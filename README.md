@@ -1,19 +1,30 @@
 # Bannerlord Scene Toolkit
 
-Editor tooling for **Mount & Blade II: Bannerlord** scene work, running inside the game's
+Editor tooling for **Mount & Blade II: Bannerlord** scene editing, running inside the game's
 own scene editor (the Modding Kit / `Win64_Shipping_wEditor` build) as a single module.
 
-Material swapping and recoloring with presets, palettes and per-culture generation.
-Prefab swapping and distribution (grid, along a path, onto a surface), true mirroring and
-rotation about a chosen point. Prefab creation, origin tools and a pile generator to scatter
+Tools:
+Material swapping and recoloring with presets (replace all materials correctly across multiple
+entities with a single "Apply" click instead of manually overriding the materials on all individual
+layers yourself), recoloring tool (apply color factors to all layers), and built-in rule presets 
+which define how materials get changed. These overrides can supported two different ways to "weight" 
+them, so if you override an entire scene there can be different types of overrides at the end state 
+for the same input material (only one final rule set applies to a single target prefab, but it can
+vary across prefabs, if you use the right syntax on the rules for weighting). 
+
+Prefab swapping and distribution tools (distribute entities into a grid, along a path, onto a surface), true 
+mirroring and rotation about a chosen point (avoids scaling negatively along an axis to mirror). 
+Prefab creation tools (manipulate origin positions) and a pile generator to scatter
 entities randomly along a surface or surrounding a point. Also contains a scene analyzer with
 battle, skirmish and siege requirement checks and one-click fixes. 
 
 Automatic scene-file backups with retention. And a set of editor shortcuts the editor itself lacks:
-isolate (hide everything else), repeat last transform (or repeat clone+translate with Shift+R), numeric transform, 
-select whole prefab (my favorite one - Ctrl+Shift+P), grow selection.
+isolate (hide everything else), srepeat last transform (or repeat clone+translate with Shift+R similar to Blender), 
+numeric transform, select whole prefab (my favorite one - Ctrl+Shift+P), grow selection sphere. 
 
-Built for Calradic Campaign event maps but usable on any scene.
+Built for Calradic Campaign event maps but usable on any scene. The entirety of the Calradic Campaign #88 map
+was made with heavy use of this tool, it has been used successfully on a real map. However, you use this tool
+at your own risk; no warranty is expressly granted or implied.
 
 ![The five panels: Prefab Creator (F5), Distribution (F6), Scene Analyzer (F7), Material Swap (F8), Backups (F9)](images/panels-1.jpg)
 
@@ -49,12 +60,12 @@ Optional shortcuts, all switchable from F9 > Shortcuts:
 | Shift+R | Repeat the last recorded move, rotation or shift-drag copy on the current selection |
 | Ctrl+Shift+T, or type a digit right after a gizmo drag | Numeric transform: exact move or rotate, world or local axis |
 | Ctrl+Shift+P | Promote the selection to its top-level prefab roots |
-| Ctrl+Numpad+ | Grow the selection by proximity, live radius |
+| Ctrl+Numpad+/- | Grow/shrink the selection by proximity, live radius |
 | Ctrl/Shift+Backspace | Clear the focused text field |
 | Ctrl+Minus / Ctrl+Equals / Ctrl+0 | Panel size (number row, with a panel focused) |
 | Ctrl+Alt+0 | Pop every open panel back to the centre of the screen |
 
-Every panel has a **Documentation** button. That in-editor guide is the full feature
+Most panels have a **Documentation** button. That in-editor guide is the full feature
 reference and is kept in sync with the code (source: `MaterialSwapTool/GUI/DocumentationVM.cs`).
 
 ## Installing
