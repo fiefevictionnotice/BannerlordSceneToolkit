@@ -1,0 +1,497 @@
+{
+  "Name": "Battania Natural Stone",
+  "Tags": [
+    "battania",
+    "upgrade",
+    "natural",
+    "stone",
+    "wood",
+    "culture-swap"
+  ],
+  "Rules": [
+    {
+      "FromMaterial": "stone_wall_2a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_noparallax",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_normal",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_rock",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "plank_stake_a",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_noparallax",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection_noalpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "arab_door_stone",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "arabic_wood_lattice",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "bark_pine_no_anim",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "broken_loam",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "broken_loam_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "broken_loam_noalpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "castle_floor_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "castle_floor_a_nrm",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "cliff_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "doors_windows_b",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "empire_column_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_blend",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_mud_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_gatehouse_floor",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_keep_d_column_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_marble_floor_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a_mud",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_road_sidewalk_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_a_wood",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_base_a_wood",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "empire_wall_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_a_damaged",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_brick",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_c",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_d",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_e",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_a",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_b",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "floor_2",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "floor_2_white",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "floor_3",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "floor_3_empire",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "interior_wood_a",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "khuzait_brick_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "khuzait_brick_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_roof",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_stone_wall",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_stone_wall_noparalax",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_trunks",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "loam_wall",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_wall_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_wall_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "natural_stone_wall_noparallax",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "old_wood",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_b2",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_c_np",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_d_np",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_e",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_end",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_fine_a",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_fine_b",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "plank_stake_a_animated",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "planks_3",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "planks_3_nrm",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "planks_4",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "planks_6",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "rock",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "rock_b_mix",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "rock_cliff_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "rock_cliff_b_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_bricks_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings_wet",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_brick",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_brick_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_brick_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_a_shaft",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_b_shaft",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_base",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_c_shaft",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_column_d",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_floor",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick_plaster",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_plaster",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_wall_01",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_wall_02",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_wall_03",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_desert_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_11",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_14_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_detail",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_np",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "stone_white_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "sturgia_wall_a",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b_alpha",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "sturgia_wall_c",
+      "ToMaterial": "natural_stone_wall"
+    },
+    {
+      "FromMaterial": "trunks_c",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "trunks_d",
+      "ToMaterial": "planks"
+    },
+    {
+      "FromMaterial": "walls_a",
+      "ToMaterial": "natural_stone_wall"
+    }
+  ]
+}

@@ -1,0 +1,402 @@
+<Prefab>
+  <Window>
+    <Widget Id="PanelRoot" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="620" SuggestedHeight="1428" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Children>
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas_gradient" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="frame_9" ExtendLeft="18" ExtendTop="18" ExtendRight="18" ExtendBottom="18" IsEnabled="false" />
+
+        <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginLeft="24" MarginRight="24" MarginTop="20" MarginBottom="20" DoNotAcceptEvents="true">
+          <Children>
+
+            <!-- Drag handle: press-and-hold the title row to move the whole panel. -->
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" MarginBottom="8" Command.MouseDown="ExecuteDragStart">
+              <Children>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Distribution (F6)" Brush="Popup.Title.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </Widget>
+
+            <!-- ===================== Distribution ===================== -->
+            <!-- ONE MODE's controls on screen at a time (the same IsVisible group-collapse
+                 pattern the browser panels use). The old undivided stack showed Path, Grid and
+                 Onto Surface fields all at once with three buttons at the bottom - reading it
+                 required already knowing which fields fed which button. -->
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="Distribution - repeat a prefab, or the selection" Brush="Popup.Title.Text" HorizontalAlignment="Left" MarginBottom="4" DoNotAcceptEvents="true" />
+
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="32" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="@ModeGridButtonColor" Command.Click="ExecuteSetDistributeModeGrid" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="In Grid" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="@ModePathButtonColor" Command.Click="ExecuteSetDistributeModePath" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Along Path" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="@ModeSurfaceButtonColor" Command.Click="ExecuteSetDistributeModeSurface">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Onto Surface" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="52" Text="@DistributeModeHint" Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="6" DoNotAcceptEvents="true" />
+
+            <!-- WHAT to place: a named prefab, or copies of the current selection. -->
+            <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button.NineGrid" Color="@GridSourceModeColor" Command.Click="ExecuteToggleGridSourceMode" MarginBottom="4">
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@GridSourceModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+            </ButtonWidget>
+
+            <!-- Prefab row: hidden entirely when Source is Selection, instead of sitting there
+                 with an "ignored when..." caveat. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsPrefabRowVisible">
+              <Children>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="Prefab to distribute" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+                  <Children>
+                    <!-- Fill From Selection reads the REAL prefab name (GetPrefabName) off the
+                         entity you already have to select anyway to set the origin - see the VM. -->
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button" Command.Click="ExecuteFillDistributeFromSelection" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@DistributePrefabName" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="e.g. empire_column_b" /></Children>
+                    </Widget>
+                  </Children>
+                </ListPanel>
+              </Children>
+            </ListPanel>
+
+            <!-- ============ ALONG PATH (visible only in Path mode) ============ -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsPathMode">
+              <Children>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="Path name (as authored in the editor's Path tool) + count" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PathNameInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="path name" /></Children>
+                    </Widget>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PathCountInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" DefaultSearchText="count" /></Children>
+                    </Widget>
+                  </Children>
+                </ListPanel>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteTogglePathCountMode" MarginBottom="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PathCountModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <!-- Path spacing (the grid axes each have their own spacing controls instead). -->
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleDistributeSpacingMode" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@DistributeSpacingModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@DistributeAbsoluteSpacing" Brush="MaterialSwapTool.RuleText" MarginLeft="6" DefaultSearchText="spacing" /></Children>
+                    </Widget>
+                  </Children>
+                </ListPanel>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Z Rotation (deg) - fixes prefabs facing the wrong way along the path, e.g. 90 or 180" Brush="Popup.Description.Text" MarginBottom="2" CanBreakWords="true" DoNotAcceptEvents="true" />
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="90" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF" HorizontalAlignment="Left" MarginBottom="6">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PathRotationInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" DefaultSearchText="0" /></Children>
+                </Widget>
+              </Children>
+            </ListPanel>
+
+            <!-- ============ GRID LAYOUT (shared by In Grid and Onto Surface) ============ -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsGridLayoutVisible">
+              <Children>
+                <!-- WHERE the grid starts. Coordinates supply the position only - heading still
+                     comes from the selected entity, so Local axis choices keep working. -->
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="Origin - where the grid starts, and its heading" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+                  <Children>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="190" Brush="Popup.Cancel.Button.NineGrid" Color="@DistributeOriginModeColor" Command.Click="ExecuteToggleDistributeOriginMode" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@DistributeOriginModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@DistributeOriginInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="x, y, z" /></Children>
+                    </Widget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button" Command.Click="ExecuteFillDistributeOriginFromSelection">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                  </Children>
+                </ListPanel>
+
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="Each axis is independent: direction, spacing mode, absolute value, gap, count" Brush="Popup.Description.Text" MarginBottom="2" CanBreakWords="true" DoNotAcceptEvents="true" />
+
+                <!-- Axis 1: two cycle-buttons (Local/World, X/Y/Z) combine into the read-only label below. -->
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="2">
+                  <Children>
+                    <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleGridAxis1LocalWorld" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Axis1: Local/World" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="80" Brush="Popup.Cancel.Button" Command.Click="ExecuteCycleGridAxis1Component" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X/Y/Z" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleGridAxis1Mode">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@GridAxis1ModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                  </Children>
+                </ListPanel>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@GridAxis1Label" Brush="Popup.Description.Text" HorizontalAlignment="Center" MarginBottom="6" DoNotAcceptEvents="true" />
+
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="50" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="10">
+                  <Children>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginRight="6">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Spacing (if Absolute)" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridAxis1AbsoluteInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginRight="6">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Gap" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridAxis1GapInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Count" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridCountAxis1Input" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                  </Children>
+                </ListPanel>
+
+                <!-- Axis 2: two cycle-buttons (Local/World, X/Y/Z) combine into the read-only label below. -->
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="2">
+                  <Children>
+                    <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleGridAxis2LocalWorld" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Axis2: Local/World" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="80" Brush="Popup.Cancel.Button" Command.Click="ExecuteCycleGridAxis2Component" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X/Y/Z" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                    <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleGridAxis2Mode">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@GridAxis2ModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                  </Children>
+                </ListPanel>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@GridAxis2Label" Brush="Popup.Description.Text" HorizontalAlignment="Center" MarginBottom="6" DoNotAcceptEvents="true" />
+
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="50" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+                  <Children>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginRight="6">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Spacing (if Absolute)" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridAxis2AbsoluteInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginRight="6">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Gap" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridAxis2GapInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                    <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="16" Text="Count" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
+                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@GridCountAxis2Input" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                        </Widget>
+                      </Children>
+                    </ListPanel>
+                  </Children>
+                </ListPanel>
+              </Children>
+            </ListPanel>
+
+            <!-- ============ ONTO SURFACE extras (visible only in Surface mode) ============ -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsSurfaceMode">
+              <Children>
+                <!-- The filter is a FILTER, not a destination - it does not position anything.
+                     The old label ("Surface target ... entity name to land on") read as if the
+                     name located the surface, which it never did. -->
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" Text="Optional filter: only the named entities (and their children) count as ground - comma-separate several, or multi-select them and use the button. The ray passes straight through anything else. It does NOT position anything." Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="2" DoNotAcceptEvents="true" />
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="190" HeightSizePolicy="StretchToParent" Text="Only land on (optional):" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="4" DoNotAcceptEvents="true" />
+                    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SurfaceTargetInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="names, comma-separated (blank = first hit)" /></Children>
+                    </Widget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button" Command.Click="ExecuteFillSurfaceTargetFromSelection">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Use Selected Entities" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                    </ButtonWidget>
+                  </Children>
+                </ListPanel>
+                <!-- Two independent rotations, both about world Z, both 0 = off. Entity spins
+                     each placed piece in place; Grid pivots the whole cell lattice around the
+                     origin - a non-world-aligned grid orientation without rotating a surface. -->
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="170" HeightSizePolicy="StretchToParent" Text="Rotation (Entity) deg:" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="4" DoNotAcceptEvents="true" />
+                    <Widget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="16">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SurfaceEntityRotInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /></Children>
+                    </Widget>
+                    <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="160" HeightSizePolicy="StretchToParent" Text="Rotation (Grid) deg:" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="4" DoNotAcceptEvents="true" />
+                    <Widget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SurfaceGridRotInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /></Children>
+                    </Widget>
+                  </Children>
+                </ListPanel>
+                <!-- Extent: typed counts, or derived from the captured surfaces' combined
+                     footprint (per-cell rays then trim the rectangle to the real silhouette).
+                     Same manual/derived pairing as the path's Fill Path Length toggle. -->
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleSurfaceExtentMode" MarginBottom="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SurfaceExtentModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button.NineGrid" Color="@SurfaceAlignColor" Command.Click="ExecuteToggleSurfaceAlign" MarginBottom="6">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SurfaceAlignLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <!-- Anchor: the NAME labels the wrapping entity this run creates; the MODE picks
+                 where that anchor itself ends up. Shared by every mode. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="190" HeightSizePolicy="StretchToParent" Text="Anchor name (optional):" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="4" DoNotAcceptEvents="true" />
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@DistributeAnchorName" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="blank = &lt;prefab&gt;_Grid / _Path / _Surface" /></Children>
+                </Widget>
+              </Children>
+            </ListPanel>
+            <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleDistributeAnchorMode" MarginBottom="4">
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@DistributeAnchorModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+            </ButtonWidget>
+
+            <!-- Safety cap on how many instances one run may place - the runaway-grid backstop,
+                 typed instead of the old hard-coded 500 because Fill Target Surfaces hits it
+                 legitimately. Applies to every distribute mode. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="190" HeightSizePolicy="StretchToParent" Text="Max instances per run:" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="4" DoNotAcceptEvents="true" />
+                <Widget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@MaxInstancesInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" DefaultSearchText="500" /></Children>
+                </Widget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Big runs stall the editor while placing - raise deliberately." Brush="Popup.Description.Text" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+
+            <!-- Plain-language read-back of what Distribute will do with the current inputs. -->
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="48" Text="@DistributeSummary" Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="4" DoNotAcceptEvents="true" />
+
+            <!-- ONE Distribute button - runs whichever mode is on screen. -->
+            <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" Brush="Popup.Done.Button.NineGrid" Color="#5a8f3cFF" Command.Click="ExecuteDistribute" MarginBottom="4">
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@DistributeButtonLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+            </ButtonWidget>
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="40" Text="@DistributeStatus" Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="10" DoNotAcceptEvents="true" />
+
+            <!-- ===================== Mirror (true reflection) ===================== -->
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="Mirror a group across an axis" Brush="Popup.Title.Text" HorizontalAlignment="Left" MarginBottom="4" DoNotAcceptEvents="true" />
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" Text="Select the group to mirror (multi-select), pick an axis, then Mirror. Each entity's position and rotation get reflected through a plane at the group's bottom-center pivot, so asymmetric pieces come out right - a 180-degree rotation would just spin them in place." Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="6" DoNotAcceptEvents="true" />
+
+            <!-- Mirror axis: two cycle-buttons (Local/World, X/Y/Z) combine into the read-only label below. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="2">
+              <Children>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleMirrorAxisLocalWorld" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Mirror Axis: Local/World" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="80" Brush="Popup.Cancel.Button" Command.Click="ExecuteCycleMirrorAxisComponent">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X/Y/Z" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@MirrorAxisLabel" Brush="Popup.Description.Text" HorizontalAlignment="Center" MarginBottom="6" DoNotAcceptEvents="true" />
+
+            <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleMirrorPointMode" MarginBottom="2">
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@MirrorPointModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+            </ButtonWidget>
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@MirrorCustomPointInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="x, y, z (used only if Custom above)" /></Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button" Command.Click="ExecuteFillMirrorPointFromSelection">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@MirrorAnchorName" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="anchor name (optional)" /></Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="190" Brush="Popup.Done.Button" Command.Click="ExecuteMirrorGroup">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Mirror Selected Group" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <!-- Rotate axis: own two cycle-buttons, independent of Mirror's above (used to silently
+                 share Mirror's axis, which defaults to a horizontal axis - wrong for the far more
+                 common "spin like a turntable" case, which needs Z). -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="2">
+              <Children>
+                <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleRotateAxisLocalWorld" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Rotate Axis: Local/World" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="80" Brush="Popup.Cancel.Button" Command.Click="ExecuteCycleRotateAxisComponent">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X/Y/Z" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@RotateAxisLabel" Brush="Popup.Description.Text" HorizontalAlignment="Center" MarginBottom="4" DoNotAcceptEvents="true" />
+
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Done.Button" Command.Click="ExecuteRotateGroup45" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Rotate 45" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Done.Button" Command.Click="ExecuteRotateGroup90" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Rotate 90" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <!-- Arbitrary angle in degrees; negatives counter-rotate. Uses the same axis and
+                     pivot as the fixed-angle buttons beside it. -->
+                <Widget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@RotateAngleInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteRotateGroupSpecified">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Rotate (Specify)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <!-- Close rides along on the LAST existing row rather than getting a row of its
+                     own: this panel's content used to overflow its fixed height, and an extra
+                     row pushed Close clean off the bottom edge where it couldn't be clicked at
+                     all. Spacer right-aligns it, so it still reads as the bottom-right action. -->
+                <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" />
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <!-- Undo applies to frame-only transforms (rotations). Mirror creates copies and
+                 Distribute instantiates, so neither is on this stack - restoring frames would
+                 leave the extra entities behind and look like it had worked. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="220" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteUndoTransform">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Rotation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Up to 10 steps, this session only." Brush="Popup.Description.Text" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="40" Text="@MirrorStatus" Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="10" DoNotAcceptEvents="true" />
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="40" Text="@StatusText" Brush="Popup.Title.Text" HorizontalAlignment="Center" DoNotAcceptEvents="true" CanBreakWords="true" />
+
+          </Children>
+        </ListPanel>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

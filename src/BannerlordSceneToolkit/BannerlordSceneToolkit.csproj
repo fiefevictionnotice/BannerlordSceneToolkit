@@ -1,0 +1,174 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Merged v0.5 build: MaterialSwapTool + PrefabSwapperTool + PrefabCreatorTool, combined into
+       one assembly/module so all three load as a single Harmony instance instead of three
+       separate mods each patching MBEditor.TickSceneEditorPresentation independently. Built to
+       test whether crash frequency (the long-standing native Qt5Core.dll bug, see the crash
+       investigation memory) is affected by having multiple separate mod assemblies loaded at
+       once, as opposed to one. The three original mods are archived as v0.4 - see
+       deprecated-features.md / bannerlord_crash_investigation.md.
+
+       Each tool keeps its own original namespace (MaterialSwapTool, PrefabSwapperTool,
+       PrefabCreatorTool) unchanged, in its own top-level source folder here - the three source
+       trees never referenced each other (deliberate crash-isolation architecture, confirmed
+       still true at merge time), so this is a straight sibling-folder merge, not a rewrite. Only
+       SubModule.cs was consolidated into one entry point (see SubModule.cs for why - three
+       separate PatchAll calls over one merged assembly would each apply ALL patches, triple-
+       firing every Tick/hotkey). -->
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>BannerlordSceneToolkit</AssemblyName>
+    <RootNamespace>BannerlordSceneToolkit</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Bannerlord itself is 64-bit only. -->
+    <PlatformTarget>x64</PlatformTarget>
+    <!-- Where the game/editor install lives, so backups/dev builds can find it. -->
+    <BannerlordDir>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerlordDir>
+    <BannerlordBin>$(BannerlordDir)\bin\Win64_Shipping_wEditor</BannerlordBin>
+    <!-- Where the compiled mod gets deployed for in-game testing. Both bin folders get a copy:
+         the launcher's mod-verification step checks Win64_Shipping_Client regardless of which
+         build you actually launch, so an editor-only module still needs a file present there
+         to pass that check, even though the tool is inert outside the editor build. -->
+    <ModuleDeployDirEditor>$(BannerlordDir)\Modules\BannerlordSceneToolkit\bin\Win64_Shipping_wEditor</ModuleDeployDirEditor>
+    <ModuleDeployDirClient>$(BannerlordDir)\Modules\BannerlordSceneToolkit\bin\Win64_Shipping_Client</ModuleDeployDirClient>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <!-- Game/engine assemblies, referenced directly from the installed editor build. Identical
+       reference list across all three original mods - one copy here covers all of them. -->
+  <ItemGroup>
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(BannerlordBin)\TaleWorlds.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.DotNet">
+      <HintPath>$(BannerlordBin)\TaleWorlds.DotNet.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Engine">
+      <HintPath>$(BannerlordBin)\TaleWorlds.Engine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.InputSystem">
+      <HintPath>$(BannerlordBin)\TaleWorlds.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(BannerlordBin)\TaleWorlds.Library.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Localization">
+      <HintPath>$(BannerlordBin)\TaleWorlds.Localization.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.ModuleManager">
+      <HintPath>$(BannerlordBin)\TaleWorlds.ModuleManager.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(BannerlordBin)\TaleWorlds.MountAndBlade.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.ObjectSystem">
+      <HintPath>$(BannerlordBin)\TaleWorlds.ObjectSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.ScreenSystem">
+      <HintPath>$(BannerlordBin)\TaleWorlds.ScreenSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.GauntletUI">
+      <HintPath>$(BannerlordBin)\TaleWorlds.GauntletUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.GauntletUI.Data">
+      <HintPath>$(BannerlordBin)\TaleWorlds.GauntletUI.Data.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Engine.GauntletUI">
+      <HintPath>$(BannerlordBin)\TaleWorlds.Engine.GauntletUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.TwoDimension">
+      <HintPath>$(BannerlordBin)\TaleWorlds.TwoDimension.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- EventManager.MousePosition (focus-blur fix) returns this type. The NuGet package version
+         mismatches the game's own copy and throws MissingMethodException at runtime - referencing
+         the game's own DLL directly, same as every TaleWorlds.* reference above, avoids that. -->
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>$(BannerlordBin)\System.Numerics.Vectors.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Deploy straight into the editor's module bin folder after every build. Data files copied
+       BEFORE the DLL - a running game only locks the DLL, never plain data files, but an MSBuild
+       <Copy> failure aborts the rest of its Target, so ordering data-first means a pure-XML/JSON
+       edit still deploys even while the game is open. -->
+  <!-- SkipDeploy=true compiles without writing anything into the game folder. Needed because
+       this target copies DATA FILES FIRST and the DLL last, so a plain build run while the editor
+       is open still pushes XML into a live module and leaves an XML/DLL mismatch behind. Use
+       -p:SkipDeploy=true for "does it compile" checks. -->
+  <!-- PANEL XML IS VALIDATED BEFORE ANYTHING DEPLOYS, and this runs on EVERY build, including
+       -p:SkipDeploy=true compile checks - the whole point is to catch a malformed panel while
+       the game is closed rather than discovering it as "F6 no longer launches".
+       Gauntlet parses these at panel-open time, not at build time, so the C# compiler happily
+       reports 0 errors while a mismatched end tag sits in a panel nobody has opened yet. That
+       has now cost two separate incidents: a double-hyphen sequence inside an XML comment (which
+       XML forbids) in 2026-08, and a ButtonWidget end tag that should have been a ListPanel one
+       on 2026-08-22.
+       XmlPeek fails the build on any malformed document - a file that does not parse cannot be
+       queried at all, so the query itself only has to match the root element. -->
+  <Target Name="ValidatePanelXml" BeforeTargets="Build">
+    <ItemGroup>
+      <PanelXmlToValidate Include="$(MSBuildProjectDirectory)\*\GUI\Prefabs\*.xml" />
+      <PanelXmlToValidate Include="$(MSBuildProjectDirectory)\*\GUI\Brushes\*.xml" />
+    </ItemGroup>
+    <XmlPeek XmlInputPath="%(PanelXmlToValidate.FullPath)" Query="/*" Condition="'@(PanelXmlToValidate)' != ''" ContinueOnError="false">
+      <Output TaskParameter="Result" ItemName="_PanelXmlPeekDiscard" />
+    </XmlPeek>
+  </Target>
+
+  <Target Name="DeployToModule" AfterTargets="Build" Condition="'$(SkipDeploy)' != 'true'">
+    <ItemGroup>
+      <PrefabFiles Include="$(MSBuildProjectDirectory)\MaterialSwapTool\GUI\Prefabs\*.xml" />
+      <PrefabFiles Include="$(MSBuildProjectDirectory)\PrefabSwapperTool\GUI\Prefabs\*.xml" />
+      <PrefabFiles Include="$(MSBuildProjectDirectory)\PrefabCreatorTool\GUI\Prefabs\*.xml" />
+
+      <BrushFiles Include="$(MSBuildProjectDirectory)\MaterialSwapTool\GUI\Brushes\*.xml" />
+      <BrushFiles Include="$(MSBuildProjectDirectory)\PrefabCreatorTool\GUI\Brushes\*.xml" />
+
+      <ReferenceDataFiles Include="$(MSBuildProjectDirectory)\MaterialSwapTool\ReferenceData\*.*" />
+      <BuiltInPresetFiles Include="$(MSBuildProjectDirectory)\MaterialSwapTool\Presets\BuiltIn\*.json" Condition="Exists('$(MSBuildProjectDirectory)\MaterialSwapTool\Presets\BuiltIn')" />
+      <!-- Entity/scene prefabs (game_entity definitions) - only MaterialSwapTool ships any. -->
+      <EntityPrefabFiles Include="$(MSBuildProjectDirectory)\MaterialSwapTool\Prefabs\*.xml" Condition="Exists('$(MSBuildProjectDirectory)\MaterialSwapTool\Prefabs')" />
+    </ItemGroup>
+    <!-- Module manifest deploys too (added v0.7 - version bumps used to need a manual copy). -->
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\_Module\SubModule.xml" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit" />
+    <Copy SourceFiles="@(PrefabFiles)" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit\GUI\Prefabs" />
+    <Copy SourceFiles="@(BrushFiles)" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit\GUI\Brushes" Condition="'@(BrushFiles)' != ''" />
+    <Copy SourceFiles="@(ReferenceDataFiles)" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit\ReferenceData" />
+    <Copy SourceFiles="@(BuiltInPresetFiles)" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit\Presets\BuiltIn" Condition="'@(BuiltInPresetFiles)' != ''" />
+    <Copy SourceFiles="@(EntityPrefabFiles)" DestinationFolder="$(BannerlordDir)\Modules\BannerlordSceneToolkit\Prefabs" Condition="'@(EntityPrefabFiles)' != ''" />
+
+    <ItemGroup>
+      <DeployFiles Include="$(TargetDir)BannerlordSceneToolkit.dll" />
+      <DeployFiles Include="$(TargetDir)0Harmony.dll" Condition="Exists('$(TargetDir)0Harmony.dll')" />
+      <DeployFiles Include="$(TargetDir)Newtonsoft.Json.dll" Condition="Exists('$(TargetDir)Newtonsoft.Json.dll')" />
+    </ItemGroup>
+    <MakeDir Directories="$(ModuleDeployDirEditor)" Condition="!Exists('$(ModuleDeployDirEditor)')" />
+    <MakeDir Directories="$(ModuleDeployDirClient)" Condition="!Exists('$(ModuleDeployDirClient)')" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(ModuleDeployDirEditor)" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(ModuleDeployDirClient)" />
+  </Target>
+
+</Project>

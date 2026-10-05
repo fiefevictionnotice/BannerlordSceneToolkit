@@ -1,0 +1,227 @@
+{
+  "stone": {
+    "Include": [
+      "stone_wall",
+      "_brick",
+      "brick_",
+      "sturgia_wall",
+      "khuzait_brick",
+      "natural_stone_wall",
+      "hippodrome_wall",
+      "walls_a",
+      "loam_stone_wall",
+      "empire_wall",
+      "loam_wall",
+      "moss_wall",
+      "roman_wall",
+      "rock",
+      "marble",
+      "rubble_stone",
+      "stone_desert",
+      "stone_white",
+      "broken_loam",
+      "aqueduct",
+      "arab_door_stone",
+      "cliff",
+      "sand_stone",
+      "stone_a",
+      "column",
+      "floor",
+      "sidewalk",
+      "loam_roof"
+    ],
+    "Exclude": [
+      "wicker",
+      "plank"
+    ]
+  },
+  "wall": {
+    "Include": [
+      "wall",
+      "stucco",
+      "timber_frame"
+    ],
+    "Exclude": []
+  },
+  "adobe": {
+    "Include": [
+      "adobe_"
+    ],
+    "Exclude": []
+  },
+  "roof": {
+    "Include": [
+      "roof"
+    ],
+    "Exclude": []
+  },
+  "timberframe": {
+    "Include": [
+      "timber_frame"
+    ],
+    "Exclude": []
+  },
+  "wood": {
+    "Include": [
+      "_wood",
+      "wood_",
+      "plank",
+      "woodsection",
+      "bark_pine",
+      "trunks",
+      "woodends",
+      "fence",
+      "gatehouse_gate",
+      "bark",
+      "trunk",
+      "pine",
+      "wicker",
+      "doors_windows"
+    ],
+    "Exclude": []
+  },
+  "floor": {
+    "Include": [
+      "floor",
+      "sidewalk"
+    ],
+    "Exclude": []
+  },
+  "column": {
+    "Include": [
+      "column"
+    ],
+    "Exclude": []
+  },
+  "cloth": {
+    "Include": [
+      "tent_",
+      "_cloth",
+      "_tent",
+      "carpet",
+      "awning",
+      "tapestry",
+      "fabric"
+    ],
+    "Exclude": []
+  },
+  "detail": {
+    "Include": [
+      "interior_walls",
+      "_inside",
+      "building_detail",
+      "_details",
+      "ornament",
+      "relief",
+      "fake_houses",
+      "pediment",
+      "statue",
+      "sign",
+      "target_board",
+      "plaza",
+      "garden"
+    ],
+    "Exclude": []
+  },
+  "doorswindows": {
+    "Include": [
+      "doors_windows",
+      "windows_alpha"
+    ],
+    "Exclude": []
+  },
+  "ground": {
+    "Include": [
+      "dirt",
+      "ashes",
+      "straw",
+      "ground_",
+      "dirt_decal",
+      "water_plane_dirty",
+      "pebbles",
+      "ground2",
+      "landscape",
+      "mountain_border",
+      "outer_mesh",
+      "road_a",
+      "puddles",
+      "manure",
+      "rushes"
+    ],
+    "Exclude": []
+  },
+  "water": {
+    "Include": [
+      "water_plane",
+      "waterfall",
+      "water_river",
+      "fountain"
+    ],
+    "Exclude": []
+  },
+  "furniture": {
+    "Include": [
+      "bed_",
+      "chair",
+      "cradle",
+      "fire_place",
+      "drinking_horn",
+      "mead_cup",
+      "cooking_pot",
+      "kitchen",
+      "roman_pot",
+      "pottery",
+      "merchandise",
+      "merchant_stand",
+      "interior_props",
+      "furniture",
+      "furnitures",
+      "boardgames",
+      "books_pens",
+      "musical_instrument",
+      "food",
+      "watermelon",
+      "props_"
+    ],
+    "Exclude": []
+  },
+  "flora": {
+    "Include": [
+      "tree_",
+      "_tree",
+      "bush",
+      "grass",
+      "flora",
+      "foliage",
+      "plant_",
+      "leaf",
+      "leaves",
+      "wheat",
+      "vineyard",
+      "grape",
+      "agricultural",
+      "lavender",
+      "valley_plants",
+      "ivy"
+    ],
+    "Exclude": []
+  },
+  "thatch": {
+    "Include": [
+      "thatch"
+    ],
+    "Exclude": []
+  },
+  "tile": {
+    "Include": [
+      "roof_tiles"
+    ],
+    "Exclude": []
+  },
+  "plaster": {
+    "Include": [
+      "stucco"
+    ],
+    "Exclude": []
+  }
+}

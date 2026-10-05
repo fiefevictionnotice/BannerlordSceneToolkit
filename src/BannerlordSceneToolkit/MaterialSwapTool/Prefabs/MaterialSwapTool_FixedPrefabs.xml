@@ -1,0 +1,91 @@
+<prefabs>
+	<!-- Clean-named copies of SandBoxCore's own module_wall_plank_a/b_unfucked_by_fief prefabs
+	     (Modules\SandBoxCore\Prefabs\Fief_NativeEntitySwaps.xml) - that crude name is baked into
+	     the base game's own shipped asset and can't be renamed there, so BrokenPrefabFixer now
+	     targets these clean-named duplicates instead (kept the "_fief" suffix to match the
+	     source's own naming convention for this fix, just without the crude middle part).
+	     Geometry/physics/tags are copied verbatim; only the top-level game_entity name changed. -->
+	<game_entity name="module_wall_plank_a_fixed_fief" old_prefab_name="">
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<children>
+			<game_entity name="fief_wooden_platform_2_plank_f_column" old_prefab_name="">
+				<tags>
+					<tag name="fief_wood_scaffold"/>
+					<tag name="fief_wood_scaffold_mod1"/>
+				</tags>
+				<transform position="-0.037, -0.138, 4.204" rotation_euler="0.000, 0.856, -1.571" scale="1.046, 0.844, 0.375"/>
+				<physics shape="bo_wooden_platform_2_plank_f_column"/>
+				<components>
+					<meta_mesh_component name="wooden_platform_2_plank_f_column">
+						<mesh name="wooden_platform_2_plank_f_column.0" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.1" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.lod3" factor="4284966759"/>
+					</meta_mesh_component>
+				</components>
+			</game_entity>
+			<game_entity name="fief_wooden_platform_2_plank_f_column" old_prefab_name="">
+				<tags>
+					<tag name="fief_native_entity_replacement"/>
+				</tags>
+				<transform position="-0.064, 0.127, -3.804" rotation_euler="0.000, 0.000, 0.000" scale="1.718, 1.718, 1.817"/>
+				<physics shape="bo_wooden_platform_2_plank_f_column"/>
+				<components>
+					<meta_mesh_component name="wooden_platform_2_plank_f_column">
+						<mesh name="wooden_platform_2_plank_f_column.0" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.1" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.lod3" factor="4284966759"/>
+					</meta_mesh_component>
+				</components>
+			</game_entity>
+		</children>
+	</game_entity>
+	<game_entity name="module_wall_plank_b_fixed_fief" old_prefab_name="">
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<children>
+			<game_entity name="fief_wooden_platform_2_plank_f_column" old_prefab_name="">
+				<tags>
+					<tag name="fief_native_entity_replacement"/>
+				</tags>
+				<transform position="-0.026, 0.103, -3.804" rotation_euler="0.000, 0.000, 0.000" scale="1.718, 1.718, 1.817"/>
+				<physics shape="bo_wooden_platform_2_plank_f_column"/>
+				<components>
+					<meta_mesh_component name="wooden_platform_2_plank_f_column">
+						<mesh name="wooden_platform_2_plank_f_column.0" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.1" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.lod3" factor="4284966759"/>
+					</meta_mesh_component>
+				</components>
+			</game_entity>
+			<game_entity name="fief_wooden_platform_2_plank_f_column" old_prefab_name="">
+				<tags>
+					<tag name="fief_wood_scaffold"/>
+					<tag name="fief_wood_scaffold_mod1"/>
+				</tags>
+				<transform position="-0.096, 0.146, 4.056" rotation_euler="0.000, -0.868, -1.571" scale="1.046, 0.844, 0.424"/>
+				<physics shape="bo_wooden_platform_2_plank_f_column"/>
+				<components>
+					<meta_mesh_component name="wooden_platform_2_plank_f_column">
+						<mesh name="wooden_platform_2_plank_f_column.0" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.1" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.lod3" factor="4284966759"/>
+					</meta_mesh_component>
+				</components>
+			</game_entity>
+			<game_entity name="fief_wooden_platform_2_plank_f_column" old_prefab_name="">
+				<tags>
+					<tag name="fief_wood_scaffold"/>
+					<tag name="fief_wood_scaffold_mod1"/>
+				</tags>
+				<transform position="-0.096, 0.039, 4.030" rotation_euler="0.000, 0.856, -1.571" scale="1.046, 0.844, 0.417"/>
+				<physics shape="bo_wooden_platform_2_plank_f_column"/>
+				<components>
+					<meta_mesh_component name="wooden_platform_2_plank_f_column">
+						<mesh name="wooden_platform_2_plank_f_column.0" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.1" factor="4284966759"/>
+						<mesh name="wooden_platform_2_plank_f_column.lod3" factor="4284966759"/>
+					</meta_mesh_component>
+				</components>
+			</game_entity>
+		</children>
+	</game_entity>
+</prefabs>

@@ -1,0 +1,38 @@
+# Entities with BAD or EARLY-POPPING LODs
+# These switch to a low-quality LOD mesh at an unreasonably close distance,
+# making detailed geometry vanish or degrade noticeably during normal play.
+# Format: entity_name  (append :WORST for the very worst offenders)
+# Source: bl-scenes Discord community + native scene analysis
+#
+# :WORST = pops to a billboard or near-invisible mesh within easy visual range.
+#          These are the highest priority to replace or avoid.
+
+# ── FENCES ──────────────────────────────────────────────────────────────────
+fence_a
+fence_b
+fence_c
+fence_d
+fence_empire_a
+fence_empire_b
+fence_empire_c
+fence_old_a
+fence_old_b
+fence_old_c1
+fence_old_c2
+fence_old_c3
+fence_old_c4
+khuzait_arena_fence_a
+khuzait_arena_fence_b
+khuzait_arena_fence_c
+khuzait_arena_fence_door_a_closed
+
+# (WOODEN PLATFORMS / SIEGE SCAFFOLDING section DEPRECATED 2026-08-17 - see
+# Deprecated_Legacy_Checks.txt for the removed block + why + how to restore.)
+
+# ── CASTLE / SETTLEMENT WALLS ───────────────────────────────────────────────
+# Battania
+battania_castle_wall_d_roof    | Has known mesh issues — check for broken geometry on roof surface.
+
+# ── STRUCTURAL DETAILS ──────────────────────────────────────────────────────
+# These have LOD levels that pop at ranges typical for player sightlines on MP maps.
+woodsection_a           | Early LOD pop on the solid wood section variant.

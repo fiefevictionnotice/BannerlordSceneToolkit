@@ -1,0 +1,483 @@
+{
+  "Name": "Sturgia Nordic",
+  "Tags": [
+    "sturgia",
+    "culture-swap",
+    "nordic",
+    "northern",
+    "stone",
+    "roof",
+    "wood",
+    "floor"
+  ],
+  "Rules": [
+    {
+      "FromMaterial": "empire_wall_a",
+      "ToMaterial": "sturgia_wall_a"
+    },
+    {
+      "FromMaterial": "empire_wall_b",
+      "ToMaterial": "sturgia_wall_b"
+    },
+    {
+      "FromMaterial": "empire_wall_c",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "empire_wall_d",
+      "ToMaterial": "sturgia_wall_c"
+    },
+    {
+      "FromMaterial": "empire_wall_e",
+      "ToMaterial": "stone_wall_new_b"
+    },
+    {
+      "FromMaterial": "roman_brick",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_brick_b",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_wall_01",
+      "ToMaterial": "sturgia_wall_a"
+    },
+    {
+      "FromMaterial": "roman_wall_02",
+      "ToMaterial": "sturgia_wall_b"
+    },
+    {
+      "FromMaterial": "roman_wall_03",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "walls_a",
+      "ToMaterial": "sturgia_wall_a"
+    },
+    {
+      "FromMaterial": "stone_wall_11",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "loam_stone_wall",
+      "ToMaterial": "sturgia_wall_b"
+    },
+    {
+      "FromMaterial": "loam_wall",
+      "ToMaterial": "sturgia_wall_b"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_plaster",
+      "ToMaterial": "sturgia_wall_b"
+    },
+    {
+      "FromMaterial": "roman_roof",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "thatched_roof",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "old_wood",
+      "ToMaterial": "plank_c"
+    },
+    {
+      "FromMaterial": "woodsection_a",
+      "ToMaterial": "plank_d"
+    },
+    {
+      "FromMaterial": "interior_wood_a",
+      "ToMaterial": "plank_c"
+    },
+    {
+      "FromMaterial": "castle_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_a",
+      "ToMaterial": "empire_dungeon_floor_c"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_noparallax",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "arab_door_stone",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_a",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_b",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "arabic_wood_lattice",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "bark_pine",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "bark_pine_no_anim",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "broken_loam",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "broken_loam_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "broken_loam_noalpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "burned_wood_a",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "cliff_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "doors_windows_b",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "empire_column_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_b",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_blend",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_gatehouse_floor",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_keep_d_column_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "empire_marble_floor_a",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a_mud",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_road_sidewalk_a",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_a_wood",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_base_a_wood",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "empire_wall_a_damaged",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "empire_wall_brick",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "empire_wall_inside",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_a",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_b",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "fence_old_b",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "floor_2",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "floor_2_white",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "floor_3",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "floor_3_empire",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "khuzait_brick_b",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "loam_roof",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "loam_stone_wall_noparalax",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "loam_trunks",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "loam_wall_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "loam_wall_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "moss_wall_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall_noparallax",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "plank_b2",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "plank_e",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "plank_fine_a",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "plank_fine_b",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "plank_floor_a_bleached",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "plank_stake_a_animated",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "planks_1_interior",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "planks_3",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "rock",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "rock_1_plain",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_bricks_b",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings_wet",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_brick_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_a_shaft",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_b",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_b_shaft",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_base",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_c_shaft",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_column_d",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_floor",
+      "ToMaterial": "pict_floor_stone:1, empire_dungeon_floor_c:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_b",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick_plaster",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "roman_roof_nrm",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "rubble_stone",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "rubble_stone_alpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_desert_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2_rocks",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_rock",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_np",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "stone_white_a",
+      "ToMaterial": "stone_wall_14:6, sturgia_wall_b:5, sturgia_wall_a:3, stone_wall_new_b:1, sturgia_wall_c:1"
+    },
+    {
+      "FromMaterial": "thatched_roof_b_alpha",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "thatched_roof_c",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "thatched_roof_c_alpha",
+      "ToMaterial": "thatched_roof_b"
+    },
+    {
+      "FromMaterial": "trunks",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "trunks_c",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    },
+    {
+      "FromMaterial": "trunks_d",
+      "ToMaterial": "plank_c:2, plank_d:1"
+    }
+  ]
+}

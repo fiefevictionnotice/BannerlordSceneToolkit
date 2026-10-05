@@ -1,0 +1,31 @@
+# Sittable / Animation-Point Prefab Fragments -- MP Crash Risk
+# =============================================================
+# IMPORTANT: The script now detects sittable entities PRIMARILY via scripts:
+#   - UsablePlace script on the entity itself
+#   - chair_sit__position_script / sit_point / sp_sit on child entities
+#
+# Name fragments here are a FALLBACK only, used when no script evidence is found.
+# Do NOT add broad terms like "throne" or "chair" -- static prop variants
+# (e.g. bd_throne_sturgia_b, bd_chair_a_unsittable) are fine in MP.
+#
+# Add exact prefab names or specific fragments that are NEVER safe in MP.
+# ---------------------------------------------------------------
+
+# ── SIT-POINT MARKER PREFABS -- always unsafe as standalone entities ─────────
+# These are the actual script-holder child prefabs that make things interactive.
+sit_point
+sp_sit
+animation_point_sit
+chair_sit__position_script
+
+# ── KNOWN-BAD TAVERN BENCH/SEAT PREFABS (have embedded sit scripts) ──────────
+bench_sittable
+bench_sit
+sitting_bench
+tavern_bench_sittable
+inn_bench_sittable
+feast_bench_sittable
+
+# ── SMITHING STATIONS (SP-only scripts) ──────────────────────────────────────
+sp_blacksmith_with_smithing_machine
+smithing_machine

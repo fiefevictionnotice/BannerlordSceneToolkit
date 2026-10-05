@@ -1,0 +1,51 @@
+# DEPRECATED / LEGACY CHECKS
+#
+# Entries here are NOT loaded by any active check - this file is a holding pen, not reference
+# data the tool reads. Kept so a deprecated check can be restored by pasting its block back into
+# the named active file, instead of having to re-derive/re-source it from scratch.
+#
+# ==============================================================================================
+# DEPRECATED 2026-08-17: wooden_platform_2_* substitution recommendations
+# Restore to: LOD_Substitutions.txt (paste the block back in verbatim)
+# Reason: user judgment call - the original wooden_platform series' early-LOD-popping problem
+# that motivated recommending the _2_ series replacement is believed fixed by TaleWorlds since
+# this data was originally sourced from the bl-scenes Discord. If popping on the ORIGINAL (non-
+# _2_) series is ever observed again in a current game version, restore this block.
+# ==============================================================================================
+# ── WOODEN PLATFORM SERIES ──────────────────────────────────────────────────
+# The wooden_platform_2 series has significantly better LOD behaviour than
+# the original wooden_platform series — use these wherever possible.
+wooden_platform_plank_f_column -> wooden_platform_2_plank_f_column
+wooden_platform_stairs_a       -> wooden_platform_2_stairs_a
+wooden_platform_plank_a        -> wooden_platform_2_plank_a
+wooden_platform_plank_b        -> wooden_platform_2_plank_b
+wooden_platform_plank_c        -> wooden_platform_2_plank_c
+wooden_platform_plank_d        -> wooden_platform_2_plank_d
+wooden_platform_plank_e        -> wooden_platform_2_plank_e
+wooden_platform_heap_a         -> wooden_platform_2_heap_a
+wooden_platform_c              -> wooden_platform_2_c
+wooden_platform_fence_a        -> wooden_platform_2_fence_a
+wooden_platform_fence_b        -> wooden_platform_2_fence_b
+wooden_platform_ladder_a       -> wooden_platform_2_ladder_a
+
+# ==============================================================================================
+# DEPRECATED 2026-08-17: wooden_platform_* (original, non-_2_ series) known-bad/early-popping LODs
+# Restore to: Known_Bad_LODs.txt (paste the block back in verbatim)
+# Reason: same as above - believed fixed by TaleWorlds since this data was originally sourced.
+# Only the WOODEN PLATFORMS / SIEGE SCAFFOLDING section is deprecated here - the FENCES,
+# CASTLE/SETTLEMENT WALLS, and STRUCTURAL DETAILS sections in Known_Bad_LODs.txt are untouched,
+# unrelated asset families the user did not flag.
+# ==============================================================================================
+# ── WOODEN PLATFORMS / SIEGE SCAFFOLDING ────────────────────────────────────
+wooden_platform_fence_a
+wooden_platform_fence_b
+wooden_platform_c
+wooden_platform_ladder_a
+wooden_platform_heap_a
+wooden_platform_plank_a:WORST
+wooden_platform_plank_b:WORST
+wooden_platform_plank_c:WORST
+wooden_platform_plank_d:WORST
+wooden_platform_plank_e
+wooden_platform_plank_f_column:WORST
+wooden_platform_stairs_a

@@ -1,0 +1,41 @@
+# Entities with BUGGED PHYSICS SHAPES
+# Format: entity_name | description | severity (ERROR/WARNING)
+# Source: bl-scenes Discord community + native scene testing
+#
+# If a physics shape is deleted from an entity in the editor, the editor may
+# silently substitute an invisible unit cube — this is a common source of
+# "invisible wall" complaints. Entities in this file have confirmed physics
+# geometry bugs independent of that issue.
+
+# ── STAIR / TRAVERSAL TRAPS ─────────────────────────────────────────────────
+# Players or AI get permanently stuck inside the physics shape.
+sturgia_dungeon_staircase_a | Physics shape traps players inside — cannot escape without noclip | ERROR
+sturgia_dungeon_staircase_b | Physics shape traps players inside — cannot escape without noclip | ERROR
+
+# ── WALL PLATFORM POLE TRAPS ────────────────────────────────────────────────
+# Y-shaped or branched pole geometry creates concave physics hulls.
+# Players walk into them and become permanently stuck.
+module_wall_platform_a | Y-shaped pole physics — players get stuck inside the concave hull | ERROR
+module_wall_platform_b | Y-shaped pole physics — players get stuck inside the concave hull | ERROR
+
+# ── INVERTED PHYSICS SHAPES ─────────────────────────────────────────────────
+# Collision normals are flipped — players can walk INTO the entity but not back out.
+# TW appears to have known: Town Outskirts manually deletes plank_b physics and
+# substitutes invisible editor cubes, but the prefab itself was never fixed.
+# Fix: use bannerlord_physics_unf-cker to replace with working prefabs.
+module_wall_plank_a | Inverted physics shape — players walk in but cannot walk out | ERROR
+module_wall_plank_b | Inverted physics shape — players walk in but cannot walk out | ERROR
+
+# ── SIEGE GATE / DOOR PHYSICS ───────────────────────────────────────────────
+# Gates and doors are generally problematic in non-Siege MP and can produce
+# invisible collision or inconsistent solid/passable states.
+# Community note: "doors, gates, siege ladders, rock piles, catapults, can all crash it"
+# (See also Known_Bad_MP_Entities.txt for the crash-causing variants)
+
+# ── FENCE PHYSICS OVERREACH ─────────────────────────────────────────────────
+# fence_old prefabs have physics that extends beyond their visible mesh,
+# creating invisible collision areas adjacent to the fence model.
+fence_old_c1 | Physics extends beyond mesh, invisible collision overhang | WARNING
+fence_old_c2 | Physics extends beyond mesh, invisible collision overhang | WARNING
+fence_old_c3 | Physics extends beyond mesh, invisible collision overhang | WARNING
+fence_old_c4 | Physics extends beyond mesh, invisible collision overhang | WARNING

@@ -1,0 +1,137 @@
+# Bannerlord Scene Toolkit
+
+Editor tooling for **Mount & Blade II: Bannerlord** scene work, running inside the game's
+own scene editor (the Modding Kit / `Win64_Shipping_wEditor` build) as a single module.
+
+Material swapping and recoloring with presets, palettes and per-culture generation.
+Prefab swapping and distribution (grid, along a path, onto a surface), true mirroring and
+rotation about a chosen point. Prefab creation, origin tools and a pile generator. A scene
+analyzer with battle, skirmish and siege requirement checks and one-click fixes. Automatic
+scene-file backups with retention. And a set of editor shortcuts the editor itself lacks:
+isolate, repeat last transform, numeric transform, select whole prefab, grow selection.
+
+Built for the Calradic Campaign event maps; usable on any scene.
+
+![The five panels: Prefab Creator (F5), Distribution (F6), Scene Analyzer (F7), Material Swap (F8), Backups (F9)](images/panels-1.jpg)
+
+![Material Swap Tool applying an Empire-to-Aserai preset to a gatehouse](images/panels-2.jpg)
+
+## Tutorial video
+
+A full walkthrough of every panel and button (2 h 31 m, chaptered):
+
+[![Bannerlord Scene Toolkit tutorial](https://i.ytimg.com/vi/f1uzZ-qQm3c/hqdefault.jpg)](https://www.youtube.com/watch?v=f1uzZ-qQm3c)
+
+https://www.youtube.com/watch?v=f1uzZ-qQm3c
+
+The video shows the v0.8.0 build (2026-08-23). Everything added since is in
+[docs/CHANGELOG.md](docs/CHANGELOG.md); a transcript with chapter headings is in
+[docs/TUTORIAL-TRANSCRIPT.md](docs/TUTORIAL-TRANSCRIPT.md).
+
+## Hotkeys
+
+| Key | Panel |
+|-----|-------|
+| F5 | Prefab Creator: new prefab, origin tools, pile generator, prefab swapper and swap sets |
+| F6 | Distribution: in grid, along path, onto surface; mirror; rotate |
+| F7 | Scene Analyzer: full scan, battle / skirmish / siege checks, fixes, tagging tools |
+| F8 | Material Swap: rules, presets, infer from an entity, continuous recolor, culture generator |
+| F9 | Backups, notifications, keyboard shortcut switches, documentation |
+
+Optional shortcuts, all switchable from F9 > Shortcuts:
+
+| Key | Action |
+|-----|--------|
+| Shift+O | Isolate the selection (hide everything else); press again to restore. Survives save, reload and test mode |
+| Shift+R | Repeat the last recorded move, rotation or shift-drag copy on the current selection |
+| Ctrl+Shift+T, or type a digit right after a gizmo drag | Numeric transform: exact move or rotate, world or local axis |
+| Ctrl+Shift+P | Promote the selection to its top-level prefab roots |
+| Ctrl+Numpad+ | Grow the selection by proximity, live radius |
+| Ctrl/Shift+Backspace | Clear the focused text field |
+| Ctrl+Minus / Ctrl+Equals / Ctrl+0 | Panel size (number row, with a panel focused) |
+| Ctrl+Alt+0 | Pop every open panel back to the centre of the screen |
+
+Every panel has a **Documentation** button. That in-editor guide is the full feature
+reference and is kept in sync with the code (source: `MaterialSwapTool/GUI/DocumentationVM.cs`).
+
+## Installing
+
+Requirements: Mount & Blade II: Bannerlord with the **Modding Kit** DLC installed (the
+toolkit runs in the editor build, not the game client). Tested against game v1.4.8. Harmony
+is bundled; nothing else to install.
+
+1. Download the latest release zip and copy the `BannerlordSceneToolkit` folder into
+   `...\Mount & Blade II Bannerlord\Modules\`.
+2. Copy `tool_toggles.txt` into `Documents\Mount and Blade II Bannerlord\BannerlordSceneToolkit\`
+   (create the folder). Optional: the module writes a default on first run.
+3. Enable **Bannerlord Scene Toolkit** in the launcher's mod list, start the editor, and press
+   F5 through F9.
+
+`release/README.txt` is the same install guide as shipped in the zip, with the panel-size and
+panel-position notes.
+
+## Building from source
+
+Requirements: the game installed with the editor binaries (`bin\Win64_Shipping_wEditor`),
+.NET SDK (the project targets `net472`, x64, C# latest). The game path is the `BannerlordDir`
+property in `src/BannerlordSceneToolkit/BannerlordSceneToolkit.csproj`; override it on the
+command line if yours differs:
+
+```
+dotnet build src/BannerlordSceneToolkit/BannerlordSceneToolkit.csproj -c Release -p:SkipDeploy=true
+dotnet build src/BannerlordSceneToolkit/BannerlordSceneToolkit.csproj -c Release "-p:BannerlordDir=D:\Steam\steamapps\common\Mount & Blade II Bannerlord"
+```
+
+A plain build deploys straight into the game's `Modules\BannerlordSceneToolkit` folder (DLL,
+GUI prefabs, brushes, reference data, built-in presets). **Never run a deploying build while
+the editor is open**: the deploy copies data files before the DLL, so a build that fails on
+the locked DLL has already left an XML/DLL mismatch in the live module. Use `-p:SkipDeploy=true`
+for compile checks.
+
+`Tools/Package-SceneToolkit.ps1` assembles the release zip from the deployed module.
+
+## Repository layout
+
+```
+src/BannerlordSceneToolkit/   The module: one csproj, Core/ plus three tool folders
+  Core/                       Shared pieces (undo, backups glue, cursor, panel recentre, ...)
+  MaterialSwapTool/           F7 + F8 + F9 and most shared infrastructure
+  PrefabSwapperTool/          F6
+  PrefabCreatorTool/          F5
+  _Module/SubModule.xml       Module manifest
+docs/                         CHANGELOG, KNOWN-ISSUES, ROADMAP, TROUBLESHOOTING, tutorial transcript
+Tools/                        Packaging, standalone scene backup, export sync
+release/                      The README and tool_toggles.txt shipped in the zip
+```
+
+## Runtime data
+
+Each tool keeps its data under `Documents\Mount and Blade II Bannerlord\<ToolName>\`:
+logs (`tool.log`, rolled at 10 MB), scene backups (`MaterialSwapTool\Backups`, one folder per
+scene), presets, palettes, categories, cultures, swap sets, pile recipes. Scene backups copy
+the **saved** `scene.xscene` / `terrain.bin` / `terrain_ed.bin` on a timer, on scene switch
+and before destructive operations. They are a safety net, not a substitute for your own
+backups.
+
+## Known issues and roadmap
+
+[docs/KNOWN-ISSUES.md](docs/KNOWN-ISSUES.md) lists engine limitations the toolkit works
+around (scale never carries over an instantiate-based swap; copies of unsaved prefabs are not
+click-selectable until the scene is saved; runtime physics changes need a reload) and the
+items awaiting live verification. [docs/ROADMAP.md](docs/ROADMAP.md) is the canonical list
+of planned, deferred and retired features.
+
+## Credits
+
+Scene Analyzer checks were ported from the community **BannerlordSceneAnalyzer** PowerShell
+project; the Skirmish and editor-spawn checks come from **Gotha's BL_AddTestScene** mod.
+Harmony by Andreas Pardeike. Everything else by Fief Eviction Notice.
+
+## License
+
+**CC BY-NC 4.0** with one additional permission. You may use, share and modify the toolkit
+for non-commercial purposes with credit to Fief Eviction Notice. Additionally, a private
+individual may use it for a submission to a **publicly announced TaleWorlds competition
+that is open to public submissions**, prizes included; private or unannounced events and
+organizational use do not qualify. Full text, including the exact wording of that
+permission, in [LICENSE.md](LICENSE.md). TaleWorlds' Mod Tools EULA applies in addition.

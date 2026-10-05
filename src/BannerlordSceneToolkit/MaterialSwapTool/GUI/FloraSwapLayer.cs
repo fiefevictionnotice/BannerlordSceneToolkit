@@ -1,0 +1,142 @@
+using System;
+using TaleWorlds.Engine.GauntletUI;
+using TaleWorlds.GauntletUI.BaseTypes;
+using TaleWorlds.InputSystem;
+using TaleWorlds.ScreenSystem;
+
+namespace MaterialSwapTool.GUI
+{
+    // F8-bound, entirely separate from MaterialSwapLayer's F9 - its own identity, own panel, own
+    // toggle, per the explicit ask that this read as "obviously a flora tool instead of a
+    // material tool."
+    //
+    // RETIRED (2026-08-18): F9 now opens FloraRetiredPlaceholderVM/Panel instead of the real
+    // FloraSwapVM/FloraSwapPanel - "disable the flora tool for now and call it a placeholder in
+    // the UI too." FloraSwapVM and the rest of this file's real Open() plumbing are left intact
+    // per the "retired, not deleted" convention; only the movie/VM actually loaded changed.
+    public static class FloraSwapLayer
+    {
+        private static GauntletLayer _layer;
+        private static FloraRetiredPlaceholderVM _dataSource;
+        private static Widget _rootWidget;
+
+        private const float InitialYOffset = 100f;
+        private static readonly PanelDrag Drag = new PanelDrag("FloraSwapPanel", 0f, InitialYOffset);
+
+        public static bool IsOpen => _layer != null;
+        // CONFIRMED CRASH CAUSE (2026-08-19, full dump analysis): the engine's own
+        // GauntletLayer.IsFocusedOnInput() throws a NullReferenceException if the layer's
+        // underlying native movie/screen was torn down without our code being told - a scene
+        // switch tears down the whole screen/layer stack, but nothing clears this static _layer
+        // field, so the very next tick's Prefix check calls into a dead layer and crashes the
+        // whole game. "Crashes every time you change from one loaded scene to another." Treating
+        // that as "not focused" (and self-healing by clearing _layer, same as a real Close())
+        // instead of letting it crash is the correct, safe fallback.
+        public static bool IsFocusedOnInput
+        {
+            get
+            {
+                if (_layer == null) return false;
+                try { return _layer.IsFocusedOnInput(); }
+                catch (Exception ex)
+                {
+                    Log.Warn("IsFocusedOnInput threw (stale layer after a scene switch?): " + ex.Message);
+                    _layer = null;
+                    return false;
+                }
+            }
+        }
+
+        public static void Toggle()
+        {
+            if (IsOpen) Close();
+            else Open();
+        }
+
+        public static void Open()
+        {
+            if (IsOpen) return;
+
+            var screen = ScreenManager.TopScreen;
+            if (screen == null)
+            {
+                Log.Error("FloraSwapLayer.Open: ScreenManager.TopScreen is null.");
+                return;
+            }
+
+            try
+            {
+                _dataSource = new FloraRetiredPlaceholderVM(Close, Drag.BeginDrag);
+                _layer = new GauntletLayer("FloraRetiredPlaceholderPanel", 4007) { IsFocusLayer = true };
+                BannerlordSceneToolkit.ToolkitCursor.ApplyInputRestrictions(_layer);
+                _layer.Input.RegisterHotKeyCategory(HotKeyManager.GetCategory("GenericPanelGameKeyCategory"));
+                var movieIdentifier = _layer.LoadMovie("FloraRetiredPlaceholderPanel", _dataSource);
+                _rootWidget = movieIdentifier.Movie.RootWidget;
+                Drag.ApplyInitialPosition(_rootWidget);
+                screen.AddLayer(_layer);
+                ScreenManager.TrySetFocus(_layer);
+                MaterialSwapTool.GUI.PanelScale.Apply(_layer, "FloraRetiredPlaceholderPanel");
+                Log.Info("FloraSwapLayer opened.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("FloraSwapLayer.Open failed: " + ex);
+                Close();
+            }
+        }
+
+        public static void Close()
+        {
+            if (!IsOpen) return;
+            try
+            {
+                _layer.InputRestrictions.ResetInputRestrictions();
+                ScreenManager.TopScreen?.RemoveLayer(_layer);
+            }
+            catch (Exception ex)
+            {
+                Log.Warn("FloraSwapLayer teardown issue: " + ex.Message);
+            }
+            _layer = null;
+            _dataSource = null;
+            _rootWidget = null;
+        }
+
+        // GUARDED. A scene switch tears down the whole screen/layer stack while this class's
+        // static _layer still points at it, so the next tick calls into a dead layer -
+        // _layer.Input throws and takes the editor down with it. IsFocusedOnInput has always
+        // self-healed from exactly this; Tick never did, and a crash during a scene load is
+        // the symptom. Treat a throw as "this layer is gone" and clear it, same as a Close().
+        public static void Tick(float dt)
+        {
+            if (!IsOpen) return;
+            try { TickInner(dt); }
+            catch (Exception ex)
+            {
+                Log.Warn("Tick threw (stale layer after a scene switch?): " + ex.Message);
+                _layer = null;
+                _dataSource = null;
+                _rootWidget = null;
+            }
+        }
+
+        private static void TickInner(float dt)
+        {
+            if (!IsOpen) return;
+
+            Drag.Tick(_rootWidget);
+            MaterialSwapTool.GUI.PanelScale.HandleHotkeys(_layer, "FloraRetiredPlaceholderPanel");
+
+            // Ctrl/Shift+Backspace clears the focused text field (see TextFieldShortcuts).
+            BannerlordSceneToolkit.TextFieldShortcuts.Tick(_rootWidget);
+
+            if (_rootWidget != null && Input.IsKeyPressed(InputKey.LeftMouseButton))
+            {
+                BannerlordSceneToolkit.PanelFocus.DropFocusOnOutsideClick(_rootWidget);
+            }
+
+            bool exit = _layer.Input.IsHotKeyReleased("Exit") || _layer.Input.IsKeyReleased(InputKey.Escape);
+            if (exit) Close();
+        }
+    }
+}

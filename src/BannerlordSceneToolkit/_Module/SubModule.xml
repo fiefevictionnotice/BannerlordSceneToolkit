@@ -1,0 +1,24 @@
+<Module>
+	<Name value="Bannerlord Scene Toolkit"/>
+	<Id value="BannerlordSceneToolkit"/>
+	<Version value="v0.8.0"/>
+	<SingleplayerModule value="true"/>
+	<MultiplayerModule value="false"/>
+	<DependedModules>
+		<DependedModule Id="Native"/>
+	</DependedModules>
+	<DependedModuleMetadatas>
+		<DependedModuleMetadata id="Native" order="LoadBeforeThis" />
+	</DependedModuleMetadatas>
+	<SubModules>
+		<SubModule>
+			<Name value="Bannerlord Scene Toolkit"/>
+			<DLLName value="BannerlordSceneToolkit.dll"/>
+			<SubModuleClassType value="BannerlordSceneToolkit.SubModule"/>
+			<Tags>
+				<Tag key="DedicatedServerType" value="none"/>
+				<Tag key="IsNoRenderModeElement" value="false"/>
+			</Tags>
+		</SubModule>
+	</SubModules>
+</Module>

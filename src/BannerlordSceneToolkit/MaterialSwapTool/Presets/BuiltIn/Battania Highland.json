@@ -1,0 +1,535 @@
+{
+  "Name": "Battania Highland",
+  "Tags": [
+    "battania",
+    "culture-swap",
+    "highland",
+    "celtic",
+    "stone",
+    "roof",
+    "wood",
+    "floor"
+  ],
+  "Rules": [
+    {
+      "FromMaterial": "empire_wall_a",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "empire_wall_b",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "empire_wall_c",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "empire_wall_d",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "empire_wall_e",
+      "ToMaterial": "stone_wall_new_b"
+    },
+    {
+      "FromMaterial": "roman_brick",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_brick_b",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_wall_01",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "roman_wall_02",
+      "ToMaterial": "stone_wall_2a_noparallax"
+    },
+    {
+      "FromMaterial": "roman_wall_03",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "walls_a",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "stone_wall_11",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "loam_stone_wall",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "loam_wall",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_plaster",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_a",
+      "ToMaterial": "stone_wall_2a"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_b",
+      "ToMaterial": "stone_wall_14"
+    },
+    {
+      "FromMaterial": "roman_roof",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_b",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "old_wood",
+      "ToMaterial": "burned_wood_a"
+    },
+    {
+      "FromMaterial": "woodsection_a",
+      "ToMaterial": "plank_c"
+    },
+    {
+      "FromMaterial": "timber_frame",
+      "ToMaterial": "timber_frame_c"
+    },
+    {
+      "FromMaterial": "castle_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_noparallax",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection_noalpha",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "arab_door_stone",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_b",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "arabic_wood_lattice",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "bark_pine_no_anim",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "broken_loam",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "broken_loam_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "broken_loam_noalpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "castle_floor_a_nrm",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "cliff_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "doors_windows_b",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "empire_column_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_b",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_blend",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_mud_alpha",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_gatehouse_floor",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_keep_d_column_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "empire_marble_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a_mud",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_road_sidewalk_a",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_a_wood",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_base_a_wood",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "empire_wall_a_damaged",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "empire_wall_brick",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_a",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_b",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "floor_2",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "floor_2_white",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "floor_3",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "floor_3_empire",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "interior_wood_a",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "khuzait_brick_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "khuzait_brick_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "loam_roof",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "loam_stone_wall_noparalax",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "loam_trunks",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "loam_wall_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "loam_wall_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall_noparallax",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "plank_b2",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_c_np",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_d_np",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_e",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_end",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_fine_a",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_fine_b",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "plank_stake_a_animated",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "planks_3",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "planks_3_nrm",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "planks_4",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "planks_6",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "rock",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "rock_b_mix",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_bricks_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings_wet",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_brick_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_a_shaft",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_b_shaft",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_base",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_c_shaft",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_column_d",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_floor",
+      "ToMaterial": "pict_floor_stone"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick_plaster",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "roman_roof_nrm",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "roof_normal",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "stone_desert_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_normal",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_detail",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_np",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "stone_white_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_a",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b_alpha",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_c",
+      "ToMaterial": "stone_wall_14:8, stone_wall_2a:8, stone_wall_2a_noparallax:1, stone_wall_new_b:1"
+    },
+    {
+      "FromMaterial": "thatched_roof_b_alpha",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_c",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_c_alpha",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_d",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_d_alpha",
+      "ToMaterial": "thatched_roof"
+    },
+    {
+      "FromMaterial": "timber_frame_b",
+      "ToMaterial": "timber_frame_c"
+    },
+    {
+      "FromMaterial": "trunks_c",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    },
+    {
+      "FromMaterial": "trunks_d",
+      "ToMaterial": "burned_wood_a:1, plank_c:1"
+    }
+  ]
+}

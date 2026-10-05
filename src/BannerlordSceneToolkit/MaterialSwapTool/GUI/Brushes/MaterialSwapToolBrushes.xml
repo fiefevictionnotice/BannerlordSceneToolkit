@@ -1,0 +1,47 @@
+<Brushes>
+  <!-- Clone of Native's Review.NameInput.Text (Modules\Native\GUI\Brushes\CharacterCreation.xml),
+       two font-size steps down (40 -> 32, matching the sizes already used elsewhere in that same
+       file) for the per-rule From/To/ColorFactor textboxes specifically, so more of a long
+       material name is visible without widening the boxes further. -->
+  <Brush Name="MaterialSwapTool.RuleText" Font="FiraSansExtraCondensed-Regular" TextHorizontalAlignment="Center">
+    <Styles>
+      <Style Name="Default" FontColor="#F9EAD2FF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="32" />
+    </Styles>
+  </Brush>
+
+  <!-- Clone of Popup.Button.Text (Modules\Native\GUI\Brushes\Popup.xml), one size up (24 -> 30)
+       for the preset card's title/name specifically, left-aligned instead of centered since it
+       sits inline in a row rather than centered in a button. -->
+  <Brush Name="MaterialSwapTool.PresetTitle" Font="Galahad" TextHorizontalAlignment="Left" TextVerticalAlignment="Center">
+    <Styles>
+      <Style Name="Default" FontColor="#F8E3BEFF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="30" />
+    </Styles>
+  </Brush>
+
+  <!-- Clone of Popup.Description.Text (Modules\Native\GUI\Brushes\Popup.xml), one size up
+       (20 -> 26) for Scene Analyzer's results list (Full Scan, Battle/Skirmish/Siege) - the
+       stock size was hard to read for a dense multi-line findings report. -->
+  <Brush Name="MaterialSwapTool.DiffLineText" Font="FiraSansExtraCondensed-Regular" TextHorizontalAlignment="Left">
+    <Styles>
+      <Style Name="Default" FontColor="#F1E9DAFF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="26" />
+    </Styles>
+  </Brush>
+
+  <!-- Clone of Popup.Description.Text, two sizes up (20 -> 32, same +6-per-size step as
+       DiffLineText above) for the Documentation accordion's body text - the stock size was hard
+       to read for paragraph-length reference content. -->
+  <Brush Name="MaterialSwapTool.DocBodyText" Font="FiraSansExtraCondensed-Regular" TextHorizontalAlignment="Left">
+    <Styles>
+      <Style Name="Default" FontColor="#F1E9DAFF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="32" />
+    </Styles>
+  </Brush>
+
+  <!-- Clone of Popup.Button.Text, two sizes up (24 -> 36) for the Documentation accordion's
+       topic title buttons, left-aligned instead of centered since these sit as a wide row rather
+       than a compact button. -->
+  <Brush Name="MaterialSwapTool.DocTitleText" Font="Galahad" TextHorizontalAlignment="Left" TextVerticalAlignment="Center">
+    <Styles>
+      <Style Name="Default" FontColor="#F8E3BEFF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="36" />
+    </Styles>
+  </Brush>
+</Brushes>

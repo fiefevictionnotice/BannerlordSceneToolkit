@@ -1,0 +1,16 @@
+<Prefab>
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" IsEnabled="false" DoNotAcceptEvents="true">
+      <Children>
+        <!-- Bottom-centre, deliberately small and click-through. IsEnabled=false and
+             DoNotAcceptEvents on every node so this can never eat a click meant for the viewport. -->
+        <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="520" SuggestedHeight="34" HorizontalAlignment="Center" VerticalAlignment="Bottom" MarginBottom="90" IsVisible="@IsVisible" IsEnabled="false" DoNotAcceptEvents="true">
+          <Children>
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" AlphaFactor="0.72" IsEnabled="false" DoNotAcceptEvents="true" />
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Text" Brush="Popup.Description.Text" Brush.FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+          </Children>
+        </Widget>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

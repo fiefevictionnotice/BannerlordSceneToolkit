@@ -1,0 +1,24 @@
+# Custom Module Prefab Declarations
+# ============================================================
+# List YOUR OWN MOD'S prefabs here so the analyzer knows they
+# are intentional custom references and can track them separately
+# from both vanilla assets AND truly unknown prefabs.
+#
+# Format:
+#   exact_name          -- exact prefab= match
+#   PATTERN: prefix_*   -- wildcard match for a whole namespace
+#
+# Entries here are treated as "expected custom prefabs" in Check 2:
+#   - They will NOT trigger "unknown prefab" warnings
+#   - They ARE reported as INFO so you can verify they're all present
+#
+# ---- YOUR MOD PREFIXES (add PATTERN: lines for your namespaces) ----------
+# Example:
+#   PATTERN: fief_*
+#   PATTERN: hart_*
+#   PATTERN: mymod_*
+
+# ---- YOUR MOD EXACT PREFAB NAMES (add individual names here) -------------
+# Example:
+#   my_custom_spawn_point
+#   my_custom_barrier

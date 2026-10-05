@@ -1,0 +1,60 @@
+# Interior entity classification
+# Format: entity_name | KNOWN_GOOD or UNTESTED
+# KNOWN_GOOD = Confirmed safe to use in MP (serves a real visual/functional purpose)
+# UNTESTED   = Contains "interior" in name but not yet field-verified in MP
+# Source: bl-scenes Discord community + native scene inspection
+#
+# Note: Most "interior" entities are designed for SP village/castle interior
+# rooms. In MP they often have no effect (invisible in-game) or can cause
+# issues if they carry SP-only scripts. Verify each before use.
+
+# ── CONFIRMED SAFE (KNOWN_GOOD) ──────────────────────────────────────────────
+# These are visual-only interior decoration pieces with no SP scripts attached.
+empire_castle_keep_a_l3_interior_folding_screen_a | KNOWN_GOOD
+empire_screen_a                                   | KNOWN_GOOD
+
+# ── UNTESTED ─────────────────────────────────────────────────────────────────
+# These contain "interior" in the name but have not been verified in MP scenes.
+# Test carefully — if the prefab has a SynchedMissionObject or SP-only script
+# child it may cause issues.
+khuzait_castle_keep_l3_interior_door_close        | KNOWN_GOOD
+empire_castle_keep_a_l3_interior_door_close       | UNTESTED
+vlandia_castle_keep_l3_interior_door_close        | UNTESTED
+battania_castle_keep_l3_interior_door_close       | UNTESTED
+aserai_castle_keep_l3_interior_door_close         | UNTESTED
+sturgia_castle_keep_l3_interior_door_close        | UNTESTED
+empire_castle_keep_a_l3_interior_a                | UNTESTED
+empire_castle_keep_a_l3_interior_b                | UNTESTED
+khuzait_castle_keep_l3_interior_a                 | UNTESTED
+
+# ── CONFIRMED SAFE -- user-verified in MP (scene does not crash) ─────────────
+empire_keep_d_interior_column_top_a               | KNOWN_GOOD
+empire_keep_d_interior_column_top_b               | KNOWN_GOOD
+empire_keep_d_interior_wall_art_d2                | KNOWN_GOOD
+empire_keep_d_interior_wall_art_e2                | KNOWN_GOOD
+empire_keep_b_interior_stair                      | KNOWN_GOOD
+empire_keep_d_interior_arch_metal                 | KNOWN_GOOD
+scene: empire_house_a_interior                    | KNOWN_GOOD
+
+# ── WILDCARD PATTERNS ────────────────────────────────────────────────────────
+# All empire_keep_d_interior* variants are safe for MP (confirmed).
+PATTERN: empire_keep_d_interior* | KNOWN_GOOD
+
+# ── USER-VERIFIED KNOWN_GOOD (confirmed fine in MP fief scenes) ──────────────
+arabian_house_new_a_interior_a_stairs             | KNOWN_GOOD
+cave_interior_a                                    | KNOWN_GOOD
+cave_interior_b                                    | KNOWN_GOOD
+empire_keep_d_door_a_interior                      | KNOWN_GOOD
+interior_open_window_light_medium                  | KNOWN_GOOD
+interior_open_window_light_small                   | KNOWN_GOOD
+interior_out_light_small                           | KNOWN_GOOD
+pict_houses_b_interior                             | KNOWN_GOOD
+pict_houses_c_interior                             | KNOWN_GOOD
+khuzait_tent_interior_a                            | KNOWN_GOOD
+khuzait_tent_interior_b                            | KNOWN_GOOD
+
+PATTERN: aserai_castle_keep_a_l3_interior*        | KNOWN_GOOD
+PATTERN: aserai_keep_interior*                    | KNOWN_GOOD
+PATTERN: empire_castle_keep_a_l3_interior*        | KNOWN_GOOD
+PATTERN: khuzait_castle_keep_l1_interior*         | KNOWN_GOOD
+PATTERN: khuzait_castle_keep_l3_interior*         | KNOWN_GOOD

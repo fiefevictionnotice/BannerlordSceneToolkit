@@ -1,0 +1,19 @@
+{
+  "seaborne_village_raid": {
+    "displayName": "Seaborne Village Raid (War Sails MP)",
+    "requirements": [
+      { "label": "NavMesh ID 0 on land (naval_raid level)", "kind": "note", "value": "Not checkable from live entities - verify in the NavMesh editor directly." },
+      { "label": "Landing point 1 (infantry) - tag 'landing_001'", "kind": "tag", "value": "landing_001" },
+      { "label": "Landing point 2 (archer) - tag 'landing_002'", "kind": "tag", "value": "landing_002" },
+      { "label": "Landing point 3 (cavalry) - tag 'landing_003'", "kind": "tag", "value": "landing_003" },
+      { "label": "Jumping point 1 - tag 'jumping_001'", "kind": "tag", "value": "jumping_001" },
+      { "label": "Jumping point 2 - tag 'jumping_002'", "kind": "tag", "value": "jumping_002" },
+      { "label": "Jumping point 3 - tag 'jumping_003'", "kind": "tag", "value": "jumping_003" },
+      { "label": "Player spawn frame - tag 'player_spawn_frame'", "kind": "tag", "value": "player_spawn_frame" },
+      { "label": "Tactical position (chokepoint) - prefab 'TacticalPosition'", "kind": "prefab", "value": "TacticalPosition" },
+      { "label": "Strategic archer position(s) - prefab 'strategic_archer_point'", "kind": "prefab", "value": "strategic_archer_point" },
+      { "label": "Naval raid battle spawn set - prefab 'sp_naval_raid_battle_set'", "kind": "prefab", "value": "sp_naval_raid_battle_set" },
+      { "label": "Scene boundary - prefab 'border_soft'", "kind": "prefab", "value": "border_soft" }
+    ]
+  }
+}

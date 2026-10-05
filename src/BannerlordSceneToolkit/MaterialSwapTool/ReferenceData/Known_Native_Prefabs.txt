@@ -1,0 +1,4602 @@
+# Known Native / Shipped Bannerlord Prefab Names
+# AUTO-GENERATED from 17 official maps:
+#   Battle:   mp_battle_map_001, 002, 003
+#   Skirmish: mp_skirmish_map_004, 005, 006, 008, 013
+#   Siege:    9 additional siege maps
+# hart_* and fief_* excluded (add your own mod exclusions at the bottom)
+#
+# Format:
+#   exact_name       -- exact prefab= match
+#   PATTERN: glob*   -- PowerShell -like wildcard match
+#
+# To suppress your own mod's prefabs from Check 2, add entries to
+# ReferenceData\Custom_Module_Prefabs.txt instead.
+
+# ========================================================================
+# ACTIVE WILDCARD PATTERNS (prefixes with 2+ members)
+# ========================================================================
+PATTERN: _barrier_*
+PATTERN: _decal_*
+PATTERN: _to_*
+PATTERN: arab_*
+PATTERN: arabian_*
+PATTERN: archery_*
+PATTERN: armor_*
+PATTERN: arrow_*
+PATTERN: aserai_*
+PATTERN: ashes_*
+PATTERN: awning_*
+PATTERN: ballista_*
+PATTERN: banner_*
+PATTERN: barn_*
+PATTERN: battania_*
+PATTERN: batteringram_*
+PATTERN: battleground_*
+PATTERN: bd_*
+PATTERN: bed_*
+PATTERN: blacksmith_*
+PATTERN: border_*
+PATTERN: brushwood_*
+PATTERN: burned_*
+PATTERN: burning_*
+PATTERN: carpet_*
+PATTERN: castle_*
+PATTERN: cave_*
+PATTERN: chest_*
+PATTERN: civilian_*
+PATTERN: cliff_*
+PATTERN: cloth_*
+PATTERN: crate_*
+PATTERN: desert_*
+PATTERN: detail_*
+PATTERN: dirty_*
+PATTERN: dry_*
+PATTERN: editor_*
+PATTERN: emp_*
+PATTERN: empire_*
+PATTERN: european_*
+PATTERN: fence_*
+PATTERN: fire_*
+PATTERN: fishnet_*
+PATTERN: flag_*
+PATTERN: flagpole_*
+PATTERN: flee_*
+PATTERN: floor_*
+PATTERN: flora_*
+PATTERN: flow_*
+PATTERN: foods_*
+PATTERN: forest_*
+PATTERN: grape_*
+PATTERN: hawk_*
+PATTERN: heater_*
+PATTERN: hut_*
+PATTERN: ivy_*
+PATTERN: khuzait_*
+PATTERN: kitchen_*
+PATTERN: lib_*
+PATTERN: log_*
+PATTERN: mangonel_*
+PATTERN: market_*
+PATTERN: mat_*
+PATTERN: mead_*
+PATTERN: merchandise_*
+PATTERN: module_*
+PATTERN: mountain_*
+PATTERN: mp_*
+PATTERN: mushroom_*
+PATTERN: outermesh_*
+PATTERN: pict_*
+PATTERN: port_*
+PATTERN: pot_*
+PATTERN: pottery_*
+PATTERN: prop_*
+PATTERN: prt_*
+PATTERN: reverb_*
+PATTERN: rock_*
+PATTERN: roman_*
+PATTERN: ruinous_*
+PATTERN: ship_*
+PATTERN: shop_*
+PATTERN: shrub_*
+PATTERN: siege_*
+PATTERN: sign_*
+PATTERN: skirmish_*
+PATTERN: spear_*
+PATTERN: stand_*
+PATTERN: stone_*
+PATTERN: stonewall_*
+PATTERN: sturgia_*
+PATTERN: tavern_*
+PATTERN: tent_*
+PATTERN: tents_*
+PATTERN: terrain_*
+PATTERN: torch_*
+PATTERN: torture_*
+PATTERN: trebuchet_*
+PATTERN: tree_*
+PATTERN: village_*
+PATTERN: vlandia_*
+PATTERN: wall_*
+PATTERN: weapon_*
+PATTERN: wooden_*
+
+# ========================================================================
+# EXACT NAMES (single-member prefixes or no-underscore names)
+# ========================================================================
+Boardgame Khuzait
+__empty_object
+_bo
+_dark_light
+_occ_box
+_plane_8x8
+_positive_light
+a_spr_light
+adam_0
+adam2
+apple
+aquila
+arena_arabian_wall_a
+axe_i
+baby
+barricade_f
+boulder2
+breach_filler
+breachcollapse
+camera_instance
+carry_scroll
+city_ambient_sound
+cooking_pot
+crow
+crowd_woman_a
+digging_axe
+dragon_banner_center
+envmap_prop
+farmer_sickle
+fish_smoker_a
+fish axe
+fishing_rod
+floorstone_c
+food_fire_smoke
+gonfalon_banner
+hammer_wooden
+horse_critter
+int_cave_ambient_sound
+lake_ambient_sound
+landscape_e
+light_outside_plane
+lionhead
+local_envmap_prop
+lumberjack_axe
+merchant_stand_armorer
+nord_fire_stand
+olive_cart_a
+outer_mesh_3sided
+pitchfork
+plains_ambient_sound
+plant_watermelon
+primitive_cube
+puddles_c
+rope_chain_heap
+sally_door_a
+sea_ambient_sound
+shelf_empire_a
+shipyard_b
+shovel
+sidewalk_stone_a
+sp_player
+spawn_visual
+stairs_short_a
+table_empire_c
+taiga_forest_ambient_sound
+tavernkeeper_knife
+throwable_rock_pile
+valley_mountain_b
+viking_sword_a
+water_plane
+wetlands_ambient_sound
+wood_storage_a
+
+# ========================================================================
+# FULL REFERENCE LIST (all 1830 canonical native prefabs, commented)
+# Useful when you want to audit a specific namespace by disabling its PATTERN
+# ========================================================================
+# ---- Boardgame Khuzait (1) ----
+# Boardgame Khuzait  (x1)
+# ---- __empty_object (1) ----
+# __empty_object  (x14)
+# ---- _barrier (7) ----
+# _barrier_04x04m  (x2313)
+# _barrier_08x04m  (x321)
+# _barrier_12x04m  (x75)
+# _barrier_16x04m  (x17)
+# _barrier_ai_04x04m  (x82)
+# _barrier_ai_12x04m  (x1)
+# _barrier_ai_16x04m  (x1)
+# ---- _bo (1) ----
+# _bo  (x150)
+# ---- _dark (1) ----
+# _dark_light  (x4)
+# ---- _decal (14) ----
+# _decal  (x32)
+# _decal_leaking_a  (x7)
+# _decal_leaking_a_wet  (x1)
+# _decal_leaking_b  (x6)
+# _decal_leaking_b_wet  (x5)
+# _decal_leaking_c  (x26)
+# _decal_leaking_c_wet  (x18)
+# _decal_leaking_d  (x17)
+# _decal_leaking_d_wet  (x2)
+# _decal_leaking_e  (x13)
+# _decal_leaking_e_wet  (x1)
+# _decal_leaking_f  (x6)
+# _decal_leaking_f_wet  (x3)
+# _decal_straw_ground  (x3)
+# ---- _occ (1) ----
+# _occ_box  (x22)
+# ---- _plane (1) ----
+# _plane_8x8  (x14)
+# ---- _positive (1) ----
+# _positive_light  (x1)
+# ---- _to (2) ----
+# _to_carry_bd_basket_a  (x1)
+# _to_carry_merchandise_hides_b  (x2)
+# ---- a (1) ----
+# a_spr_light  (x21)
+# ---- adam (1) ----
+# adam_0  (x631)
+# ---- adam2 (1) ----
+# adam2  (x4)
+# ---- apple (1) ----
+# apple  (x13)
+# ---- aquila (1) ----
+# aquila  (x4)
+# ---- arab (3) ----
+# arab_awning_a1  (x3)
+# arab_awning_b1  (x2)
+# arab_awning_b2  (x2)
+# ---- arabian (26) ----
+# arabian_building_detail_a  (x1)
+# arabian_building_detail_b  (x2)
+# arabian_building_detail_d  (x2)
+# arabian_building_detail_e  (x1)
+# arabian_building_detail_f  (x11)
+# arabian_carpet_b  (x1)
+# arabian_carpet_creased_a  (x1)
+# arabian_carpet_creased_a_low  (x1)
+# arabian_carpet_creased_b_low  (x1)
+# arabian_carpet_d  (x1)
+# arabian_carpet_f  (x1)
+# arabian_castle_barn_b  (x1)
+# arabian_castle_barn_part_b  (x4)
+# arabian_castle_house_new_b  (x1)
+# arabian_fountain_a  (x1)
+# arabian_ground_new_a  (x8)
+# arabian_house_new_detail_b  (x1)
+# arabian_house_new_detail_window_a  (x5)
+# arabian_house_new_detail_window_b  (x8)
+# arabian_house_new_e  (x1)
+# arabian_ladder_wood_b  (x2)
+# arabian_ladder_wood_c  (x2)
+# arabian_parterre_new_a  (x10)
+# arabian_platform_wooden_a  (x6)
+# arabian_platform_wooden_c  (x63)
+# arabian_waterwell_a  (x1)
+# ---- archery (2) ----
+# archery_practice_target  (x3)
+# archery_target  (x8)
+# ---- arena (1) ----
+# arena_arabian_wall_a  (x2)
+# ---- armor (14) ----
+# armor_merchant_clothes_a  (x5)
+# armor_merchant_clothes_b  (x4)
+# armor_merchant_clothes_c  (x4)
+# armor_merchant_clothes_d  (x6)
+# armor_merchant_clothes_e  (x10)
+# armor_merchant_clothes_f  (x6)
+# armor_merchant_epaulet_a  (x2)
+# armor_merchant_helmet_a  (x7)
+# armor_merchant_helmet_b  (x4)
+# armor_merchant_helmet_c  (x7)
+# armor_merchant_helmet_d  (x14)
+# armor_merchant_shoe_a  (x5)
+# armor_merchant_shoe_b  (x1)
+# armor_merchant_shoe_c  (x13)
+# ---- arrow (2) ----
+# arrow_barrel  (x92)
+# arrow_roman_a  (x4)
+# ---- aserai (60) ----
+# aserai_castle_baracks_a_l2  (x2)
+# aserai_castle_barn_a_l2  (x4)
+# aserai_castle_barn_a_l3  (x1)
+# aserai_castle_barn_b_l1  (x2)
+# aserai_castle_barn_b_l2  (x1)
+# aserai_castle_barn_b_l3  (x1)
+# aserai_castle_corner_a_l2  (x2)
+# aserai_castle_corner_a_l3  (x3)
+# aserai_castle_corner_b_l3  (x1)
+# aserai_castle_corner_d_l2  (x3)
+# aserai_castle_corner_d_l3  (x5)
+# aserai_castle_corner_e_l1  (x1)
+# aserai_castle_corner_e_l3  (x1)
+# aserai_castle_corner_roof  (x4)
+# aserai_castle_gate_inner_l1  (x6)
+# aserai_castle_gate_outer_l1  (x1)
+# aserai_castle_gatehouse_a_l2  (x1)
+# aserai_castle_gatehouse_a_l3  (x1)
+# aserai_castle_keep_a_l1  (x3)
+# aserai_castle_keep_a_l3  (x1)
+# aserai_castle_keep_a_l3_interior_column_a  (x13)
+# aserai_castle_stairs_a_l1  (x22)
+# aserai_castle_stairs_a_l2  (x13)
+# aserai_castle_stairs_a_l3  (x2)
+# aserai_castle_stairs_b_l1  (x5)
+# aserai_castle_stairs_b_l2  (x3)
+# aserai_castle_stairs_b_l3  (x3)
+# aserai_castle_stairs_c_l1  (x2)
+# aserai_castle_stairs_c_l2  (x10)
+# aserai_castle_stairs_c_l3  (x5)
+# aserai_castle_tower_roof  (x1)
+# aserai_castle_tower_round_a_l2  (x1)
+# aserai_castle_tower_round_a_l3  (x2)
+# aserai_castle_tower_round_a_patch_l1  (x1)
+# aserai_castle_wall_a_l2  (x1)
+# aserai_castle_wall_a_l2_sally  (x1)
+# aserai_castle_wall_a_roof  (x1)
+# aserai_castle_wall_c_l1  (x2)
+# aserai_castle_wall_d_l1  (x8)
+# aserai_castle_wall_d_roof  (x1)
+# aserai_castle_wall_gate_l3  (x3)
+# aserai_courtyard_a  (x4)
+# aserai_courtyard_a_stairs_part_a  (x4)
+# aserai_courtyard_a_top  (x4)
+# aserai_courtyard_a_wall  (x1)
+# aserai_courtyard_a_wall_door  (x1)
+# aserai_courtyard_floor_a  (x23)
+# aserai_courtyard_flowerpot_a  (x2)
+# aserai_courtyard_fountain_a  (x1)
+# aserai_dungeon_cell_bars_door  (x1)
+# aserai_dungeon_corridor_a  (x4)
+# aserai_dungeon_door_a_closed  (x2)
+# aserai_dungeon_room_a  (x1)
+# aserai_grandbazaar_gate  (x1)
+# aserai_grandbazaar_gate_door_a  (x1)
+# aserai_keep_column_a  (x6)
+# aserai_village_barn_a  (x6)
+# aserai_village_house_a  (x6)
+# aserai_village_house_b  (x2)
+# aserai_village_house_c  (x1)
+# ---- ashes (2) ----
+# ashes_a  (x10)
+# ashes_b  (x7)
+# ---- awning (6) ----
+# awning_arbor_a  (x25)
+# awning_arbor_b  (x35)
+# awning_arbor_big_a  (x29)
+# awning_arbor_c  (x22)
+# awning_big_a  (x19)
+# awning_big_b  (x6)
+# ---- axe (1) ----
+# axe_i  (x1)
+# ---- baby (1) ----
+# baby  (x1)
+# ---- ballista (7) ----
+# ballista_a_spawnerFireMP  (x11)
+# ballista_a_spawnerMP  (x4)
+# ballista_b_spawnerFireMP  (x22)
+# ballista_b_spawnerMP  (x21)
+# ballista_cover_attacker_a  (x6)
+# ballista_cover_attacker_b  (x3)
+# ballista_cover_defender_a  (x1)
+# ---- banner (3) ----
+# banner_simple_test  (x2)
+# banner_vlandia_keep  (x5)
+# banner_vlandia_village  (x5)
+# ---- barn (5) ----
+# barn_fence_a  (x54)
+# barn_fence_b  (x14)
+# barn_fence_c  (x13)
+# barn_fence_d  (x2)
+# barn_fence_e  (x2)
+# ---- barricade (1) ----
+# barricade_f  (x21)
+# ---- battania (61) ----
+# battania_arena_tower  (x1)
+# battania_arena_wall_patch_b  (x20)
+# battania_barn_b  (x2)
+# battania_barn_c  (x2)
+# battania_castle_barn_b_l1  (x2)
+# battania_castle_barn_b_l3  (x12)
+# battania_castle_corner_a_l2  (x2)
+# battania_castle_corner_d_l1  (x1)
+# battania_castle_corner_roof  (x4)
+# battania_castle_gate_inner_l3  (x2)
+# battania_castle_gate_outer_l3  (x2)
+# battania_castle_keep  (x2)
+# battania_castle_keep_wood_stake_b  (x5)
+# battania_castle_keep_wood_stake_d  (x13)
+# battania_castle_keep_wood_stake_e  (x1)
+# battania_castle_stairs_a_l1  (x10)
+# battania_castle_stairs_a_l2  (x6)
+# battania_castle_stairs_b_l1  (x2)
+# battania_castle_stairs_b_l2  (x6)
+# battania_castle_stairs_c_l1  (x2)
+# battania_castle_stairs_c_l2  (x2)
+# battania_castle_tower_round_a_l1  (x1)
+# battania_castle_wall_a_l1  (x2)
+# battania_castle_wall_a_l2  (x12)
+# battania_castle_wall_corridor_a  (x4)
+# battania_castle_wall_corridor_b  (x6)
+# battania_castle_wall_d_l1  (x2)
+# battania_castle_wall_d_l2  (x6)
+# battania_dungeon_column_a  (x8)
+# battania_dungeon_door_a2  (x2)
+# battania_dungeon_door_a_closed_2sided  (x11)
+# battania_gatehause_door_open  (x1)
+# battania_grandbazaar_big_wall_a  (x2)
+# battania_grandbazaar_gate  (x2)
+# battania_grandbazaar_ground_a  (x34)
+# battania_grandbazaar_shop_a  (x4)
+# battania_grandbazaar_shop_door_b  (x1)
+# battania_grandbazaar_stair_a  (x6)
+# battania_grandbazaar_stone_fence_a  (x30)
+# battania_grandbazaar_stone_fence_b  (x66)
+# battania_grandbazaar_stone_fence_c  (x10)
+# battania_keep_door_a  (x4)
+# battania_pit_railing_a  (x4)
+# battania_pit_railing_b  (x1)
+# battania_stone_a  (x4)
+# battania_stone_b  (x4)
+# battania_stone_c  (x4)
+# battania_stonewall_part_a  (x1)
+# battania_stonewall_part_b  (x3)
+# battania_stonewall_part_e  (x1)
+# battania_stonewall_part_f  (x5)
+# battania_stonewall_part_g  (x1)
+# battania_stonewall_part_h  (x1)
+# battania_stonewall_part_i  (x1)
+# battania_stonewall_part_j  (x1)
+# battania_storage_wood_a  (x4)
+# battania_storage_wood_b  (x4)
+# battania_storage_wood_c  (x4)
+# battania_storage_wood_d  (x5)
+# battania_street_tent_a  (x1)
+# battania_windmill  (x1)
+# ---- batteringram (2) ----
+# batteringram_a_spawner  (x1)
+# batteringram_a_spawnerMP  (x7)
+# ---- battleground (6) ----
+# battleground_env_fire  (x4)
+# battleground_env_smoke_point  (x2)
+# battleground_env_smoke_square  (x1)
+# battleground_fire_smoke_square  (x8)
+# battleground_fire_smoke_vertical  (x4)
+# battleground_smoke_big  (x1)
+# ---- bd (236) ----
+# bd_anvil  (x2)
+# bd_aserai_plate_cupper  (x2)
+# bd_aserai_pot_cupper_b  (x3)
+# bd_aserai_seat_a_unsittable  (x1)
+# bd_barrel_a  (x222)
+# bd_barrel_b  (x24)
+# bd_barrel_c  (x59)
+# bd_barrel_d  (x12)
+# bd_barrel_e  (x14)
+# bd_barrel_f  (x18)
+# bd_barrel_heap_a  (x46)
+# bd_barrel_heap_b  (x46)
+# bd_basket_a  (x2)
+# bd_basket_heap_a  (x22)
+# bd_basket_heap_a2  (x6)
+# bd_basket_heap_aserai_a  (x19)
+# bd_basket_heap_aserai_b  (x8)
+# bd_battania_landmark_statue_b_moss  (x2)
+# bd_battania_landmark_statue_foundation_moss  (x7)
+# bd_battania_statue_a  (x7)
+# bd_battania_statue_b  (x11)
+# bd_battania_statue_male_small  (x2)
+# bd_broom_a  (x2)
+# bd_bucket_a  (x54)
+# bd_bucket_b  (x17)
+# bd_carpet_battania_a  (x2)
+# bd_carpet_battania_b  (x4)
+# bd_cart_a  (x5)
+# bd_cart_b  (x10)
+# bd_cart_c  (x5)
+# bd_cart_heap_a  (x22)
+# bd_cart_heap_b  (x22)
+# bd_cart_heap_c  (x16)
+# bd_cart_heap_d  (x10)
+# bd_cart_heap_e  (x16)
+# bd_cart_heap_f  (x8)
+# bd_cart_heap_g  (x13)
+# bd_cart_heap_h  (x5)
+# bd_cart_heap_i  (x20)
+# bd_cart_heap_j  (x3)
+# bd_cart_heap_k  (x7)
+# bd_cart_heap_l  (x12)
+# bd_cart_spoke  (x4)
+# bd_cart_wheel_a  (x4)
+# bd_cart_wheel_b  (x7)
+# bd_cartbroken_a  (x13)
+# bd_cartbroken_b  (x12)
+# bd_cartbroken_c  (x2)
+# bd_cartbroken_d  (x4)
+# bd_chains_sturgia  (x6)
+# bd_chair_b_01_unsittable  (x9)
+# bd_chair_b_unsittable  (x52)
+# bd_chair_c_left_unsittable  (x10)
+# bd_chair_c_right_unsittable  (x6)
+# bd_chair_c_unsittable  (x6)
+# bd_chair_d_tavern_unsittable  (x13)
+# bd_chair_d_unsittable  (x9)
+# bd_chair_e_unsittable  (x2)
+# bd_chair_empire_a_pillow_a_unsittable  (x2)
+# bd_chair_empire_c_pillow_b_unsittable  (x1)
+# bd_chair_g_unsittable  (x3)
+# bd_chair_khuzait_lord_c_unsittable  (x1)
+# bd_chair_trunk_a_unsittable  (x3)
+# bd_chest_a  (x5)
+# bd_chest_b  (x5)
+# bd_chest_c  (x21)
+# bd_chest_d  (x5)
+# bd_chest_sturgia_c  (x3)
+# bd_chest_sturgia_d  (x2)
+# bd_chisel  (x9)
+# bd_cloth_2  (x4)
+# bd_cloth_3  (x1)
+# bd_cloth_a  (x12)
+# bd_cloth_aserai_a  (x1)
+# bd_cloth_b  (x3)
+# bd_cloth_hanging_g  (x4)
+# bd_cloth_hanging_rope  (x12)
+# bd_cloth_khuzait_a  (x1)
+# bd_cloth_on_table_a  (x15)
+# bd_cloth_on_table_b  (x9)
+# bd_cloth_stick_10m  (x2)
+# bd_cloth_stick_5m  (x6)
+# bd_cloth_wall_a  (x9)
+# bd_cloth_wall_b  (x8)
+# bd_cloth_wall_c  (x2)
+# bd_cloth_wall_d_battania  (x2)
+# bd_cupboard_a  (x10)
+# bd_cupboard_khuzait_lord_a  (x1)
+# bd_cupboard_kitchen_a  (x7)
+# bd_empty_sack  (x6)
+# bd_fabric_a  (x2)
+# bd_flag_1  (x25)
+# bd_flag_2  (x15)
+# bd_flag_3  (x7)
+# bd_flag_4  (x67)
+# bd_goblet_sturgia_a  (x1)
+# bd_hammer  (x9)
+# bd_hammer_a  (x3)
+# bd_hay_cart_a  (x22)
+# bd_hay_cart_b  (x11)
+# bd_heap_a  (x18)
+# bd_heap_b  (x41)
+# bd_heap_c  (x34)
+# bd_heap_d  (x47)
+# bd_heap_e  (x12)
+# bd_incense_c  (x1)
+# bd_incense_g  (x1)
+# bd_khuzait_seat_a_unsittable  (x2)
+# bd_kitchen_stove__grill  (x28)
+# bd_kitchen_stove_empire  (x2)
+# bd_ladder_a  (x1)
+# bd_ladder_b  (x4)
+# bd_log_and_axe  (x9)
+# bd_manure_a  (x27)
+# bd_mill_flour_sack  (x54)
+# bd_mill_flour_sack_desk_a  (x19)
+# bd_mill_flour_sack_desk_b  (x38)
+# bd_pickaxe_a  (x21)
+# bd_pickaxe_b  (x2)
+# bd_pickaxe_c  (x4)
+# bd_pillow_a  (x6)
+# bd_pillow_b  (x6)
+# bd_pillow_c  (x2)
+# bd_pillow_d  (x3)
+# bd_pillow_e  (x2)
+# bd_pillow_f  (x3)
+# bd_pillow_g  (x4)
+# bd_pillow_h  (x1)
+# bd_pillow_i  (x6)
+# bd_pillow_j  (x7)
+# bd_planks_a  (x10)
+# bd_plough_a  (x1)
+# bd_plough_b  (x4)
+# bd_plough_c  (x2)
+# bd_pole_3m  (x20)
+# bd_pole_6m  (x8)
+# bd_roasting_spit_a  (x4)
+# bd_rope_a  (x38)
+# bd_rope_b  (x35)
+# bd_rope_c  (x125)
+# bd_rope_sturgia_a  (x54)
+# bd_sack_a  (x57)
+# bd_sack_b  (x121)
+# bd_sack_c  (x96)
+# bd_sack_heap_a  (x118)
+# bd_sack_heap_b  (x64)
+# bd_sack_heap_c  (x49)
+# bd_shelf_2_heap_a  (x7)
+# bd_shelf_2_heap_b  (x5)
+# bd_shelf_b  (x2)
+# bd_shelf_c  (x8)
+# bd_shelf_d  (x4)
+# bd_shelf_hanged_d  (x2)
+# bd_shelf_hanged_e  (x1)
+# bd_shelf_heap_a  (x28)
+# bd_shelf_heap_b  (x29)
+# bd_shelf_heap_c  (x5)
+# bd_shelf_heap_c1  (x3)
+# bd_shelf_heap_c2  (x6)
+# bd_shelf_heap_d  (x3)
+# bd_shelf_heap_f  (x4)
+# bd_shelf_heap_g  (x1)
+# bd_shelf_heap_h  (x2)
+# bd_smithy_anvil  (x1)
+# bd_spice_mesh  (x3)
+# bd_stacked_wood  (x19)
+# bd_stand_a  (x4)
+# bd_stand_b  (x9)
+# bd_stand_b_dark  (x5)
+# bd_stand_c  (x5)
+# bd_stand_d  (x27)
+# bd_straw_a  (x189)
+# bd_straw_a_dark  (x4)
+# bd_straw_b  (x8)
+# bd_straw_b_dark  (x5)
+# bd_straw_c  (x27)
+# bd_straw_c_dark  (x6)
+# bd_straw_d  (x61)
+# bd_straw_e  (x43)
+# bd_straw_f  (x32)
+# bd_straw_g  (x2)
+# bd_straw_h  (x35)
+# bd_sturgia_statue  (x4)
+# bd_sturgia_wall_tapestry_e  (x1)
+# bd_sturgia_wall_tapestry_g  (x1)
+# bd_sturgian_buttertub_a  (x3)
+# bd_sturgian_buttertub_b  (x11)
+# bd_table_a  (x29)
+# bd_table_aserai_tavern_a  (x2)
+# bd_table_aserai_tavern_b  (x8)
+# bd_table_aserai_tavern_c  (x5)
+# bd_table_b  (x22)
+# bd_table_c  (x12)
+# bd_table_d  (x24)
+# bd_table_e  (x4)
+# bd_table_f  (x3)
+# bd_table_kitchen_a  (x7)
+# bd_table_kitchen_b  (x3)
+# bd_table_small_a  (x4)
+# bd_table_small_c  (x3)
+# bd_table_vlandia_tavern_a  (x3)
+# bd_table_vlandia_tavern_b  (x2)
+# bd_tapestry_aserai_b  (x4)
+# bd_tapestry_aserai_d  (x1)
+# bd_tapestry_aserai_e  (x1)
+# bd_tapestry_aserai_f  (x2)
+# bd_tapestry_aserai_g  (x2)
+# bd_tapestry_battania  (x2)
+# bd_tapestry_imperial_a  (x3)
+# bd_tapestry_imperial_b  (x2)
+# bd_tapestry_imperial_d  (x4)
+# bd_target_board  (x3)
+# bd_target_board_2  (x6)
+# bd_trough_a  (x17)
+# bd_urn_a  (x7)
+# bd_village_bridge  (x6)
+# bd_wall_baskets_a  (x11)
+# bd_wall_baskets_b  (x1)
+# bd_wall_bucket  (x26)
+# bd_wall_decoration_weapons_a  (x2)
+# bd_wall_decoration_weapons_j  (x4)
+# bd_wall_pouches  (x4)
+# bd_wall_pouches_b  (x2)
+# bd_wall_scales  (x1)
+# bd_washtub_a  (x2)
+# bd_washtub_b  (x3)
+# bd_waterwell_a  (x10)
+# bd_waterwell_b  (x4)
+# bd_wheelbarrow_a  (x12)
+# bd_wood_c  (x34)
+# bd_wood_heap_a  (x26)
+# bd_wood_heap_b  (x43)
+# bd_wood_heap_c  (x37)
+# bd_wood_heap_d  (x17)
+# bd_wood_heap_e  (x16)
+# bd_wood_heap_f  (x15)
+# ---- bed (22) ----
+# bed_battania_king_b  (x1)
+# bed_ground_b  (x2)
+# bed_ground_d  (x3)
+# bed_ground_e  (x2)
+# bed_ground_f  (x9)
+# bed_ground_g  (x4)
+# bed_ground_h  (x5)
+# bed_ground_i  (x5)
+# bed_ground_j  (x2)
+# bed_straw_a  (x5)
+# bed_straw_b  (x5)
+# bed_straw_c  (x11)
+# bed_straw_d  (x4)
+# bed_straw_e  (x2)
+# bed_straw_f  (x4)
+# bed_straw_g  (x2)
+# bed_tavern_b  (x1)
+# bed_tavern_i  (x1)
+# bed_tavern_k  (x1)
+# bed_wodden_straw_c  (x2)
+# bed_wodden_straw_d  (x4)
+# bed_wodden_straw_e  (x2)
+# ---- blacksmith (2) ----
+# blacksmith_flame  (x1)
+# blacksmith_props  (x3)
+# ---- border (2) ----
+# border_hard  (x8)
+# border_soft  (x168)
+# ---- boulder2 (1) ----
+# boulder2  (x15)
+# ---- breach (1) ----
+# breach_filler  (x1)
+# ---- breachcollapse (1) ----
+# breachcollapse  (x1)
+# ---- brushwood (5) ----
+# brushwood_a  (x2)
+# brushwood_b  (x6)
+# brushwood_c  (x8)
+# brushwood_e  (x2)
+# brushwood_f  (x4)
+# ---- burned (6) ----
+# burned_wood_a  (x7)
+# burned_wood_b  (x3)
+# burned_wood_c  (x3)
+# burned_wood_d  (x9)
+# burned_wood_e  (x2)
+# burned_wood_f  (x1)
+# ---- burning (2) ----
+# burning_campfire  (x3)
+# burning_campfire_big  (x7)
+# ---- camera (1) ----
+# camera_instance  (x1)
+# ---- carpet (3) ----
+# carpet_empire_a  (x5)
+# carpet_empire_a_hang_b  (x2)
+# carpet_empire_b  (x4)
+# ---- carry (1) ----
+# carry_scroll  (x1)
+# ---- castle (9) ----
+# castle_door_sally  (x11)
+# castle_plank_ramp_a  (x211)
+# castle_plank_ramp_b  (x114)
+# castle_plank_ramp_wall_a  (x39)
+# castle_plank_wall_a  (x58)
+# castle_plank_wall_b  (x34)
+# castle_plank_wall_c  (x138)
+# castle_scaffold_a  (x5)
+# castle_scaffold_b  (x30)
+# ---- cave (15) ----
+# cave_corner_a  (x1)
+# cave_corridor_b  (x2)
+# cave_desert_floor_a  (x3)
+# cave_desert_rock_a  (x1)
+# cave_desert_rock_wall_f  (x1)
+# cave_entry_a  (x1)
+# cave_floor_a  (x1)
+# cave_rock_a  (x6)
+# cave_rock_b  (x2)
+# cave_rock_small_a  (x1)
+# cave_rock_small_b  (x2)
+# cave_rock_wall_a  (x11)
+# cave_rock_wall_b  (x33)
+# cave_rock_wall_e  (x1)
+# cave_wall_a  (x1)
+# ---- chest (3) ----
+# chest_empire_a  (x10)
+# chest_empire_b  (x23)
+# chest_empire_c  (x12)
+# ---- city (1) ----
+# city_ambient_sound  (x2)
+# ---- civilian (3) ----
+# civilian_ladder_4m  (x7)
+# civilian_ladder_5m  (x21)
+# civilian_ladder_6m  (x6)
+# ---- cliff (12) ----
+# cliff_a  (x4)
+# cliff_d  (x3)
+# cliff_e  (x2)
+# cliff_f  (x5)
+# cliff_g  (x2)
+# cliff_h  (x1)
+# cliff_i  (x1)
+# cliff_j  (x1)
+# cliff_soil_a  (x48)
+# cliff_soil_b  (x115)
+# cliff_soil_c  (x38)
+# cliff_soil_d  (x112)
+# ---- cloth (2) ----
+# cloth_flag_a  (x2)
+# cloth_flag_b  (x8)
+# ---- cooking (1) ----
+# cooking_pot  (x2)
+# ---- crate (7) ----
+# crate_a  (x39)
+# crate_a_empty  (x5)
+# crate_a_lid  (x9)
+# crate_b  (x330)
+# crate_b_empty  (x78)
+# crate_b_lid  (x34)
+# crate_c  (x20)
+# ---- crow (1) ----
+# crow  (x3)
+# ---- crowd (1) ----
+# crowd_woman_a  (x3)
+# ---- desert (5) ----
+# desert_ambient_sound  (x1)
+# desert_bones_a  (x3)
+# desert_bones_b  (x1)
+# desert_bones_c  (x3)
+# desert_bones_d  (x2)
+# ---- detail (17) ----
+# detail_birds_arid_sound  (x1)
+# detail_birds_city_sound  (x4)
+# detail_birds_coastal_sound  (x4)
+# detail_birds_forest_sound  (x10)
+# detail_birds_lake_sound  (x2)
+# detail_birds_taiga_sound  (x8)
+# detail_crickets_warm_sound  (x5)
+# detail_distant_bells_sound  (x1)
+# detail_fauna_marsh_sound  (x1)
+# detail_flies_sound  (x8)
+# detail_lake_gust_sound  (x2)
+# detail_rats_sound  (x1)
+# detail_trees_deciduous_sound  (x10)
+# detail_vegetation_sound  (x15)
+# detail_waves_lake_sound  (x2)
+# detail_well_sound  (x10)
+# detail_wind_howl_sound  (x15)
+# ---- digging (1) ----
+# digging_axe  (x1)
+# ---- dirty (2) ----
+# dirty_a  (x12)
+# dirty_b  (x43)
+# ---- dragon (1) ----
+# dragon_banner_center  (x2)
+# ---- dry (5) ----
+# dry_tree_a  (x4)
+# dry_tree_b  (x3)
+# dry_tree_c  (x1)
+# dry_tree_d  (x1)
+# dry_tree_e  (x1)
+# ---- editor (5) ----
+# editor_cone  (x14)
+# editor_cube  (x363)
+# editor_cylinder  (x33)
+# editor_plane  (x7)
+# editor_sphere  (x3)
+# ---- emp (2) ----
+# emp_bridge_g  (x7)
+# emp_stairs_a  (x9)
+# ---- empire (259) ----
+# empire_aqueduct  (x13)
+# empire_aqueduct_end_reservoir  (x1)
+# empire_arena_a  (x2)
+# empire_bed_a  (x2)
+# empire_bridge_a_part_a  (x3)
+# empire_bridge_a_part_b  (x3)
+# empire_bridge_b_connection_b  (x12)
+# empire_bridge_b_connection_c  (x2)
+# empire_bridge_b_part_a  (x3)
+# empire_bridge_b_part_b  (x6)
+# empire_bridge_b_part_c  (x36)
+# empire_castle_baracks_a_l3  (x3)
+# empire_castle_barn_a_l3  (x2)
+# empire_castle_barn_b_l3  (x8)
+# empire_castle_corner_a_l3  (x1)
+# empire_castle_corner_b_l3  (x1)
+# empire_castle_corner_c_l3  (x3)
+# empire_castle_corner_d_l3  (x5)
+# empire_castle_corner_e_l3  (x3)
+# empire_castle_gate_inner_l3  (x1)
+# empire_castle_gate_outer_l3  (x1)
+# empire_castle_gatehouse_a_l3_gate_back_close  (x3)
+# empire_castle_gatehouse_a_l3_gate_close  (x5)
+# empire_castle_keep_a_l3  (x1)
+# empire_castle_keep_a_l3_interior_column_top_a  (x6)
+# empire_castle_keep_a_l3_interior_folding_screen_a  (x18)
+# empire_castle_keep_a_l3_interior_window_a  (x1)
+# empire_castle_stairs_a_l3  (x15)
+# empire_castle_stairs_b_l3  (x6)
+# empire_castle_stairs_c_l3  (x2)
+# empire_castle_tower_round_a_l3  (x8)
+# empire_castle_wall_a_l3  (x63)
+# empire_castle_wall_a_roof  (x1)
+# empire_castle_wall_d_l3  (x1)
+# empire_castle_wall_d_roof  (x1)
+# empire_column_a  (x24)
+# empire_column_b  (x4)
+# empire_dungeon_cell_door_a_closed  (x14)
+# empire_dungeon_cell_door_a_open  (x1)
+# empire_dungeon_corridor_b1  (x1)
+# empire_dungeon_corridor_b2  (x2)
+# empire_dungeon_corridor_b5  (x2)
+# empire_dungeon_door_a_closed  (x5)
+# empire_dungeon_door_a_closed_2sided  (x5)
+# empire_dungeon_door_a_empty  (x2)
+# empire_dungeon_room_c  (x2)
+# empire_dungeon_room_g  (x2)
+# empire_endtable_a  (x1)
+# empire_garden_door_a_close  (x1)
+# empire_garden_door_c_close  (x1)
+# empire_garden_door_e_close  (x2)
+# empire_garden_door_f_close  (x5)
+# empire_garden_door_f_open  (x3)
+# empire_garden_flowerpot_a  (x1)
+# empire_garden_flowerpot_b  (x25)
+# empire_garden_flowerpot_c  (x1)
+# empire_garden_flowerpot_d  (x14)
+# empire_garden_sidewalk_a1  (x17)
+# empire_garden_sidewalk_a2  (x18)
+# empire_garden_sidewalk_a_corner1  (x5)
+# empire_garden_sidewalk_a_short1  (x7)
+# empire_garden_sidewalk_b1  (x33)
+# empire_garden_sidewalk_b2  (x25)
+# empire_garden_sidewalk_b_corner1  (x25)
+# empire_garden_sidewalk_b_round1  (x11)
+# empire_garden_sidewalk_b_short1  (x25)
+# empire_garden_sidewalk_c1  (x131)
+# empire_garden_sidewalk_c2  (x133)
+# empire_garden_sidewalk_c_short1  (x79)
+# empire_garden_wall_b1  (x41)
+# empire_garden_wall_b2  (x30)
+# empire_garden_wall_b_damaged  (x38)
+# empire_garden_wall_b_round1  (x12)
+# empire_garden_wall_b_round2  (x7)
+# empire_garden_wall_b_short1  (x6)
+# empire_garden_wall_c1  (x734)
+# empire_garden_wall_c2  (x204)
+# empire_garden_wall_c_end  (x11)
+# empire_garden_wall_c_round1  (x73)
+# empire_garden_wall_c_round2  (x83)
+# empire_garden_wall_c_short1  (x49)
+# empire_garden_wall_d1  (x66)
+# empire_garden_wall_d2  (x40)
+# empire_garden_wall_d_end  (x6)
+# empire_garden_wall_d_round1  (x17)
+# empire_garden_wall_d_round2  (x5)
+# empire_garden_wall_d_short1  (x14)
+# empire_garden_wall_top_a1  (x27)
+# empire_garden_wall_top_a2  (x10)
+# empire_garden_wall_top_a_end  (x19)
+# empire_garden_wall_top_a_round1  (x20)
+# empire_garden_wall_top_a_round2  (x9)
+# empire_garden_wall_top_a_short  (x29)
+# empire_garden_wall_top_b1  (x66)
+# empire_garden_wall_top_b2  (x40)
+# empire_garden_wall_top_b_end  (x3)
+# empire_garden_wall_top_b_round1  (x4)
+# empire_garden_wall_top_b_short  (x11)
+# empire_garden_wall_top_c1  (x34)
+# empire_garden_wall_top_c2  (x12)
+# empire_garden_wall_top_c_end  (x2)
+# empire_garden_wall_top_c_round1  (x2)
+# empire_garden_wall_top_c_round2  (x1)
+# empire_garden_wall_top_c_short  (x5)
+# empire_gatehouse_b  (x6)
+# empire_gatehouse_c  (x4)
+# empire_grandbazaar_column  (x1)
+# empire_grandbazaar_corridor_a  (x1)
+# empire_grandbazaar_corridor_stairs  (x4)
+# empire_grandbazaar_entry  (x1)
+# empire_grandbazaar_floor_a  (x2)
+# empire_grandbazaar_gate  (x4)
+# empire_grandbazaar_gate_door_a  (x1)
+# empire_grandbazaar_shop_a  (x1)
+# empire_grandbazaar_wall  (x10)
+# empire_hippodrome_column_a  (x6)
+# empire_hippodrome_enterance_side_tower  (x1)
+# empire_hippodrome_grandstand_d  (x2)
+# empire_hippodrome_middle_platform_b  (x1)
+# empire_house_a  (x16)
+# empire_house_b  (x11)
+# empire_house_basement_enterance_a  (x5)
+# empire_house_bay_window_a  (x1)
+# empire_house_bay_window_b  (x2)
+# empire_house_bridge_a  (x7)
+# empire_house_bridge_b  (x4)
+# empire_house_bridge_b_end  (x4)
+# empire_house_bridge_b_roof  (x21)
+# empire_house_bridge_c  (x12)
+# empire_house_bridge_c_end  (x124)
+# empire_house_bridge_c_roof  (x21)
+# empire_house_bridge_d  (x3)
+# empire_house_bridge_e  (x8)
+# empire_house_c  (x21)
+# empire_house_d  (x12)
+# empire_house_fake_a  (x8)
+# empire_house_fake_b  (x8)
+# empire_house_fake_d  (x1)
+# empire_house_fake_e  (x4)
+# empire_house_shed_a  (x9)
+# empire_house_shrine_a  (x8)
+# empire_house_storage_a  (x3)
+# empire_house_tower_a1  (x6)
+# empire_house_tower_a2  (x3)
+# empire_house_tower_b1  (x3)
+# empire_house_tower_b2  (x1)
+# empire_house_tower_c1  (x2)
+# empire_house_tower_c2  (x2)
+# empire_house_tower_d1  (x3)
+# empire_house_tower_e1  (x2)
+# empire_house_tower_e2  (x6)
+# empire_house_tower_f1  (x3)
+# empire_house_tower_g1  (x5)
+# empire_house_tower_g2  (x2)
+# empire_house_tower_h1  (x5)
+# empire_keep_a  (x4)
+# empire_keep_a_door_top  (x1)
+# empire_keep_a_emblem_a  (x6)
+# empire_keep_b  (x1)
+# empire_keep_b_part_c  (x1)
+# empire_keep_b_relief_b  (x1)
+# empire_keep_b_relief_c  (x1)
+# empire_keep_b_relief_d  (x1)
+# empire_keep_b_relief_e  (x2)
+# empire_keep_b_relief_f  (x2)
+# empire_keep_b_side_building_d  (x1)
+# empire_keep_b_side_building_f  (x1)
+# empire_keep_b_side_building_h  (x2)
+# empire_keep_b_side_building_k  (x2)
+# empire_keep_b_side_building_l  (x1)
+# empire_keep_balcony_a  (x1)
+# empire_keep_d  (x2)
+# empire_keep_d_back  (x1)
+# empire_keep_d_base  (x3)
+# empire_keep_d_corner_side  (x1)
+# empire_keep_d_interior_column_a  (x5)
+# empire_keep_d_interior_column_top_b  (x12)
+# empire_keep_d_interior_flag  (x23)
+# empire_keep_d_interior_top_door_a_close  (x1)
+# empire_keep_d_platform_a  (x3)
+# empire_keep_d_side_  (x10)
+# empire_keep_d_stair  (x3)
+# empire_keep_d_top_corner  (x2)
+# empire_lord_pot_a  (x1)
+# empire_lord_pot_brass  (x1)
+# empire_lord_pot_e  (x2)
+# empire_lord_pot_f  (x2)
+# empire_lord_pot_g  (x2)
+# empire_lord_pot_h  (x3)
+# empire_lord_pot_j  (x2)
+# empire_lord_pot_l  (x3)
+# empire_lord_pot_m  (x5)
+# empire_lord_pot_n  (x1)
+# empire_lord_pot_p  (x1)
+# empire_market_fountain  (x3)
+# empire_obelisk_a  (x1)
+# empire_obelisk_b  (x13)
+# empire_pot_holder_01  (x1)
+# empire_pot_holder_02  (x12)
+# empire_retaining_wall_a  (x36)
+# empire_retaining_wall_c  (x29)
+# empire_retaining_wall_d  (x8)
+# empire_road_floor_a  (x15)
+# empire_road_floor_a_small  (x44)
+# empire_road_plaza_a  (x5)
+# empire_road_sidewalk_a  (x19)
+# empire_road_sidewalk_a_corner_2  (x7)
+# empire_road_sidewalk_a_corner_3  (x4)
+# empire_road_sidewalk_a_damaged  (x3)
+# empire_road_sidewalk_a_flower_pot  (x58)
+# empire_screen_a  (x32)
+# empire_sofa_a  (x2)
+# empire_sofa_c  (x3)
+# empire_stair_a  (x31)
+# empire_stair_b  (x13)
+# empire_statue_bust_a  (x16)
+# empire_statue_bust_a_mini_b  (x3)
+# empire_statue_bust_place_b  (x2)
+# empire_statue_chariot  (x8)
+# empire_statue_horse  (x21)
+# empire_statue_plinth_a  (x3)
+# empire_statue_plinth_b  (x7)
+# empire_statue_plinth_d  (x9)
+# empire_statue_plinth_e  (x14)
+# empire_street_fountain_d  (x1)
+# empire_street_fountain_e  (x3)
+# empire_street_pottery_01  (x1)
+# empire_street_pottery_03_b  (x10)
+# empire_street_pottery_05  (x1)
+# empire_street_pottery_05_b  (x11)
+# empire_street_pottery_09  (x1)
+# empire_street_pottery_11  (x2)
+# empire_street_pottery_12  (x2)
+# empire_street_quad_well  (x2)
+# empire_street_tent_01  (x1)
+# empire_street_tent_02  (x12)
+# empire_street_tent_03  (x2)
+# empire_street_tent_04  (x8)
+# empire_street_tent_05  (x22)
+# empire_street_tent_06  (x19)
+# empire_tablecloth_a  (x3)
+# empire_tower_a  (x5)
+# empire_triumphal_arch_a  (x2)
+# empire_village_barn_a2  (x2)
+# empire_village_house_a  (x13)
+# empire_village_house_b  (x41)
+# empire_village_house_c  (x4)
+# empire_village_house_d  (x8)
+# empire_village_house_d_part_1  (x1)
+# empire_village_house_door_a  (x12)
+# empire_village_house_door_b  (x3)
+# empire_village_house_part_a  (x6)
+# empire_village_house_part_b  (x8)
+# empire_village_house_part_c  (x6)
+# empire_wall_a  (x40)
+# empire_wall_stair_a  (x2)
+# empire_wall_tower_b  (x4)
+# empire_wall_tower_e  (x15)
+# empire_wall_tower_roof_a  (x5)
+# ---- envmap (1) ----
+# envmap_prop  (x8)
+# ---- european (95) ----
+# european_castle_baracks_a  (x5)
+# european_castle_baracks_a_l3  (x2)
+# european_castle_barn_a  (x8)
+# european_castle_barn_a_l1  (x2)
+# european_castle_barn_a_l3  (x7)
+# european_castle_barn_b  (x2)
+# european_castle_barn_b_l3  (x8)
+# european_castle_bridge_a  (x6)
+# european_castle_bridge_a_destroyed  (x8)
+# european_castle_bridge_a_new  (x2)
+# european_castle_corner_a_l1_roof  (x2)
+# european_castle_corner_a_l3  (x2)
+# european_castle_corner_b_l3  (x1)
+# european_castle_corner_c_l1  (x1)
+# european_castle_corner_c_l3  (x2)
+# european_castle_corner_c_l3_old  (x5)
+# european_castle_corner_c_roof  (x9)
+# european_castle_corner_d_l3  (x8)
+# european_castle_corner_e_l1  (x4)
+# european_castle_corner_e_l3  (x1)
+# european_castle_corner_e_l3_old  (x4)
+# european_castle_gate_outer_l1  (x1)
+# european_castle_gate_outer_l2  (x4)
+# european_castle_gate_outer_l2_l3  (x2)
+# european_castle_gatehouse_a_l3  (x1)
+# european_castle_gatehouse_b_l3  (x1)
+# european_castle_gatehouse_door_closed  (x3)
+# european_castle_gatehouse_door_open  (x1)
+# european_castle_gatehouse_portcullis_a  (x2)
+# european_castle_keep_a_l3  (x2)
+# european_castle_keep_a_l3_brattice  (x2)
+# european_castle_keep_b  (x1)
+# european_castle_keep_part_a  (x1)
+# european_castle_l1_corner_upstairs_a  (x18)
+# european_castle_l1_floor_a  (x4)
+# european_castle_ladder  (x1)
+# european_castle_stairs_a_l1  (x5)
+# european_castle_stairs_a_l2  (x4)
+# european_castle_stairs_a_l3  (x13)
+# european_castle_stairs_b_l1  (x4)
+# european_castle_stairs_b_l3  (x16)
+# european_castle_stairs_c_l1  (x5)
+# european_castle_stairs_c_l2  (x5)
+# european_castle_stairs_c_l3  (x16)
+# european_castle_tower_round_a_l2  (x2)
+# european_castle_tower_round_a_l3  (x13)
+# european_castle_tower_round_a_roof  (x7)
+# european_castle_wall_a_damaged_heap_a  (x10)
+# european_castle_wall_a_damaged_heap_b  (x36)
+# european_castle_wall_a_damaged_heap_c  (x23)
+# european_castle_wall_a_damaged_heap_d  (x99)
+# european_castle_wall_a_damaged_heap_e  (x35)
+# european_castle_wall_a_damaged_l1_heap_a  (x21)
+# european_castle_wall_a_damaged_l1_heap_b  (x17)
+# european_castle_wall_a_damaged_l3_2_old  (x4)
+# european_castle_wall_a_l3  (x38)
+# european_castle_wall_a_l3_old  (x24)
+# european_castle_wall_a_l3_sally  (x2)
+# european_castle_wall_a_roof  (x1)
+# european_castle_wall_c_l3  (x2)
+# european_castle_wall_d_l1  (x4)
+# european_castle_wall_d_l3  (x12)
+# european_castle_wall_d_l3_sally  (x2)
+# european_castle_wall_d_roof  (x5)
+# european_castle_wall_fence_b  (x1)
+# european_castle_wall_gate_l3  (x7)
+# european_castle_wall_part_a  (x9)
+# european_castle_wooden_cover_b  (x3)
+# european_city_awning_a  (x16)
+# european_city_gatehouse_a  (x7)
+# european_city_house_a  (x6)
+# european_city_house_b  (x5)
+# european_city_house_c  (x19)
+# european_city_house_d  (x16)
+# european_city_house_e  (x6)
+# european_city_house_f  (x12)
+# european_city_house_g  (x5)
+# european_city_part_a  (x11)
+# european_city_part_b  (x9)
+# european_city_part_c  (x6)
+# european_city_part_d  (x9)
+# european_city_part_e  (x9)
+# european_city_part_f_stairs  (x19)
+# european_city_part_g_stairs  (x1)
+# european_city_part_h_door  (x19)
+# european_city_part_i  (x17)
+# european_city_part_j_balcony  (x7)
+# european_sally_door_a_state4  (x1)
+# european_village_barn_a  (x6)
+# european_village_barn_b  (x6)
+# european_village_house_b  (x4)
+# european_village_house_c  (x9)
+# european_village_house_d  (x6)
+# european_village_house_f  (x2)
+# european_village_storage_a  (x7)
+# ---- farmer (1) ----
+# farmer_sickle  (x3)
+# ---- fence (12) ----
+# fence_a  (x2)
+# fence_d  (x12)
+# fence_e  (x67)
+# fence_empire_a  (x54)
+# fence_empire_b  (x1)
+# fence_empire_c  (x7)
+# fence_f  (x57)
+# fence_g  (x23)
+# fence_h  (x17)
+# fence_old_a3  (x9)
+# fence_old_a4  (x11)
+# fence_old_a5  (x8)
+# ---- fire (5) ----
+# fire_light  (x1)
+# fire_stones_battania  (x2)
+# fire_stones_bonfire  (x1)
+# fire_stones_desert  (x2)
+# fire_stones_steppe  (x4)
+# ---- fish (1) ----
+# fish_smoker_a  (x1)
+# ---- fish axe (1) ----
+# fish axe  (x1)
+# ---- fishing (1) ----
+# fishing_rod  (x3)
+# ---- fishnet (5) ----
+# fishnet_a  (x10)
+# fishnet_b  (x10)
+# fishnet_c  (x30)
+# fishnet_d  (x2)
+# fishnet_e  (x2)
+# ---- flag (13) ----
+# flag_1  (x2)
+# flag_2  (x8)
+# flag_3  (x1)
+# flag_4  (x1)
+# flag_pole_big_sergeant_A  (x17)
+# flag_pole_big_sergeant_B  (x17)
+# flag_pole_big_sergeant_C  (x17)
+# flag_pole_big_sergeant_D  (x9)
+# flag_pole_big_sergeant_E  (x9)
+# flag_pole_big_sergeant_F  (x9)
+# flag_pole_big_sergeant_main  (x9)
+# flag_rope_cloth  (x19)
+# flag_stand_big  (x6)
+# ---- flagpole (3) ----
+# flagpole_a  (x15)
+# flagpole_b_ground  (x6)
+# flagpole_intro  (x8)
+# ---- flee (3) ----
+# flee_line  (x65)
+# flee_line_defender  (x2)
+# flee_position  (x6)
+# ---- floor (4) ----
+# floor_dirt_a  (x3)
+# floor_dirt_b  (x5)
+# floor_dirt_c  (x5)
+# floor_dirt_d  (x4)
+# ---- floorstone (1) ----
+# floorstone_c  (x3)
+# ---- flora (14) ----
+# flora_plant_d  (x2)
+# flora_plant_e  (x2)
+# flora_plant_h  (x5)
+# flora_plant_k  (x2)
+# flora_tree_forest_beech_young_c  (x14)
+# flora_tree_forest_beech_young_e  (x10)
+# flora_tree_high_b  (x2)
+# flora_tree_high_c  (x2)
+# flora_tree_high_d  (x2)
+# flora_tree_high_g_aspen  (x7)
+# flora_tree_high_l_poplar  (x8)
+# flora_tree_high_m_poplar  (x12)
+# flora_tree_high_t_pine  (x3)
+# flora_tree_high_v_palm_date_d  (x8)
+# ---- flow (3) ----
+# flow_birds_a  (x23)
+# flow_fish_a  (x20)
+# flow_flies  (x23)
+# ---- food (1) ----
+# food_fire_smoke  (x16)
+# ---- foods (48) ----
+# foods_Cooked lobster  (x1)
+# foods_Cooked mutton  (x1)
+# foods_Cooked mutton rotten  (x14)
+# foods_Cooked pig head  (x1)
+# foods_Cooked ribs  (x5)
+# foods_Cooked sheep head  (x3)
+# foods_Hare_leg  (x3)
+# foods_Lobster  (x2)
+# foods_Maggots  (x6)
+# foods_Moss a  (x2)
+# foods_Moss b  (x6)
+# foods_Moss c  (x8)
+# foods_Moss d  (x11)
+# foods_Moss e  (x2)
+# foods_Moss f  (x2)
+# foods_Moss g  (x4)
+# foods_Mutton  (x1)
+# foods_Pig head  (x6)
+# foods_Ribs  (x3)
+# foods_Sheep head  (x3)
+# foods_apple_a  (x4)
+# foods_basket_a  (x1)
+# foods_basket_apple  (x5)
+# foods_basket_b  (x2)
+# foods_basket_c  (x2)
+# foods_basket_cabbage  (x9)
+# foods_basket_e  (x1)
+# foods_basket_olive_a  (x1)
+# foods_bread  (x1)
+# foods_cabbage_a  (x40)
+# foods_carrots_a  (x3)
+# foods_carrots_b  (x8)
+# foods_carrots_basket  (x6)
+# foods_cauldron_stew  (x1)
+# foods_chicken_raw  (x3)
+# foods_chicken_roast  (x3)
+# foods_crab_green  (x4)
+# foods_flour_pile  (x1)
+# foods_flour_sack  (x1)
+# foods_orange  (x2)
+# foods_orange_basket  (x4)
+# foods_orange_slice  (x1)
+# foods_pumpkin_a  (x4)
+# foods_pumpkin_b  (x1)
+# foods_watermelon_a  (x5)
+# foods_watermelon_a_to_carry  (x4)
+# foods_watermelon_b  (x1)
+# foods_watermelon_b_piece  (x4)
+# ---- forest (18) ----
+# forest_ambient_sound  (x4)
+# forest_ruinous_pine_a  (x1)
+# forest_ruinous_pine_b  (x7)
+# forest_ruinous_pine_c  (x5)
+# forest_ruinous_tree_a  (x6)
+# forest_ruinous_tree_b  (x8)
+# forest_ruinous_tree_beech__broken_a  (x3)
+# forest_ruinous_tree_beech__broken_b  (x4)
+# forest_ruinous_tree_beech__broken_c  (x2)
+# forest_ruinous_tree_beech__broken_d  (x6)
+# forest_ruinous_tree_beech__cutted_a  (x135)
+# forest_ruinous_tree_beech__cutted_b  (x22)
+# forest_ruinous_tree_beech_a  (x2)
+# forest_ruinous_tree_beech_b  (x4)
+# forest_ruinous_tree_beech_c  (x2)
+# forest_ruinous_tree_beech_e  (x1)
+# forest_ruinous_tree_palm_a  (x1)
+# forest_ruinous_tree_palm_b  (x1)
+# ---- gonfalon (1) ----
+# gonfalon_banner  (x18)
+# ---- grape (4) ----
+# grape  (x10)
+# grape_branch  (x121)
+# grape_leaf  (x75)
+# grape_root  (x7)
+# ---- hammer (1) ----
+# hammer_wooden  (x4)
+# ---- hawk (4) ----
+# hawk  (x1)
+# hawk_cage_a_with_hawk  (x1)
+# hawk_stand_a  (x2)
+# hawk_stand_c_with_hawk  (x1)
+# ---- heater (2) ----
+# heater_shield_a  (x1)
+# heater_shield_k  (x2)
+# ---- horse (1) ----
+# horse_critter  (x15)
+# ---- hut (5) ----
+# hut_b  (x4)
+# hut_b_fishing  (x3)
+# hut_c_fishing  (x6)
+# hut_d  (x2)
+# hut_door_a  (x9)
+# ---- int (1) ----
+# int_cave_ambient_sound  (x1)
+# ---- ivy (8) ----
+# ivy_02  (x13)
+# ivy_03  (x3)
+# ivy_european_01  (x8)
+# ivy_european_02  (x111)
+# ivy_european_03  (x14)
+# ivy_european_04  (x46)
+# ivy_european_05  (x36)
+# ivy_european_06  (x22)
+# ---- khuzait (12) ----
+# khuzait_arena_fence_c  (x1)
+# khuzait_arena_stadium_b  (x2)
+# khuzait_castle_gate_outer_l1  (x1)
+# khuzait_castle_keep_l3_interior_arc  (x2)
+# khuzait_castle_keep_l3_interior_balcony  (x1)
+# khuzait_castle_keep_l3_interior_door_close  (x2)
+# khuzait_castle_keep_l3_interior_door_open_a  (x2)
+# khuzait_castle_keep_l3_interior_floor_support  (x1)
+# khuzait_gate_stone_c  (x1)
+# khuzait_grandbazaar_ground_b  (x43)
+# khuzait_platform_wooden_a  (x6)
+# khuzait_platform_wooden_c  (x27)
+# ---- kitchen (55) ----
+# kitchen_basket_a  (x3)
+# kitchen_basket_b  (x5)
+# kitchen_basket_grape  (x8)
+# kitchen_basket_grape_b  (x5)
+# kitchen_bottle_a  (x16)
+# kitchen_bottle_b  (x10)
+# kitchen_bottle_c  (x9)
+# kitchen_bowl_a  (x2)
+# kitchen_bowl_b  (x4)
+# kitchen_bowl_b_four  (x4)
+# kitchen_bowl_b_two  (x4)
+# kitchen_bowl_c  (x6)
+# kitchen_bowl_d  (x1)
+# kitchen_bowl_fish  (x1)
+# kitchen_bowl_stew_a  (x7)
+# kitchen_bowl_stew_b  (x2)
+# kitchen_chopping_board_a  (x6)
+# kitchen_chopping_board_b  (x6)
+# kitchen_cutting_food_bread  (x3)
+# kitchen_cutting_food_fish  (x4)
+# kitchen_cutting_food_leek  (x2)
+# kitchen_cutting_food_meat  (x11)
+# kitchen_cutting_food_meat_b  (x5)
+# kitchen_food_bread_b  (x3)
+# kitchen_food_bread_c_slice  (x5)
+# kitchen_food_breadsauce  (x4)
+# kitchen_food_fish  (x3)
+# kitchen_food_flora  (x2)
+# kitchen_food_leek  (x23)
+# kitchen_garlic_bundle  (x1)
+# kitchen_hanger_a  (x1)
+# kitchen_hanger_b  (x1)
+# kitchen_hook  (x12)
+# kitchen_knife  (x2)
+# kitchen_mug_a  (x36)
+# kitchen_mug_b  (x34)
+# kitchen_mug_c  (x59)
+# kitchen_pitcher_a  (x11)
+# kitchen_pitcher_b  (x15)
+# kitchen_pitcher_c  (x1)
+# kitchen_pitcher_d  (x3)
+# kitchen_pitcher_e  (x4)
+# kitchen_plate_a  (x12)
+# kitchen_plate_b  (x19)
+# kitchen_plate_c  (x8)
+# kitchen_plate_grape  (x8)
+# kitchen_plate_sauce  (x1)
+# kitchen_plate_steak  (x2)
+# kitchen_pot_a  (x1)
+# kitchen_pot_b  (x1)
+# kitchen_potcover_a  (x4)
+# kitchen_sausage_a  (x2)
+# kitchen_sausage_b  (x4)
+# kitchen_sausage_c  (x2)
+# kitchen_spoon  (x4)
+# ---- lake (1) ----
+# lake_ambient_sound  (x6)
+# ---- landscape (1) ----
+# landscape_e  (x3)
+# ---- lib (4) ----
+# lib_book_closed_a  (x1)
+# lib_book_open_a  (x1)
+# lib_book_open_d  (x1)
+# lib_quill_pen  (x150)
+# ---- light (1) ----
+# light_outside_plane  (x1)
+# ---- lionhead (1) ----
+# lionhead  (x1)
+# ---- local (1) ----
+# local_envmap_prop  (x9)
+# ---- log (41) ----
+# log_beech_a  (x4)
+# log_beech_c  (x7)
+# log_beech_d  (x11)
+# log_beech_e  (x2)
+# log_beech_f  (x1)
+# log_bench_beech_c_unsittable  (x2)
+# log_bench_default_d_unsittable  (x14)
+# log_bench_pine_d_unsittable  (x6)
+# log_pine_a  (x9)
+# log_pine_b  (x7)
+# log_pine_d  (x5)
+# log_pine_e  (x3)
+# log_pine_f  (x1)
+# log_pine_g  (x5)
+# log_pine_group_a  (x5)
+# log_pine_group_b  (x7)
+# log_pine_group_c  (x12)
+# log_pine_group_d  (x18)
+# log_pine_group_e  (x11)
+# log_pine_group_f  (x11)
+# log_pine_group_g  (x10)
+# log_pine_group_h  (x5)
+# log_pine_group_i  (x13)
+# log_pine_group_j  (x7)
+# log_pine_group_k  (x8)
+# log_pine_group_l  (x5)
+# log_pine_h  (x10)
+# log_pine_i  (x14)
+# log_pine_j  (x8)
+# log_pine_k  (x6)
+# log_pine_m  (x41)
+# log_tree_high_a  (x27)
+# log_tree_high_b  (x27)
+# log_tree_high_c  (x29)
+# log_tree_high_d  (x41)
+# log_tree_high_e  (x16)
+# log_tree_high_f  (x7)
+# log_tree_high_group_a  (x2)
+# log_tree_high_group_b  (x2)
+# log_tree_high_group_c  (x2)
+# log_tree_high_group_d  (x2)
+# ---- lumberjack (1) ----
+# lumberjack_axe  (x2)
+# ---- mangonel (4) ----
+# mangonel_a_spawnerFireMP  (x11)
+# mangonel_a_spawnerMP  (x8)
+# mangonel_b_spawnerFireMP  (x9)
+# mangonel_b_spawnerMP  (x16)
+# ---- market (31) ----
+# market_applePile  (x5)
+# market_apple_crate  (x38)
+# market_breadPile  (x1)
+# market_breadPile2  (x3)
+# market_breadPile3  (x3)
+# market_breadPile4  (x3)
+# market_brooms  (x3)
+# market_cabbagePile  (x8)
+# market_cabbagePile2  (x5)
+# market_cabbagePile3  (x12)
+# market_cabbage_basket  (x9)
+# market_cabbage_crate  (x34)
+# market_chicken_basket  (x5)
+# market_flaxPile2  (x1)
+# market_hangedMeats  (x7)
+# market_hangedMeats2  (x3)
+# market_leekPile  (x6)
+# market_leek_basket  (x19)
+# market_leek_crate  (x36)
+# market_melonPile  (x3)
+# market_orangePile  (x4)
+# market_pitchforks  (x4)
+# market_potteryPile  (x1)
+# market_potteryPile2  (x3)
+# market_potteryPile3  (x3)
+# market_potteryPile4  (x4)
+# market_pumpkinPile  (x3)
+# market_pumpkinPile2  (x5)
+# market_ribs_basket  (x3)
+# market_sheepHead_basket  (x3)
+# market_textilePile  (x3)
+# ---- mat (10) ----
+# mat_carpet_b  (x3)
+# mat_carpet_c  (x3)
+# mat_carpet_g  (x2)
+# mat_carpet_h  (x59)
+# mat_carpet_i  (x48)
+# mat_fur_a  (x3)
+# mat_fur_b  (x2)
+# mat_wicker_a  (x6)
+# mat_wicker_b  (x2)
+# mat_wicker_c  (x5)
+# ---- mead (3) ----
+# mead_cup  (x2)
+# mead_cup_foam  (x2)
+# mead_cup_wooden_a_foam  (x2)
+# ---- merchandise (30) ----
+# merchandise_cheese_a  (x7)
+# merchandise_cheese_b  (x1)
+# merchandise_cheese_b_slice  (x1)
+# merchandise_clay  (x5)
+# merchandise_cloth_a  (x36)
+# merchandise_cloth_b  (x5)
+# merchandise_fish_a  (x7)
+# merchandise_fish_b  (x5)
+# merchandise_fish_barrel_a  (x28)
+# merchandise_fish_c  (x8)
+# merchandise_flax  (x3)
+# merchandise_gold  (x1)
+# merchandise_gold_b  (x3)
+# merchandise_grain  (x2)
+# merchandise_hides_a  (x3)
+# merchandise_hides_b  (x1)
+# merchandise_iron_a  (x1)
+# merchandise_ironware  (x1)
+# merchandise_ironware_pitchfork  (x1)
+# merchandise_leather_a  (x2)
+# merchandise_leather_c  (x2)
+# merchandise_linen  (x3)
+# merchandise_meat  (x1)
+# merchandise_pottery  (x13)
+# merchandise_raw_silk  (x1)
+# merchandise_stones  (x4)
+# merchandise_velvet  (x5)
+# merchandise_wood  (x10)
+# merchandise_wooden_stick  (x13)
+# merchandise_wool  (x3)
+# ---- merchant (1) ----
+# merchant_stand_armorer  (x3)
+# ---- module (22) ----
+# module_aserai_caravanserai_column  (x2)
+# module_aserai_caravanserai_door_extension  (x2)
+# module_european_floor_a  (x71)
+# module_european_floor_b  (x17)
+# module_european_floor_c  (x14)
+# module_european_floor_d  (x10)
+# module_european_floor_e  (x7)
+# module_european_floor_f  (x2)
+# module_european_floor_g  (x22)
+# module_european_house_end_attick_d  (x2)
+# module_european_house_end_front_a  (x6)
+# module_european_house_getty_a  (x2)
+# module_european_house_rooftop  (x10)
+# module_european_stone_floor_a  (x3)
+# module_european_stone_floor_b  (x1)
+# module_european_stone_floor_c  (x6)
+# module_european_village_house_c  (x12)
+# module_wall_plank_a  (x10)
+# module_wall_plank_b  (x2)
+# module_wall_stone_vlandia_c  (x14)
+# module_wall_stone_vlandia_d  (x4)
+# module_wall_village_vlandia_e  (x8)
+# ---- mountain (7) ----
+# mountain_border_a  (x2)
+# mountain_border_b  (x7)
+# mountain_border_c  (x1)
+# mountain_border_d  (x5)
+# mountain_border_e  (x3)
+# mountain_border_long_a  (x2)
+# mountain_border_long_b  (x8)
+# ---- mp (9) ----
+# mp_breach_wall_a  (x3)
+# mp_camera_start_pos  (x12)
+# mp_merchandise_leather_b  (x1)
+# mp_prop_merchantweavery_velvet_a  (x1)
+# mp_shop_prop_merchantcarpenter_a  (x4)
+# mp_shop_prop_merchanthorse_a  (x1)
+# mp_shop_prop_merchantpottery_a  (x1)
+# mp_spawnpoint  (x20)
+# mp_spawnpoint_attacker  (x1)
+# ---- mushroom (6) ----
+# mushroom_a2  (x2)
+# mushroom_a3  (x2)
+# mushroom_b1  (x4)
+# mushroom_tree_a  (x7)
+# mushroom_tree_b  (x2)
+# mushroom_tree_c  (x5)
+# ---- nord (1) ----
+# nord_fire_stand  (x2)
+# ---- olive (1) ----
+# olive_cart_a  (x1)
+# ---- outer (1) ----
+# outer_mesh_3sided  (x8)
+# ---- outermesh (5) ----
+# outermesh_001  (x3)
+# outermesh_desert_a  (x1)
+# outermesh_mountains_a  (x1)
+# outermesh_mountains_c  (x6)
+# outermesh_steppe_a  (x4)
+# ---- pict (16) ----
+# pict_houses_b  (x8)
+# pict_houses_b_burned  (x2)
+# pict_houses_b_interior  (x2)
+# pict_houses_c  (x1)
+# pict_houses_d  (x2)
+# pict_houses_e  (x1)
+# pict_houses_e_burned  (x5)
+# pict_houses_f  (x5)
+# pict_houses_g  (x2)
+# pict_houses_h  (x1)
+# pict_houses_m  (x3)
+# pict_houses_m_burned  (x1)
+# pict_houses_storage  (x2)
+# pict_town_house_a  (x1)
+# pict_town_house_b  (x2)
+# pict_town_house_c  (x1)
+# ---- pitchfork (1) ----
+# pitchfork  (x1)
+# ---- plains (1) ----
+# plains_ambient_sound  (x6)
+# ---- plant (1) ----
+# plant_watermelon  (x15)
+# ---- port (4) ----
+# port_a  (x6)
+# port_b  (x4)
+# port_ramp_a  (x12)
+# port_ramp_b  (x5)
+# ---- pot (9) ----
+# pot_archery_destroyed  (x2)
+# pot_break_a  (x6)
+# pot_break_b  (x5)
+# pot_break_c  (x8)
+# pot_heap_a  (x7)
+# pot_heap_b  (x5)
+# pot_heap_c  (x15)
+# pot_heap_d  (x12)
+# pot_pile  (x4)
+# ---- pottery (6) ----
+# pottery_a  (x3)
+# pottery_a3  (x2)
+# pottery_a4  (x1)
+# pottery_a6  (x2)
+# pottery_f4  (x1)
+# pottery_h2  (x1)
+# ---- primitive (1) ----
+# primitive_cube  (x2)
+# ---- prop (30) ----
+# prop_merchantbakery_b  (x3)
+# prop_merchantbakery_c  (x1)
+# prop_merchantbeer_b  (x4)
+# prop_merchantbeer_c  (x6)
+# prop_merchantcarpenter_a  (x5)
+# prop_merchantcarpenter_b  (x21)
+# prop_merchanthorse_a  (x1)
+# prop_merchanthorse_b  (x1)
+# prop_merchanthorse_c  (x2)
+# prop_merchantleather_a  (x2)
+# prop_merchantleather_b  (x8)
+# prop_merchantleather_c  (x4)
+# prop_merchantpottery_b  (x4)
+# prop_merchantpottery_c  (x4)
+# prop_merchantsiege_b  (x5)
+# prop_merchantsiege_c  (x12)
+# prop_merchantsmithing_b  (x5)
+# prop_merchantsmithing_tools_c  (x4)
+# prop_merchantw_a  (x1)
+# prop_merchantweapons_melee_c  (x3)
+# prop_merchantweapons_ranged_c  (x2)
+# prop_merchantweapons_shield_c  (x9)
+# prop_merchantweavery_linen_b  (x1)
+# prop_merchantweavery_linen_c  (x5)
+# prop_merchantweavery_velvet_b  (x2)
+# prop_merchantweavery_velvet_c  (x1)
+# prop_merchantweavery_wool_b  (x4)
+# prop_merchantweavery_wool_c  (x4)
+# prop_merchantwinery_b  (x1)
+# prop_merchantwinery_c  (x3)
+# ---- prt (6) ----
+# prt_border_probe  (x21)
+# prt_food_steam  (x4)
+# prt_small_fire_sparks  (x3)
+# prt_steam_bath  (x4)
+# prt_torch_fire  (x10)
+# prt_wm_exponential_dust_desert  (x9)
+# ---- puddles (1) ----
+# puddles_c  (x6)
+# ---- reverb (7) ----
+# reverb_alley  (x18)
+# reverb_courtyard  (x10)
+# reverb_dungeon  (x1)
+# reverb_forest  (x5)
+# reverb_gatehouse  (x7)
+# reverb_stone_corridor  (x15)
+# reverb_stone_interior  (x1)
+# ---- rock (14) ----
+# rock_cliff_a  (x304)
+# rock_cliff_b  (x698)
+# rock_cliff_bridge_a  (x2)
+# rock_cliff_c  (x38)
+# rock_cliff_d  (x90)
+# rock_cliff_far_a  (x6)
+# rock_cliff_far_b  (x4)
+# rock_cliff_top_b  (x15)
+# rock_desert_cliff_a  (x10)
+# rock_desert_cliff_b  (x19)
+# rock_desert_cliff_c  (x8)
+# rock_desert_cliff_d  (x10)
+# rock_floor_a  (x1)
+# rock_pile  (x6)
+# ---- roman (6) ----
+# roman_awning_a  (x13)
+# roman_house_big_a  (x2)
+# roman_houses_a  (x1)
+# roman_houses_b  (x1)
+# roman_houses_bridge_a  (x1)
+# roman_houses_c  (x1)
+# ---- rope (1) ----
+# rope_chain_heap  (x15)
+# ---- ruinous (21) ----
+# ruinous_battania_castle_gate_house_a  (x5)
+# ruinous_battania_castle_stone_heap_a  (x41)
+# ruinous_battania_castle_stone_heap_b  (x87)
+# ruinous_battania_castle_structure_a  (x1)
+# ruinous_battania_castle_tower_a  (x7)
+# ruinous_battania_castle_wall_a  (x28)
+# ruinous_battania_castle_wall_b  (x9)
+# ruinous_battania_castle_wall_c  (x39)
+# ruinous_castle_building_a  (x3)
+# ruinous_castle_floor_a  (x21)
+# ruinous_castle_floor_b  (x13)
+# ruinous_castle_floor_b_tilable_bumpy  (x18)
+# ruinous_castle_floor_c  (x17)
+# ruinous_castle_floor_d  (x5)
+# ruinous_castle_small_wall_a  (x35)
+# ruinous_castle_small_wall_b  (x68)
+# ruinous_castle_stone_heap_a  (x36)
+# ruinous_castle_stone_heap_b  (x37)
+# ruinous_castle_wall_a  (x2)
+# ruinous_castle_wall_b  (x5)
+# ruinous_castle_wall_c  (x17)
+# ---- sally (1) ----
+# sally_door_a  (x1)
+# ---- sea (1) ----
+# sea_ambient_sound  (x1)
+# ---- shelf (1) ----
+# shelf_empire_a  (x1)
+# ---- ship (2) ----
+# ship_a  (x30)
+# ship_e  (x26)
+# ---- shipyard (1) ----
+# shipyard_b  (x6)
+# ---- shop (61) ----
+# shop_prop_merchantarmory_b  (x2)
+# shop_prop_merchantarmory_heavy_c  (x3)
+# shop_prop_merchantarmory_light_c  (x2)
+# shop_prop_merchantarmory_medium_c  (x2)
+# shop_prop_merchantbakery_b  (x1)
+# shop_prop_merchantbakery_c  (x2)
+# shop_prop_merchantbakery_e  (x3)
+# shop_prop_merchantbeer_c  (x6)
+# shop_prop_merchantbeer_e  (x2)
+# shop_prop_merchantcarpenter_b  (x4)
+# shop_prop_merchantcarpenter_d  (x1)
+# shop_prop_merchantcarpenter_e  (x1)
+# shop_prop_merchantcarpenter_f  (x1)
+# shop_prop_merchantflour_e  (x2)
+# shop_prop_merchanthorse_b  (x1)
+# shop_prop_merchanthorse_d  (x1)
+# shop_prop_merchantleather_b  (x1)
+# shop_prop_merchantleather_c  (x1)
+# shop_prop_merchantleather_e  (x1)
+# shop_prop_merchantpottery_b  (x7)
+# shop_prop_merchantpottery_c  (x3)
+# shop_prop_merchantpottery_e  (x1)
+# shop_prop_merchantsiege_b  (x3)
+# shop_prop_merchantsiege_c  (x11)
+# shop_prop_merchantsiege_d  (x1)
+# shop_prop_merchantsiege_e  (x4)
+# shop_prop_merchantsilversmith_b  (x2)
+# shop_prop_merchantsmithing_b  (x4)
+# shop_prop_merchantsmithing_tools_c  (x4)
+# shop_prop_merchantweapons_melee_c  (x2)
+# shop_prop_merchantweapons_ranged_c  (x2)
+# shop_prop_merchantweapons_shield_c  (x4)
+# shop_prop_merchantweavery_linen_b  (x1)
+# shop_prop_merchantweavery_velvet_c  (x1)
+# shop_prop_merchantweavery_velvet_e  (x1)
+# shop_prop_merchantweavery_wool_b  (x1)
+# shop_prop_merchantweavery_wool_c  (x3)
+# shop_prop_merchantwinery_b  (x1)
+# shop_prop_merchantwinery_c  (x1)
+# shop_sign_base_a1  (x2)
+# shop_sign_base_a2  (x7)
+# shop_sign_base_a3  (x6)
+# shop_sign_base_b1  (x1)
+# shop_sign_base_b2  (x10)
+# shop_sign_base_c1  (x3)
+# shop_sign_base_c2  (x10)
+# shop_sign_base_c3  (x1)
+# shop_sign_merchantarmor_heavy  (x2)
+# shop_sign_merchantarmor_midium  (x1)
+# shop_sign_merchantbakery  (x1)
+# shop_sign_merchantbeer  (x2)
+# shop_sign_merchantempty  (x3)
+# shop_sign_merchanthorse  (x6)
+# shop_sign_merchantleather  (x2)
+# shop_sign_merchantpottery  (x1)
+# shop_sign_merchantshields  (x20)
+# shop_sign_merchantsiege  (x9)
+# shop_sign_merchantsmithing  (x1)
+# shop_sign_merchantweapons_melee  (x13)
+# shop_sign_merchantweapons_ranged  (x2)
+# shop_sign_merchantweaverylinen  (x3)
+# ---- shovel (1) ----
+# shovel  (x13)
+# ---- shrub (2) ----
+# shrub_b  (x2)
+# shrub_c  (x1)
+# ---- sidewalk (1) ----
+# sidewalk_stone_a  (x28)
+# ---- siege (24) ----
+# siege_barricade_a  (x220)
+# siege_barricade_c  (x111)
+# siege_barricade_d  (x5)
+# siege_barricade_e  (x31)
+# siege_barricade_group_a  (x12)
+# siege_barricade_group_b  (x14)
+# siege_barricade_group_c  (x7)
+# siege_barricade_group_d  (x5)
+# siege_fire_particle_f  (x3)
+# siege_ladder_11m_mp_spawner  (x3)
+# siege_ladder_11m_spawner  (x5)
+# siege_ladder_14m_spawner  (x5)
+# siege_ladder_6m_spawner  (x17)
+# siege_ladder_7m_spawner  (x6)
+# siege_ladder_8m_spawner  (x6)
+# siege_soil_a  (x2)
+# siege_soil_detail_a  (x4)
+# siege_soil_detail_b  (x5)
+# siege_soil_detail_c  (x21)
+# siege_soil_detail_d  (x16)
+# siege_soil_detail_e  (x4)
+# siege_tower_12m_spawnerMP  (x2)
+# siege_tower_5m_spawnerMP  (x1)
+# siege_tower_9m_spawnerMP  (x3)
+# ---- sign (2) ----
+# sign_arena  (x2)
+# sign_tavern  (x3)
+# ---- skirmish (2) ----
+# skirmish_respawn  (x12)
+# skirmish_start_spawn  (x4)
+# ---- sp (1) ----
+# sp_player  (x17)
+# ---- spawn (1) ----
+# spawn_visual  (x12)
+# ---- spear (2) ----
+# spear_new_f_1-9m  (x3)
+# spear_rack  (x4)
+# ---- stairs (1) ----
+# stairs_short_a  (x2)
+# ---- stand (2) ----
+# stand_straw_a  (x2)
+# stand_straw_b  (x8)
+# ---- stone (23) ----
+# stone_bridge  (x47)
+# stone_bridge_end  (x26)
+# stone_bridge_wide  (x14)
+# stone_bridge_wide_extension  (x1)
+# stone_pile_a  (x19)
+# stone_pile_b  (x14)
+# stone_pile_c  (x18)
+# stone_pile_d  (x28)
+# stone_pile_desert_a  (x2)
+# stone_pile_desert_b  (x4)
+# stone_pile_desert_c  (x1)
+# stone_pile_desert_d  (x2)
+# stone_pile_desert_e  (x5)
+# stone_pile_desert_f  (x1)
+# stone_pile_desert_j  (x1)
+# stone_pile_f  (x3)
+# stone_pile_g  (x22)
+# stone_pile_green_a  (x2)
+# stone_pile_green_b  (x2)
+# stone_pile_h  (x2)
+# stone_pile_wall_desert_g  (x16)
+# stone_pile_wall_desert_h  (x2)
+# stone_pile_wall_green_a  (x16)
+# ---- stonewall (5) ----
+# stonewall_2b1  (x6)
+# stonewall_2b2  (x3)
+# stonewall_2b3  (x4)
+# stonewall_2b4  (x6)
+# stonewall_2c  (x4)
+# ---- sturgia (10) ----
+# sturgia_arena_detailstones_a  (x2)
+# sturgia_arena_stakes_a  (x4)
+# sturgia_castle_balcony_b  (x1)
+# sturgia_castle_gate_inner_l3  (x4)
+# sturgia_castle_log_a  (x48)
+# sturgia_dungeon_cell_door_closed  (x4)
+# sturgia_grandbazaar_shop_door_a  (x2)
+# sturgia_village_house_entrance  (x1)
+# sturgia_village_tent_a  (x2)
+# sturgia_village_tent_b  (x2)
+# ---- table (1) ----
+# table_empire_c  (x1)
+# ---- taiga (1) ----
+# taiga_forest_ambient_sound  (x1)
+# ---- tavern (15) ----
+# tavern_aserai_panel_a  (x66)
+# tavern_aserai_panel_b  (x22)
+# tavern_aserai_panel_c  (x28)
+# tavern_empire_table_a  (x2)
+# tavern_empire_table_b  (x1)
+# tavern_empire_table_c  (x1)
+# tavern_empire_table_d  (x1)
+# tavern_guitar  (x2)
+# tavern_khuzait_table_shelf  (x4)
+# tavern_sturgia_table_a  (x1)
+# tavern_sturgia_table_c  (x1)
+# tavern_vlandia_stove_a  (x1)
+# tavern_vlandia_table_a  (x1)
+# tavern_vlandia_table_b  (x1)
+# tavern_vlandia_table_c  (x1)
+# ---- tavernkeeper (1) ----
+# tavernkeeper_knife  (x1)
+# ---- tent (6) ----
+# tent_aserai_b  (x1)
+# tent_aserai_c  (x2)
+# tent_aserai_d  (x1)
+# tent_vlandia_a  (x31)
+# tent_vlandia_b  (x41)
+# tent_vlandia_c  (x67)
+# ---- tents (4) ----
+# tents_pict_a  (x2)
+# tents_pict_b  (x4)
+# tents_pict_d  (x3)
+# tents_pict_e  (x4)
+# ---- terrain (12) ----
+# terrain_ambush_cliff_02  (x1)
+# terrain_ambush_cliff_top_01  (x3)
+# terrain_cliff_a1  (x6)
+# terrain_cliff_a2  (x6)
+# terrain_cliff_a3  (x6)
+# terrain_cliff_a5  (x1)
+# terrain_desert_rock_a  (x1)
+# terrain_desert_rock_b  (x1)
+# terrain_desert_rock_big_a  (x1)
+# terrain_desert_rock_big_c  (x1)
+# terrain_green_rock_c  (x1)
+# terrain_rock_a2  (x1)
+# ---- throwable (1) ----
+# throwable_rock_pile  (x25)
+# ---- torch (19) ----
+# torch_a_wm  (x6)
+# torch_candle_a  (x7)
+# torch_candle_a_fire  (x60)
+# torch_candle_b  (x5)
+# torch_candle_b_fire  (x26)
+# torch_candle_c  (x7)
+# torch_candle_c_fire  (x18)
+# torch_chandelier  (x1)
+# torch_long_a  (x3)
+# torch_long_b  (x38)
+# torch_long_c  (x11)
+# torch_long_d  (x6)
+# torch_long_d2  (x12)
+# torch_outdoors_a_burning  (x13)
+# torch_table_a  (x4)
+# torch_wall_a  (x57)
+# torch_wall_a_cycleoff  (x505)
+# torch_wall_b  (x2)
+# torch_wall_c  (x3)
+# ---- torture (7) ----
+# torture_tool_chain_a  (x28)
+# torture_tool_chain_b  (x51)
+# torture_tool_chain_c  (x5)
+# torture_tool_chain_d  (x22)
+# torture_tools_a  (x4)
+# torture_tools_c  (x2)
+# torture_tools_d  (x2)
+# ---- trebuchet (2) ----
+# trebuchet_a_spawnerFireMP  (x1)
+# trebuchet_a_spawnerMP  (x5)
+# ---- tree (10) ----
+# tree_acacia_a  (x1)
+# tree_far_a  (x470)
+# tree_root_a_acacia  (x1)
+# tree_root_a_beech_b  (x15)
+# tree_root_a_dry  (x5)
+# tree_root_a_pine  (x12)
+# tree_root_b_acacia  (x2)
+# tree_root_b_beech_b  (x18)
+# tree_root_b_dry  (x13)
+# tree_root_b_pine  (x17)
+# ---- valley (1) ----
+# valley_mountain_b  (x2)
+# ---- viking (1) ----
+# viking_sword_a  (x1)
+# ---- village (5) ----
+# village_ambient_sound  (x1)
+# village_tent_c  (x4)
+# village_tent_d  (x1)
+# village_tent_d_up  (x11)
+# village_tent_e  (x1)
+# ---- vlandia (52) ----
+# vlandia_arena_decoration_cloth_a2  (x4)
+# vlandia_arena_decoration_cloth_a4  (x9)
+# vlandia_arena_decoration_cloth_b2  (x1)
+# vlandia_arena_decoration_cloth_b4  (x6)
+# vlandia_arena_grandstand_barrier_b  (x5)
+# vlandia_arena_grandstand_barrier_c  (x6)
+# vlandia_arena_grandstand_roof_a  (x46)
+# vlandia_arena_grandstand_roof_b  (x1)
+# vlandia_arena_grandstand_roof_c  (x1)
+# vlandia_arena_grandstand_roof_cloth_a2  (x1)
+# vlandia_arena_grandstand_roof_cloth_a4  (x3)
+# vlandia_arena_grandstand_roof_cloth_b1  (x3)
+# vlandia_arena_grandstand_roof_cloth_b3  (x3)
+# vlandia_arena_grandstand_roof_cloth_b4  (x1)
+# vlandia_arena_grandstand_roof_cloth_c1  (x2)
+# vlandia_arena_grandstand_roof_cloth_c2  (x5)
+# vlandia_arena_grandstand_roof_cloth_c3  (x1)
+# vlandia_arena_main_building  (x1)
+# vlandia_arena_main_building_lords_platform  (x1)
+# vlandia_arena_tower  (x4)
+# vlandia_arena_wall_a  (x6)
+# vlandia_arena_wall_b  (x11)
+# vlandia_arena_wall_c  (x24)
+# vlandia_bench_a_unsittable  (x9)
+# vlandia_bench_b_unsittable  (x8)
+# vlandia_chest_c  (x4)
+# vlandia_dungeon_corridor_b  (x4)
+# vlandia_dungeon_corridor_c  (x4)
+# vlandia_dungeon_corridor_d  (x4)
+# vlandia_dungeon_door_a_closed  (x4)
+# vlandia_dungeon_door_a_empty  (x6)
+# vlandia_dungeon_door_b_closed  (x4)
+# vlandia_dungeon_stair_a  (x2)
+# vlandia_dungeon_stair_b  (x3)
+# vlandia_grandbazaar_big_wall_a  (x5)
+# vlandia_grandbazaar_big_wall_b  (x4)
+# vlandia_grandbazaar_gate  (x2)
+# vlandia_grandbazaar_gate_a  (x2)
+# vlandia_grandbazaar_ground_a  (x17)
+# vlandia_grandbazaar_ground_b  (x6)
+# vlandia_grandbazaar_shop_a  (x2)
+# vlandia_grandbazaar_shop_b  (x6)
+# vlandia_grandbazaar_shop_c  (x3)
+# vlandia_grandbazaar_shop_corner  (x10)
+# vlandia_grandbazaar_shop_corner_roof  (x4)
+# vlandia_grandbazaar_shop_door_a  (x4)
+# vlandia_grandbazaar_shop_gate_a  (x5)
+# vlandia_keep_door_a  (x14)
+# vlandia_keep_door_a_case  (x2)
+# vlandia_keep_door_b  (x8)
+# vlandia_keep_door_b_case  (x2)
+# vlandia_twohanded_sword_c  (x5)
+# ---- wall (5) ----
+# wall_carpet_a  (x2)
+# wall_carpet_b  (x3)
+# wall_carpet_c  (x1)
+# wall_carpet_d  (x1)
+# wall_carpet_e  (x1)
+# ---- water (1) ----
+# water_plane  (x1)
+# ---- weapon (8) ----
+# weapon_heap_arrow_a  (x10)
+# weapon_heap_axe_a  (x7)
+# weapon_heap_crossbow_a  (x1)
+# weapon_heap_sword_a  (x5)
+# weapon_rack_a  (x38)
+# weapon_rack_aserai_a  (x7)
+# weapon_rack_sturgia_a  (x2)
+# weapon_rack_vlandia_a  (x5)
+# ---- wetlands (1) ----
+# wetlands_ambient_sound  (x1)
+# ---- wood (1) ----
+# wood_storage_a  (x2)
+# ---- wooden (28) ----
+# wooden_platform_2_a  (x61)
+# wooden_platform_2_b  (x17)
+# wooden_platform_2_c  (x159)
+# wooden_platform_2_fence_a  (x109)
+# wooden_platform_2_fence_b  (x26)
+# wooden_platform_2_heap_a  (x20)
+# wooden_platform_2_ladder_a  (x34)
+# wooden_platform_2_plank_a  (x83)
+# wooden_platform_2_plank_b  (x70)
+# wooden_platform_2_plank_c  (x53)
+# wooden_platform_2_plank_d  (x49)
+# wooden_platform_2_plank_e  (x143)
+# wooden_platform_2_plank_f_column  (x291)
+# wooden_platform_2_stairs_a  (x62)
+# wooden_platform_a  (x41)
+# wooden_platform_b  (x37)
+# wooden_platform_c  (x268)
+# wooden_platform_fence_a  (x159)
+# wooden_platform_fence_b  (x29)
+# wooden_platform_heap_a  (x16)
+# wooden_platform_ladder_a  (x47)
+# wooden_platform_plank_a  (x111)
+# wooden_platform_plank_b  (x65)
+# wooden_platform_plank_c  (x78)
+# wooden_platform_plank_d  (x27)
+# wooden_platform_plank_e  (x163)
+# wooden_platform_plank_f_column  (x359)
+# wooden_platform_stairs_a  (x20)
+
+
+# ========================================================================
+# ADDITIONAL VANILLA PREFABS (from SP maps / not in MP dataset)
+# Add more here as you encounter them in vanilla SP scenes
+# ========================================================================
+_occ_quad
+battle_axe
+docks_ambient_sound
+fish_smoker_b
+fishnet
+fishnet_b
+fishnet_c
+fishnet_char_creation
+hanging_fishes
+lumberyard_axe
+map_mountain_rock_d
+shipyard_sign_a
+shipyard_sign_b
+shipyard_sign_c
+shipyard_sign_d
+shipyard_sign_e
+shipyard_sign_f
+shipyard_b
+tavernkeeper_spatula
+tavernkeeper_knife
+woodcutter_a
+burning_campfire
+burning_campfire_big
+prt_outdoor_smoke_medium
+dry_tree_d
+hammer_wooden
+bed_convolute_g
+bed_convolute_i
+bed_ground_c
+bed_ground_d
+PATTERN: map_icons_*
+PATTERN: map_mountain_*
+PATTERN: barn_*
+PATTERN: bed_*
+PATTERN: burning_*
+PATTERN: dry_tree*
+PATTERN: fish_smoker*
+PATTERN: fishnet*
+PATTERN: hanging_*
+PATTERN: lumberyard_*
+PATTERN: shipyard*
+PATTERN: tavernkeeper*
+PATTERN: woodcutter*
+PATTERN: prt_*
+PATTERN: Spear_*
+PATTERN: skirmish_*
+PATTERN: sp_*
+PATTERN: armor_*
+PATTERN: arabian_*
+PATTERN: awning_*
+
+# ---- Additional vanilla prefabs not found in the 17 sample maps ----
+civil_ladder_6m
+crow_flying
+cupboard_empire_a
+grappling_hook
+hawk
+spiculum_roman_a
+PATTERN: musical_instrument_*
+PATTERN: civil_ladder*
+PATTERN: crow_*
+PATTERN: hawk*
+PATTERN: cupboard_*
+
+# ── FAUNA ────────────────────────────────────────────────────────────────────
+desert_scorpion
+
+# ── FIEF / CUSTOM PREFABS (confirmed vanilla) ─────────────────────────────────
+PATTERN: fief_church_battania_stone_c*
+fief_empire_brick_retainingwall_straight
+
+# ── INTERIOR LIGHT RIGS ───────────────────────────────────────────────────────
+interior_open_window_light_medium
+interior_open_window_light_small
+interior_out_light_small
+
+# ── THRONE / SEAT PROPS ───────────────────────────────────────────────────────
+throne_empire_unsittable
+
+# -- AMBIENT / AUDIO ----------------------------------------------------------
+ambient_sound_emitter
+PATTERN: ambient_sound_emitter_*
+_sound_emitter
+
+# -- ANIMATION / AI IDLE ACTORS -----------------------------------------------
+PATTERN: adam_idle*
+
+# -- DEPLOYABLE PROPS (MP gameplay) -------------------------------------------
+Barricade_heap_2
+Ladder_deploy_1
+
+# -- SCENE CONTROL ENTITIES ---------------------------------------------------
+camera_height_limiter
+
+# ========================================================================
+# War Sails / NavalDLC native entities (added 20260827-2257)
+# Auto-added from live Modules/{Native,NavalDLC,SandBox,...}/AssetPackages
+# metamesh names not previously listed. Exact-match entries.
+# ========================================================================
+adaptor_dromon
+adaptor_liburna
+adaptor_light_dromon
+adaptor_meditheavy
+adaptor_sturgian_heavy_longship
+adaptor_xebec
+arrow_bl_fire_a
+aserai_shields_b_floatable_a
+aserai_shields_b_floatable_b
+aserai_shields_b_floatable_c
+aserai_shields_c_floatable_a
+aserai_shields_c_floatable_b
+aserai_shields_c_floatable_c
+aserai_shipyard_column_a
+aserai_shipyard_column_b
+aserai_shipyard_column_c
+aserai_shipyard_maingate_a
+aserai_shipyard_maingate_b
+aserai_shipyard_roof_a
+aserai_shipyard_roof_b
+aserai_shipyard_wall_a
+aserai_shipyard_wall_a_wide
+aserai_shipyard_wall_b
+aserai_shipyard_wall_b_wide
+aserai_shipyard_wall_c
+aserai_shipyard_wall_c_wide
+aserai_shipyard_wall_d
+aserai_shipyard_wall_d_wide
+aserai_shipyard_wall_e
+aserai_shipyard_wall_e_wide
+ballista_c_body
+ballista_c_body_decal
+ballista_c_damaged_part_01
+ballista_c_damaged_part_02
+ballista_c_damaged_part_03
+ballista_c_navel
+ballista_c_stand
+ballista_d_body
+ballista_d_body_decal
+ballista_e_body
+ballista_e_boulder_body
+ballista_e_damaged_01
+ballista_e_damaged_02
+ballista_e_damaged_03
+ballista_e_navel
+ballista_e_pot_projectile
+ballista_e_projectile_a
+ballista_e_projectile_a_pile
+ballista_e_projectile_b
+ballista_e_rock_projectile
+ballista_e_stand
+ballista_e_stand_damaged_01
+ballista_e_stand_damaged_02
+ballista_projectile_c
+ballista_projectile_c_ammo
+ballista_projectile_c_carry
+ballista_projectile_c_flying
+ballista_projectile_d
+ballista_projectile_d_ammo
+ballista_projectile_d_carry
+ballista_projectile_d_flying
+ballista_projectile_e
+ballista_projectile_e_ammo
+ballista_projectile_e_carry
+ballista_projectile_e_flying
+ballista_projectile_f
+ballista_projectile_f_ammo
+ballista_projectile_f_carry
+ballista_projectile_f_flying
+ballista_projectile_g
+ballista_projectile_g_ammo
+ballista_projectile_g_carry
+ballista_projectile_g_flying
+bandit_hybrid_armor_a
+bandit_hybrid_armor_a_converted
+bandit_hybrid_armor_a_converted_slim
+bandit_hybrid_armor_a_slim
+bandit_hybrid_armor_b
+bandit_hybrid_armor_b_converted
+bandit_hybrid_armor_b_converted_slim
+bandit_hybrid_armor_b_slim
+bandit_hybrid_armor_boots_a
+bandit_hybrid_armor_boots_b
+bandit_hybrid_armor_c
+bandit_hybrid_armor_c_converted
+bandit_hybrid_armor_c_converted_slim
+bandit_hybrid_armor_c_slim
+bandit_hybrid_armor_gloves_a
+bandit_hybrid_armor_gloves_b
+bandit_hybrid_armor_helmet_a
+bandit_hybrid_armor_helmet_b
+bandit_hybrid_armor_shoulder_a
+bandit_hybrid_armor_shoulder_b
+base_oar_4m
+base_oar_6m
+base_oar_8m
+beards_nvl_a
+beards_nvl_b
+beards_nvl_b_type1
+beards_nvl_b_type3
+beards_nvl_b_type4
+beards_nvl_c
+beards_nvl_c_type2
+berserker_cloak
+berserker_helmet
+berserker_helmet_reinforced
+boarding_bridge_hanged_a
+boarding_bridge_hanged_end_a
+boarding_bridge_hook
+boarding_bridge_pile_a
+boarding_bridge_pile_b
+boarding_bridge_segment
+boarding_bridge_segment_a
+boarding_bridge_segment_b
+boarding_bridge_segment_c
+boarding_bridge_segment_d
+boarfigurehead
+bolt_bl_fire_a
+buoy_flag_big
+buoy_flag_small
+camel_mesh
+cape_norse_lady
+cargo_tent
+cat_deckwater
+catship
+catship_medium
+catship_medium_ballista_platform
+catship_medium_deckwater
+catship_medium_platform
+catship_medium_platform_stairs
+celtic_helmet
+chainmail_shoulder_armor_b
+clay_mine_mesh
+clo_bandit_hybrid_armor
+clo_berserker_cloak
+clo_cape_norse_lady
+clo_double_belted_leather_armor
+clo_double_belted_leather_armor_converted
+clo_dress_norse_lady
+clo_female_hair_z_k
+clo_female_hair_z_k_type4
+clo_fur_cape
+clo_hair_male_i
+clo_hair_male_i_type4
+clo_naval_chainmail_armor
+clo_naval_strappy_tunic
+clo_naval_strappy_tunic_converted
+clo_nord_fur_shoulder
+clo_nord_helmet_a
+clo_nord_king_armor
+clo_nord_king_shoulder_armor
+clo_nord_poor_civil
+clo_nordic_chainmail_a
+clo_nordic_chainmail_c
+clo_nordic_civilian_dress
+clo_nordic_civilian_dress_plaid
+clo_northman_raider_armor
+clo_northman_raider_cape
+clo_pirate_a
+clo_pirate_a_head
+clo_pirate_tier_2_body
+clo_pirate_tier_2_head
+clo_pirate_tier_3_armor
+clo_pirate_tier_3_head
+clo_small_lateen_l
+clo_small_lateen_r
+clo_southern_pirate_armor
+clo_southern_pirate_head
+clo_square_sail_a_static
+clo_tacky_bandit
+clo_tacky_bandit_helmet
+clo_tacky_bandit_helmet_b
+clo_tacky_bandit_helmet_c
+clo_tacky_bandit_shoulder_b
+cloth_fragment_a
+cloth_fragment_b
+cloth_fragment_c
+cloth_fragment_clth_a
+cloth_fragment_clth_b
+cloth_fragment_d
+cloth_fragment_e
+cloth_fragment_f
+cloth_fragment_g
+cloth_fragment_h
+cloth_fragment_i
+cog_deckwater
+cog_ship
+cog_ship_platform
+cog_ship_stairs
+coh_axe_handle_1
+coh_axe_head_1
+coh_axe_pommel_1
+coh_dagger1_blade1
+coh_dagger1_blade1_scabbard1
+coh_dagger1_grip1
+coh_dagger1_guard1
+coh_dagger1_pommel1
+coh_dagger2_blade2
+coh_dagger2_blade2_scabbard2
+coh_dagger2_grip2
+coh_dagger2_guard2
+coh_dagger2_pommel2
+coh_mace_handle_1
+coh_mace_handle_2
+coh_mace_head_1
+coh_mace_head_2
+coh_mace_pommel_1
+coh_mace_pommel_2
+coh_sword_blade_1
+coh_sword_blade_2
+coh_sword_grip_1
+coh_sword_grip_2
+coh_sword_guard_1
+coh_sword_guard_2
+coh_sword_pommel_1
+coh_sword_pommel_2
+coh_sword_scabbard_1
+coh_sword_scabbard_2
+corbita_deckwater
+deerfigurehead
+dhow_deckwater
+dhow_ship
+dhow_ship_rudder_support_bottom
+dhow_ship_rudder_support_top
+distance_pole
+double_belted_leather_armor
+double_belted_leather_armor_converted
+double_belted_leather_armor_converted_slim
+double_belted_leather_armor_slim
+dragon_banner_animated
+dragon_banner_head_only_mesh
+dragon_l
+drakkar_deckweater
+drakkar_oars
+drakkar_sail
+drakkar_shields
+drakkar_ship
+dress_norse_lady
+dress_norse_lady_converted
+dress_norse_lady_converted_slim
+dress_norse_lady_slim
+dromon_01
+dromon_01_stairs
+dromon_deckwater
+empire_ship_dromon_body
+empire_shipyard_base
+empire_shipyard_base_column_a
+empire_shipyard_base_column_b
+empire_shipyard_base_column_c
+empire_shipyard_gate_a
+empire_shipyard_gate_a_column_a
+empire_shipyard_roof_a
+empire_shipyard_roof_b
+empire_shipyard_side_a
+empire_shipyard_side_b
+empire_shipyard_side_c
+empire_shipyard_wall_a
+empire_shipyard_wall_b
+empire_shipyard_wall_c
+empire_shipyard_wall_d
+empire_shipyard_wall_e
+empire_shipyard_wall_f
+empire_shipyard_wall_g
+empire_shipyard_wall_h
+empire_shipyard_wall_i
+empire_shipyard_wall_j
+empire_shipyard_wall_k
+fabric01
+fabric02
+fabric03
+female_hair_z_j
+female_hair_z_j_type1
+female_hair_z_k
+female_hair_z_k_type1
+female_hair_z_k_type2
+female_hair_z_k_type4
+female_hair_z_l
+female_hair_z_l_type1
+female_hair_z_l_type2
+female_hair_z_l_type4
+figurehea_adapter_meditheavy
+figurehead_adapter_cog
+figurehead_adapter_drakkar
+figurehead_adapter_dromonheavy
+figurehead_adapter_dromonlight
+figurehead_adapter_liburna
+figurehead_adapter_lightlongship
+figurehead_adapter_longship
+figurehead_adapter_medmid
+figurehead_adapter_roundship
+figurehead_adapter_xebec
+figurehead_lightlongship
+figurehead_lion
+figurehead_longship
+figureheads_adapter_sturgian_heavy_longship
+fishing_deckwater
+flora_juncus_a
+flora_juncus_b
+flora_laminaria_a
+flora_rumex_a
+flora_trifolium_a
+flora_typha_a
+funeral_boat
+funeral_boat_corpse
+funeral_boat_platform_a
+funeral_boat_platform_b
+fur_cape_a
+fur_cape_b
+galley_deckwater
+galley_ship
+hair_male_i
+hair_male_i_type1
+hair_male_i_type2
+hair_male_i_type4
+hair_male_j
+hair_male_j_type1
+hair_male_j_type4
+hair_male_k
+hair_male_k_type1
+hair_male_k_type2
+hair_male_k_type4
+hawkfigurehead
+heavy_gambeson_armor
+heavy_gambeson_armor_converted
+heavy_gambeson_armor_converted_slim
+heavy_gambeson_armor_plain
+heavy_gambeson_armor_plain_converted
+heavy_gambeson_armor_plain_converted_slim
+heavy_gambeson_armor_plain_slim
+heavy_gambeson_armor_slim
+heavy_gambeson_converted_armor
+horsefigurehead
+hull_plate_corbita
+hull_plate_corbita_polished
+hull_plate_dhow
+hull_plate_dhow_polished
+hull_plate_dromon
+hull_plate_dromon_polished
+hull_plate_galley
+hull_plate_galley_polished
+hull_plate_liburna
+hull_plate_liburna_polished
+hull_plate_lightdromon
+hull_plate_lightdromon_polished
+hull_plate_meditheavy
+hull_plate_meditheavy_polished
+hull_plate_meditlight
+hull_plate_meditlight_polished
+hull_plate_meditmedium
+hull_plate_meditmedium_polished
+hull_plate_roundship
+hull_plate_roundship_polished
+hull_plate_xebec
+hull_plate_xebec_polished
+khuzait_shipyard_base_a
+khuzait_shipyard_gate_a
+khuzait_shipyard_gate_b
+khuzait_shipyard_roof_a
+khuzait_shipyard_small_a
+khuzait_shipyard_small_b
+khuzait_shipyard_wall_a
+khuzait_shipyard_wall_b
+khuzait_shipyard_wall_c
+khuzait_shipyard_wall_d
+khuzait_shipyard_wall_e
+khuzait_shipyard_wall_f
+khuzait_shipyard_wall_g
+khuzait_shipyard_wall_h
+khuzait_shipyard_wall_i
+khuzait_shipyard_wall_j
+khuzait_shipyard_wall_k
+knarr_deckwater
+knarr_kargo_section
+knarr_rudder_right
+knarr_ship
+knarr_ship_sail
+knarr_ship_sail_wood
+knot_point_a_1
+knot_point_a_2
+knot_point_a_3
+knot_point_a_4
+knot_point_b_1
+knot_point_b_2
+knot_point_b_3
+knot_point_b_4
+knot_point_b_5
+knot_point_c_1
+knot_point_c_2
+knot_point_c_3
+knot_point_d_1
+knot_point_d_2
+knot_point_d_3
+knot_point_e
+knot_point_f
+knot_point_g
+large_cargo_tent
+lateen_sail_a
+lateen_sail_a_free
+lateen_sail_a_static
+liburna
+liburna_deckwater
+liburna_pattern_eye_a
+liburna_pattern_stripe_a
+liburna_ram_a
+liburna_rudder_left
+liburna_rudder_right
+liburna_sail
+liburna_sail_wood
+light_dromon_body
+light_dromon_body_color
+light_dromon_decals
+light_dromon_deckwater
+light_dromon_rudder_l
+light_dromon_rudder_r
+light_long_deckwater
+long_deckwater
+longboat_aft
+longboat_bow
+longboat_midship
+mace_handle_21
+mace_handle_22
+mace_handle_23
+mace_handle_24
+mace_handle_25
+mace_handle_26
+mail_mitten_d
+mail_mitten_e
+mail_mitten_f
+mail_mitten_g
+mail_mitten_h
+mast_ropes_a
+mast_ropes_b
+mast_ropes_c
+mast_ropes_d
+mast_ropes_e
+mast_ropes_f
+mast_ropes_lateen_medium
+mast_ropes_square_large
+mast_ropes_square_medium
+mast_ropes_square_small
+medit_heavy_deckwater
+medit_light_waterdeck
+medit_medium_deckwater
+meditlight_ship
+meditlight_ship_rudder_01
+meditlight_ship_rudder_02
+meditlight_ship_rudder_03
+meditlight_ship_rudder_04
+meditlight_ship_rudder_05
+mi_bridge_bat1
+mi_bridge_bat2
+mi_bridge_bat3
+mi_bridge_empire1
+mi_bridge_empire2
+mi_bridge_empire3
+mi_bridge_khuzait1
+mi_bridge_khuzait2
+mi_bridge_khuzait3
+mi_bridge_leg_bat
+mi_bridge_leg_khuzait
+mi_bridge_leg_nord
+mi_bridge_leg_stone
+mi_bridge_leg_sturgia
+mi_bridge_leg_vla
+mi_bridge_nord1
+mi_bridge_nord2
+mi_bridge_nord3
+mi_bridge_sturgia1
+mi_bridge_sturgia2
+mi_bridge_sturgia3
+mi_bridge_vla2
+mi_bridge_vla3
+mi_bridge_wooden1
+mi_bridge_wooden2
+mi_nord_arena
+mi_nord_barracks
+mi_nord_gatehouse_1
+mi_nord_gatehouse_2
+mi_nord_gatehouse_3
+mi_nord_keep_1
+mi_nord_keep_2
+mi_nord_keep_3
+mi_nord_roundtower_1
+mi_nord_roundtower_2
+mi_nord_roundtower_3
+mi_nord_squaretower_1
+mi_nord_squaretower_1_tall
+mi_nord_squaretower_2
+mi_nord_squaretower_2_tall
+mi_nord_squaretower_3
+mi_nord_squaretower_3_tall
+mi_nord_tavern
+mi_nord_town_1
+mi_nord_town_2
+mi_nord_town_3
+mi_nord_town_4
+mi_nord_wall_1
+mi_nord_wall_1s
+mi_nord_wall_1s_collapsed
+mi_nord_wall_2
+mi_nord_wall_2s
+mi_nord_wall_2s_collapsed
+mi_nord_wall_3
+mi_nord_wall_3s
+mi_nord_wall_3s_collapsed
+mi_port_pier_1
+mi_port_pier_2
+mi_port_pier_3
+mi_raft
+narrow_oar_l1_4m
+narrow_oar_l1_6m
+narrow_oar_l1_8m
+narrow_oar_l2_4m
+narrow_oar_l2_6m
+narrow_oar_l2_8m
+narrow_oar_l3_4m
+narrow_oar_l3_6m
+narrow_oar_l3_8m
+naval_axe_handle01
+naval_axe_handle02
+naval_axe_handle03
+naval_axe_handle04
+naval_axe_handle05
+naval_axe_handle06
+naval_axe_handle07
+naval_axe_handle08
+naval_axe_handle09
+naval_axe_handle10
+naval_axe_handle11
+naval_axe_handle12
+naval_axe_head_01
+naval_axe_head_02
+naval_axe_head_03
+naval_axe_head_04
+naval_axe_head_05
+naval_axe_head_06
+naval_axe_head_07
+naval_axe_head_08
+naval_axe_head_09
+naval_axe_head_10
+naval_axe_head_11
+naval_axe_head_12
+naval_axe_head_13
+naval_axe_pommel_01
+naval_axe_pommel_02
+naval_axe_pommel_03
+naval_axe_pommel_04
+naval_axe_pommel_05
+naval_axe_pommel_06
+naval_axe_pommel_07
+naval_axe_pommel_08
+naval_axe_pommel_09
+naval_axe_pommel_10
+naval_axe_pommel_11
+naval_chainmail_armor
+naval_chainmail_armor_converted
+naval_chainmail_armor_converted_slim
+naval_chainmail_armor_slim
+naval_ship_breach
+naval_strappy_tunic
+naval_strappy_tunic_converted
+naval_strappy_tunic_converted_slim
+naval_strappy_tunic_slim
+naval_worldmap_outermesh_00
+naval_worldmap_outermesh_01
+naval_worldmap_outermesh_02
+naval_worldmap_outermesh_03
+naval_worldmap_outermesh_04
+naval_worldmap_outermesh_05
+naval_worldmap_outermesh_06
+naval_worldmap_outermesh_07
+naval_worldmap_outermesh_08
+naval_worldmap_outermesh_09
+naval_worldmap_outermesh_10
+naval_worldmap_outermesh_11
+naval_worldmap_outermesh_12
+naval_worldmap_outermesh_13
+naval_worldmap_outermesh_14
+naval_worldmap_outermesh_15
+naval_worldmap_outermesh_16
+naval_worldmap_outermesh_17
+naval_worldmap_outermesh_18
+naval_worldmap_outermesh_19
+naval_worldmap_outermesh_20
+naval_worldmap_outermesh_21
+naval_worldmap_outermesh_22
+naval_worldmap_outermesh_23
+naval_worldmap_outermesh_24
+naval_worldmap_outermesh_25
+naval_worldmap_outermesh_26
+naval_worldmap_outermesh_27
+naval_worldmap_outermesh_28
+naval_worldmap_outermesh_29
+naval_worldmap_outermesh_30
+naval_worldmap_outermesh_31
+nord_arena_grandstand_a
+nord_arena_grandstand_b
+nord_arena_grandstand_c
+nord_arena_grandstand_d
+nord_arena_grandstand_e
+nord_arena_grandstand_wood_detail
+nord_arena_main_building
+nord_arena_tower_a
+nord_arena_wall_a
+nord_arena_wall_b
+nord_banner_t1
+nord_banner_t2
+nord_banner_t3
+nord_barrel
+nord_barrel_top
+nord_castle_baracks_a_l2
+nord_castle_barn_a_l2
+nord_castle_barn_b_l2
+nord_castle_barn_b_l2_door_left
+nord_castle_barn_b_l2_door_right
+nord_castle_corner_a_l1
+nord_castle_corner_a_l1_merlon_01
+nord_castle_corner_a_l1_merlon_02
+nord_castle_corner_a_l1_merlon_03
+nord_castle_corner_a_l1_merlon_04
+nord_castle_corner_a_l2
+nord_castle_corner_a_l2_merlon_01
+nord_castle_corner_a_l2_merlon_02
+nord_castle_corner_a_l2_merlon_03
+nord_castle_corner_a_l2_merlon_04
+nord_castle_corner_a_l2_merlon_05
+nord_castle_corner_a_l3
+nord_castle_corner_a_l3_01
+nord_castle_corner_a_l3_02
+nord_castle_corner_a_l3_03
+nord_castle_corner_a_l3_04
+nord_castle_corner_a_l3_05
+nord_castle_corner_b_l3
+nord_castle_corner_b_l3_01
+nord_castle_corner_b_l3_02
+nord_castle_corner_b_l3_03
+nord_castle_corner_b_l3_04
+nord_castle_corner_b_l3_05
+nord_castle_corner_b_l3_stairs
+nord_castle_corner_c_l1
+nord_castle_corner_c_l1_merlon_01
+nord_castle_corner_c_l1_merlon_02
+nord_castle_corner_c_l1_merlon_03
+nord_castle_corner_c_l1_merlon_04
+nord_castle_corner_c_l1_merlon_05
+nord_castle_corner_c_l1_merlon_06
+nord_castle_corner_c_l1_merlon_07
+nord_castle_corner_c_l1_merlon_08
+nord_castle_corner_c_l1_merlon_09
+nord_castle_corner_c_l1_merlon_10
+nord_castle_corner_c_l1_stairs
+nord_castle_corner_c_l2
+nord_castle_corner_c_l2_merlon_01
+nord_castle_corner_c_l2_merlon_02
+nord_castle_corner_c_l2_merlon_03
+nord_castle_corner_c_l2_merlon_04
+nord_castle_corner_c_l2_merlon_05
+nord_castle_corner_c_l2_merlon_06
+nord_castle_corner_c_l2_merlon_07
+nord_castle_corner_c_l2_merlon_08
+nord_castle_corner_c_l2_stairs
+nord_castle_corner_c_l3
+nord_castle_corner_c_l3_01
+nord_castle_corner_c_l3_02
+nord_castle_corner_c_l3_03
+nord_castle_corner_c_l3_04
+nord_castle_corner_c_l3_05
+nord_castle_corner_c_l3_06
+nord_castle_corner_c_l3_07
+nord_castle_corner_c_l3_08
+nord_castle_corner_c_l3_stairs
+nord_castle_corner_d_l1
+nord_castle_corner_d_l1_merlon_01
+nord_castle_corner_d_l1_merlon_02
+nord_castle_corner_d_l1_merlon_03
+nord_castle_corner_d_l1_merlon_04
+nord_castle_corner_d_l1_merlon_05
+nord_castle_corner_d_l1_merlon_06
+nord_castle_corner_d_l2
+nord_castle_corner_d_l2_merlon_01
+nord_castle_corner_d_l2_merlon_02
+nord_castle_corner_d_l2_merlon_03
+nord_castle_corner_d_l2_merlon_04
+nord_castle_corner_d_l2_merlon_05
+nord_castle_corner_d_l2_merlon_06
+nord_castle_corner_d_l2_merlon_07
+nord_castle_corner_d_l3
+nord_castle_corner_d_l3_01
+nord_castle_corner_d_l3_02
+nord_castle_corner_d_l3_03
+nord_castle_corner_d_l3_04
+nord_castle_corner_d_l3_05
+nord_castle_corner_d_l3_06
+nord_castle_corner_d_l3_07
+nord_castle_corner_e_l1
+nord_castle_corner_e_l1_merlon_01
+nord_castle_corner_e_l1_merlon_02
+nord_castle_corner_e_l1_merlon_03
+nord_castle_corner_e_l1_merlon_04
+nord_castle_corner_e_l1_merlon_05
+nord_castle_corner_e_l1_merlon_06
+nord_castle_corner_e_l1_merlon_07
+nord_castle_corner_e_l1_merlon_08
+nord_castle_corner_e_l1_merlon_09
+nord_castle_corner_e_l1_merlon_10
+nord_castle_corner_e_l1_stairs
+nord_castle_corner_e_l2
+nord_castle_corner_e_l2_merlon_01
+nord_castle_corner_e_l2_merlon_02
+nord_castle_corner_e_l2_merlon_03
+nord_castle_corner_e_l2_merlon_04
+nord_castle_corner_e_l2_merlon_05
+nord_castle_corner_e_l2_merlon_06
+nord_castle_corner_e_l2_merlon_07
+nord_castle_corner_e_l2_merlon_08
+nord_castle_corner_e_l2_stairs
+nord_castle_corner_e_l3
+nord_castle_corner_e_l3_01
+nord_castle_corner_e_l3_02
+nord_castle_corner_e_l3_03
+nord_castle_corner_e_l3_04
+nord_castle_corner_e_l3_05
+nord_castle_corner_e_l3_06
+nord_castle_corner_e_l3_07
+nord_castle_corner_e_l3_08
+nord_castle_corner_e_l3_stairs
+nord_castle_corner_f_l1
+nord_castle_corner_f_l2
+nord_castle_gatehouse_a_l1
+nord_castle_gatehouse_a_l1_merlon_01
+nord_castle_gatehouse_a_l1_merlon_02
+nord_castle_gatehouse_a_l1_merlon_03
+nord_castle_gatehouse_a_l1_merlon_04
+nord_castle_gatehouse_a_l1_merlon_05
+nord_castle_gatehouse_a_l1_merlon_06
+nord_castle_gatehouse_a_l1_merlon_07
+nord_castle_gatehouse_a_l1_merlon_08
+nord_castle_gatehouse_a_l1_merlon_09
+nord_castle_gatehouse_a_l1_merlon_10
+nord_castle_gatehouse_a_l1_merlon_11
+nord_castle_gatehouse_a_l1_merlon_12
+nord_castle_gatehouse_a_l1_merlon_13
+nord_castle_gatehouse_a_l1_merlon_14
+nord_castle_gatehouse_a_l1_merlon_15
+nord_castle_gatehouse_a_l1_merlon_16
+nord_castle_gatehouse_a_l1_merlon_17
+nord_castle_gatehouse_a_l1_merlon_18
+nord_castle_gatehouse_a_l1_merlon_19
+nord_castle_gatehouse_a_l1_merlon_20
+nord_castle_gatehouse_a_l1_roof_part1
+nord_castle_gatehouse_a_l1_roof_part10
+nord_castle_gatehouse_a_l1_roof_part11
+nord_castle_gatehouse_a_l1_roof_part12
+nord_castle_gatehouse_a_l1_roof_part13
+nord_castle_gatehouse_a_l1_roof_part14
+nord_castle_gatehouse_a_l1_roof_part2
+nord_castle_gatehouse_a_l1_roof_part3
+nord_castle_gatehouse_a_l1_roof_part4
+nord_castle_gatehouse_a_l1_roof_part5
+nord_castle_gatehouse_a_l1_roof_part6
+nord_castle_gatehouse_a_l1_roof_part7
+nord_castle_gatehouse_a_l1_roof_part8
+nord_castle_gatehouse_a_l1_roof_part9
+nord_castle_gatehouse_a_l1_tower
+nord_castle_gatehouse_a_l1_tower_wall
+nord_castle_gatehouse_a_l2
+nord_castle_gatehouse_a_l2_left_stairs
+nord_castle_gatehouse_a_l2_merlon_01
+nord_castle_gatehouse_a_l2_merlon_02
+nord_castle_gatehouse_a_l2_merlon_03
+nord_castle_gatehouse_a_l2_merlon_04
+nord_castle_gatehouse_a_l2_merlon_05
+nord_castle_gatehouse_a_l2_merlon_06
+nord_castle_gatehouse_a_l2_merlon_07
+nord_castle_gatehouse_a_l2_merlon_08
+nord_castle_gatehouse_a_l2_merlon_09
+nord_castle_gatehouse_a_l2_merlon_10
+nord_castle_gatehouse_a_l2_right_stairs
+nord_castle_gatehouse_l1_stairs
+nord_castle_keep_a_l2
+nord_castle_keep_a_l3
+nord_castle_keep_interior_l2
+nord_castle_keep_l1
+nord_castle_keep_l1_window
+nord_castle_stairs_a_l2
+nord_castle_stairs_a_l3
+nord_castle_stairs_b_l2
+nord_castle_stairs_b_l3
+nord_castle_stairs_c_l2
+nord_castle_stairs_c_l3
+nord_castle_tower_round_a_l1
+nord_castle_tower_round_a_l1_merlon_01
+nord_castle_tower_round_a_l1_merlon_02
+nord_castle_tower_round_a_l1_merlon_03
+nord_castle_tower_round_a_l1_merlon_04
+nord_castle_tower_round_a_l1_merlon_05
+nord_castle_tower_round_a_l1_merlon_06
+nord_castle_tower_round_a_l1_merlon_07
+nord_castle_tower_round_a_l1_merlon_08
+nord_castle_tower_round_a_l1_merlon_09
+nord_castle_tower_round_a_l1_merlon_10
+nord_castle_tower_round_a_l1_merlon_11
+nord_castle_tower_round_a_l1_merlon_12
+nord_castle_tower_round_a_l1_stairs
+nord_castle_tower_round_a_l2
+nord_castle_tower_round_a_l2_merlon_01
+nord_castle_tower_round_a_l2_merlon_02
+nord_castle_tower_round_a_l2_merlon_03
+nord_castle_tower_round_a_l2_merlon_04
+nord_castle_tower_round_a_l2_merlon_05
+nord_castle_tower_round_a_l2_merlon_06
+nord_castle_tower_round_a_l2_merlon_07
+nord_castle_tower_round_a_l2_merlon_08
+nord_castle_tower_round_a_l2_merlon_09
+nord_castle_tower_round_a_l2_merlon_10
+nord_castle_tower_round_a_l2_merlon_11
+nord_castle_tower_round_a_l2_merlon_12
+nord_castle_tower_round_a_l2_merlon_13
+nord_castle_tower_round_a_l2_merlon_14
+nord_castle_tower_round_a_l2_merlon_15
+nord_castle_tower_round_a_l2_merlon_16
+nord_castle_tower_round_a_l2_merlon_17
+nord_castle_tower_round_a_l2_merlon_18
+nord_castle_tower_round_a_l2_merlon_19
+nord_castle_tower_round_a_l2_merlon_20
+nord_castle_tower_round_a_l2_stairs
+nord_castle_tower_round_a_l3
+nord_castle_tower_round_a_l3_01
+nord_castle_tower_round_a_l3_02
+nord_castle_tower_round_a_l3_03
+nord_castle_tower_round_a_l3_04
+nord_castle_tower_round_a_l3_05
+nord_castle_tower_round_a_l3_06
+nord_castle_tower_round_a_l3_07
+nord_castle_tower_round_a_l3_08
+nord_castle_tower_round_a_l3_09
+nord_castle_tower_round_a_l3_10
+nord_castle_tower_round_a_l3_11
+nord_castle_tower_round_a_l3_12
+nord_castle_tower_round_a_l3_13
+nord_castle_tower_round_a_l3_14
+nord_castle_tower_round_a_l3_15
+nord_castle_tower_round_a_l3_16
+nord_castle_tower_round_a_l3_interior
+nord_castle_tower_round_a_l3_stair
+nord_castle_wall_a_l1
+nord_castle_wall_a_l1_broken
+nord_castle_wall_a_l1_merlon_01
+nord_castle_wall_a_l1_merlon_02
+nord_castle_wall_a_l1_merlon_03
+nord_castle_wall_a_l1_merlon_04
+nord_castle_wall_a_l1_merlon_05
+nord_castle_wall_a_l1_merlon_06
+nord_castle_wall_a_l2
+nord_castle_wall_a_l2_broken
+nord_castle_wall_a_l2_broken_merlon_01
+nord_castle_wall_a_l2_broken_merlon_02
+nord_castle_wall_a_l2_broken_merlon_03
+nord_castle_wall_a_l2_merlon_01
+nord_castle_wall_a_l2_merlon_02
+nord_castle_wall_a_l2_merlon_03
+nord_castle_wall_a_l2_merlon_04
+nord_castle_wall_a_l2_merlon_05
+nord_castle_wall_a_l2_merlon_06
+nord_castle_wall_a_l2_merlon_07
+nord_castle_wall_a_l3
+nord_castle_wall_a_l3_01
+nord_castle_wall_a_l3_02
+nord_castle_wall_a_l3_03
+nord_castle_wall_a_l3_04
+nord_castle_wall_a_l3_05
+nord_castle_wall_a_l3_06
+nord_castle_wall_a_l3_07
+nord_castle_wall_a_l3_broken
+nord_castle_wall_b_l3
+nord_castle_wall_b_l3_01
+nord_castle_wall_b_l3_02
+nord_castle_wall_b_l3_03
+nord_castle_wall_b_l3_04
+nord_castle_wall_b_l3_05
+nord_castle_wall_b_l3_06
+nord_castle_wall_b_l3_07
+nord_castle_wall_b_l3_stair
+nord_castle_wall_c_l1
+nord_castle_wall_c_l1_merlon_01
+nord_castle_wall_c_l1_merlon_02
+nord_castle_wall_c_l1_merlon_03
+nord_castle_wall_c_l1_merlon_04
+nord_castle_wall_c_l2
+nord_castle_wall_c_l2_merlon_01
+nord_castle_wall_c_l2_merlon_02
+nord_castle_wall_c_l2_merlon_03
+nord_castle_wall_c_l2_merlon_04
+nord_castle_wall_c_l3
+nord_castle_wall_c_l3_01
+nord_castle_wall_c_l3_02
+nord_castle_wall_c_l3_03
+nord_castle_wall_c_l3_04
+nord_castle_wall_d_l1
+nord_castle_wall_d_l1_broken
+nord_castle_wall_d_l1_merlon_01
+nord_castle_wall_d_l1_merlon_02
+nord_castle_wall_d_l1_merlon_03
+nord_castle_wall_d_l1_merlon_04
+nord_castle_wall_d_l2
+nord_castle_wall_d_l2_broken
+nord_castle_wall_d_l2_merlon_01
+nord_castle_wall_d_l2_merlon_02
+nord_castle_wall_d_l2_merlon_03
+nord_castle_wall_d_l2_merlon_04
+nord_castle_wall_d_l3
+nord_castle_wall_d_l3_01
+nord_castle_wall_d_l3_02
+nord_castle_wall_d_l3_03
+nord_castle_wall_d_l3_04
+nord_castle_wall_d_l3_broken
+nord_castle_wall_e_l1
+nord_castle_wall_e_l2
+nord_castle_wall_f_l1
+nord_castle_wall_f_l2
+nord_castle_wall_gate_l1
+nord_castle_wall_gate_l1_merlon_01
+nord_castle_wall_gate_l1_merlon_02
+nord_castle_wall_gate_l1_merlon_03
+nord_castle_wall_gate_l1_merlon_04
+nord_castle_wall_gate_l1_merlon_05
+nord_castle_wall_gate_l1_merlon_06
+nord_castle_wall_gate_l1_merlon_07
+nord_castle_wall_gate_l1_merlon_08
+nord_castle_wall_gate_l1_merlon_09
+nord_castle_wall_gate_l1_merlon_10
+nord_castle_wall_gate_l1_stairs
+nord_castle_wallgate_l2
+nord_castle_wallgate_l2_merlon_01
+nord_castle_wallgate_l2_merlon_02
+nord_castle_wallgate_l2_merlon_03
+nord_castle_wallgate_l2_merlon_04
+nord_castle_wallgate_l2_merlon_05
+nord_castle_wallgate_l2_merlon_06
+nord_castle_wallgate_l2_merlon_07
+nord_castle_wallgate_l2_merlon_08
+nord_castle_wallgate_l2_stairs
+nord_castle_wallgate_l3
+nord_castle_wallgate_l3_01
+nord_castle_wallgate_l3_02
+nord_castle_wallgate_l3_03
+nord_castle_wallgate_l3_04
+nord_castle_wallgate_l3_05
+nord_castle_wallgate_l3_06
+nord_castle_wallgate_l3_07
+nord_castle_wallgate_l3_08
+nord_castle_wallgate_l3_stairs
+nord_casual_boots
+nord_casual_bracers
+nord_casual_cloak
+nord_casual_cloak_clo
+nord_casual_tunic
+nord_casual_tunic_clo
+nord_casual_tunic_converted
+nord_casual_tunic_converted_slim
+nord_casual_tunic_slim
+nord_chest
+nord_chest_closed
+nord_chest_top
+nord_cliff_01
+nord_cliff_02
+nord_cliff_03
+nord_cliff_03_corner_a
+nord_cliff_03_corner_b
+nord_cliff_04
+nord_cliff_04_short
+nord_cliff_05
+nord_dungeon_cell_door_a
+nord_dungeon_cell_door_case
+nord_dungeon_cell_door_closed
+nord_dungeon_cell_door_opened
+nord_dungeon_cells_a
+nord_dungeon_corridor_a
+nord_dungeon_corridor_b
+nord_dungeon_corridor_c
+nord_dungeon_corridor_e
+nord_dungeon_corridor_enterance
+nord_dungeon_floor_a
+nord_dungeon_floor_b
+nord_dungeon_log_a
+nord_dungeon_roof_a
+nord_dungeon_roof_b
+nord_dungeon_roof_c
+nord_dungeon_roof_d
+nord_dungeon_roof_e
+nord_dungeon_tunnel_a
+nord_dungeon_tunnel_b
+nord_dungeon_tunnel_c
+nord_dungeon_tunnel_d
+nord_dungeon_tunnel_e
+nord_dungeon_tunnel_f
+nord_dungeon_tunnel_f_stairs
+nord_dungeon_tunnel_g
+nord_dungeon_tunnel_g_stairs
+nord_dungeon_wall_a
+nord_dungeon_wall_b
+nord_dungeon_wall_c
+nord_dungeon_wall_d
+nord_dungeon_wall_e
+nord_fur_shoulder
+nord_gatehouse_l3_center
+nord_gatehouse_l3_center_back
+nord_gatehouse_l3_center_floors
+nord_gatehouse_l3_center_front
+nord_gatehouse_l3_center_stairs
+nord_gatehouse_l3_roof_a
+nord_gatehouse_l3_roof_b
+nord_gatehouse_l3_side
+nord_gatehouse_l3_side_01
+nord_gatehouse_l3_side_02
+nord_gatehouse_l3_side_03
+nord_gatehouse_l3_side_04
+nord_gatehouse_l3_side_05
+nord_gatehouse_l3_side_06
+nord_gatehouse_l3_side_back
+nord_gatehouse_l3_side_floors
+nord_gatehouse_l3_side_front
+nord_gatehouse_l3_side_interior
+nord_gatehouse_l3_side_stairs
+nord_grand_bazaar_awning_1
+nord_grand_bazaar_gate
+nord_grand_bazaar_gate_door
+nord_grand_bazaar_part_1
+nord_grand_bazaar_part_1_door
+nord_grand_bazaar_part_1_door_border
+nord_grand_bazaar_part_2
+nord_grand_bazaar_wall_1
+nord_helmet_a
+nord_helmet_b
+nord_helmet_c
+nord_helmet_d
+nord_helmet_da
+nord_helmet_e
+nord_helmet_ea
+nord_helmet_f
+nord_helmet_fa
+nord_house_a_facade_a
+nord_house_a_facade_a_balcony_a
+nord_house_a_facade_b
+nord_house_a_facade_b_balcony_a
+nord_house_a_facade_door_a
+nord_house_a_facade_window_a
+nord_house_a_floor_a_1m
+nord_house_a_floor_a_2m
+nord_house_a_mezzanine_floor_a
+nord_house_a_roof_connection_a
+nord_house_a_roof_connection_b
+nord_house_a_roof_front_center_a
+nord_house_a_roof_front_center_c
+nord_house_a_roof_front_left_aa
+nord_house_a_roof_front_left_aa_window
+nord_house_a_roof_front_left_ab
+nord_house_a_roof_front_left_ab_window
+nord_house_a_roof_front_left_ba
+nord_house_a_roof_front_left_ba_window
+nord_house_a_roof_front_left_ca
+nord_house_a_roof_front_right_aa
+nord_house_a_roof_front_right_aa_window
+nord_house_a_roof_front_right_ab
+nord_house_a_roof_front_right_ab_window
+nord_house_a_roof_front_right_ba
+nord_house_a_roof_front_right_ba_window
+nord_house_a_roof_front_right_ca
+nord_house_a_roof_int_support_a
+nord_house_a_roof_int_support_b
+nord_house_a_roof_middle_2m_aa
+nord_house_a_roof_middle_2m_ab
+nord_house_a_roof_middle_2m_ba
+nord_house_a_roof_middle_2m_ca
+nord_house_a_roof_middle_3m_aa
+nord_house_a_roof_middle_3m_aa_window
+nord_house_a_roof_middle_3m_ab
+nord_house_a_roof_middle_3m_ab_window
+nord_house_a_roof_middle_3m_ba
+nord_house_a_roof_middle_3m_ba_window
+nord_house_a_roof_middle_3m_ca
+nord_house_a_roof_middle_4m_aa
+nord_house_a_roof_middle_4m_aa_window
+nord_house_a_roof_middle_4m_ab
+nord_house_a_roof_middle_4m_ab_window
+nord_house_a_roof_middle_4m_ba
+nord_house_a_roof_middle_4m_ba_window
+nord_house_a_roof_middle_4m_ca
+nord_house_a_roof_middle_4m_cb
+nord_house_a_roof_middle_center_2m
+nord_house_a_roof_middle_center_2m_c
+nord_house_a_roof_middle_center_3m
+nord_house_a_roof_middle_center_3m_c
+nord_house_a_roof_middle_center_4m
+nord_house_a_roof_middle_center_4m_c
+nord_house_a_roof_middle_center_cover_a
+nord_house_a_roof_middle_part_c1
+nord_house_a_roof_middle_part_c2
+nord_house_a_roof_middle_part_c3
+nord_house_a_roof_middle_part_c4
+nord_house_a_roof_middle_part_c5
+nord_house_a_roof_middle_part_c6
+nord_house_a_roof_middle_part_c7
+nord_house_a_roof_middle_part_c8
+nord_house_a_roof_support_a
+nord_house_a_roof_window_a
+nord_house_a_roof_window_b
+nord_house_a_top_roof_a
+nord_house_a_top_roof_b
+nord_house_a_top_roof_c
+nord_house_b_c2
+nord_house_b_facade_a
+nord_house_b_facade_a_balcony_a
+nord_house_b_facade_b
+nord_house_b_facade_b_balcony_a
+nord_house_b_facade_c
+nord_house_b_facade_c_balcony_a
+nord_house_b_facade_c_door_a
+nord_house_b_facade_c_full_a
+nord_house_b_facade_c_window_a
+nord_house_b_facade_c_window_b
+nord_house_b_facade_door_a
+nord_house_b_facade_window_a
+nord_house_b_floor_a_1m
+nord_house_b_floor_a_2m
+nord_house_b_mezzanine_floor_a
+nord_house_b_roof_connection_a
+nord_house_b_roof_connection_b
+nord_house_b_roof_front_center_a
+nord_house_b_roof_front_center_c
+nord_house_b_roof_front_left_aa
+nord_house_b_roof_front_left_aa_window
+nord_house_b_roof_front_left_ab
+nord_house_b_roof_front_left_ab_window
+nord_house_b_roof_front_left_ba
+nord_house_b_roof_front_left_ba_window
+nord_house_b_roof_front_left_ca
+nord_house_b_roof_front_right_aa
+nord_house_b_roof_front_right_aa_window
+nord_house_b_roof_front_right_ab
+nord_house_b_roof_front_right_ab_window
+nord_house_b_roof_front_right_ba
+nord_house_b_roof_front_right_ba_window
+nord_house_b_roof_front_right_ca
+nord_house_b_roof_int_support_a
+nord_house_b_roof_int_support_b
+nord_house_b_roof_middle_2m_aa
+nord_house_b_roof_middle_2m_ba
+nord_house_b_roof_middle_2m_ca
+nord_house_b_roof_middle_3m_aa
+nord_house_b_roof_middle_3m_aa_window
+nord_house_b_roof_middle_3m_ba
+nord_house_b_roof_middle_3m_ba_window
+nord_house_b_roof_middle_3m_ca
+nord_house_b_roof_middle_4m_aa
+nord_house_b_roof_middle_4m_aa_window
+nord_house_b_roof_middle_4m_ba
+nord_house_b_roof_middle_4m_ba_window
+nord_house_b_roof_middle_4m_ca
+nord_house_b_roof_middle_4m_cb
+nord_house_b_roof_middle_center_2m
+nord_house_b_roof_middle_center_2m_c
+nord_house_b_roof_middle_center_3m
+nord_house_b_roof_middle_center_3m_c
+nord_house_b_roof_middle_center_4m
+nord_house_b_roof_middle_center_4m_c
+nord_house_b_roof_middle_center_cover_a
+nord_house_b_roof_middle_part_c5
+nord_house_b_roof_middle_part_c6
+nord_house_b_roof_middle_part_c7
+nord_house_b_roof_middle_part_c8
+nord_house_b_roof_support_a
+nord_house_b_roof_window_a
+nord_house_b_roof_window_b
+nord_house_b_top_roof_a
+nord_house_b_top_roof_b
+nord_house_b_top_roof_c
+nord_house_beam_1m_a
+nord_house_beam_2m_a
+nord_house_beam_3m_a
+nord_house_beam_4m_a
+nord_house_beam_5m_a
+nord_house_beam_6m_a
+nord_house_c_facade_a
+nord_house_c_facade_a_balcony_a
+nord_house_c_facade_b
+nord_house_c_facade_b_balcony_a
+nord_house_c_facade_door_a
+nord_house_c_facade_window_a
+nord_house_c_floor_a_1m
+nord_house_c_floor_a_2m
+nord_house_c_mezzanine_floor_a
+nord_house_c_roof_connection_a
+nord_house_c_roof_connection_b
+nord_house_c_roof_front_center_a
+nord_house_c_roof_front_center_c
+nord_house_c_roof_front_left_aa
+nord_house_c_roof_front_left_aa_window
+nord_house_c_roof_front_left_ab
+nord_house_c_roof_front_left_ab_window
+nord_house_c_roof_front_left_ba
+nord_house_c_roof_front_left_ba_window
+nord_house_c_roof_front_left_ca
+nord_house_c_roof_front_right_aa
+nord_house_c_roof_front_right_aa_window
+nord_house_c_roof_front_right_ab
+nord_house_c_roof_front_right_ab_window
+nord_house_c_roof_front_right_ba
+nord_house_c_roof_front_right_ba_window
+nord_house_c_roof_front_right_ca
+nord_house_c_roof_int_support_a
+nord_house_c_roof_middle_2m_aa
+nord_house_c_roof_middle_2m_ba
+nord_house_c_roof_middle_2m_ca
+nord_house_c_roof_middle_3m_aa
+nord_house_c_roof_middle_3m_aa_window
+nord_house_c_roof_middle_3m_ba
+nord_house_c_roof_middle_3m_ba_window
+nord_house_c_roof_middle_3m_ca
+nord_house_c_roof_middle_4m_aa
+nord_house_c_roof_middle_4m_aa_window
+nord_house_c_roof_middle_4m_ba
+nord_house_c_roof_middle_4m_ba_window
+nord_house_c_roof_middle_4m_ca
+nord_house_c_roof_middle_4m_cb
+nord_house_c_roof_middle_center_2m
+nord_house_c_roof_middle_center_2m_c
+nord_house_c_roof_middle_center_3m
+nord_house_c_roof_middle_center_3m_c
+nord_house_c_roof_middle_center_4m
+nord_house_c_roof_middle_center_4m_c
+nord_house_c_roof_middle_center_cover_a
+nord_house_c_roof_support_a
+nord_house_c_roof_window_a
+nord_house_c_roof_window_b
+nord_house_c_roof_window_c
+nord_house_c_top_roof_a
+nord_house_c_top_roof_b
+nord_house_c_top_roof_c
+nord_house_column_a_corner_a
+nord_house_column_a_corner_b
+nord_house_column_a_corner_c
+nord_house_column_a_corner_d
+nord_house_column_a_corner_e
+nord_house_column_a_corner_f
+nord_house_column_aa
+nord_house_column_ab
+nord_house_column_ac
+nord_house_column_ad
+nord_house_column_ae
+nord_house_column_af
+nord_house_column_medium_a_corner_a
+nord_house_column_medium_a_corner_b
+nord_house_column_medium_a_corner_c
+nord_house_column_medium_a_corner_d
+nord_house_column_medium_a_corner_e
+nord_house_column_medium_a_corner_f
+nord_house_column_medium_aa
+nord_house_column_medium_ab
+nord_house_column_medium_ac
+nord_house_column_medium_ad
+nord_house_column_medium_ae
+nord_house_column_medium_af
+nord_house_column_short_a_corner_a
+nord_house_column_short_aa
+nord_house_column_short_support_aa
+nord_house_column_short_support_ab
+nord_house_column_short_support_ac
+nord_house_column_short_support_ba
+nord_house_column_short_support_bb
+nord_house_column_short_support_bc
+nord_house_door_a
+nord_house_door_handle_a
+nord_house_door_lock_a
+nord_house_door_lock_b
+nord_house_door_nail_a
+nord_house_door_pivot_bottom_a
+nord_house_door_pivot_support_a
+nord_house_door_pivot_top_a
+nord_house_door_pivot_top_b
+nord_house_door_short_a
+nord_house_entrance_roof_a1
+nord_house_entrance_roof_b1
+nord_house_entrance_roof_b2
+nord_house_entrance_roof_c1
+nord_house_entrance_roof_support_aa
+nord_house_entrance_roof_support_ab
+nord_house_entrance_roof_support_ba
+nord_house_entrance_roof_support_bb
+nord_house_platform_a_2m
+nord_house_platform_a_3m
+nord_house_platform_a_4m
+nord_house_platform_b_2m
+nord_house_platform_b_3m
+nord_house_platform_b_4m
+nord_house_platform_c_2m
+nord_house_platform_c_3m
+nord_house_platform_c_4m
+nord_house_platform_support_a
+nord_house_porch_a_1m_a
+nord_house_porch_a_1m_b
+nord_house_porch_a_2m_a
+nord_house_porch_a_2m_b
+nord_house_porch_a_3m_a
+nord_house_porch_a_3m_b
+nord_house_porch_a_4m_a
+nord_house_porch_a_4m_b
+nord_house_porch_a_corner_in_a
+nord_house_porch_a_corner_in_b
+nord_house_porch_a_corner_out_a
+nord_house_porch_a_corner_out_b
+nord_house_porch_a_end_a
+nord_house_porch_a_wall_a
+nord_house_porch_b_1m_a
+nord_house_porch_b_1m_b
+nord_house_porch_b_2m_a
+nord_house_porch_b_2m_b
+nord_house_porch_b_3m_a
+nord_house_porch_b_3m_b
+nord_house_porch_b_4m_a
+nord_house_porch_b_4m_b
+nord_house_porch_b_corner_in_a
+nord_house_porch_b_corner_in_b
+nord_house_porch_b_corner_out_a
+nord_house_porch_b_corner_out_b
+nord_house_porch_b_end_a
+nord_house_porch_b_wall_a
+nord_house_porch_column_a
+nord_house_porch_column_b
+nord_house_roof_shutter_a
+nord_house_roof_shutter_closed_a
+nord_house_roof_shutter_closed_b
+nord_house_roof_shutter_pivot_a
+nord_house_stair_a
+nord_house_stair_b
+nord_house_stair_c
+nord_house_stair_platform_a
+nord_house_stair_platform_b
+nord_house_stair_platform_c
+nord_house_wall_a_1m_a
+nord_house_wall_a_1m_win_a
+nord_house_wall_a_2m_a
+nord_house_wall_a_2m_b
+nord_house_wall_a_2m_c
+nord_house_wall_a_2m_d
+nord_house_wall_a_2m_win_a
+nord_house_wall_a_3m_a
+nord_house_wall_a_3m_b
+nord_house_wall_a_3m_c
+nord_house_wall_a_3m_d
+nord_house_wall_a_3m_door_a
+nord_house_wall_a_3m_win_a
+nord_house_wall_a_4m_a
+nord_house_wall_a_4m_b
+nord_house_wall_a_4m_c
+nord_house_wall_a_4m_d
+nord_house_wall_a_4m_door_a
+nord_house_wall_a_4m_win_a
+nord_house_wall_a_5m_a
+nord_house_wall_a_5m_b
+nord_house_wall_a_5m_c
+nord_house_wall_a_5m_d
+nord_house_wall_a_5m_door_a
+nord_house_wall_a_5m_win_a
+nord_house_wall_a_6m_a
+nord_house_wall_a_6m_b
+nord_house_wall_a_6m_c
+nord_house_wall_a_6m_d
+nord_house_wall_a_6m_door_a
+nord_house_wall_a_6m_win_a
+nord_house_wall_a_medium_1m_a
+nord_house_wall_a_medium_1m_win_a
+nord_house_wall_a_medium_2m_a
+nord_house_wall_a_medium_2m_b
+nord_house_wall_a_medium_2m_c
+nord_house_wall_a_medium_2m_d
+nord_house_wall_a_medium_2m_win_a
+nord_house_wall_a_medium_3m_a
+nord_house_wall_a_medium_3m_b
+nord_house_wall_a_medium_3m_c
+nord_house_wall_a_medium_3m_d
+nord_house_wall_a_medium_3m_win_a
+nord_house_wall_a_medium_4m_a
+nord_house_wall_a_medium_4m_b
+nord_house_wall_a_medium_4m_c
+nord_house_wall_a_medium_4m_d
+nord_house_wall_a_medium_4m_win_a
+nord_house_wall_a_medium_5m_a
+nord_house_wall_a_medium_5m_b
+nord_house_wall_a_medium_5m_c
+nord_house_wall_a_medium_5m_d
+nord_house_wall_a_medium_5m_win_a
+nord_house_wall_a_medium_6m_a
+nord_house_wall_a_medium_6m_b
+nord_house_wall_a_medium_6m_c
+nord_house_wall_a_medium_6m_d
+nord_house_wall_a_medium_6m_win_a
+nord_house_wall_a_porch_1m_win_a
+nord_house_wall_a_porch_2m_win_a
+nord_house_wall_a_porch_3m_door_a
+nord_house_wall_a_porch_3m_win_a
+nord_house_wall_a_porch_4m_door_a
+nord_house_wall_a_porch_4m_win_a
+nord_house_wall_a_short_1m_a
+nord_house_wall_a_short_1m_win_a
+nord_house_wall_a_short_2m_a
+nord_house_wall_a_short_2m_win_a
+nord_house_wall_a_short_3m_a
+nord_house_wall_a_short_3m_win_a
+nord_house_wall_a_short_4m_a
+nord_house_wall_a_short_4m_win_a
+nord_house_wall_a_short_5m_a
+nord_house_wall_a_short_5m_win_a
+nord_house_wall_a_short_6m_a
+nord_house_wall_a_short_6m_win_a
+nord_house_wall_b_1m_a
+nord_house_wall_b_2m_a
+nord_house_wall_b_3m_a
+nord_house_wall_b_4m_a
+nord_house_wall_b_5m_a
+nord_house_wall_b_6m_a
+nord_house_window_lock_a
+nord_house_window_lock_b
+nord_house_window_lock_c
+nord_house_window_pivot_a
+nord_house_window_shutter_a
+nord_house_window_shutter_b
+nord_keep_interior_lv1
+nord_keep_interior_lv1_stairs
+nord_keep_interior_lv3
+nord_keep_interior_lv3_center
+nord_keep_interior_lv3_stairs
+nord_keep_interior_lv3_walldeco
+nord_king_armor
+nord_king_armor_b
+nord_king_armor_b_converted
+nord_king_armor_b_converted_slim
+nord_king_armor_b_slim
+nord_king_armor_c
+nord_king_armor_c_converted
+nord_king_armor_c_converted_slim
+nord_king_armor_c_slim
+nord_king_armor_converted
+nord_king_armor_converted_slim
+nord_king_armor_d
+nord_king_armor_d_converted
+nord_king_armor_d_converted_slim
+nord_king_armor_d_slim
+nord_king_armor_slim
+nord_king_crown
+nord_king_shoulder_armor
+nord_king_shoulder_armor_b
+nord_lantern
+nord_lantern_gen
+nord_lantern_gen_part_01
+nord_lantern_gen_part_02
+nord_lantern_part_01
+nord_lantern_part_02
+nord_ls_02
+nord_ls_02_lowpoly
+nord_ls_03
+nord_ls_03_lowpoly
+nord_ls_04_lowpoly
+nord_ls_05_lowpoly
+nord_mossy_forest_rock_a
+nord_mossy_forest_rock_b
+nord_mossy_forest_rock_big_a
+nord_mossy_forest_rock_big_b
+nord_mossy_forest_rock_big_c
+nord_mossy_forest_rock_big_d
+nord_mossy_forest_rock_big_e
+nord_mossy_forest_rock_c
+nord_mossy_forest_rock_d
+nord_mossy_forest_rock_e
+nord_mossy_forest_rock_f
+nord_mossy_forest_rock_g
+nord_mossy_forest_rock_h
+nord_mossy_rock_a
+nord_mossy_rock_b
+nord_mossy_rock_c
+nord_mossy_rock_d
+nord_mossy_small_rock_a
+nord_mossy_small_rock_b
+nord_mossy_small_rock_c
+nord_mossy_small_rock_d
+nord_nail
+nord_poor_boot
+nord_poor_civil
+nord_poor_civil_converted
+nord_poor_civil_converted_slim
+nord_poor_civil_slim
+nord_rock_01
+nord_rock_02
+nord_rock_03
+nord_shield_tier_2_d
+nord_shield_tier_3_a
+nord_shield_tier_3_a_floatable_a
+nord_shield_tier_3_a_floatable_b
+nord_shield_tier_3_a_floatable_c
+nord_shield_tier_3_b
+nord_shield_tier_4_a
+nord_shield_tier_4_a_floatable_a
+nord_shield_tier_4_a_floatable_b
+nord_shield_tier_4_a_floatable_c
+nord_shield_tier_4_b
+nord_shield_tier_5_a
+nord_shield_tier_5_b
+nord_shield_tier_5_b_floatable_a
+nord_shield_tier_5_b_floatable_b
+nord_shield_tier_5_b_floatable_c
+nord_shield_tier_6_a
+nord_shield_tier_6_b
+nord_shipyard_base
+nord_shipyard_pillars_base_long_a
+nord_shipyard_pillars_base_short_a
+nord_shipyard_pillars_long_a
+nord_shipyard_pillars_long_b
+nord_shipyard_pillars_short_a
+nord_shipyard_pillars_short_b
+nord_shipyard_pillars_wall_long_a
+nord_shipyard_pillars_wall_long_b
+nord_shipyard_pillars_wall_short_a
+nord_shipyard_pillars_wall_short_b
+nord_shipyard_roof_a
+nord_shipyard_side_a
+nord_shipyard_side_b
+nord_shipyard_wall_a
+nord_shipyard_wall_b
+nord_shipyard_wall_c
+nord_shipyard_wall_part_a
+nord_shipyard_wall_part_b
+nord_shipyard_wall_part_c
+nord_shipyard_wall_part_d
+nord_shipyard_wall_part_e
+nord_shipyard_wall_part_f
+nord_shipyard_wall_part_g
+nord_shipyard_wall_part_h
+nord_shoulder_a
+nord_shoulder_b
+nord_small_rock_01
+nord_small_rock_02
+nord_small_rock_03
+nord_small_rock_04
+nord_small_rock_05
+nord_small_rock_06
+nord_small_rock_07
+nord_small_rock_08
+nord_small_rock_09
+nord_small_rock_10
+nord_small_rock_11
+nord_small_rock_12
+nord_small_rock_13
+nord_small_rock_14
+nord_spear_blade_1
+nord_spear_blade_10
+nord_spear_blade_11
+nord_spear_blade_12
+nord_spear_blade_13
+nord_spear_blade_2
+nord_spear_blade_3
+nord_spear_blade_4
+nord_spear_blade_5
+nord_spear_blade_6
+nord_spear_blade_7
+nord_spear_blade_8
+nord_spear_blade_9
+nord_spear_guard_1
+nord_spear_guard_10
+nord_spear_guard_2
+nord_spear_guard_3
+nord_spear_guard_4
+nord_spear_guard_5
+nord_spear_guard_6
+nord_spear_guard_7
+nord_spear_guard_8
+nord_spear_guard_9
+nord_spear_pommel_1
+nord_spear_pommel_2
+nord_spear_pommel_3
+nord_spear_pommel_4
+nord_spear_pommel_6
+nord_spear_pommel_7
+nord_sword_blade_01
+nord_sword_blade_01_scabbard_01
+nord_sword_blade_02
+nord_sword_blade_02_scabbard_02
+nord_sword_blade_03
+nord_sword_blade_03_scabbard_03
+nord_sword_blade_04
+nord_sword_blade_04_scabbard_04
+nord_sword_blade_05
+nord_sword_blade_05_scabbard_05
+nord_sword_blade_06
+nord_sword_blade_06_scabbard_06
+nord_sword_blade_07
+nord_sword_blade_07_scabbard_07
+nord_sword_blade_08
+nord_sword_blade_08_scabbard_08
+nord_sword_blade_09
+nord_sword_blade_09_scabbard_09
+nord_sword_blade_10
+nord_sword_blade_10_scabbard_10
+nord_sword_blade_11
+nord_sword_blade_11_scabbard_11
+nord_sword_blade_12
+nord_sword_blade_12_scabbard_12
+nord_sword_blade_13
+nord_sword_blade_13_scabbard_13
+nord_sword_blade_14
+nord_sword_blade_14_scabbard_14
+nord_sword_grip_01
+nord_sword_grip_02
+nord_sword_grip_03
+nord_sword_grip_04
+nord_sword_grip_05
+nord_sword_grip_06
+nord_sword_grip_07
+nord_sword_grip_08
+nord_sword_grip_09
+nord_sword_grip_10
+nord_sword_guard_01
+nord_sword_guard_02
+nord_sword_guard_03
+nord_sword_guard_04
+nord_sword_guard_05
+nord_sword_guard_06
+nord_sword_guard_07
+nord_sword_guard_08
+nord_sword_guard_09
+nord_sword_guard_10
+nord_sword_pommel_01
+nord_sword_pommel_02
+nord_sword_pommel_03
+nord_sword_pommel_04
+nord_sword_pommel_05
+nord_sword_pommel_06
+nord_sword_pommel_07
+nord_sword_pommel_08
+nord_sword_pommel_09
+nord_sword_pommel_10
+nord_tavern
+nord_tavern_stairs
+nord_village_barn
+nord_village_barn_door
+nord_village_house_a
+nord_village_house_b
+nord_village_house_c
+nord_village_house_d
+nord_village_house_d_stairs
+nord_village_house_part_a
+nord_village_house_part_b
+nordheavy_deckwater
+nordic_chainmail_a
+nordic_chainmail_a_converted
+nordic_chainmail_a_converted_slim
+nordic_chainmail_a_slim
+nordic_chainmail_c
+nordic_chainmail_c_converted
+nordic_chainmail_c_converted_slim
+nordic_chainmail_c_slim
+nordic_civilian_dress
+nordic_civilian_dress_converted
+nordic_civilian_dress_converted_slim
+nordic_civilian_dress_plaid
+nordic_civilian_dress_plaid_converted
+nordic_civilian_dress_plaid_converted_slim
+nordic_civilian_dress_plaid_slim
+nordic_civilian_dress_slim
+nordic_civilian_hat
+nordic_civilian_hat_fur_brim
+norse_chainmail_pleatedtrousers
+norse_chainmail_pleatedtrousers_converted
+norse_chainmail_pleatedtrousers_converted_slim
+norse_chainmail_pleatedtrousers_slim
+northman_raider_armor
+northman_raider_armor_converted
+northman_raider_armor_converted_slim
+northman_raider_armor_slim
+northman_raider_boot
+northman_raider_cape
+northman_raider_shoulder
+northman_wrist_armor
+oar_10m
+oar_12m
+oar_6m
+oar_8m
+oar_floatable_a
+oar_floatable_b
+oar_floatable_c
+oar_floatable_d
+oar_single_4m
+oar_single_6m
+oar_single_8m
+oar_stand_a
+oar_stand_b
+oar_stand_c
+oar_stand_d
+order_flag_a_naval
+outer_ls_05
+outer_nord_04
+oxenfigurehead
+pirate_a
+pirate_a_converted
+pirate_a_converted_slim
+pirate_a_head
+pirate_a_slim
+pirate_tier_2_body
+pirate_tier_2_body_converted
+pirate_tier_2_body_converted_slim
+pirate_tier_2_body_slim
+pirate_tier_2_head
+pirate_tier_3_armor
+pirate_tier_3_armor_converted
+pirate_tier_3_armor_converted_slim
+pirate_tier_3_armor_slim
+pirate_tier_3_head
+plank_debris_1
+plank_debris_10
+plank_debris_11
+plank_debris_12
+plank_debris_13
+plank_debris_14
+plank_debris_15
+plank_debris_16
+plank_debris_17
+plank_debris_18
+plank_debris_19
+plank_debris_2
+plank_debris_20
+plank_debris_21
+plank_debris_22
+plank_debris_23
+plank_debris_24
+plank_debris_25
+plank_debris_26
+plank_debris_27
+plank_debris_28
+plank_debris_29
+plank_debris_3
+plank_debris_30
+plank_debris_31
+plank_debris_32
+plank_debris_33
+plank_debris_34
+plank_debris_35
+plank_debris_36
+plank_debris_37
+plank_debris_4
+plank_debris_5
+plank_debris_6
+plank_debris_7
+plank_debris_8
+plank_debris_9
+plank_splinter_1
+plank_splinter_2
+plank_splinter_3
+plank_splinter_4
+plank_splinter_5
+plank_splinter_6
+plank_splinter_7
+plank_splinter_8
+planks
+planned_wood_a
+quiver_barrel_holder
+ram_01
+ram_02
+ram_03
+ram_04
+ram_05
+ram_06
+ram_07
+ram_08
+ramfigurehead
+ravenfigurehead
+rockymountain_outermesh
+rockymountain_outermesh_b
+rolled_fabric_a
+rolled_fabric_b
+rope_25m
+rope_pile_hanger
+rope_segment_a
+rope_segment_b
+rope_segment_c
+rope_segment_d
+ropepiletestmesh
+round_deckwater
+round_ship
+round_ship_rudder
+round_ship_stairs
+rudder_ship_drakkar
+rudder_ship_drakkar_rope
+sail_faction_flag
+sail_pulley
+sail_pulley_wheel
+sail_rope_10m
+sail_rope_20m
+sail_rope_30m
+sail_rope_pile
+sail_rope_pile_b
+sail_rope_pile_c
+sail_rope_pile_d
+sail_rope_pile_d_1
+sail_rope_pile_d_2
+sail_single_deadeye
+sandycliff_outermesh
+seahorsefigurehead
+seaserpentfigurehead
+shield_aserai_infantary_b_floatable_a
+shield_aserai_infantary_b_floatable_b
+shield_aserai_infantary_b_floatable_c
+ship_brazier_a
+ship_brazier_b
+ship_brazier_c
+ship_brazier_d
+ship_broken_log_a
+ship_broken_log_b
+ship_broken_log_c
+ship_broken_plank_a
+ship_broken_plank_b
+ship_broken_plank_c
+ship_broken_plank_d
+ship_broken_plank_e
+ship_broken_plank_f
+ship_broken_plank_g
+ship_broken_plank_h
+ship_broken_plank_i
+ship_broken_plank_j
+ship_broken_wood_a
+ship_broken_wood_b
+ship_broken_wood_c
+ship_broken_wood_d
+ship_broken_wood_small_a
+ship_broken_wood_small_b
+ship_broken_wood_small_c
+ship_broken_wood_small_d
+ship_broken_wood_small_e
+ship_broken_wood_small_f
+ship_broken_wood_small_g
+ship_build_fishing_a
+ship_build_fishing_b
+ship_build_fishing_parts_a
+ship_build_fishing_parts_b
+ship_build_fishing_parts_c
+ship_build_fishing_parts_d
+ship_build_fishing_parts_e
+ship_build_fishing_platform_a
+ship_build_knarr_a
+ship_build_knarr_b
+ship_build_knarr_parts_a
+ship_build_knarr_parts_b
+ship_build_knarr_parts_c
+ship_build_knarr_parts_d
+ship_build_knarr_platform_a
+ship_build_liburna_a
+ship_build_liburna_b
+ship_build_liburna_parts_a
+ship_build_liburna_parts_b
+ship_build_liburna_parts_c
+ship_build_liburna_parts_d
+ship_build_liburna_platform_a
+ship_build_liburna_platform_b
+ship_build_meditheavy_a
+ship_build_meditheavy_b
+ship_build_meditheavy_parts_a
+ship_build_meditheavy_parts_b
+ship_build_meditheavy_parts_c
+ship_build_meditheavy_parts_d
+ship_build_meditheavy_platform_a
+ship_build_old_planks_a
+ship_build_scaffolding_platform_a
+ship_build_scaffolding_platform_b
+ship_build_scaffolding_platform_c
+ship_build_scaffolding_platform_d
+ship_build_scaffolding_support_a
+ship_build_support_a
+ship_build_support_b
+ship_build_support_c
+ship_build_support_d
+ship_climbing_rope
+ship_climbing_rope_clth
+ship_climbing_rope_large
+ship_climbing_rope_large_clth
+ship_climbing_rope_medium
+ship_climbing_rope_medium_clth
+ship_climbing_rope_narrow_large
+ship_climbing_rope_narrow_medium
+ship_climbing_rope_narrow_small
+ship_climbing_rope_small
+ship_climbing_rope_small_clt
+ship_control_cloth_ribbon
+ship_control_cloth_ribbon_clth
+ship_control_cloth_wrap
+ship_corbita
+ship_corbita_rudder
+ship_crate_chair_a
+ship_crate_chair_b
+ship_deck_base
+ship_drakkar
+ship_drakkar_base_figurehead
+ship_drakkar_knots
+ship_dromon_ballista_platform_a
+ship_dromon_railing_back_a
+ship_dromon_railing_front_a
+ship_dromon_roof_platform_a
+ship_fishing
+ship_fishing_mast_holder_a
+ship_fishing_mast_holder_angled_a
+ship_fishing_mast_holder_angled_a_support
+ship_fishing_rudder
+ship_knarr
+ship_knarr_knots
+ship_knarr_rudder_a
+ship_liburna
+ship_liburna_pattern_eye_a
+ship_liburna_pattern_stripe_a
+ship_liburna_ram_a
+ship_liburna_rudder_a
+ship_liburna_sail
+ship_liburna_sail_wood
+ship_liburna_shovel_a
+ship_lightdromon_ballista_platform_a
+ship_lightdromon_railing_front_a
+ship_lightdromon_roof_platform_a
+ship_lightdromon_roof_platform_a_default
+ship_lightlongship
+ship_lightlongship_rudder_a
+ship_longship
+ship_longship_rudder_a
+ship_mast_floatable_a
+ship_mast_holder_a
+ship_mast_holder_angled_a
+ship_mast_holder_angled_a_support
+ship_mast_holder_angled_b
+ship_mast_holder_angled_b_support
+ship_mast_holder_b
+ship_mast_holder_c
+ship_mast_lateen_a_large
+ship_mast_lateen_a_medium
+ship_mast_lateen_a_small
+ship_mast_square_a_large
+ship_mast_square_a_medium
+ship_mast_square_a_small
+ship_meditheavy
+ship_meditheavy_ballista_platform_a
+ship_meditheavy_pattern_stripe_a
+ship_meditheavy_railing_front_a
+ship_meditheavy_roof_platform_a
+ship_meditheavy_roof_platform_a_default
+ship_meditheavy_roof_platform_a_stripe
+ship_meditheavy_rudder_a
+ship_meditmedium
+ship_meditmedium_railing_a
+ship_meditmedium_roof_platform_a
+ship_meditmedium_rubber
+ship_nordheavy
+ship_nordheavy_ballista_platform
+ship_nordheavy_figurehead
+ship_nordheavy_figurehead_adapter
+ship_nordheavy_rudder
+ship_ram_a_l1
+ship_ram_a_l2
+ship_ram_a_l3
+ship_ram_b_l1
+ship_ram_b_l2
+ship_ram_b_l3
+ship_roof_a_l1
+ship_roof_a_l1_cloth
+ship_roof_a_l1_sim
+ship_roof_a_l2
+ship_roof_a_l2_sim
+ship_roof_a_l3
+ship_roof_a_l3_sim
+ship_roof_b_l1
+ship_roof_b_l1_sim
+ship_roof_b_l2
+ship_roof_b_l2_sim
+ship_roof_b_l3
+ship_roof_b_l3_sim
+ship_roof_c_l1
+ship_roof_c_l1_sim
+ship_roof_c_l2
+ship_roof_c_l2_sim
+ship_roof_c_l3
+ship_roof_d_l1
+ship_roof_d_l1_sim
+ship_roof_d_l2
+ship_roof_d_l2_sim
+ship_roof_d_l3
+ship_roof_e_l1
+ship_roof_e_l1_sim
+ship_roof_e_l2
+ship_roof_e_l2_sim
+ship_roof_e_l3
+ship_roof_e_l3_sim
+ship_roof_merlon_a
+ship_roof_merlon_a_broken_a
+ship_roof_merlon_a_broken_b
+ship_roof_merlon_a_broken_c
+ship_roof_merlon_b
+ship_roof_merlon_b_broken_a
+ship_roof_merlon_b_broken_b
+ship_roof_merlon_b_broken_c
+ship_roof_merlon_c
+ship_roof_merlon_c_broken_a
+ship_roof_merlon_c_broken_b
+ship_roof_merlon_c_broken_c
+ship_roof_merlon_d
+ship_roof_merlon_d_broken_a
+ship_roof_merlon_d_broken_b
+ship_roof_merlon_d_broken_c
+ship_roof_merlon_e
+ship_roof_merlon_e_broken_a
+ship_roof_merlon_e_broken_b
+ship_roof_merlon_e_broken_c
+ship_roof_merlon_f
+ship_roof_merlon_f_broken_a
+ship_roof_merlon_f_broken_b
+ship_roof_merlon_f_broken_c
+ship_roof_merlon_floatable_a
+ship_roof_merlon_floatable_b
+ship_roof_merlon_floatable_c
+ship_roof_merlon_floatable_d
+ship_roof_merlon_floatable_e
+ship_roof_merlon_floatable_f
+ship_roundship_ballista_platform_a
+ship_roundship_railing_back_a
+ship_roundship_railing_front_a
+ship_rudder_catship
+ship_rudder_catship_support
+ship_rudder_cogship
+ship_rudder_cogship_support
+ship_rudder_dromon
+ship_rudder_galley
+ship_rudder_galley_support
+ship_rudder_knarr
+ship_rudder_liburna
+ship_rudder_lightdromon
+ship_rudder_lightdromon_support
+ship_rudder_lightlongship
+ship_rudder_longship
+ship_rudder_meditheavy
+ship_rudder_meditmedium
+ship_rudder_roundship
+ship_rudder_sturgian_heavy_longship
+ship_rudder_trade_cogship
+ship_rudder_trade_cogship_support
+ship_rudder_xebec
+ship_sturgian_heavy_longship_railing_a
+ship_sturgian_heavy_longship_roof_platform_a
+ship_trap_door_a
+ship_trap_door_b
+ship_trap_door_c
+ship_trap_door_d
+ship_xebec_ballista_platform_a
+ship_xebec_railing_front_a
+ship_xebec_roof_platform_a
+ship_xebec_roof_platform_a_default
+ship_yard_lateen_a_large
+ship_yard_lateen_a_medium
+ship_yard_lateen_a_small
+ship_yard_square_a_large
+ship_yard_square_a_medium
+ship_yard_square_a_small
+shipyard_module_nord_b_1
+shipyard_module_nord_b_2
+shipyard_module_nord_b_rooftop
+shipyard_module_nord_b_sliced
+shipyard_module_nord_b_sliced_mirror
+shipyard_module_nord_b_thin_sliced
+shipyard_module_nord_b_thin_sliced_mirror
+shipyard_module_nord_c
+shipyard_module_nord_c_rooftop
+shipyard_module_nord_column_a_1
+shipyard_module_nord_column_b_1
+shipyard_module_nord_column_b_2
+shipyard_module_nord_column_c_1
+shipyard_module_nord_d_1
+shipyard_module_nord_d_2
+shipyard_module_nord_d_3
+shipyard_module_nord_d_4
+shipyard_module_nord_d_window_a
+shipyard_module_nord_d_window_b
+shipyard_module_nord_d_window_cover
+shipyard_module_nord_e_1
+shipyard_module_nord_e_2
+shipyard_module_nord_e_3
+shipyard_module_nord_e_4
+shipyard_module_nord_f_1
+shipyard_module_nord_f_2
+shipyard_module_nord_f_3
+shipyard_module_nord_f_4
+shipyard_module_nord_f_a_4
+shipyard_module_nord_f_window
+shipyard_module_nord_roof_c
+shipyard_module_nord_wall_logs
+siege_tower_5m_destroyed_logs
+siege_tower_5m_destroyed_part1
+siege_tower_5m_destroyed_part2
+siege_tower_5m_destroyed_part3
+siege_tower_5m_destroyed_part4
+siege_tower_5m_destroyed_part5
+siege_tower_5m_destroyed_planks
+siege_tower_5m_destroyed_ropes
+siege_tower_5m_door
+siege_tower_5m_logs
+siege_tower_5m_planks
+siege_tower_5m_ropes
+siege_tower_5m_wheel
+sirenfigurehead
+small_lateen_l
+small_lateen_l_folded
+small_lateen_r
+small_lateen_r_folded
+small_lateen_rope_l
+small_lateen_rope_r
+southern_pirate_armor
+southern_pirate_armor_converted
+southern_pirate_armor_converted_slim
+southern_pirate_armor_slim
+southern_pirate_head
+southern_pirate_turban
+spear_barrel_holder
+spear_handle_rough_29
+spear_handle_rough_30
+spear_quiver_barrel_holder
+splinted_bracers
+square_sail_a
+square_sail_a_free
+square_sail_a_static
+square_sail_morph_export
+stealth_arrow
+stealth_bow
+stealth_quiver
+steppehills_outermesh
+steppehills_outermesh_b
+storm_cover_large
+storm_cover_small
+strapped_jackboots
+studded_arm_guards
+sturgia_shipyard_base
+sturgia_shipyard_main_roof
+sturgia_shipyard_side_a
+sturgia_shipyard_side_wall_a
+sturgia_shipyard_side_wall_b
+sturgia_shipyard_side_wall_c
+sturgia_shipyard_side_wall_d
+sturgia_shipyard_side_wall_e
+sturgia_shipyard_wall_a
+sturgia_shipyard_wall_b
+sturgia_shipyard_wall_c
+sturgia_shipyard_wall_d
+sturgian_heavy_deckwater
+sturgian_heavy_longship
+swanfigurehead
+swords_barrel_holder
+tacky_bandit
+tacky_bandit_boot
+tacky_bandit_bracer
+tacky_bandit_converted
+tacky_bandit_converted_slim
+tacky_bandit_helmet
+tacky_bandit_helmet_b
+tacky_bandit_helmet_c
+tacky_bandit_shoulder
+tacky_bandit_shoulder_b
+tacky_bandit_slim
+test_sail
+tigerfigurehead
+trade_cog_deckwater
+trade_cog_ship
+trade_cog_ship_platform
+trade_cog_ship_stairs
+tree_aspen_fall
+tree_aspen_fall_10
+tree_aspen_fall_11
+tree_aspen_fall_12
+tree_aspen_fall_2
+tree_aspen_fall_3
+tree_aspen_fall_4
+tree_aspen_fall_5
+tree_aspen_fall_6
+tree_aspen_fall_7
+tree_aspen_fall_8
+tree_aspen_fall_9
+tree_aspen_spring
+tree_aspen_spring_10
+tree_aspen_spring_11
+tree_aspen_spring_12
+tree_aspen_spring_2
+tree_aspen_spring_3
+tree_aspen_spring_4
+tree_aspen_spring_5
+tree_aspen_spring_6
+tree_aspen_spring_7
+tree_aspen_spring_8
+tree_aspen_spring_9
+tree_aspen_summer
+tree_aspen_summer_10
+tree_aspen_summer_11
+tree_aspen_summer_12
+tree_aspen_summer_2
+tree_aspen_summer_3
+tree_aspen_summer_4
+tree_aspen_summer_5
+tree_aspen_summer_6
+tree_aspen_summer_7
+tree_aspen_summer_8
+tree_aspen_summer_9
+tree_aspen_winter
+tree_aspen_winter_10
+tree_aspen_winter_11
+tree_aspen_winter_12
+tree_aspen_winter_2
+tree_aspen_winter_3
+tree_aspen_winter_4
+tree_aspen_winter_5
+tree_aspen_winter_6
+tree_aspen_winter_7
+tree_aspen_winter_8
+tree_aspen_winter_9
+tree_beech_fall
+tree_beech_fall_2
+tree_beech_fall_3
+tree_beech_fall_4
+tree_beech_fall_5
+tree_beech_fall_6
+tree_beech_spring
+tree_beech_spring_2
+tree_beech_spring_3
+tree_beech_spring_4
+tree_beech_spring_5
+tree_beech_spring_6
+tree_beech_summer
+tree_beech_summer_2
+tree_beech_summer_3
+tree_beech_summer_4
+tree_beech_summer_5
+tree_beech_summer_6
+tree_birch_fall
+tree_birch_fall_2
+tree_birch_fall_3
+tree_birch_spring
+tree_birch_spring_2
+tree_birch_spring_3
+tree_birch_summer
+tree_birch_summer_2
+tree_birch_summer_3
+turtlefigurehead
+village_nord_1
+village_nord_2
+village_nord_3
+viperfigurehead
+vlandia_shipyard_base_a
+vlandia_shipyard_base_i
+vlandia_shipyard_base_j
+vlandia_shipyard_side_a
+vlandia_shipyard_side_b
+vlandia_shipyard_wall_a
+vlandia_shipyard_wall_b
+vlandia_shipyard_wall_c
+vlandia_shipyard_wall_d
+vlandia_shipyard_wall_e
+vlandia_shipyard_wall_f
+vlandia_shipyard_wall_g
+vlandia_shipyard_wall_h
+walrus_ivory
+water_grid_256
+weapon_crate
+weapon_crate2
+weapon_crate3
+weapon_crate4
+whale_oil
+wide_oar_l1_4m
+wide_oar_l1_6m
+wide_oar_l1_8m
+wide_oar_l2_4m
+wide_oar_l2_6m
+wide_oar_l2_8m
+wide_oar_l3_4m
+wide_oar_l3_6m
+wide_oar_l3_8m
+wingsofvictoryfigurehead
+wolf_shoulder_2
+wolfhead_reinforced
+xebec
+xebec_color
+xebec_deckwater
+xebec_tail
+yard_ropes_lateen_medium

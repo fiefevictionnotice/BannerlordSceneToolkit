@@ -1,0 +1,312 @@
+{
+  "Name": "Imperial Grandeur",
+  "Tags": [
+    "empire",
+    "upgrade",
+    "stone",
+    "detail",
+    "culture-swap"
+  ],
+  "Rules": [
+    {
+      "FromMaterial": "empire_wall_a",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "empire_wall_b",
+      "ToMaterial": "empire_wall_brick"
+    },
+    {
+      "FromMaterial": "empire_wall_c",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "empire_wall_d",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "empire_wall_e",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "roman_brick",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "roman_brick_b",
+      "ToMaterial": "roman_aqueduct_bricks_b"
+    },
+    {
+      "FromMaterial": "roman_wall_01",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "roman_wall_02",
+      "ToMaterial": "roman_hippodrome_wall_plaster"
+    },
+    {
+      "FromMaterial": "roman_wall_03",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "walls_a",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "stone_wall_11",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "empire_wall_inside",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "loam_stone_wall",
+      "ToMaterial": "roman_hippodrome_wall_brick"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_alpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_noparallax",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_alpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection_noalpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "adobe_wall_relief",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "arab_door_stone",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "arab_keep_details_a",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "arab_ornament_a",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "arabian_fake_houses_a",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "battania_fake_houses",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "battania_walls_inside",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "building_details_sturgia",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "cliff_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_mud_alpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a_mud",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "floor_2",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "floor_2_white",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "floor_3",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "khuzait_brick_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "khuzait_brick_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "loam_roof",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "loam_wall_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "natural_stone_wall_noparallax",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "pict_floor_stone",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "pict_lords_hall_details",
+      "ToMaterial": "roman_interior_walls"
+    },
+    {
+      "FromMaterial": "rock",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "rock_b_mix",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "rubble_stone",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "rubble_stone_alpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_desert_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14_detail",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2_rocks",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_noparallax",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_normal",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_rock",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_detail",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_np",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "stone_white_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_a",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b_alpha",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_c",
+      "ToMaterial": "roman_hippodrome_wall_brick:10, roman_hippodrome_wall_plaster:1, empire_wall_brick:1, roman_aqueduct_bricks_b:1"
+    }
+  ]
+}

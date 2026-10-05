@@ -1,0 +1,17 @@
+# BannerlordSceneToolkit per-tool enable/disable, read once at game startup.
+# Set a tool to false to skip registering its Harmony patch entirely for this
+# session - its hotkey does nothing and its Tick loop never runs. Restart the
+# game after editing for a change to take effect. Check
+# BannerlordSceneToolkit\tool.log on the next load to confirm which tools
+# actually got patched.
+#
+# Hotkeys:
+#   F5  Prefab Creator
+#   F6  Prefab Swapper and Distribution
+#   F7  Scene Analyzer
+#   F8  Material Swap
+#   F9  Backups
+# (F7/F8/F9 all belong to MaterialSwapTool and follow its setting below.)
+MaterialSwapTool=True
+PrefabSwapperTool=True
+PrefabCreatorTool=True

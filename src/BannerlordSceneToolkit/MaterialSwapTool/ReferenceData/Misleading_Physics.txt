@@ -1,0 +1,22 @@
+# Entities with MISLEADING PHYSICS
+# These look visually open/gapped but have solid collision — or the reverse.
+# Players can get unexpectedly stuck, blocked, or fall through.
+# Format: entity_name | description
+# Source: bl-scenes Discord community (2020-2025)
+
+# ── LOOKS OPEN, PHYSICS IS SOLID ──────────────────────────────────────────────
+# Visually has openings/holes but collision is a solid box.
+wooden_platform_fence_b | Looks like an open fence but has a solid collision box — players are blocked where none expected.
+fence_old_c1            | Old fence variant with misleading solid physics.
+fence_old_c2            | Old fence variant with misleading solid physics.
+fence_old_c3            | Old fence variant with misleading solid physics.
+fence_old_c4            | Old fence variant with misleading solid physics.
+woodsection_a           | Visual has gaps/holes but collision is fully solid. Use woodsection_a_alpha if you need the gapped version.
+
+# ── LOOKS SOLID, HAS NO COLLISION (or partial) ────────────────────────────────
+# Visually solid walls or surfaces with missing/partial physics — players fall through.
+# (Add confirmed examples here as discovered)
+
+# ── INVISIBLE COLLISION OVERREACH ─────────────────────────────────────────────
+# Physics shape extends significantly beyond the visible mesh, causing invisible walls.
+# (Add confirmed examples here as discovered)

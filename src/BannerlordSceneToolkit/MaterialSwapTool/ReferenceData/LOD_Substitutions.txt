@@ -1,0 +1,12 @@
+# Suggested LOD substitutions
+# Format: bad_entity -> good_entity
+# The right-hand side is a superior replacement with better LOD distances.
+# Source: bl-scenes Discord community recommendations
+
+# (wooden_platform_2_* series recommendations DEPRECATED 2026-08-17 - see
+# Deprecated_Legacy_Checks.txt for the removed block + why + how to restore.)
+
+# ── FENCE SERIES ────────────────────────────────────────────────────────────
+# Where possible replace fences with the _empire_ or _battania_ variants
+# which have better LOD distances. The generic fence_a-d are the worst.
+# (No universal 1:1 substitute — context-dependent)

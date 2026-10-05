@@ -1,0 +1,524 @@
+{
+  "Name": "Khuzait Steppe (Loam)",
+  "Tags": [
+    "khuzait",
+    "culture-swap",
+    "steppe",
+    "stone",
+    "adobe",
+    "roof",
+    "column",
+    "wood",
+    "cloth"
+  ],
+  "Rules": [
+    {
+      "FromMaterial": "empire_wall_a",
+      "ToMaterial": "loam_stone_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_b",
+      "ToMaterial": "loam_wall"
+    },
+    {
+      "FromMaterial": "empire_wall_c",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "empire_wall_d",
+      "ToMaterial": "khuzait_brick_b"
+    },
+    {
+      "FromMaterial": "empire_wall_e",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "roman_brick",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "roman_brick_b",
+      "ToMaterial": "khuzait_brick_b"
+    },
+    {
+      "FromMaterial": "roman_wall_01",
+      "ToMaterial": "loam_stone_wall"
+    },
+    {
+      "FromMaterial": "roman_wall_02",
+      "ToMaterial": "loam_wall"
+    },
+    {
+      "FromMaterial": "roman_wall_03",
+      "ToMaterial": "adobe_stone_wall"
+    },
+    {
+      "FromMaterial": "walls_a",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "stone_wall_11",
+      "ToMaterial": "loam_stone_wall"
+    },
+    {
+      "FromMaterial": "loam_stone_wall_noparalax",
+      "ToMaterial": "loam_stone_wall_noparalax"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_plaster",
+      "ToMaterial": "loam_wall"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_a",
+      "ToMaterial": "khuzait_brick_a"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_b",
+      "ToMaterial": "khuzait_brick_b"
+    },
+    {
+      "FromMaterial": "roman_roof",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "empire_column_a",
+      "ToMaterial": "roman_column_a"
+    },
+    {
+      "FromMaterial": "empire_keep_d_column_a",
+      "ToMaterial": "roman_column_a"
+    },
+    {
+      "FromMaterial": "roman_column_a_shaft",
+      "ToMaterial": "roman_column_a_shaft"
+    },
+    {
+      "FromMaterial": "old_wood",
+      "ToMaterial": "interior_wood_a"
+    },
+    {
+      "FromMaterial": "woodsection_a",
+      "ToMaterial": "plank_b"
+    },
+    {
+      "FromMaterial": "tent_aserai_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "tent_vlandia_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_alpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "adobe_stone_wall_a_noparallax",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "adobe_wall_3_floor_connection_noalpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "arab_tavern_floor_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "arabic_wood_lattice",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "awning_arbor_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "awning_arbor_b",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "awning_arbor_big_a1",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "awning_arbor_big_a2",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "awning_arbor_c",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "bark_pine",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "bark_pine_no_anim",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "bd_cloth_1",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "bd_cloth_2",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "bd_cloth_3",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "bd_cloth_4",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "carpet_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "carpet_b",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "carpet_c",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "carpets_empire_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "carpets_new_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "castle_floor_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "castle_floor_a_nrm",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "cliff_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_blend",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_c_mud_alpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_dungeon_floor_dirt_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_gatehouse_floor",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_marble_floor_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_road_floor_a_mud",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_road_sidewalk_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_a_wood",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "empire_statue_bust_base_a_wood",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "empire_street_tents_01",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "empire_wall_a_damaged",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_wall_brick",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_a",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "empire_wall_wicker_b",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "fence_old_b",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "floor_1",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "floor_3",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "moss_wall_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "pict_floor_stone",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "plank_c",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "plank_c_np",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "plank_c_trunk",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "plank_d_np",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "plank_fine_a",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "planks_1_interior",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "planks_3",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "planks_4",
+      "ToMaterial": "interior_wood_a:1, plank_b:1"
+    },
+    {
+      "FromMaterial": "rock",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rock_1",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rock_1_plain",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rock_b_mix",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rock_cliff_b_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_bricks_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_aqueduct_leakings_wet",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_brick_alpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_column_b",
+      "ToMaterial": "roman_column_a:2, roman_column_a_shaft:1"
+    },
+    {
+      "FromMaterial": "roman_column_b_shaft",
+      "ToMaterial": "roman_column_a:2, roman_column_a_shaft:1"
+    },
+    {
+      "FromMaterial": "roman_column_base",
+      "ToMaterial": "roman_column_a:2, roman_column_a_shaft:1"
+    },
+    {
+      "FromMaterial": "roman_column_c_shaft",
+      "ToMaterial": "roman_column_a:2, roman_column_a_shaft:1"
+    },
+    {
+      "FromMaterial": "roman_column_d",
+      "ToMaterial": "roman_column_a:2, roman_column_a_shaft:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_floor",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_hippodrome_wall_brick_plaster",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "roman_roof_nrm",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "roof_normal",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "rubble_stone",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "rubble_stone_alpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14_detail",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_14_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2_rocks",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_noparallax",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_normal",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_2a_rock",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_a_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_desert_b_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_a_noalpha_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_detail",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "stone_wall_new_b_np",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_a",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_b_alpha",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "sturgia_wall_c",
+      "ToMaterial": "khuzait_brick_a:6, loam_wall:3, loam_stone_wall:3, khuzait_brick_b:3, adobe_stone_wall:1, loam_stone_wall_noparalax:1"
+    },
+    {
+      "FromMaterial": "sturgia_windmill_cloth_a",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "sturgian_carpets",
+      "ToMaterial": "khuzait_tent_a"
+    },
+    {
+      "FromMaterial": "thatched_roof_alpha",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_b_end",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_d",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "thatched_roof_d_alpha",
+      "ToMaterial": "loam_roof"
+    },
+    {
+      "FromMaterial": "vlandia_tent_cloth",
+      "ToMaterial": "khuzait_tent_a"
+    }
+  ]
+}

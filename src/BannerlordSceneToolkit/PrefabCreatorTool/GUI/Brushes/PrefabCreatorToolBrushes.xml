@@ -1,0 +1,11 @@
+<Brushes>
+  <!-- Clone of Native's Review.NameInput.Text (Modules\Native\GUI\Brushes\CharacterCreation.xml),
+       two font-size steps down (40 -> 32, same step MaterialSwapTool's own equivalent brush uses)
+       for every typeable text field in this mod's panels - the native brush was sized for
+       character creation's one big name field, not a small in-tool text box. -->
+  <Brush Name="PrefabCreatorTool.InputText" Font="FiraSansExtraCondensed-Regular" TextHorizontalAlignment="Center">
+    <Styles>
+      <Style Name="Default" FontColor="#F9EAD2FF" TextGlowColor="#000000FF" TextOutlineColor="#000000FF" TextOutlineAmount="0" TextGlowRadius="0" TextBlur="0" FontSize="32" />
+    </Styles>
+  </Brush>
+</Brushes>
