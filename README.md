@@ -7,10 +7,10 @@ Tools:
 Material swapping and recoloring with presets (replace all materials correctly across multiple
 entities with a single "Apply" click instead of manually overriding the materials on all individual
 layers yourself), recoloring tool (apply color factors to all layers), and built-in rule presets 
-which define how materials get changed. These overrides can supported two different ways to "weight" 
-them, so if you override an entire scene there can be different types of overrides at the end state 
-for the same input material (only one final rule set applies to a single target prefab, but it can
-vary across prefabs, if you use the right syntax on the rules for weighting). 
+which define how materials get changed. These rule sets can support weighted randomness, so if you
+override an entire scene there can be different types of overrides at the end state for the same
+input material (only one final rule set applies to a single target prefab, but it can vary across 
+prefabs, if you use the right syntax on the rules for weighting). 
 
 Prefab swapping and distribution tools (distribute entities into a grid, along a path, onto a surface), true 
 mirroring and rotation about a chosen point (avoids scaling negatively along an axis to mirror). 
