@@ -5,12 +5,15 @@ own scene editor (the Modding Kit / `Win64_Shipping_wEditor` build) as a single 
 
 Material swapping and recoloring with presets, palettes and per-culture generation.
 Prefab swapping and distribution (grid, along a path, onto a surface), true mirroring and
-rotation about a chosen point. Prefab creation, origin tools and a pile generator. A scene
-analyzer with battle, skirmish and siege requirement checks and one-click fixes. Automatic
-scene-file backups with retention. And a set of editor shortcuts the editor itself lacks:
-isolate, repeat last transform, numeric transform, select whole prefab, grow selection.
+rotation about a chosen point. Prefab creation, origin tools and a pile generator to scatter
+entities randomly along a surface or surrounding a point. Also contains a scene analyzer with
+battle, skirmish and siege requirement checks and one-click fixes. 
 
-Built for the Calradic Campaign event maps; usable on any scene.
+Automatic scene-file backups with retention. And a set of editor shortcuts the editor itself lacks:
+isolate (hide everything else), repeat last transform (or repeat clone+translate with Shift+R), numeric transform, 
+select whole prefab (my favorite one - Ctrl+Shift+P), grow selection.
+
+Built for Calradic Campaign event maps but usable on any scene.
 
 ![The five panels: Prefab Creator (F5), Distribution (F6), Scene Analyzer (F7), Material Swap (F8), Backups (F9)](images/panels-1.jpg)
 
@@ -125,7 +128,7 @@ of planned, deferred and retired features.
 
 Scene Analyzer checks were ported from the community **BannerlordSceneAnalyzer** PowerShell
 project; the Skirmish and editor-spawn checks come from **Gotha's BL_AddTestScene** mod.
-Harmony by Andreas Pardeike. Everything else by Fief Eviction Notice.
+Harmony by Andreas Pardeike. Everything else by Fief Eviction Notice (thanks to Claude).
 
 ## License
 
