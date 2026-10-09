@@ -19,7 +19,7 @@ entities randomly along a surface or surrounding a point. Also contains a scene 
 battle, skirmish and siege requirement checks and one-click fixes. 
 
 Automatic scene-file backups with retention. And a set of editor shortcuts the editor itself lacks:
-isolate (hide everything else), srepeat last transform (or repeat clone+translate with Shift+R similar to Blender), 
+isolate (hide everything else), repeat last transform (or repeat clone+translate with Shift+R similar to Blender), 
 numeric transform, select whole prefab (my favorite one - Ctrl+Shift+P), grow selection sphere. 
 
 Built for Calradic Campaign event maps but usable on any scene. The entirety of the Calradic Campaign #88 map
