@@ -72,7 +72,7 @@ Soft requirement:
 - [ ] **An attacker spawn area and a defender spawn area.** Use a skirmish start prefab or place
       spawns individually, but do not mix attacker and defender spawns in the same area; they belong
       in separate regions of the map. If you use the skirmish spawn prefab, try toggling the
-      "snap to terrain" setting.
+      "snap to terrain" setting (not required, just be aware you can change that).
 - [ ] **Flags A, B and C** in the playable area.
 
 ## Testing (any map type)
