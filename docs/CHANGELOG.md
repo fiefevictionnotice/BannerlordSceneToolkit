@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-08 - Mapping guide (docs only)
+
+- New `docs/MAPPING-GUIDE.md`: the MP scene checklist (spawns, borders, flags, envmap,
+  ladders, destructibles, broken prefabs), Native scenes worth studying, testing tags, QA passes
+  and heightmap workflows, from FiefEvictionNotice's mapping notes. Linked from the GitHub README
+  and added to `Sync-GitHubExport.ps1`'s doc list. The GitHub README's web edits (2026-10-04/05)
+  were pulled back into `docs/github/README.md` first so the sync keeps them.
+
 ## 2026-10-04 - Ctrl+Shift+0 centres every open panel
 
 - New `Core/PanelRecenter` (generation counter). The hotkey, handled in MaterialSwapTool's

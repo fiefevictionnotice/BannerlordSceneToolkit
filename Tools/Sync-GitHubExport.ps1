@@ -10,7 +10,7 @@
 # WHAT GOES IN
 #   src\BannerlordSceneToolkit\**   minus bin\, obj\, *.backup-*, *.bak, *.bak2
 #   docs\                           CHANGELOG, KNOWN-ISSUES, ROADMAP, TROUBLESHOOTING,
-#                                   TUTORIAL-TRANSCRIPT (the working notes stay home)
+#                                   TUTORIAL-TRANSCRIPT, MAPPING-GUIDE (the working notes stay home)
 #   Tools\*.ps1                     including this script
 #   release\                        the shipped README.txt and tool_toggles.txt
 #   README.md, LICENSE.md, images\  from docs\github\ (the GitHub-facing copies)
@@ -61,7 +61,7 @@ Mirror (Join-Path $repo 'src\BannerlordSceneToolkit') (Join-Path $ExportDir 'src
 # Docs - curated list, not the folder
 $docsOut = Join-Path $ExportDir 'docs'
 New-Item -ItemType Directory -Force $docsOut | Out-Null
-$keepDocs = @('CHANGELOG.md', 'KNOWN-ISSUES.md', 'ROADMAP.md', 'TROUBLESHOOTING.md', 'TUTORIAL-TRANSCRIPT.md')
+$keepDocs = @('CHANGELOG.md', 'KNOWN-ISSUES.md', 'MAPPING-GUIDE.md', 'ROADMAP.md', 'TROUBLESHOOTING.md', 'TUTORIAL-TRANSCRIPT.md')
 foreach ($d in $keepDocs) { CopyFile (Join-Path $repo "docs\$d") (Join-Path $docsOut $d) }
 Get-ChildItem $docsOut -File | Where-Object { $keepDocs -notcontains $_.Name } | ForEach-Object {
     if ($PSCmdlet.ShouldProcess($_.FullName, 'remove stale doc')) { Remove-Item $_.FullName }

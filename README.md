@@ -26,6 +26,9 @@ Built for Calradic Campaign event maps but usable on any scene. The entirety of 
 was made with heavy use of this tool, it has been used successfully on a real map. However, you use this tool
 at your own risk; no warranty is expressly granted or implied.
 
+New to multiplayer mapping? [docs/MAPPING-GUIDE.md](docs/MAPPING-GUIDE.md) has the MP scene
+checklist (spawns, borders, flags, envmap, QA passes), Native scenes worth studying, and heightmap workflows.
+
 ![The five panels: Prefab Creator (F5), Distribution (F6), Scene Analyzer (F7), Material Swap (F8), Backups (F9)](images/panels-1.jpg)
 
 ![Material Swap Tool applying an Empire-to-Aserai preset to a gatehouse](images/panels-2.jpg)
