@@ -1,7 +1,7 @@
 # Bannerlord MP mapping guide
 
 A checklist and reference list for building multiplayer scenes in the Bannerlord Modding Kit, from
-the notes FiefEvictionNotice [BLCC] keeps for Calradic Campaign mappers. It is about scene
+the notes I keeps for new Calradic Campaign mappers. It is about scene
 requirements in general, not about this toolkit; where the toolkit can check or fix something for
 you, that is noted.
 
