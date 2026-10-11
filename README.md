@@ -150,7 +150,7 @@ Every finding credits its author and links back to the original message.
 ## Related projects
 
 - **[blenderlord-reference-materials](https://github.com/fiefevictionnotice/blenderlord-reference-materials):** Blender 4.4 reference files rebuilt from Bannerlord's own scene and prefab data (buildings, physics shapes, materials, polycount tables), plus the human skeleton and body reference meshes.
-- **[docs.bannerlordmodding.lt](https://docs.bannerlordmodding.lt/):** the community modding wiki.
+- **[docs.bannerlordmodding.lt](https://docs.bannerlordmodding.lt/):** the community modding wiki. I have no affiliation with this website, but I still want to point people to it as a useful resource.
 
 ## Credits
 
