@@ -1,7 +1,7 @@
 # Bannerlord MP mapping guide
 
 A checklist and reference list for building multiplayer scenes in the Bannerlord Modding Kit, from
-the notes I keeps for new Calradic Campaign mappers. It is about scene
+the notes FiefEvictionNotice [BLCC] keeps for Calradic Campaign mappers. It is about scene
 requirements in general, not about this toolkit; where the toolkit can check or fix something for
 you, that is noted.
 
@@ -72,7 +72,7 @@ Soft requirement:
 - [ ] **An attacker spawn area and a defender spawn area.** Use a skirmish start prefab or place
       spawns individually, but do not mix attacker and defender spawns in the same area; they belong
       in separate regions of the map. If you use the skirmish spawn prefab, try toggling the
-      "snap to terrain" setting (not required, just be aware you can change that).
+      "snap to terrain" setting.
 - [ ] **Flags A, B and C** in the playable area.
 
 ## Testing (any map type)

@@ -119,6 +119,7 @@ src/BannerlordSceneToolkit/   The module: one csproj, Core/ plus three tool fold
 docs/                         CHANGELOG, KNOWN-ISSUES, ROADMAP, TROUBLESHOOTING, tutorial transcript
 Tools/                        Packaging, standalone scene backup, export sync
 release/                      The README and tool_toggles.txt shipped in the zip
+guides/                       Community 3D art and scene guides, with sources
 ```
 
 ## Runtime data
@@ -137,6 +138,19 @@ around (scale never carries over an instantiate-based swap; copies of unsaved pr
 click-selectable until the scene is saved; runtime physics changes need a reload) and the
 items awaiting live verification. [docs/ROADMAP.md](docs/ROADMAP.md) is the canonical list
 of planned, deferred and retired features.
+
+## Guides
+
+[guides/](guides/README.md) holds 16 guides compiled from six years of the #bl-3d-art and #bl-scenes channels of the Mount & Blade Modding Discord:
+- 3D art: materials, meshes and LODs, rigged armour, weapons, cloth and physics, characters.
+- Scenes: setup and files, terrain and flora, navmesh, sieges, entities and prefabs, lighting, multiplayer, the campaign map, and troubleshooting.
+
+Every finding credits its author and links back to the original message.
+
+## Related projects
+
+- **[blenderlord-reference-materials](https://github.com/fiefevictionnotice/blenderlord-reference-materials):** Blender 4.4 reference files rebuilt from Bannerlord's own scene and prefab data (buildings, physics shapes, materials, polycount tables), plus the human skeleton and body reference meshes.
+- **[docs.bannerlordmodding.lt](https://docs.bannerlordmodding.lt/):** the community modding wiki.
 
 ## Credits
 

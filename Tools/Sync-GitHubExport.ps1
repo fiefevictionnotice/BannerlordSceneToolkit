@@ -14,6 +14,7 @@
 #   Tools\*.ps1                     including this script
 #   release\                        the shipped README.txt and tool_toggles.txt
 #   README.md, LICENSE.md, images\  from docs\github\ (the GitHub-facing copies)
+#   guides\                         from docs\github\guides\ (community 3D/scene guides + sources)
 #
 # WHAT NEVER GOES IN
 #   _private-ideas\, Distribution\ (zips), bin\obj\, backup copies, session logs, and
@@ -79,6 +80,7 @@ CopyFile (Join-Path $repo 'docs\github\README.md')  (Join-Path $ExportDir 'READM
 CopyFile (Join-Path $repo 'docs\github\LICENSE.md') (Join-Path $ExportDir 'LICENSE.md')
 CopyFile (Join-Path $repo 'docs\github\.gitignore') (Join-Path $ExportDir '.gitignore')
 Mirror (Join-Path $repo 'docs\github\images') (Join-Path $ExportDir 'images')
+Mirror (Join-Path $repo 'docs\github\guides') (Join-Path $ExportDir 'guides') -xf @('*.zip')
 
 # Safety net: nothing private may have slipped through
 $leaks = Get-ChildItem $ExportDir -Recurse -Force -File | Where-Object {
