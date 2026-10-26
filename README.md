@@ -26,7 +26,7 @@ Built for Calradic Campaign event maps but usable on any scene. The entirety of 
 was made with heavy use of this tool, it has been used successfully on a real map. However, you use this tool
 at your own risk; no warranty is expressly granted or implied.
 
-New to multiplayer mapping? [docs/MAPPING-GUIDE.md](docs/MAPPING-GUIDE.md) has the MP scene
+New to multiplayer mapping? [docs/misc/MAPPING-GUIDE.md](docs/misc/MAPPING-GUIDE.md) has the MP scene
 checklist (spawns, borders, flags, envmap, QA passes), Native scenes worth studying, and heightmap workflows.
 
 ![The five panels: Prefab Creator (F5), Distribution (F6), Scene Analyzer (F7), Material Swap (F8), Backups (F9)](images/panels-1.jpg)
@@ -42,8 +42,8 @@ A full walkthrough of every panel and button (2 h 31 m, chaptered):
 https://www.youtube.com/watch?v=f1uzZ-qQm3c
 
 The video shows the v0.8.0 build (2026-08-23). Everything added since is in
-[docs/CHANGELOG.md](docs/CHANGELOG.md); a transcript with chapter headings is in
-[docs/TUTORIAL-TRANSCRIPT.md](docs/TUTORIAL-TRANSCRIPT.md).
+[docs/scene-toolkit/CHANGELOG.md](docs/scene-toolkit/CHANGELOG.md); a transcript with chapter headings is in
+[docs/scene-toolkit/TUTORIAL-TRANSCRIPT.md](docs/scene-toolkit/TUTORIAL-TRANSCRIPT.md).
 
 ## Hotkeys
 
@@ -70,6 +70,12 @@ Optional shortcuts, all switchable from F9 > Shortcuts:
 
 Most panels have a **Documentation** button. That in-editor guide is the full feature
 reference and is kept in sync with the code (source: `MaterialSwapTool/GUI/DocumentationVM.cs`).
+
+The same in-editor text is on GitHub in [docs/scene-toolkit/in-editor/](docs/scene-toolkit/in-editor/USER-GUIDE.md),
+regenerated from the code on every update. To search all the documentation at once, or to
+ask an AI about the toolkit, download the single file
+[SCENE-TOOLKIT-DOCS-ALL-IN-ONE.md](docs/scene-toolkit/SCENE-TOOLKIT-DOCS-ALL-IN-ONE.md). The
+[Scene Toolkit docs index](docs/scene-toolkit/README.md) lists everything.
 
 ## Installing
 
@@ -128,7 +134,9 @@ src/BannerlordSceneToolkit/   The module: one csproj, Core/ plus three tool fold
   PrefabSwapperTool/          F6
   PrefabCreatorTool/          F5
   _Module/SubModule.xml       Module manifest
-docs/                         CHANGELOG, KNOWN-ISSUES, ROADMAP, TROUBLESHOOTING, tutorial transcript
+docs/scene-toolkit/           The toolkit's docs: in-editor guide (exported), changelog, known issues,
+                              roadmap, troubleshooting, tutorial transcript, ALL-IN-ONE file
+docs/misc/                    Other docs: MP mapping guide
 Tools/                        Packaging, standalone scene backup, export sync
 release/                      The README and tool_toggles.txt shipped in the zip
 guides/                       Community 3D art and scene guides, with sources
@@ -145,10 +153,10 @@ backups.
 
 ## Known issues and roadmap
 
-[docs/KNOWN-ISSUES.md](docs/KNOWN-ISSUES.md) lists engine limitations the toolkit works
+[docs/scene-toolkit/KNOWN-ISSUES.md](docs/scene-toolkit/KNOWN-ISSUES.md) lists engine limitations the toolkit works
 around (scale never carries over an instantiate-based swap; copies of unsaved prefabs are not
 click-selectable until the scene is saved; runtime physics changes need a reload) and the
-items awaiting live verification. [docs/ROADMAP.md](docs/ROADMAP.md) is the canonical list
+items awaiting live verification. [docs/scene-toolkit/ROADMAP.md](docs/scene-toolkit/ROADMAP.md) is the canonical list
 of planned, deferred and retired features.
 
 ## Guides

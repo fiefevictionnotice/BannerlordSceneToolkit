@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-10-26 - In-editor docs on GitHub; docs split into scene-toolkit / misc (docs only)
+
+- New `Tools/Export-InEditorDocs.ps1` reads `DocumentationVM.cs` (no build) and writes
+  `docs/in-editor/USER-GUIDE.md` (40 topics) and `TECHNICAL-DOCS.md` (15), in on-screen
+  order. It throws if a topic's constant can't be parsed rather than skipping it.
+  `Sync-GitHubExport.ps1` runs it first, so GitHub always matches the code.
+- GitHub docs layout: `docs/scene-toolkit/` (in-editor, not-yet-in-editor, TROUBLESHOOTING,
+  KNOWN-ISSUES, ROADMAP, TUTORIAL-TRANSCRIPT, CHANGELOG, and a generated
+  `SCENE-TOOLKIT-DOCS-ALL-IN-ONE.md` for Ctrl+F or an AI upload) and `docs/misc/`
+  (MAPPING-GUIDE). Index pages from `docs/github/docs/`. The working folder's own `docs/`
+  layout is unchanged; only the export is regrouped. README links updated. `guides/` stays
+  at the top level so links already shared to it keep working.
+- Audit of the in-editor docs against the features since v0.8.0: native cursor, Ctrl+Alt+0
+  recentre, the Grow/scaling key split, Isolate persistence and the Backups folder size are
+  covered. Panel SIZE (Ctrl+Minus/Equals/0, 50-150%, PanelScales.json) and panel
+  dragging / saved positions are NOT - drafted in
+  `docs/not-yet-in-editor/PANEL-SIZE-AND-POSITION.md`, deliberately not built into
+  `DocumentationVM.cs` yet.
+- ROADMAP: "Search all documentation at once (Ctrl+F)" and "Build the pending docs into the
+  Documentation buttons", both TO BE BUILT. No release; v0.8.1 is unchanged.
+
 ## v0.8.1 - 2026-10-26 (first GitHub release)
 
 - Version bumped to v0.8.1 (`_Module/SubModule.xml`). Same code as the 2026-10-04 deploy:
