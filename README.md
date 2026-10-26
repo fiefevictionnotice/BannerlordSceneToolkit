@@ -84,6 +84,18 @@ is bundled; nothing else to install.
 3. Enable **Bannerlord Scene Toolkit** in the launcher's mod list, start the editor, and press
    F5 through F9.
 
+**If the toolkit doesn't load** (no panels, or the launcher reports an error loading
+`BannerlordSceneToolkit.dll`), Windows may have blocked the DLLs because they came from a
+downloaded zip. Right-click each `.dll` in `Modules\BannerlordSceneToolkit\bin\Win64_Shipping_wEditor\`,
+choose **Properties**, tick **Unblock** and click OK. Or unblock the whole folder in one go
+from PowerShell:
+
+```
+Get-ChildItem "...\Mount & Blade II Bannerlord\Modules\BannerlordSceneToolkit" -Recurse | Unblock-File
+```
+
+Unblocking the zip itself (Properties > Unblock) before extracting it avoids this.
+
 `release/README.txt` is the same install guide as shipped in the zip, with the panel-size and
 panel-position notes.
 

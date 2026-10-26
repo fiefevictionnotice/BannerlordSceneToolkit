@@ -51,6 +51,15 @@ INSTALLATION
         PrefabSwapperTool=True, PrefabCreatorTool=True."
    to confirm the toggles took effect.
 
+If the toolkit doesn't load (no panels, or the launcher reports an error
+loading BannerlordSceneToolkit.dll), Windows may have blocked the DLLs because
+they came from a downloaded zip. Right-click each .dll in
+    Modules\BannerlordSceneToolkit\bin\Win64_Shipping_wEditor\
+choose Properties, tick Unblock and click OK. Or unblock the whole folder in
+PowerShell:
+    Get-ChildItem "...\Mount & Blade II Bannerlord\Modules\BannerlordSceneToolkit" -Recurse | Unblock-File
+Unblocking the zip itself (Properties > Unblock) before extracting avoids this.
+
 
 BACKUPS - READ THIS BEFORE USING THE DESTRUCTIVE TOOLS
 Several operations cannot be undone from inside the toolkit: Delete Interior
