@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.8.1 - 2026-10-26 (first GitHub release)
+
+- Version bumped to v0.8.1 (`_Module/SubModule.xml`). Same code as the 2026-10-04 deploy:
+  native cursor, global panel scaling, Grow/scaling key split, Ctrl+Alt+0 recentre, Isolate
+  surviving save/reload/test mode, Backups folder size on F9, User Guide pass from the video.
+- Released as GitHub Release `v0.8.1` with `SceneToolkit-v0.8.1-20261026-1811.zip`. The
+  repo had no Release before, although the README said to download one.
+- The shipped `LICENSE.txt` is now `docs/github/LICENSE.md` (CC BY-NC 4.0 + TaleWorlds-competition
+  permission) instead of the old custom license text. New `WHATS-NEW-v0.8.1.txt` in the zip.
+- `Package-SceneToolkit.ps1` now leaves out loose `*.png` files in the module folder (two 9 MB
+  screenshots, one showing a Windows user name, would have shipped) and zips
+  `WHATS-NEW-<version>.txt` when there is one.
+- Built and deployed after the editor was closed, then packaged with the fixed script.
+- README install step now links the Releases page.
+
 ## 2026-10-08 - Mapping guide (docs only)
 
 - New `docs/MAPPING-GUIDE.md`: the MP scene checklist (spawns, borders, flags, envmap,

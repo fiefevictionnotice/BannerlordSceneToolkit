@@ -77,7 +77,7 @@ Requirements: Mount & Blade II: Bannerlord with the **Modding Kit** DLC installe
 toolkit runs in the editor build, not the game client). Tested against game v1.4.8. Harmony
 is bundled; nothing else to install.
 
-1. Download the latest release zip and copy the `BannerlordSceneToolkit` folder into
+1. Download the latest release zip from [Releases](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases/latest) and copy the `BannerlordSceneToolkit` folder into
    `...\Mount & Blade II Bannerlord\Modules\`.
 2. Copy `tool_toggles.txt` into `Documents\Mount and Blade II Bannerlord\BannerlordSceneToolkit\`
    (create the folder). Optional: the module writes a default on first run.

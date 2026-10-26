@@ -11,7 +11,7 @@
 # What it does, mirroring the manual steps that used to live only in the README:
 #   1. Copies the DEPLOYED module (Modules\BannerlordSceneToolkit in the game install)
 #      into Distribution\SceneToolkit\BannerlordSceneToolkit, excluding SceneObj\,
-#      SceneEditData\ and *.bak - working data, not part of the mod.
+#      SceneEditData\, *.bak and loose *.png (screenshots) - not part of the mod.
 #   2. Warns if the deployed DLL looks older than the newest source file, because a
 #      stale deploy is exactly how a package silently ships last week's build. It
 #      warns rather than builds: building deploys into the game folder, and that must
@@ -54,8 +54,8 @@ if ($null -eq $dll) {
 
 # --- Stage ------------------------------------------------------------------------------
 if (Test-Path $StageDir) { Remove-Item $StageDir -Recurse -Force }
-Write-Host "Staging $ModuleDir -> $StageDir (excluding SceneObj, SceneEditData, *.bak)..."
-robocopy $ModuleDir $StageDir /E /XD SceneObj SceneEditData /XF *.bak /NFL /NDL /NJH /NJS | Out-Null
+Write-Host "Staging $ModuleDir -> $StageDir (excluding SceneObj, SceneEditData, *.bak, *.png)..."
+robocopy $ModuleDir $StageDir /E /XD SceneObj SceneEditData /XF *.bak *.png /NFL /NDL /NJH /NJS | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
 
 # --- Version + zip ----------------------------------------------------------------------
@@ -77,6 +77,7 @@ $zipPath = Join-Path (Join-Path $RepoRoot "Distribution") $zipName
 if (Test-Path $zipPath) { Remove-Item $zipPath }
 
 Write-Host "Zipping -> $zipPath"
-Compress-Archive -Path $StageDir, (Join-Path $DistDir "README.txt"), (Join-Path $DistDir "LICENSE.txt"), (Join-Path $DistDir "tool_toggles.txt") -DestinationPath $zipPath
+$extra = @("README.txt", "LICENSE.txt", "tool_toggles.txt", "WHATS-NEW-$version.txt") | % { Join-Path $DistDir $_ } | ? { Test-Path $_ }
+Compress-Archive -Path (@($StageDir) + $extra) -DestinationPath $zipPath
 
 Write-Host "Done: $zipPath (version $version)"
