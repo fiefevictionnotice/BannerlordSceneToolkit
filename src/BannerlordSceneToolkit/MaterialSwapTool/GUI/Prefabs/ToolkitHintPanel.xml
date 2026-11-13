@@ -1,0 +1,26 @@
+<Prefab>
+  <Window>
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" IsEnabled="false" DoNotAcceptEvents="true">
+      <Children>
+        <!-- The one shared hover tooltip (Core/ToolkitHints.cs). Click-through on every node:
+             IsEnabled=false and DoNotAcceptEvents so it can never eat a click meant for a panel
+             or the viewport. Positioned from code (PositionXOffset / PositionYOffset).
+
+             SIZING (fixed 2026-11-12 after the first live test filled the whole screen): the
+             backgrounds are sprites ON the two CoverChildren containers, never StretchToParent
+             children. A CoverChildren widget with a StretchToParent child takes that child's
+             size from ITS parent, which here is the full-screen root. The only thing that gives
+             the box a size is the text: fixed width, height from its own content. -->
+        <Widget Id="HintBox" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Left" VerticalAlignment="Top" Sprite="BlankWhiteSquare_9" Color="#B89B62FF" IsVisible="@IsVisible" IsEnabled="false" DoNotAcceptEvents="true">
+          <Children>
+            <Widget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" MarginLeft="2" MarginRight="2" MarginTop="2" MarginBottom="2" Sprite="BlankWhiteSquare_9" Color="#141210FF" IsEnabled="false" DoNotAcceptEvents="true">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="460" HeightSizePolicy="CoverChildren" MarginLeft="12" MarginRight="12" MarginTop="8" MarginBottom="10" Text="@Text" Brush="MaterialSwapTool.DiffLineText" Brush.FontSize="22" IsEnabled="false" DoNotAcceptEvents="true" />
+              </Children>
+            </Widget>
+          </Children>
+        </Widget>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

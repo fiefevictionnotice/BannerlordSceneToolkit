@@ -21,6 +21,9 @@ The engineering notes behind the **Technical Docs** button on F9: confirmed bugs
 - [Weighted rules - how the roll granularity evolved](#weighted-rules---how-the-roll-granularity-evolved)
 - [Runtime-created entities - stale editor state](#runtime-created-entities---stale-editor-state)
 - [Misc: Culture Editor lag, palette rows, Flora API limits](#misc-culture-editor-lag-palette-rows-flora-api-limits)
+- [Tooltip layer - ToolkitHints and the Hint widgets](#tooltip-layer---toolkithints-and-the-hint-widgets)
+- [Unsaved-change guard - UnsavedGuard](#unsaved-change-guard---unsavedguard)
+- [Crash ledger - NativeProbe and the Statistics scan](#crash-ledger---nativeprobe-and-the-statistics-scan)
 
 ## About these notes
 
@@ -47,6 +50,8 @@ THE 2026-08-19 COLOR DISCOVERIES, in order:
 4. Mesh.Color was confirmed as a real live per-INDIVIDUAL-slot tint via a test scene (european_city_house_d3) where exactly one LOD5 submesh carried a non-white Color while Factor1 and FactorColor were both white. Continuous Recolor and Fix Color Mismatches use this same mechanism.
 
 LATER (2026-08-23): unparseable typed colors (e.g. '#ffwe193') used to be skipped silently, indistinguishable from 'broken' - they now warn on screen and in the log. MST undo used to restore an entity-wide entry via SetFactorColor(old), which (per discovery 2) flattened per-layer colors the batch never touched; entries now snapshot every mesh color before the forward SetFactorColor and undo restores them individually.
+
+MESH.COLOR IS STORED LINEAR (2026-11-12). Typed colors came out lighter and less saturated than the hex, always by the same curve (#BAFFAF -\> #DDFFD7, #802020 -\> #BB6363). The editor's own color field converts the typed sRGB hex to linear first; the toolkit wrote it raw. ColorHex.SrgbToLinear / LinearToSrgb (gamma 2.2, alpha untouched) now convert at the typed-input write sites: Continuous Recolor palette and single-color apply, the Material Swap rule color factor, and the seeded hex of Get Input from Selection. Unchanged on purpose: undo/redo logs, the LOD color fix, Fill In Overrides and color presets copy stored values mesh-to-mesh, so they stay raw and round-trip exactly. The entity-wide color factor (SetFactorColor) is not converted; whether it has the same issue is untested.
 
 ## Entity-wide color - why blank means reset
 
@@ -80,6 +85,10 @@ PER-SCENE HISTORY: the swap log is one shared file across all scenes. A batch fr
 
 MIRROR'S RESIDUAL LIMITATION: a hand-built prefab-LESS piece mirrored an ODD number of times renders inside-out until the scene is saved and reloaded - the saved data is correct; the live winding cache is not reachable from managed code.
 
+PATH ROTATION ON GAME v1.5.7 (2026-11-11). After the v1.5.7 update Path.GetFrameForDistance returns the position but an identity rotation, so Distribute along path placed every instance world-aligned. PrefabDistributor.PathFrameAt now samples two positions 5 cm apart, flattens the direction to the ground plane and builds the yaw-only frame the engine used to return. All path sampling goes through it.
+
+MESH BENDER ON SWAPS (2026-11-12). Instantiate only brings the new prefab's own definition and the live-reference path discards everything from the old entity, so every swap used to drop the native mesh_bender script. It is carried now with GameEntity.CopyScriptComponentFromAnotherEntity, and the two float values with Get/SetNativeScriptComponentVariable; each carry logs '\[MeshBender\]' with the values read back from the new entity.
+
 ## Numeric transform - watcher internals & the two-axis saga
 
 HOW THE TAKEOVER KNOWS ANYTHING: the editor exposes no manipulation state at all - no rotate flag, no gizmo axis. The ManipulationWatcher polls the selected entities' frames and looks for the SHAPE of an operation: change followed by stillness. That covers gizmo drags, G/Z modal drags and typed transforms alike, and yields the frames from BEFORE the drag - which is what lets a typed number replace the drag. Rotation is checked before movement (rotating a group also moves each origin); the settle never fires while the mouse button is held (a pause mid-drag used to split one drag into two recorded operations); duplicates are recognised by the selection switching to a NEW entity while the original sits untouched.
@@ -99,6 +108,8 @@ DELETE PHYSICS took five rounds because each layer of the engine hides the previ
 5. File surgery: the pieces are tagged pile_nophys at generation; the stripper removes their \<physics\> nodes from the saved scene.xscene (timestamped .bak first). An editor save from a stale session re-emits the nodes - confirmed live by matching timestamps - so the stripper also re-runs automatically ~2s after every detected save. Collision state in a LIVE session only updates on load; judge results after a reload.
 
 Every claim above was verified against the saved xscene, not inferred.
+
+REMOVE PHYSICS OUTSIDE BORDER (F7) was still the round-1 approach until 2026-11-12: it skipped every entity whose own BodyFlag read None (every placed prefab root) and called RemovePhysics, which never persists. It now uses round 5: each out-of-border entity is tagged oob_nophys, live prefab links among them are broken first (a prefab="X" entity has no children in the file, so there would be nothing to strip), and the stripper removes the \<physics\> nodes of the tagged entity AND its whole subtree after each save. The stripper covers subtrees for pile_nophys too. This rework is not covered by the 'verified' line above.
 
 ## Live-reference swaps - CopyFrom's tree behaviour
 
@@ -146,3 +157,43 @@ RECOLOR PALETTES: category rows used to share ONE color for every armed category
 FLORA LAYERS: the live scripting API exposes exactly two read-only flora counters (GetFloraInstanceCount, GetFloraRendererTextureUsage) and nothing else - no enumerate, no read-where-painted, no write. Confirmed by reflecting the shipped engine DLL. Editing terrain flora layers from a mod is an engine-side impossibility, which is why Flora Swap only ever handled placed flora PROPS and is retired.
 
 CCMODULE_SP STARTUP: its wEditor bin was missing (DLL popups - fixed by populating it); the RGL texture warnings are unfixable from outside - the sheets exist in the module's pack0.tpac but the editor doesn't mount them and ignores loose GUI PNG paths (extraction was tried; correct layout, still not consulted). An external watchdog dismisses those popups at launch instead.
+
+## Tooltip layer - ToolkitHints and the Hint widgets
+
+THE SHARED TOOLTIP LAYER (2026-11-12, Core/ToolkitHints.cs). A hint is declared in the panel XML as a hidden text child with Id="Hint" inside the widget it belongs to - normally a ButtonWidget, or the wrapper Widget of a text field:  
+  \<TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="..." /\>  
+Nothing else is needed: no view-model property, no command, no per-panel code. Adding a hint to a new button is one XML line.
+
+HOW IT IS SHOWN. Once per frame ToolkitHints looks at every Gauntlet layer on the top screen, asks its event manager which widget the mouse is over, and walks up at most four parents looking for a 'Hint' child. After a dwell of 0.45 s the text is shown in ONE shared layer (ToolkitHintPanel.xml). It is ticked from all three editor tick patches, so hints keep working whichever tools are toggled off.
+
+That layer is not a focus layer and every node in it is DoNotAcceptEvents, like the last-operation readout: it is drawn over the viewport and must never take a click or a keystroke. A mouse press hides the hint and keeps it hidden for that widget until the mouse moves to another one. The box flips left / up near the right and bottom edges and follows the shared panel scale.
+
+SWITCH: HintsEnabled in shortcut_settings.json (default on), shown as 'Tooltips: ON/OFF' on F9 -\> Shortcuts.
+
+SAFETY NET. The first live build laid the box out at full-screen size, so every tooltip covered the editor (two background sprites were StretchToParent children of a CoverChildren widget and took their size from the full-screen root). The sprites now sit on the CoverChildren containers. In addition, a box that measures more than 60% of the screen in either direction switches hints off for the session and logs a '\[Hints\]' line.
+
+WHY NOT GAUNTLET'S OWN HintWidget: it relies on the game's global information layer, which is not known to exist in the editor screen, and needs a view-model property per button.
+
+## Unsaved-change guard - UnsavedGuard
+
+Core/UnsavedGuard.cs (2026-11-12) is the 'Discard changes / Keep editing' question of the three row editors: Interior Whitelist, Category Editor, Culture Editor. Those panels only write on Save, and Close / Esc used to discard edits without a word.
+
+DETECTION compares a signature of the rows with the signature taken when the rows were last loaded or saved (HasUnsavedChanges on each view model). No setter has to report a change, so none can be missed.
+
+ONLY THE USER'S OWN CLOSE BUTTON AND ESC GO THROUGH IT. Forced closes (parent panel closing, scene switch) still close at once - asking a question during a teardown is worse than losing an edit. A second Esc while the question is up is ignored. If the question cannot be shown, the panel closes and a '\[UnsavedGuard\]' warning is logged, so a failure never traps the user in a panel.
+
+An inquiry has two buttons, so the question is 'discard?' and the safe answer keeps the panel open. A 'save and close' button was left out on purpose: a save that fails would then also close the panel.
+
+RELATED: F7 Delete Interiors checks InteriorWhitelistLayer.HasUnsavedChanges and refuses while it is true. The delete acts on the SAVED whitelist; with the panel edited but not saved, what is on screen there protects nothing.
+
+## Crash ledger - NativeProbe and the Statistics scan
+
+Core/NativeProbe.cs (2026-11-12) is a crash ledger for engine calls that have not yet been proven safe in the editor. A native crash is not a managed exception: try/catch never sees it and nothing is logged. The first live run of the F7 Statistics scan took the editor down that way, with half a dozen new engine calls in one loop and no way to tell which one did it.
+
+HOW IT WORKS. Each group of unproven calls runs inside NativeProbe.Run(name, ...). Before it starts, 'trying|name' is appended to the ledger and flushed to disk; when it returns, 'ok|name' is appended. If the editor dies in between, the file still ends on 'trying' for that name. The next time the toolkit loads, it reads that as 'this call crashed the editor', appends 'crashed|name', and Run() skips that name from then on. So a bad call costs ONE crash, names itself in the file, and the feature keeps working without it. A managed exception is not a crash: it is recorded as survived and rethrown.
+
+THE LEDGER is MaterialSwapTool\\native_probe_ledger.txt, one 'state|name|time' line per event, read once per editor process; the last line for a name wins. Deleting the file retries everything. To retry one name, delete all of its lines - removing only the 'crashed' line leaves the 'trying' line last, which reads as a crash again.
+
+THE STATISTICS SCAN runs in passes for this reason. Pass 1 uses only long-proven calls (live prefab name, mesh component count). Each newer call gets its own pass under the ledger: Scene.RootEntityCount, the baked-copy name match (GameEntity.PrefabExists), the component counts for cloth, particles, decals and lights, the script count, the light getters, and the mesh-name + Mesh.GetFaceCount pass of the Heaviest Meshes tab. A skipped pass shows as 'NOT COUNTED' in the panel.
+
+WHAT IT FOUND: GameEntity.GetOldPrefabName(). The ledger ended on 'trying' for that call on the second crash. It is no longer called anywhere in the statistics code and must not be called from this toolkit: it takes the editor down natively. Baked copies are therefore named from their entity name instead - the engine is asked whether a prefab of that name exists, and if not one _2 / _3 / _mst style suffix is stripped and it is asked again (up to four steps, cached per distinct name).

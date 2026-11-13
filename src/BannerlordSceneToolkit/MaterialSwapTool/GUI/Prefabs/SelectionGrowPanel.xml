@@ -36,17 +36,17 @@
                      font, and a lone "+" or "-" drawn in it fills the whole button - which is
                      what made this panel read as a big blue blob rather than a control. -->
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteShrink" MarginRight="6">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Shrink" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Shrink" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reduces the radius by 1 unit and updates the selection live. The radius is always measured from the selection you started with. Keys: Minus or Down; hold Shift for 5, Ctrl for 0.25." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteGrow" MarginRight="6">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Grow" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Grow" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Increases the radius by 1 unit and updates the selection live: entities whose origin is within the radius of the original selection are added. Keys: Plus or Up; hold Shift for 5, Ctrl for 0.25." /></Children>
                 </ButtonWidget>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteCommit" MarginRight="6">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Keeps the grown selection and closes the panel. Selection only, nothing in the scene changes. Hotkey: Enter." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteCancel">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Cancel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Cancel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Restores the selection you started with and closes the panel. Hotkey: Esc." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>

@@ -51,8 +51,8 @@ The video shows the v0.8.0 build (2026-08-23). Everything added since is in
 |-----|-------|
 | F5 | Prefab Creator: new prefab, origin tools, pile generator, prefab swapper and swap sets |
 | F6 | Distribution: in grid, along path, onto surface; mirror; rotate |
-| F7 | Scene Analyzer: full scan, battle / skirmish / siege checks, fixes, tagging tools |
-| F8 | Material Swap: rules, presets, infer from an entity, continuous recolor, culture generator |
+| F7 | Scene Analyzer: full scan, battle / skirmish / siege checks, fixes, tagging tools, scene diff, statistics, light list |
+| F8 | Material Swap: rules, presets, infer from an entity, continuous recolor, culture generator, mesh blend check |
 | F9 | Backups, notifications, keyboard shortcut switches, documentation |
 
 Optional shortcuts, all switchable from F9 > Shortcuts:
@@ -80,10 +80,26 @@ ask an AI about the toolkit, download the single file
 ## Installing
 
 Requirements: Mount & Blade II: Bannerlord with the **Modding Kit** DLC installed (the
-toolkit runs in the editor build, not the game client). Tested against game v1.4.8. Harmony
-is bundled; nothing else to install.
+toolkit runs in the editor build, not the game client). Harmony is bundled; nothing else to
+install.
 
-1. Download the latest release zip from [Releases](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases/latest) and copy the `BannerlordSceneToolkit` folder into
+### Which release for which game version
+
+Pick the release that matches your Bannerlord / Modding Kit version. The Modding Kit always
+has the same version number as the game.
+
+| Toolkit release | Bannerlord / Modding Kit version | Notes |
+|-----------------|----------------------------------|-------|
+| [v0.9.0](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases/tag/v0.9.0) (latest) | v1.5.7 | Built and tested against v1.5.7. Not tried on v1.4.8. |
+| [v0.8.1](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases/tag/v0.8.1) | v1.4.8 | On v1.5.7, Distribute along path places every copy without rotation. Use v0.9.0 there. |
+
+All releases: [Releases page](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases).
+To see your game version, look at the bottom of the launcher, or open
+`bin\Win64_Shipping_Client\Version.xml` in the game folder.
+
+### Steps
+
+1. Download the release zip for your game version (table above; the newest is at [Releases](https://github.com/fiefevictionnotice/BannerlordSceneToolkit/releases/latest)) and copy the `BannerlordSceneToolkit` folder into
    `...\Mount & Blade II Bannerlord\Modules\`.
 2. Copy `tool_toggles.txt` into `Documents\Mount and Blade II Bannerlord\BannerlordSceneToolkit\`
    (create the folder). Optional: the module writes a default on first run.

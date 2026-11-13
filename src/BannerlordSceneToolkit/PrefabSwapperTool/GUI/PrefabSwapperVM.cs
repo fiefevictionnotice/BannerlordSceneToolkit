@@ -141,8 +141,22 @@ namespace PrefabSwapperTool.GUI
         public string StatusText
         {
             get => _statusText;
-            set { if (value != _statusText) { _statusText = value; OnPropertyChangedWithValue(value, nameof(StatusText)); } }
+            set
+            {
+                if (value == _statusText) return;
+                _statusText = value;
+                OnPropertyChangedWithValue(value, nameof(StatusText));
+                // Every swap status is logged and announced (2026-11-12, "nothing happens when i
+                // run the swap thing"): a swap finishes inside the confirm dialog's callback,
+                // AFTER the F5 panel has already refreshed its mirrored status, so the result -
+                // including a refusal and its reason - never reached the screen or the log.
+                if (!string.IsNullOrEmpty(value)) Log.Info("[SwapStatus] " + value);
+                try { StatusChanged?.Invoke(); } catch { }
+            }
         }
+
+        // Raised whenever StatusText changes - the F5 panel mirrors this VM and listens here.
+        public Action StatusChanged;
 
         [DataSourceProperty]
         public string SelectionInfoText
@@ -574,6 +588,19 @@ namespace PrefabSwapperTool.GUI
             InformationManager.ShowInquiry(inquiry);
         }
 
+        // Logs every failed result and returns the first reason for the status line.
+        private static string FirstError(List<LivePrefabSwapper.SwapResult> results)
+        {
+            string first = null;
+            foreach (var r in results)
+            {
+                if (r.Success) continue;
+                Log.Warn("[Swap] failed: " + (r.Error ?? "(no reason given)"));
+                if (first == null) first = r.Error ?? "(no reason given)";
+            }
+            return first ?? "";
+        }
+
         private void RunSwap(List<GameEntity> targets, string newPrefab)
         {
             try
@@ -596,7 +623,7 @@ namespace PrefabSwapperTool.GUI
                         BannerlordSceneToolkit.EditUndo.CaptureCreated($"Add prefabs ({okResults.Count})",
                             okResults.Select(r => r.NewEntity));
                     var addMsg = $"Added {okResults.Count} '{newPrefab}' at the selected entit{(okResults.Count == 1 ? "y's spot" : "ies' spots")} - originals KEPT (they overlap until you delete them).";
-                    if (failCount > 0) addMsg += $" {failCount} failed.";
+                    if (failCount > 0) addMsg += $" {failCount} failed: {FirstError(results)}";
                     if (scaleWarnCount > 0) addMsg += $" {scaleWarnCount} original(s) have non-default scale the new copy does NOT inherit.";
                     StatusText = addMsg;
                     return;
@@ -632,7 +659,7 @@ namespace PrefabSwapperTool.GUI
                 }
 
                 var msg = $"Swapped {okResults.Count} entit{(okResults.Count == 1 ? "y" : "ies")} to '{newPrefab}'.";
-                if (failCount > 0) msg += $" {failCount} failed.";
+                if (failCount > 0) msg += $" {failCount} failed: {FirstError(results)}";
                 var notRemovedCount = okResults.Count(r => r.OriginalNotRemoved);
                 if (notRemovedCount > 0) msg += $" WARNING: {notRemovedCount} original(s) could NOT be removed and still overlap the new " +
                                                 "pieces (prefab-instance children or live-copy ghosts) - delete them by hand, or use ADD mode.";
@@ -728,7 +755,7 @@ namespace PrefabSwapperTool.GUI
                         BannerlordSceneToolkit.EditUndo.CaptureCreated($"Add live copies ({okResults.Count})",
                             okResults.Select(r => r.NewEntity));
                     var addMsg = $"Added {okResults.Count} live cop{(okResults.Count == 1 ? "y" : "ies")} of '{refName}' at the selected entit{(okResults.Count == 1 ? "y's spot" : "ies' spots")} - originals KEPT.";
-                    if (failCount > 0) addMsg += $" {failCount} failed.";
+                    if (failCount > 0) addMsg += $" {failCount} failed: {FirstError(results)}";
                     StatusText = addMsg;
                     return;
                 }
@@ -760,7 +787,7 @@ namespace PrefabSwapperTool.GUI
                 }
 
                 var msg = $"Swapped {okResults.Count} entit{(okResults.Count == 1 ? "y" : "ies")} to a live copy of '{refName}'.";
-                if (failCount > 0) msg += $" {failCount} failed.";
+                if (failCount > 0) msg += $" {failCount} failed: {FirstError(results)}";
                 var liveNotRemoved = okResults.Count(r => r.OriginalNotRemoved);
                 if (liveNotRemoved > 0) msg += $" WARNING: {liveNotRemoved} original(s) could NOT be removed and still overlap - delete by hand, or use ADD mode.";
                 if (childrenPreservedCount > 0) msg += $" {childrenPreservedCount} existing child entit(y/ies) carried over.";
@@ -882,7 +909,7 @@ namespace PrefabSwapperTool.GUI
                     : $"Created '{result.AnchorEntity.Name}', placed {baseCount} of {count} along path '{PathNameInput}'.";
                 if (result.AutoPlacedSecondaryCount > 0) msg += $" Plus {result.AutoPlacedSecondaryCount} auto-placed paired secondary(ies).";
                 if (result.PathSpacingWasShrunkToFit) msg += $" Spacing shrunk to {result.PathSpacingUsed:F2} to fit the path (measured spacing wouldn't fit {count} instances).";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 DistributeStatus = msg;
             }
             catch (Exception ex)
@@ -1074,7 +1101,7 @@ namespace PrefabSwapperTool.GUI
                 if (!result.Success) { MirrorStatus = "Failed: " + result.Error; return; }
                 var msg = $"Created '{result.AnchorEntity.Name}', mirrored {result.Placed.Count - result.AutoPlacedSecondaryCount} of {selection.Count} entit(y/ies).";
                 if (result.AutoPlacedSecondaryCount > 0) msg += $" Plus {result.AutoPlacedSecondaryCount} auto-placed paired secondary(ies).";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 if (alreadyMirrored > 0)
                     msg += $" WARNING: the source already contained {alreadyMirrored} mirror-flipped piece(s) nested in it " +
                            "(likely stowaways from an earlier mirror run) - the copy duplicated them too. If the result " +
@@ -1211,7 +1238,7 @@ namespace PrefabSwapperTool.GUI
 
                 if (!result.Success) { MirrorStatus = "Failed: " + result.Error; return; }
                 var msg = $"Rotated {result.Placed.Count} of {selection.Count} entit(y/ies) by {angleDegrees} degrees.";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 MirrorStatus = msg;
             }
             catch (Exception ex)
@@ -1248,7 +1275,7 @@ namespace PrefabSwapperTool.GUI
                 var result = RaycastPlacement.SnapToSurface(EntitySelector.CurrentScene, selection, _snapDirection, maxDist);
 
                 var msg = $"Snapped {result.Snapped} of {selection.Count} entit(y/ies).";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 SnapStatus = msg;
             }
             catch (Exception ex)
@@ -1274,7 +1301,7 @@ namespace PrefabSwapperTool.GUI
                 var result = RaycastPlacement.SnapIntoPile(EntitySelector.CurrentScene, selection, scatter, maxDist);
 
                 var msg = $"Piled {result.Snapped} of {selection.Count} entit(y/ies) (scatter radius {scatter}).";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 SnapStatus = msg;
             }
             catch (Exception ex)
@@ -1593,7 +1620,7 @@ namespace PrefabSwapperTool.GUI
                 if (!result.Success) { DistributeStatus = "Failed: " + result.Error; return; }
                 var msg = $"Created '{result.AnchorEntity.Name}', placed {result.Placed.Count - result.AutoPlacedSecondaryCount} of {count1 * count2} in a {count1}x{count2} grid.";
                 if (result.AutoPlacedSecondaryCount > 0) msg += $" Plus {result.AutoPlacedSecondaryCount} auto-placed paired secondary(ies).";
-                if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed)}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 DistributeStatus = msg;
             }
             catch (Exception ex)
@@ -1899,7 +1926,7 @@ namespace PrefabSwapperTool.GUI
 
                 var msg = $"Created '{result.AnchorEntity.Name}': dropped {result.Placed.Count} piece(s) onto the surface " +
                           $"in a {count1}x{count2} grid" + (_surfaceAlign ? ", tilted to match the ground." : ", kept upright.");
-                if (result.Failed.Count > 0) msg += $" {string.Join("; ", result.Failed.Take(3))}";
+                if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
                 DistributeStatus = msg;
             }
             catch (Exception ex)
@@ -2003,7 +2030,7 @@ namespace PrefabSwapperTool.GUI
                       $"with {result.Placed.Count} piece(s) (derived {result.DerivedCount1}x{result.DerivedCount2} grid, " +
                       $"cells off the surfaces skipped){(_surfaceAlign ? ", tilted to match the ground." : ", kept upright.")}" +
                       (filterDerived ? $" Filter auto-derived from the targets: {filterNames}." : "");
-            if (result.Failed.Count > 0) msg += $" {string.Join("; ", result.Failed.Take(3))}";
+            if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
             DistributeStatus = msg;
         }
 
@@ -2066,7 +2093,7 @@ namespace PrefabSwapperTool.GUI
 
             var msg = $"Created '{result.AnchorEntity.Name}': {result.Placed.Count} copy(ies) of {selected.Count} selected " +
                       $"entity(ies) across a {count1}x{count2} grid. Your originals were left alone and fill the first cell.";
-            if (result.Failed.Count > 0) msg += $" Failed: {string.Join("; ", result.Failed.Take(3))}";
+            if (result.Failed.Count > 0) msg += " " + PrefabDistributor.FailureSummary(result.Failed);
             DistributeStatus = msg;
         }
     }

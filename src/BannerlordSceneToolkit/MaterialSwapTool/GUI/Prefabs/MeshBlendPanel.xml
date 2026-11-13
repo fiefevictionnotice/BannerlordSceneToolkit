@@ -1,0 +1,235 @@
+<Prefab>
+  <Window>
+    <Widget Id="PanelRoot" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="620" SuggestedHeight="900" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Children>
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas_gradient" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="frame_9" ExtendLeft="18" ExtendTop="18" ExtendRight="18" ExtendBottom="18" IsEnabled="false" />
+
+        <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginLeft="20" MarginRight="20" MarginTop="16" MarginBottom="16" DoNotAcceptEvents="true">
+          <Children>
+
+            <!-- Drag handle: press-and-hold the title row to move the whole panel. -->
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" MarginBottom="6" Command.MouseDown="ExecuteDragStart">
+              <Children>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Mesh Blend" Brush="Popup.Title.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </Widget>
+
+            <!-- 130+170+110 = 410 (+ margins) of 580. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Done.Button" Command.Click="ExecuteCheck" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Check" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Checks the selected entities (the first 4) against each condition terrain mesh blend needs and lists OK, FAIL or UNKNOWN per condition. Terrain layer flags come from the last saved scene file. Changes nothing." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteRecalculate" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Recalculate" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Looks up the editor's recalculate_mesh_blend console command and runs it for the open scene, then shows what the editor answered. What it rebuilds is up to the editor; there is no undo for it here." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Closes this panel. The Esc key does the same. Values already applied stay on the meshes, and the undo steps are kept until the scene is closed." /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <!-- Check results. Takes whatever height the fixed rows below leave, so opening
+                 Advanced shrinks this list instead of growing the panel. Rows are capped in
+                 MeshBlend.Check (Gauntlet builds a real widget per row). -->
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" MarginBottom="8">
+              <Children>
+                <ScrollablePanel Id="BlendScrollablePanel" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" MarginRight="14" AutoHideScrollBars="true" ClipRect="BlendClipRect" InnerPanel="BlendClipRect\BlendListPanel" VerticalScrollbar="..\BlendScrollbar">
+                  <Children>
+                    <Widget Id="BlendClipRect" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" ClipContents="true">
+                      <Children>
+                        <ListPanel Id="BlendListPanel" DataSource="{Rows}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" ClipContents="true">
+                          <ItemTemplate>
+                            <!-- Background tint: green OK, red FAIL, amber UNKNOWN, blue summary. -->
+                            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" Sprite="BlankWhiteSquare_9" Color="@RowColor" MarginBottom="3">
+                              <Children>
+                                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" MinHeight="30" MarginLeft="8" MarginRight="8" MarginTop="2" MarginBottom="2" Text="@Text" Brush="MaterialSwapTool.DiffLineText" Brush.FontSize="22" HorizontalAlignment="Left" CanBreakWords="true" DoNotAcceptEvents="true" />
+                              </Children>
+                            </Widget>
+                          </ItemTemplate>
+                        </ListPanel>
+                      </Children>
+                    </Widget>
+                  </Children>
+                </ScrollablePanel>
+                <ScrollbarWidget Id="BlendScrollbar" WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="6" HorizontalAlignment="Right" AlignmentAxis="Vertical" Handle="BlendScrollbarHandle" MaxValue="100" MinValue="0">
+                  <Children>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="4" HorizontalAlignment="Center" Sprite="BlankWhiteSquare_9" Color="#5a4033FF" AlphaFactor="0.2" />
+                    <ImageWidget Id="BlendScrollbarHandle" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedHeight="10" SuggestedWidth="8" HorizontalAlignment="Center" Brush="FaceGen.Scrollbar.Handle" />
+                  </Children>
+                </ScrollbarWidget>
+              </Children>
+            </Widget>
+
+            <!-- Tuning. A field row is 140 label + 30 + 90 field + 30 + note = 580 with margins.
+                 An EMPTY field means: keep what each mesh has now. -->
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="Tuning - selected entities, all LODs. Empty field = keep current." Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" MarginBottom="4" DoNotAcceptEvents="true" />
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Blend height" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteHeightDown" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Blend height in the panel by 0.1 (not below 0.05). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children>
+                    <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@BlendHeight" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How far up from the ground the terrain color reaches, in meters. Default 1. Allowed 0.05 to 20. Empty keeps what each mesh has." />
+                  </Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteHeightUp" MarginRight="8">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Blend height in the panel by 0.1 (not above 20). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="meters above the ground, default 1" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Softness" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteSoftnessDown" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Softness in the panel by 0.05 (not below -0.5). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children>
+                    <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@Softness" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Where the fade-out starts inside the blend height. 0 starts it halfway up; lower values start it nearer the ground for a longer, softer fade; higher values give a harder edge. Allowed -0.5 to 0.49. Empty keeps the current value." />
+                  </Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteSoftnessUp" MarginRight="8">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Softness in the panel by 0.05 (not above 0.49). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0; lower = longer fade" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Noise amount" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteNoiseAmountDown" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Noise amount in the panel by 0.1 (not below -0.5). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children>
+                    <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NoiseAmount" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How much a random pattern raises the upper edge of the blend. 0 is the default; -0.5 gives a straight edge. Allowed -0.5 to 10. Empty keeps the current value." />
+                  </Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteNoiseAmountUp" MarginRight="8">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Noise amount in the panel by 0.1 (not above 10). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0; -0.5 = straight edge" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+              <Children>
+                <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Noise scale" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteNoiseScaleDown" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Noise scale in the panel by 1 (not below -15). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                  <Children>
+                    <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NoiseScale" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Size of the random pattern on the edge. 0 is the default; higher values give a finer pattern, lower values a coarser one. Allowed -15 to 200. Empty keeps the current value." />
+                  </Children>
+                </Widget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteNoiseScaleUp" MarginRight="8">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Noise scale in the panel by 1 (not above 200). Changes only the field; press Apply to Selection to write it." /></Children>
+                </ButtonWidget>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0; higher = finer" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </ListPanel>
+
+            <!-- Behind the Advanced toggle: the three values of the second vector argument. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsAdvancedVisible">
+              <Children>
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Heightmap start" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteHeightmapStartDown" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Heightmap start in the panel by 0.05 (not below -0.5). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children>
+                        <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@HeightmapStart" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How far up the blend the material's height map starts to push the terrain color back. Only matters on materials with a separate displacement map. Allowed -0.5 to 0.49. Empty keeps the current value." />
+                      </Children>
+                    </Widget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteHeightmapStartUp" MarginRight="8">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Heightmap start in the panel by 0.05 (not above 0.49). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                  </Children>
+                </ListPanel>
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Heightmap power" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteHeightmapPowerDown" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Heightmap power in the panel by 0.1 (not below -1). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children>
+                        <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@HeightmapPower" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How strongly the material's height map pushes the terrain color back. 0 is the default, -1 switches it off. Only matters on materials with a separate displacement map. Allowed -1 to 10. Empty keeps the current value." />
+                      </Children>
+                    </Widget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteHeightmapPowerUp" MarginRight="8">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Heightmap power in the panel by 0.1 (not above 10). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0; -1 = off" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                  </Children>
+                </ListPanel>
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
+                  <Children>
+                    <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Text="Normal bend" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteNormalBendDown" MarginRight="4">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="-" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Lowers Normal bend in the panel by 0.05 (not below -0.19). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
+                      <Children>
+                        <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NormalBend" Brush="MaterialSwapTool.RuleText" Brush.FontSize="26" MarginLeft="6" MarginRight="6" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How far up the blend the surface normal is bent toward the terrain's. 0 is the default; higher bends it further up. Allowed -0.19 to 0.8. Empty keeps the current value." />
+                      </Children>
+                    </Widget>
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Done.Button" Command.Click="ExecuteNormalBendUp" MarginRight="8">
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Raises Normal bend in the panel by 0.05 (not above 0.8). Changes only the field; press Apply to Selection to write it." /></Children>
+                    </ButtonWidget>
+                    <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="default 0" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                  </Children>
+                </ListPanel>
+              </Children>
+            </ListPanel>
+
+            <!-- 250+250 = 500 (+ margin) of 580. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginTop="2" MarginBottom="4">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="250" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteReadFromSelection" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Read from Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Fills every field, the advanced ones included, with the values of the first tunable mesh in the selection. Changes nothing in the scene." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="250" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteApply">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply to Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes the filled-in fields to every tunable mesh of the selected entities and their children, all LODs. Empty fields are left as they are on each mesh. No confirmation; Undo Last Change reverts it. Save the scene to keep it." /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+            <!-- 200+200+160 = 560 (+ margins) of 580. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="8">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteResetToDefault" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Reset to Default" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes the default (zero) blend values, the advanced ones included, to every tunable mesh of the selected entities and their children. No confirmation; Undo Last Change reverts it. Save the scene to keep it." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteUndo" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Change" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Puts back the values the last Apply or Reset from this panel replaced. Up to 20 steps, kept until the scene is closed. It does not undo Recalculate." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button" Command.Click="ExecuteToggleAdvanced">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@AdvancedButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows or hides three more values: heightmap start, heightmap power and normal bend. Apply to Selection writes them only while this is ON." /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="88" Text="@StatusText" Brush="Popup.Description.Text" CanBreakWords="true" HorizontalAlignment="Center" DoNotAcceptEvents="true" />
+
+          </Children>
+        </ListPanel>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

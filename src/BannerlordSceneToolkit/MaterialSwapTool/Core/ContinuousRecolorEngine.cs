@@ -38,6 +38,7 @@ namespace MaterialSwapTool.Core
         public static Result Apply(List<GameEntity> targets, HashSet<string> armedCategories, uint color, string batchId, List<ChangeLogEntry> logEntries, string sceneName)
         {
             var result = new Result();
+            color = ColorHex.SrgbToLinear(color);   // typed hex is sRGB; Mesh.Color is linear (see ColorHex)
 
             foreach (var target in targets)
             {
@@ -230,7 +231,7 @@ namespace MaterialSwapTool.Core
 
                             var matchedCategory = orderedCategories.FirstOrDefault(categories.Contains);
                             if (matchedCategory == null) continue;
-                            var color = categoryColors[matchedCategory];
+                            var color = ColorHex.SrgbToLinear(categoryColors[matchedCategory]);   // typed sRGB -> stored linear
 
                             var currentColor = mesh.Color;
                             if (currentColor == color) continue;

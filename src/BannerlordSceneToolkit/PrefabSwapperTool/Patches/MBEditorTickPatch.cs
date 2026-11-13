@@ -35,6 +35,7 @@ namespace PrefabSwapperTool.Patches
             SwapSetBrowserLayer.Tick(dt);
             TextureSetBrowserLayer.Tick(dt);
             BackupManager.Tick(dt);
+            BannerlordSceneToolkit.ToolkitHints.Tick();
         }
     }
 }

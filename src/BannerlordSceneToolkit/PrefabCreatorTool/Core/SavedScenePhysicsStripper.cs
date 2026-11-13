@@ -24,6 +24,16 @@ namespace PrefabCreatorTool.Core
     {
         public const string Tag = "pile_nophys";
 
+        // Scene Analyzer's "Remove Physics Outside Border" (2026-11-12, "deleting the physics of
+        // things outside the border is broken but the tagging still works"): it still used the
+        // first-round runtime calls that the pile work proved never persist. It now tags each
+        // out-of-border ROOT with this, and the strip below covers the whole subtree, because a
+        // placed prefab saves broken-out with its <physics shape="bo_..."/> nodes on the children.
+        public const string OobTag = "oob_nophys";
+        public static readonly string[] Tags = { Tag, OobTag };
+
+        public static bool FileHasStripTags(string text) => Tags.Any(t => text.Contains(t));
+
         // Returns a human-readable status line.
         public static string StripCurrentScene()
         {
@@ -36,19 +46,20 @@ namespace PrefabCreatorTool.Core
             catch (Exception ex) { return "Couldn't parse the saved scene: " + ex.Message; }
 
             int stripped = 0;
-            foreach (var entity in doc.Descendants("game_entity"))
+            var markedRoots = doc.Descendants("game_entity").Where(entity =>
             {
                 var tags = entity.Element("tags");
-                if (tags == null) continue;
-                bool marked = tags.Elements("tag").Any(t => string.Equals((string)t.Attribute("name"), Tag, StringComparison.OrdinalIgnoreCase));
-                if (!marked) continue;
+                return tags != null && tags.Elements("tag").Any(t =>
+                    Tags.Any(x => string.Equals((string)t.Attribute("name"), x, StringComparison.OrdinalIgnoreCase)));
+            }).ToList();
 
-                var physicsNodes = entity.Elements("physics").ToList();
-                foreach (var p in physicsNodes) { p.Remove(); stripped++; }
-            }
+            // Whole subtree, not just the tagged node: collision usually sits on the children.
+            foreach (var root in markedRoots)
+                foreach (var entity in root.DescendantsAndSelf("game_entity").ToList())
+                    foreach (var p in entity.Elements("physics").ToList()) { p.Remove(); stripped++; }
 
             if (stripped == 0)
-                return $"No <physics> nodes found on {Tag}-tagged entities in the saved file - " +
+                return $"No <physics> nodes found on {Tag}/{OobTag}-tagged entities in the saved file - " +
                        "either already stripped, or the scene hasn't been saved since generating.";
 
             try

@@ -33,29 +33,29 @@
                                       <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PrefabName" Brush="PrefabCreatorTool.InputText" MarginLeft="6" DefaultSearchText="prefab name, e.g. rock_a" /></Children>
                                     </Widget>
                                     <Widget WidthSizePolicy="Fixed" SuggestedWidth="72" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="2">
-                                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@CountText" Brush="PrefabCreatorTool.InputText" MarginLeft="4" /></Children>
+                                      <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@CountText" Brush="PrefabCreatorTool.InputText" MarginLeft="4" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How many of this row's prefab to place. Blank, zero or unreadable values count as 1." /></Children>
                                     </Widget>
                                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteMoveUp" MarginRight="1">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="^" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="^" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Moves this row one layer up, toward the top of the pile." /></Children>
                                     </ButtonWidget>
                                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteMoveDown" MarginRight="2">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="v" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="v" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Moves this row one layer down, toward the base of the pile." /></Children>
                                     </ButtonWidget>
                                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteRemove">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes this row from the entry list. A saved recipe is not changed until you save it again." /></Children>
                                     </ButtonWidget>
                                   </Children>
                                 </ListPanel>
                                 <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="24" StackLayout.LayoutMethod="HorizontalLeftToRight">
                                   <Children>
                                     <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteCyclePreset" MarginRight="2">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PresetLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PresetLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Cycles through the texture sets saved for this row's prefab name, then back to None. The chosen set is applied to each piece of this row when it is generated." /></Children>
                                     </ButtonWidget>
                                     <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteTogglePhysics" MarginRight="2">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PhysicsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PhysicsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Keep: pieces keep their collision. Delete: once the pile is built, this row's pieces lose collision and are tagged pile_nophys; they stop responding to clicks, and it takes full effect after a save and reload." /></Children>
                                     </ButtonWidget>
                                     <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleSnap">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SnapLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SnapLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="On: each piece of this row is dropped straight down onto whatever is beneath it. Off: pieces are scattered flat at the reference height." /></Children>
                                     </ButtonWidget>
                                   </Children>
                                 </ListPanel>
@@ -77,22 +77,22 @@
             </Widget>
 
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteAddEntry" MarginBottom="6">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Add Entry" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Add Entry" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds a new row at the bottom of the list (the base of the pile) with count 5 and Snap on. Type its prefab name; rows without a name are ignored." /></Children>
             </ButtonWidget>
 
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteTogglePlacementMode" MarginBottom="4">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PlacementModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PlacementModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Single Pile: scatters around the one selected entity within Scatter Radius. Scatter Area: spreads across the combined top-down footprint of all selected entities." /></Children>
             </ButtonWidget>
 
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="120" HeightSizePolicy="StretchToParent" Text="Scatter Radius:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="12">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ScatterRadiusInput" Brush="PrefabCreatorTool.InputText" MarginLeft="6" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ScatterRadiusInput" Brush="PrefabCreatorTool.InputText" MarginLeft="6" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Radius in scene units around the selected entity within which Single Pile scatters the pieces. Must be above zero. Not used in Scatter Area mode." /></Children>
                 </Widget>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="100" HeightSizePolicy="StretchToParent" Text="Anchor Name:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@AnchorNameInput" Brush="PrefabCreatorTool.InputText" MarginLeft="6" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@AnchorNameInput" Brush="PrefabCreatorTool.InputText" MarginLeft="6" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Name for the empty parent entity created to hold the generated pieces. Left blank, it is Pile." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -106,7 +106,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@RecipeNameInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="recipe name" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button" Command.Click="ExecuteSaveRecipe">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Recipe" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Recipe" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Saves the rows, scatter radius and placement tag under the typed recipe name, to disk, without asking. A recipe with the same name is overwritten." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -120,18 +120,18 @@
                      off the edge. StretchToParent shares the row evenly instead; the labels all
                      fit at a quarter-width each. -->
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteExportRecipes" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All Recipes" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All Recipes" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes every saved recipe as a .json file into Documents, Mount and Blade II Bannerlord, PrefabCreatorTool, Exports, PileRecipes, replacing files of the same name there." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteImportRecipes" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Recipes" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Recipes" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the .json files in the PileRecipes export folder into your saved recipes. A recipe whose name you already have is skipped, so your copy is kept." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenRecipeFolder" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the PileRecipes export folder in the file browser, creating it if needed." /></Children>
                 </ButtonWidget>
                 <!-- The Texture cell on each row cycles saved texture sets, but the browser that
                      CREATES them was only reachable from the Prefab Creator panel. -->
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteOpenTextureBrowser">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Texture Overrides" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Texture Overrides" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Texture Sets browser, where the texture sets offered by each row's Texture button are created and edited." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -141,7 +141,7 @@
                  reference), so this strips pile_nophys-tagged entities' physics nodes from
                  scene.xscene directly. Workflow: save -> click -> reload. -->
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteStripSavedPhysics" MarginBottom="6">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Strip Physics From SAVED Scene - manual fallback (runs automatically after every save)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Strip Physics From SAVED Scene - manual fallback (runs automatically after every save)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Edits the saved scene.xscene on disk: removes the physics nodes of entities tagged pile_nophys, after copying the file to a .bak. Normally automatic after each save. Save first, click, then reload the scene." /></Children>
             </ButtonWidget>
 
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
@@ -151,7 +151,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@RecipeSearchTerm" Brush="PrefabCreatorTool.InputText" MarginLeft="8" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Done.Button" Command.Click="ExecuteRefreshRecipes">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reloads the saved recipes from disk, filtered by the search text." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -173,17 +173,17 @@
                                     <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="2">
                                       <Children>
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteLoad" MarginRight="6">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Load" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Load" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Replaces the rows, scatter radius, recipe name and placement tag above with this recipe's, without asking. Nothing is placed in the scene." /></Children>
                                         </ButtonWidget>
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Title.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" MarginRight="6" />
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="80" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteDelete">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Deletes this saved recipe file from disk at once, without asking. Cannot be undone. Piles already generated are not affected." /></Children>
                                         </ButtonWidget>
                                       </Children>
                                     </ListPanel>
                                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@SummaryText" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
                                     <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="120" HeightSizePolicy="Fixed" SuggestedHeight="22" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggleExpand" MarginBottom="2">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ExpandButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ExpandButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows or hides this recipe's rows." /></Children>
                                     </ButtonWidget>
                                     <ListPanel DataSource="{EntrySummaries}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsExpanded">
                                       <ItemTemplate>
@@ -216,7 +216,7 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="200" HeightSizePolicy="StretchToParent" Text="Tag placed entities (optional):" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PlacementTagInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PlacementTagInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Extra tag added to every piece as it is placed. Set it before Generate; changing it later does not retag an existing pile. It is saved with the recipe." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -224,13 +224,13 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button" Command.Click="ExecuteGenerate" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Places all rows as a pile under a new anchor entity, base row first: around the one selected entity, or across the selected footprint in Scatter Area mode. Backup first, no prompt. Undo with the Undo button here." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="190" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteResettle" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Re-Settle (force down)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Re-Settle (force down)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Drops pieces straight down onto whatever is beneath them now. Acts on the selection (for a selected anchor, its children), or on the last generated pile when nothing is selected. Backup first; undoable." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="140" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteUndo">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Undoes the most recent undoable step from any toolkit panel: generated or distributed entities are removed, moves and rotations are put back. Up to 10 steps, this session only. Deletions cannot be undone." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -254,7 +254,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@RandomZInput" Brush="PrefabCreatorTool.InputText" MarginLeft="6" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Color="#3bc98aFF" Command.Click="ExecuteRandomizeRotation">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Randomize Rotation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Randomize Rotation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Gives each targeted piece its own random rotation within the typed X, Y and Z limits. Acts on the selection (for a selected anchor, its children), or on the last generated pile when nothing is selected. Backup first; undoable." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>

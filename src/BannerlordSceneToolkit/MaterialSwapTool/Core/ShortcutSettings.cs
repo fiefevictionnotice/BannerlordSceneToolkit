@@ -53,6 +53,10 @@ namespace MaterialSwapTool.Core
         // see Core/ToolkitCursor for what it changes and why it is switchable.
         public bool NativeCursorEnabled { get; set; } = true;
 
+        // Hover tooltips on toolkit buttons (Core/ToolkitHints). Also not a key binding; it is
+        // here for the same reason as the cursor switch. Defaults on.
+        public bool HintsEnabled { get; set; } = true;
+
         private static ShortcutSettings _current;
 
         public static string SettingsPath => Path.Combine(

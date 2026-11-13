@@ -224,6 +224,28 @@ namespace MaterialSwapTool.GUI
                 : $"Native cursor off - panels show the engine's own (large) cursor again. Applied to {touched} open panel(s).";
         }
 
+        // Hover tooltips (Core/ToolkitHints). Read every frame by the hint tick, so the switch
+        // takes effect at once.
+        [DataSourceProperty]
+        public string HintsLabel =>
+            ShortcutSettings.Current.HintsEnabled ? "Tooltips: ON" : "Tooltips: OFF";
+
+        [DataSourceProperty]
+        public string HintsColor =>
+            ShortcutSettings.Current.HintsEnabled ? "#4fb96aFF" : "#c9484eFF";
+
+        public void ExecuteToggleHints()
+        {
+            var s = ShortcutSettings.Current;
+            s.HintsEnabled = !s.HintsEnabled;
+            s.Save();
+            OnPropertyChanged(nameof(HintsLabel));
+            OnPropertyChanged(nameof(HintsColor));
+            StatusText = s.HintsEnabled
+                ? "Tooltips on - rest the mouse on a button for a moment to see what it does."
+                : "Tooltips off.";
+        }
+
         public void ExecuteClose() => _closeAction?.Invoke();
         public void ExecuteDragStart() => _beginDragAction?.Invoke();
     }

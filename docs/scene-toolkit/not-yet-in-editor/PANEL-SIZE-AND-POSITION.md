@@ -1,9 +1,6 @@
-# Panel size and panel position
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
 
-> **Not yet in the in-editor docs.** These features shipped in v0.8.0 (size) and v0.8.1
-> (centre key), but no Documentation-button topic covers them yet. This page is the
-> draft for that topic. When it is built into `DocumentationVM.cs`, delete this file: the
-> exported `in-editor/USER-GUIDE.md` will carry it from then on.
+# Panel size and panel position
 
 ## Panel size: one size for every panel
 

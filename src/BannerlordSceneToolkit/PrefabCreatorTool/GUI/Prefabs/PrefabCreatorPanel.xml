@@ -19,7 +19,7 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Text="Naming prefix:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NamingPrefixInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="fief_" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NamingPrefixInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="fief_" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Prefix put in front of every name this panel generates, such as the anchor made by Create Anchor. Saved as you type; a name that already starts with it is not prefixed again." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -30,7 +30,7 @@
                  placed, so it belongs here; F6 is now purely Distribution. Swap Sets leads,
                  by request. -->
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenSwapSets" MarginBottom="8">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Sets - change a whole modular structure at once" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Sets - change a whole modular structure at once" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the Swap Sets browser, where a saved group of old to new prefab rules is applied to the selection in one step." /></Children>
             </ButtonWidget>
 
             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="Prefab Swapper - add or replace a placed prefab, keeping position and rotation" Brush="Popup.Title.Text" HorizontalAlignment="Left" MarginBottom="4" DoNotAcceptEvents="true" />
@@ -47,10 +47,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="@SwapModeColor" Command.Click="ExecuteToggleSwapMode" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SwapModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SwapModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="SWAP: each target is deleted and recreated as the new prefab. ADD: the new prefab is placed at each target's spot and the original is kept. Applies to Swap Selected, Swap All, live reference and swap-set Apply." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="@SwapScaleColor" Command.Click="ExecuteToggleSwapScale">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SwapScaleLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SwapScaleLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="1x: the new entity gets the prefab's own authored scale. Inherit: it keeps the old entity's scale. Applies to every swap from this panel and to swap-set Apply." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -62,11 +62,11 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Text="Z Rot (deg):" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="12">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SwapZRotInput" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SwapZRotInput" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Extra rotation about world Z, in degrees, given to every entity swapped in, including swap-set Apply. 0 is off." /></Children>
                 </Widget>
                 <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Text="Scale mult:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SwapScaleMultInput" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SwapScaleMultInput" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Uniform scale multiplier given to every entity swapped in, including swap-set Apply. 1 is off; zero and negative values are ignored." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -75,7 +75,7 @@
                  them): clean-rooted subtrees whose children still carry the runtime flags that
                  make them unclickable and unsaveable. Flags only - nothing moves or is deleted. -->
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="28" Brush="Popup.Cancel.Button" Command.Click="ExecuteRepairFlaggedCopies" MarginBottom="6">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Repair Unselectable Copies (whole scene)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Repair Unselectable Copies (whole scene)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Scans the whole scene for copies whose child entities still carry runtime-only flags that make them unclickable and left out of saves, and clears those flags. Nothing is moved, created or deleted. Runs at once, without a backup." /></Children>
             </ButtonWidget>
 
             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="Old prefab name (entity to replace)" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
@@ -85,7 +85,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@OldPrefabName" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button" Command.Click="ExecuteSwapFillFromSelection">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Puts the first selected entity's real prefab name into the old prefab box, or its display name if it has no prefab. Changes nothing in the scene." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -98,7 +98,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@NewPrefabName" Brush="PrefabCreatorTool.InputText" MarginLeft="10" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button" Command.Click="ExecuteSwapFillNewFromSelection">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Puts the first selected entity's real prefab name into the new prefab box, or its display name if it has no prefab. Changes nothing in the scene." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -106,10 +106,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Done.Button" Command.Click="ExecuteSwapSelected" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Selected" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Selected" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Swaps every selected entity to the new prefab, whatever it is now, keeping position and rotation. Asks first and takes a backup. Undo with Undo Last Swap; ADD-mode additions are undone with Undo Last Rotation on F6." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button" Command.Click="ExecuteSwapAllMatching">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap All Matching in Scene" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap All Matching in Scene" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Swaps every entity in the whole scene whose entity name equals the old prefab name (case ignored) to the new prefab. Asks first, showing the count, and takes a backup. Undo with Undo Last Swap." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -118,10 +118,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Cancel.Button" Command.Click="ExecuteSetLiveReference" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Live Reference" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Live Reference" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Remembers the one selected entity as the live reference for the button to the right. It does not need to be a saved prefab. Changes nothing in the scene." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteSwapSelectedToLiveReference">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Selected -&gt; Live Reference" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Swap Selected -&gt; Live Reference" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Replaces every selected entity with an exact copy of the live reference as it now stands; nothing from the old entity carries over. Asks first and takes a backup. Copies may be unselectable until the scene is saved." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -129,17 +129,17 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Done.Button" Command.Click="ExecuteUndoLastSwap" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Swap" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Swap" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reverts the most recent swap batch that is not already undone, restoring the original prefabs in place. A backup is taken first; it does not ask. ADD-mode additions are not swap batches; undo those on F6." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenSwapHistory">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo/Redo History" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo/Redo History" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the swap history for the open scene, where any of the last 30 swap batches can be undone or redone and its screenshot viewed." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" Text="@SwapStatusText" Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="10" DoNotAcceptEvents="true" />
 
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" Brush="Popup.Cancel.Button.NineGrid" Color="#5a8f3cFF" Command.Click="ExecuteOpenPileGenerator" MarginBottom="8">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Pile Generator" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Pile Generator" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the Pile Generator, which scatters counted layers of prefabs into a pile or across a selected floor." /></Children>
             </ButtonWidget>
 
             <!-- ===================== Mode 1: New Prefab ===================== -->
@@ -153,7 +153,7 @@
                   </Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Done.Button" Command.Click="ExecuteCreateAnchor">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Create Anchor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Create Anchor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Creates an empty anchor entity at the selection's bottom-center point, named with the prefix plus the typed name, and tags every selected entity so they can be found again. A backup is taken first; it does not ask." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -165,10 +165,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="10">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="190" Brush="Popup.Cancel.Button" Command.Click="ExecuteSetPrimaryAnchor" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Primary" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Primary" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Remembers the one selected entity as the primary whose origin the next button copies. Changes nothing in the scene." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="380" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteMatchSecondaryOrigin">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Match Secondary Origin to Primary" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Match Secondary Origin to Primary" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Moves the one selected entity's origin onto the primary's origin while its children keep their world positions. A backup is taken first; it does not ask and records no undo step." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -188,13 +188,13 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="210" Brush="Popup.Cancel.Button" Command.Click="ExecuteFillOriginAnchorFromSelection" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies the world position of the one selected entity into the x, y, z box as the point the origin should move to. Exactly one entity must be selected." /></Children>
                 </ButtonWidget>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@OriginAnchorInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="x, y, z" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@OriginAnchorInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="x, y, z" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="World point as x, y, z that Origin to Anchor moves the selected prefab's origin to." /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteOriginToAnchor">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Origin to Anchor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Origin to Anchor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Moves the origin of the one selected prefab to the x, y, z point while its children stay where they are. A backup is taken first. It asks only when the entity is not an empty, and records no undo step." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -210,14 +210,14 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteCycleOriginAxis" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@OriginAxisLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@OriginAxisLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Cycles the axis used by Set Origins through X, Y and Z. The text to the right shows the origin point that the axis and side make together." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteCycleOriginSide" MarginRight="6">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@OriginSideLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@OriginSideLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Cycles which end of the axis is used: Min, Center or Max. With axis Z, Min is Bottom Center and Max is Top Center; Center is always Middle Center." /></Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@OriginPresetLabel" Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteApplyOriginPreset">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Origins (Selected)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Origins (Selected)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Measures each selected prefab's own bounding box and moves its origin to the point shown, without moving the prefab. Entities with geometry of their own are skipped. Backup first; undo with Undo Last Rotation on F6." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>

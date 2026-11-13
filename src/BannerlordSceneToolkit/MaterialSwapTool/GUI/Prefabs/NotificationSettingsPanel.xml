@@ -20,7 +20,7 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="250" Brush="Popup.Done.Button.NineGrid" Color="@BackupWarningsColor" Command.Click="ExecuteToggleBackupWarnings" MarginRight="10">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@BackupWarningsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@BackupWarningsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="ON: popups appear when a backup is running, did not complete or failed. OFF: no popups, but the messages still go to tool.log and backups keep running. Turning it off asks you to confirm." /></Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="&quot;backup running&quot;, &quot;did NOT complete&quot;, &quot;FAILED&quot;" Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
               </Children>
@@ -29,7 +29,7 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="14">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="250" Brush="Popup.Done.Button.NineGrid" Color="@SaveRemindersColor" Command.Click="ExecuteToggleSaveReminders" MarginRight="10">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SaveRemindersLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@SaveRemindersLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="ON: shows the 15-minute no-save warning and the reminder to save after an apply. OFF: no popups, but they are still written to tool.log. Turning it off asks you to confirm." /></Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="15-minute no-save warning, post-apply &quot;save the scene&quot;" Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
               </Children>

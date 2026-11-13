@@ -29,10 +29,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="8">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Done.Button.NineGrid" Color="@EnabledColor" Command.Click="ExecuteToggleEnabled" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@EnabledLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@EnabledLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Master switch, saved at once. ON: scene backups run before destructive operations, on scene change and on the timer. OFF: no scene backup is written at all, not even by Backup Scene Now." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button.NineGrid" Color="@PeriodicColor" Command.Click="ExecuteTogglePeriodic" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PeriodicLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@PeriodicLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Interval timer only, saved at once. ON: the open scene's saved files are copied every few minutes when they have changed. OFF: only the before-apply and scene-change backups run." /></Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Timer off still leaves before-apply + scene-change backups running." Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" />
               </Children>
@@ -42,11 +42,11 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="150" HeightSizePolicy="StretchToParent" Text="Every (minutes):" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="14">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@IntervalInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@IntervalInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Minutes between timer backups, 1 to 120. Takes effect when you press Save Settings." /></Children>
                 </Widget>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="150" HeightSizePolicy="StretchToParent" Text="Keep per scene:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@KeepInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@KeepInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="How many backups to keep for each scene, 1 to 500; older ones are thinned out. Takes effect when you press Save Settings." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -64,13 +64,13 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="8">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button" Command.Click="ExecuteSaveSettings" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Settings" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Settings" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Saves the interval, keep count and location to backup_settings.json; they apply at once. A custom location is created now. Nothing is saved if a number is not valid or the folder cannot be created." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteBackupNow" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Scene Now" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Scene Now" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies the open scene's saved files (scene.xscene, terrain.bin, terrain_ed.bin) to the backup folder now, even if nothing changed. Unsaved editor changes are not included. Does nothing while Backups is OFF." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenFolder">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the backup folder in Windows Explorer." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -78,25 +78,25 @@
             <!-- Full-width and taller by direct request ("really hard to read and not even
                  full panel width") - it was a 180px slot in a four-button row. -->
             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteBackupToolData" MarginBottom="4">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Tool Data" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Tool Data" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies your presets, palettes, categories, cultures, interior whitelist and tool settings into a new time-stamped folder under _ToolData in the backup folder. Never runs by itself; works even while Backups is OFF." /></Children>
             </ButtonWidget>
             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" Text="Backup Tool Data (presets, palettes, categories, cultures, interior whitelist) is MANUAL ONLY - it never runs on the timer." Brush="Popup.Description.Text" CanBreakWords="true" MarginBottom="8" DoNotAcceptEvents="true" />
 
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Done.Button" Command.Click="ExecuteRefresh" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Re-reads the backup folder and updates the age, last result, count and disk size lines above. Changes nothing on disk." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenShortcuts" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Shortcuts" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Shortcuts" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Keyboard Shortcuts window: on/off switches for the optional hotkeys, the native cursor and these tooltips." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Cancel.Button.NineGrid" Color="@NotificationsColor" Command.Click="ExecuteOpenNotifications" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@NotificationsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@NotificationsLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the switches for backup warning popups and save reminders. This button turns red and shows a count while any of them is off." /></Children>
                 </ButtonWidget>
                 <!-- Engineering history & confirmed-bug reference - separate from the User Guide
                      on the Documentation buttons. -->
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteOpenTechnicalDocs" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Technical Docs" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Technical Docs" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the Technical Docs window: engineering history and confirmed-bug notes, separate from the User Guide." /></Children>
                 </ButtonWidget>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">

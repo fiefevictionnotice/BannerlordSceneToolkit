@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TaleWorlds.Library;
 
@@ -72,5 +73,33 @@ namespace BannerlordSceneToolkit
             result |= (uint)MulByte(a, b, 0);        // B
             return result;
         }
+
+        // COLOR SPACE (2026-11-12, "it always reduces the saturation of your color factor ... it
+        // seems almost exactly 50%"). Mesh.Color is stored LINEAR. The editor's own colour field
+        // converts the sRGB hex you type to linear before storing; the toolkit wrote the typed
+        // hex raw, so the renderer brightened it a second time. Measured live: #BAFFAF came out
+        // #DDFFD7 and #802020 came out #BB6363 (a 2.2 gamma predicts #DDFFD7 / #BA6363), while
+        // the same hex typed into the editor's field stays as typed. ("50% to white" fit the light
+        // colour too, but predicted #C09090 for the dark one.)
+        //
+        // Rule: a hex a PERSON typed or reads is sRGB; anything stored, logged for undo, copied
+        // between meshes or saved in a colour preset stays the raw stored (linear) value. So
+        // convert exactly at the typed-input -> mesh write and at mesh -> hex shown for re-use.
+        // Alpha is never converted. 8-bit linear storage loses a little precision on very dark
+        // colours; the editor's own field has the same limit.
+        private const double Gamma = 2.2;
+
+        private static uint MapRgb(uint value, Func<double, double> f)
+        {
+            uint Ch(int shift)
+            {
+                var c = ((value >> shift) & 0xFF) / 255.0;
+                return (uint)Math.Max(0, Math.Min(255, Math.Round(f(c) * 255.0)));
+            }
+            return (value & 0xFF000000u) | (Ch(16) << 16) | (Ch(8) << 8) | Ch(0);
+        }
+
+        public static uint SrgbToLinear(uint srgb) => MapRgb(srgb, c => Math.Pow(c, Gamma));
+        public static uint LinearToSrgb(uint linear) => MapRgb(linear, c => Math.Pow(c, 1.0 / Gamma));
     }
 }

@@ -22,6 +22,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SearchTerm" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows only presets whose name contains this text. The two filters below are combined with it: a preset must match every box that is filled in." />
                   </Children>
                 </Widget>
               </Children>
@@ -46,6 +47,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@MaterialFilterTerm" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows only presets that have a rule whose From material contains this text. The To side is not searched." />
                   </Children>
                 </Widget>
               </Children>
@@ -56,11 +58,13 @@
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button" Command.Click="ExecuteToggleMode" MarginRight="8">
                   <Children>
                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ModeLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Cycles how Choose loads a preset. Overwrite replaces the rules list. Add appends the preset rules and asks about conflicting ones. Merge only fills the empty To fields of rules you already have." />
                   </Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Cancel.Button" Command.Click="ExecuteToggleInvert" MarginRight="8">
                   <Children>
                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@InvertLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="On: Choose swaps From and To on every rule as the preset loads, reversing its direction. Off: rules load as saved. The preset file is not changed either way." />
                   </Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@StatusText" Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
@@ -88,17 +92,20 @@
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="91" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Color="@AccentColor" Command.Click="ExecuteChoose" MarginRight="8">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Choose" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Loads this preset into the Material Swap rules list using the Mode and Invert settings above, then closes this window. The scene is not changed until Apply." />
                                           </Children>
                                         </ButtonWidget>
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="MaterialSwapTool.PresetTitle" VerticalAlignment="Center" DoNotAcceptEvents="true" MarginRight="8" />
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="91" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteDelete" MarginRight="8">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Permanently deletes this personal preset file from disk after asking for confirmation. Built-in presets and BSA .txt templates cannot be deleted here." />
                                           </Children>
                                         </ButtonWidget>
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="91" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenHistory" MarginRight="8">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="History" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the earlier saved versions of this preset, where any of them can be restored. Built-in presets have no history." />
                                           </Children>
                                         </ButtonWidget>
                                         <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="250" HeightSizePolicy="StretchToParent" Text="@TagsText" Brush="Popup.Description.Text" HorizontalAlignment="Left" VerticalAlignment="Center" DoNotAcceptEvents="true" />
@@ -131,6 +138,7 @@
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="110" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggleExpand" MarginRight="10">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ExpandButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows or hides the rules of this preset beyond the first two." />
                                           </Children>
                                         </ButtonWidget>
                                         <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Text="@TypeText" Color="@AccentColor" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginRight="14" DoNotAcceptEvents="true" />
@@ -166,10 +174,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button" Command.Click="ExecuteRefresh" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Rereads the preset files from disk and reapplies the search and filters." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="220" Brush="Popup.Done.Button" Command.Click="ExecuteOpenCultureGenerator" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate Culture Preset" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate Culture Preset" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Culture Preset Generator, which builds a direct culture-to-culture preset from two built-in presets, or a blank starter preset from the material list of a culture." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
                   <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
@@ -183,13 +191,13 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="10">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteExportAll" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All Presets" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All Presets" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies every personal preset as a .json file into the Exports folder, overwriting files of the same name there. Built-in presets are not exported." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteImport" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Presets" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Presets" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Imports every valid .json preset in the Exports folder into your personal presets. Asks first. A preset whose name already exists is skipped, not overwritten." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenExportFolder">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Exports folder in Explorer, creating it if needed. Put .json preset files there before using Import." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>

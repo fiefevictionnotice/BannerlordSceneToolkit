@@ -58,6 +58,82 @@ namespace PrefabSwapperTool.Core
         public static float SwapZRotationDegrees = 0f;
         public static float SwapScaleMultiplier = 1f;
 
+        // MESH BENDER CARRY-OVER (2026-11-12, "if we use live reference swap any replaced
+        // entities lose their mesh bender script - this affects both versions"): mesh_bender is a
+        // NATIVE script (not a managed ScriptComponentBehavior) whose per-instance variables
+        // ("Bend Amount", "Bend Center Ratio") are what bend a beam/rail to fit its spot - the
+        // Fief_Scaffolds_Woodwork *_bent prefabs carry it on their ROOT. No swap path ever copied
+        // native scripts: Instantiate brings only the new prefab's own definition, and the live-
+        // reference path deliberately drops everything from the old entity. Now the bender is
+        // carried from the old entity (or, for live reference, from the reference when it has
+        // one) onto the new root via GameEntity.CopyScriptComponentFromAnotherEntity, and the
+        // bend values are written explicitly with SetNativeScriptComponentVariable so the result
+        // matches the source even when the new prefab already had its own bender. Every carry is
+        // logged with the values read back from the new entity.
+        private const string MeshBenderScript = "mesh_bender";
+        private static readonly string[] MeshBenderFloatVars = { "Bend Amount", "Bend Center Ratio" };
+
+        private static bool HasMeshBender(GameEntity e)
+        {
+            try { return e != null && e.Pointer != UIntPtr.Zero && e.HasScriptComponent(MeshBenderScript); }
+            catch { return false; }
+        }
+
+        private static float? ReadBenderVar(GameEntity e, string field)
+        {
+            try
+            {
+                var h = new ScriptComponentFieldHolder();
+                e.GetNativeScriptComponentVariable(MeshBenderScript, field, ref h, RglScriptFieldType.RglSftFloat);
+                return h.f;
+            }
+            catch { return null; }
+        }
+
+        // Copies source's mesh_bender (script + bend values) onto target. Source must still be
+        // alive, so callers run this BEFORE removing the old entity. Returns true if target ends
+        // up with a bender.
+        private static bool CarryMeshBender(GameEntity source, GameEntity target, string context)
+        {
+            if (!HasMeshBender(source) || target == null || target.Pointer == UIntPtr.Zero) return false;
+
+            var values = MeshBenderFloatVars.Select(v => ReadBenderVar(source, v)).ToArray();
+            try
+            {
+                if (!HasMeshBender(target))
+                    target.CopyScriptComponentFromAnotherEntity(source, MeshBenderScript);
+            }
+            catch (Exception ex)
+            {
+                Log.Warn($"[MeshBender] {context}: could not copy mesh_bender from '{source.Name}' to '{target.Name}': {ex.Message}");
+                return false;
+            }
+            if (!HasMeshBender(target))
+            {
+                Log.Warn($"[MeshBender] {context}: CopyScriptComponentFromAnotherEntity ran but '{target.Name}' still has no mesh_bender.");
+                return false;
+            }
+
+            for (int i = 0; i < MeshBenderFloatVars.Length; i++)
+            {
+                if (values[i] == null) continue;
+                try
+                {
+                    var h = new ScriptComponentFieldHolder { f = values[i].Value };
+                    target.SetNativeScriptComponentVariable(MeshBenderScript, MeshBenderFloatVars[i], ref h, RglScriptFieldType.RglSftFloat);
+                }
+                catch (Exception ex)
+                {
+                    Log.Warn($"[MeshBender] {context}: could not set '{MeshBenderFloatVars[i]}' on '{target.Name}': {ex.Message}");
+                }
+            }
+
+            string Fmt(float?[] a) => string.Join(", ", MeshBenderFloatVars.Select((v, i) => $"{v}={(a[i]?.ToString("0.###") ?? "?")}"));
+            var after = MeshBenderFloatVars.Select(v => ReadBenderVar(target, v)).ToArray();
+            Log.Info($"[MeshBender] {context}: carried mesh_bender '{source.Name}' -> '{target.Name}'  source[{Fmt(values)}]  result[{Fmt(after)}]");
+            return true;
+        }
+
         // Unit-length basis when 1x Scale is selected; untouched when inheriting. Extra Z
         // rotation and scale multiplier are layered on afterwards.
         private static MatrixFrame ApplyScaleMode(MatrixFrame frame)
@@ -162,6 +238,7 @@ namespace PrefabSwapperTool.Core
                 if (added == null)
                     return new SwapResult { Success = false, Error = $"Prefab '{newPrefabName}' failed to instantiate (unknown prefab name?)." };
 
+                CarryMeshBender(oldEntity, added, "add-mode");
                 EditorFrameSync.Sync(added);
                 var addScale = oldEntity.GetLocalScale();
                 return new SwapResult
@@ -189,11 +266,13 @@ namespace PrefabSwapperTool.Core
             // not a "no mesh components" heuristic - a legitimate composite prefab's own top-level
             // anchor is COMMONLY meshless by design too (all visible geometry lives on its
             // children), so mesh count alone would false-positive on real, valid prefabs.
-            if (!IsReinstantiable(scene, oldName, out var oldDefinitionalChildren))
+            var resolvedOldName = ResolveReinstantiableName(scene, oldEntity, out var oldDefinitionalChildren, out var triedNames);
+            if (resolvedOldName != null) oldName = resolvedOldName;
+            else
                 return new SwapResult
                 {
                     Success = false,
-                    Error = $"'{oldName}' doesn't look like a real saved prefab (Instantiate can't resolve that name back - " +
+                    Error = $"'{oldName}' doesn't look like a real saved prefab (tried: {triedNames}; Instantiate can't resolve any of them back - " +
                             "probably a raw scene-placed empty/anchor/spawn point, not something a swap could ever be undone " +
                             "for). Refusing to touch it - nothing was changed.",
                 };
@@ -244,7 +323,8 @@ namespace PrefabSwapperTool.Core
             if (newEntity == null)
                 return new SwapResult { Success = false, Error = $"Prefab '{newPrefabName}' failed to instantiate (unknown prefab name?)." };
 
-            var swapResult = FinishSwap(scene, oldEntity, oldName, newEntity, newPrefabName, frame, existingChildren, meshOverrides, metaMeshColors, nonDefaultScale, runAutoPlace: true);
+            var swapResult = FinishSwap(scene, oldEntity, oldName, newEntity, newPrefabName, frame, existingChildren, meshOverrides, metaMeshColors, nonDefaultScale, runAutoPlace: true,
+                meshBenderSource: oldEntity);
             swapResult.OriginalFrame = originalFrame;
             return swapResult;
         }
@@ -275,11 +355,13 @@ namespace PrefabSwapperTool.Core
             var oldName = oldEntity.Name;
             var refName = referenceEntity.Name;
 
-            if (!IsReinstantiable(scene, oldName))
+            var resolvedOldName = ResolveReinstantiableName(scene, oldEntity, out _, out var triedNames);
+            if (resolvedOldName != null) oldName = resolvedOldName;
+            else
                 return new SwapResult
                 {
                     Success = false,
-                    Error = $"'{oldName}' doesn't look like a real saved prefab (Instantiate can't resolve that name back), " +
+                    Error = $"'{oldName}' doesn't look like a real saved prefab (tried: {triedNames}; Instantiate can't resolve any of them back), " +
                             "so a swap onto it could never be undone. Refusing to touch it - nothing was changed.",
                 };
 
@@ -318,6 +400,12 @@ namespace PrefabSwapperTool.Core
             try { CopyMissingChildren(scene, referenceEntity, newEntity, 0); }
             catch (Exception ex) { Log.Warn($"LivePrefabSwapper: child copy from '{refName}' incomplete: {ex.Message}"); }
 
+            // CopyFrom does not reliably bring native scripts along: the reference's own bender
+            // first; if the reference has none, the old entity's bender (the bend fitted to this
+            // spot) is carried in FinishSwap below, before the old entity is removed.
+            bool refHasBender = HasMeshBender(referenceEntity);
+            if (refHasBender) CarryMeshBender(referenceEntity, newEntity, "live-ref (from reference)");
+
             // Same flag clear as PrefabDistributor.CloneSourceAt, for the same confirmed reason:
             // CopyFrom marks its product "DontSaveToScene, NonModifiableFromEditor" (a runtime
             // entity) - the first makes the swap vanish from the saved scene, the second leaves
@@ -339,6 +427,8 @@ namespace PrefabSwapperTool.Core
 
             // Add mode: the copy is placed and positioned - stop here, originals untouched.
             if (AddModeKeepOriginals)
+            {
+                if (!refHasBender) CarryMeshBender(oldEntity, newEntity, "live-ref add-mode (from original)");
                 return new SwapResult
                 {
                     Success = true,
@@ -347,6 +437,7 @@ namespace PrefabSwapperTool.Core
                     NewPrefabName = refName,
                     Frame = frame,
                 };
+            }
 
             // No real prefab name behind a live copy - the reference entity's own current Name is
             // stored for logging/History display only. Undo within THIS session still works fully
@@ -368,7 +459,8 @@ namespace PrefabSwapperTool.Core
                 existingChildren: new List<GameEntity>(),
                 meshOverrides: new List<MeshOverride>(),
                 metaMeshColors: new List<MetaMeshColorOverride>(),
-                nonDefaultScale, runAutoPlace: false);
+                nonDefaultScale, runAutoPlace: false,
+                meshBenderSource: refHasBender ? null : oldEntity);
             liveResult.OriginalFrame = originalFrame;
             return liveResult;
         }
@@ -429,6 +521,7 @@ namespace PrefabSwapperTool.Core
                     var gf = child.GetGlobalFrame();
                     childCopy.SetGlobalFrame(ref gf, true);
                     copy.AddChild(childCopy, true);
+                    CarryMeshBender(child, childCopy, "live-ref child clone");
                     cloned++;
                 }
                 catch (Exception ex)
@@ -448,8 +541,12 @@ namespace PrefabSwapperTool.Core
 
         private static SwapResult FinishSwap(Scene scene, GameEntity oldEntity, string oldName, GameEntity newEntity,
             string newPrefabLabel, MatrixFrame frame, List<GameEntity> existingChildren, List<MeshOverride> meshOverrides,
-            List<MetaMeshColorOverride> metaMeshColors, bool nonDefaultScale, bool runAutoPlace)
+            List<MetaMeshColorOverride> metaMeshColors, bool nonDefaultScale, bool runAutoPlace,
+            GameEntity meshBenderSource = null)
         {
+            // Before RemoveEntity: the source must be alive for the copy.
+            if (meshBenderSource != null) CarryMeshBender(meshBenderSource, newEntity, $"swap '{oldName}' -> '{newPrefabLabel}'");
+
             // CONFIRMED LIVE DATA LOSS #2 (2026-08-18), "obliterates half the object" on a big
             // composite prefab: Instantiate() doesn't just create a bare entity - if newPrefabName
             // is ITSELF a composite prefab (parent anchor + its own baked-in child entities, the
@@ -552,6 +649,47 @@ namespace PrefabSwapperTool.Core
         // prefab name (same check the normal newPrefabName path relies on below) - this just
         // applies that exact same resolution logic to the OLD entity's name up front.
         private static bool IsReinstantiable(Scene scene, string name) => IsReinstantiable(scene, name, out _);
+
+        // The old entity's display name is NOT always its prefab name (2026-11-12): the editor
+        // appends _2/_3 to copies and Material Swap's rename appends _mst, and a swap that only
+        // tried the display name refused those entities. Tries, in order: the display name, the
+        // entity's live prefab link, then the display name with one drift suffix removed at a
+        // time. Returns the first name Instantiate resolves, or null; 'tried' lists them all.
+        private static string ResolveReinstantiableName(Scene scene, GameEntity entity,
+            out HashSet<string> definitionalChildNames, out string tried)
+        {
+            definitionalChildNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var candidates = new List<string>();
+            void Add(string n)
+            {
+                n = n?.Trim();
+                if (!string.IsNullOrEmpty(n) && !candidates.Contains(n, StringComparer.OrdinalIgnoreCase)) candidates.Add(n);
+            }
+
+            string display = null;
+            try { display = entity.Name; } catch { }
+            Add(display);
+            try { Add(entity.GetPrefabName()); } catch { }
+            var stripped = display ?? "";
+            for (int i = 0; i < 4; i++)
+            {
+                var next = System.Text.RegularExpressions.Regex.Replace(stripped, @"(_mst|_\d+)$", "",
+                    System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                if (next == stripped || next.Length == 0) break;
+                stripped = next;
+                Add(stripped);
+            }
+
+            tried = candidates.Count == 0 ? "(no name)" : string.Join(", ", candidates.Select(c => "'" + c + "'"));
+            foreach (var c in candidates)
+            {
+                if (!IsReinstantiable(scene, c, out definitionalChildNames)) continue;
+                if (!string.Equals(c, display, StringComparison.Ordinal))
+                    Log.Info($"[Swap] '{display}' is not a prefab name - using '{c}' as the old prefab.");
+                return c;
+            }
+            return null;
+        }
 
         // The probe doubles as the source of the prefab's DEFINITIONAL child names (unique
         // suffix stripped) - what SwapEntity uses to tell the old prefab's own parts from

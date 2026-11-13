@@ -55,6 +55,9 @@ namespace MaterialSwapTool.Patches
                 || FloraSwapLayer.IsFocusedOnInput
                 || SceneAnalyzerLayer.IsFocusedOnInput
                 || InteriorWhitelistLayer.IsFocusedOnInput
+                || SceneDiffLayer.IsFocusedOnInput
+                || SceneStatsLayer.IsFocusedOnInput
+                || MeshBlendLayer.IsFocusedOnInput
                 || NotificationSettingsLayer.IsFocusedOnInput
                 || ShortcutSettingsLayer.IsFocusedOnInput
                 || NumericTransformLayer.IsFocusedOnInput
@@ -320,12 +323,16 @@ namespace MaterialSwapTool.Patches
             BackupPanelLayer.Tick(dt);
             SceneAnalyzerLayer.Tick(dt);
             InteriorWhitelistLayer.Tick(dt);
+            SceneDiffLayer.Tick(dt);
+            SceneStatsLayer.Tick(dt);
+            MeshBlendLayer.Tick(dt);
             NotificationSettingsLayer.Tick(dt);
             ShortcutSettingsLayer.Tick(dt);
             NumericTransformLayer.Tick(dt);
             SelectionGrowLayer.Tick(dt);
             BackupManager.Tick(dt);
             Core.IsolationManager.Tick();   // deferred tag recovery + save-while-isolated warning
+            BannerlordSceneToolkit.ToolkitHints.Tick();   // hover tooltips (once per frame, see its guard)
         }
 
         // The digit that started a numeric takeover, or null. Numpad included - a number pad is

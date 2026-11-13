@@ -1,7 +1,7 @@
 <Module>
 	<Name value="Bannerlord Scene Toolkit"/>
 	<Id value="BannerlordSceneToolkit"/>
-	<Version value="v0.8.1"/>
+	<Version value="v0.9.0"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>

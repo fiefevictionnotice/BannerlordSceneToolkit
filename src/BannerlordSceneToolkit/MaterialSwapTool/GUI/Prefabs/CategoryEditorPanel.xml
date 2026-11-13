@@ -41,6 +41,7 @@
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteDelete">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes this category from the list on screen without asking. The removal is only written when you press Save; closing without saving keeps the category." />
                                           </Children>
                                         </ButtonWidget>
                                       </Children>
@@ -52,6 +53,7 @@
                                         <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                                           <Children>
                                             <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@IncludeText" Brush="MaterialSwapTool.RuleText" MarginLeft="6" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Comma-separated pieces of text. A material belongs to this category when its name contains any of them, ignoring case, unless an Exclude entry also matches." />
                                           </Children>
                                         </Widget>
                                       </Children>
@@ -63,6 +65,7 @@
                                         <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                                           <Children>
                                             <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ExcludeText" Brush="MaterialSwapTool.RuleText" MarginLeft="6" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Comma-separated pieces of text. A material whose name contains any of them is kept out of this category even when an Include entry matches." />
                                           </Children>
                                         </Widget>
                                       </Children>
@@ -88,7 +91,7 @@
             </Widget>
 
             <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="180" SuggestedHeight="30" Brush="Popup.Done.Button" Command.Click="ExecuteAddCategory" MarginBottom="8">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+ New Category" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+ New Category" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds a row named new_category with empty patterns at the end of the list. Rename it and fill in Include. Not kept until you press Save." /></Children>
             </ButtonWidget>
 
             <!-- Live test: type a material name and see which of the CURRENT (unsaved) rows above
@@ -100,6 +103,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@TestMaterialInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="e.g. empire_wall_a" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Type a material name to see which categories on screen would match it, including edits you have not saved yet. The result appears on the line below as you type." />
                   </Children>
                 </Widget>
               </Children>
@@ -111,16 +115,16 @@
                 <!-- WIDTH BUDGET: fixed widths + margins on this row must stay under ~672
                      (720 panel minus side margins), Close included. Currently 626. -->
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteSave" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes all rows to your category file in Documents and refreshes Continuous Recolor. Edits, new rows and deletions are not kept until you press this. Rows with an empty name are dropped." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteExportCategories" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes the saved categories to material_categories.json in the Exports folder (Categories subfolder), replacing that file. Unsaved edits on screen are not included." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteImportCategories" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import (merge)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import (merge)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Merges the JSON files in the Exports folder (Categories subfolder) into your saved categories at once: new categories and missing patterns are added, nothing is removed. Unsaved edits on screen are lost, so Save first." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenCategoryFolder" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the category export and import folder in Windows Explorer, creating it if needed." /></Children>
                 </ButtonWidget>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="100" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">

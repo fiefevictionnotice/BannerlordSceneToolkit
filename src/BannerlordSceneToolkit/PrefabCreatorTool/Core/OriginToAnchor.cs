@@ -45,8 +45,7 @@ namespace PrefabCreatorTool.Core
             why = null;
             if (!Alive(e)) { why = "entity is gone"; return false; }
 
-            int meshes = 0;
-            try { meshes = e.MultiMeshComponentCount; } catch { }
+            int meshes = CountRealMeshSlots(e);
 
             bool hasPhysics = false;
             try { hasPhysics = e.BodyFlag != BodyFlags.None; } catch { }
@@ -55,6 +54,43 @@ namespace PrefabCreatorTool.Core
             if (meshes > 0) { why = $"has {meshes} mesh slot(s)"; return false; }
             if (hasPhysics) { why = "has a physics body"; return false; }
             return true;
+        }
+
+        // EDITOR-ONLY MARKER MESHES DON'T COUNT (2026-11-12, "the F5 axis / side set origins
+        // button no longer works": every click logged moved=0 skippedMeshed=1). The Fief scaffold
+        // prefabs (and ~170 others in Native/SandBoxCore) put an editor_plane_low mesh with the
+        // editor_gizmo material on their root - a pick handle the game never draws. It read as
+        // "has 1 mesh slot", so those roots were refused although they are organisational empties.
+        // A slot is ignored only when EVERY mesh in it uses editor_gizmo: editor_cube etc. are
+        // also used with real materials (stone_a, rock_u, ... ~20k of them) and those ARE visible.
+        // The marker moves with the origin, which is where a pick handle belongs anyway.
+        public const string EditorOnlyMaterial = "editor_gizmo";
+
+        public static int CountRealMeshSlots(GameEntity e)
+        {
+            int count = 0;
+            int slots = 0;
+            try { slots = e.MultiMeshComponentCount; } catch { return 0; }
+            for (int m = 0; m < slots; m++)
+            {
+                bool editorOnly = false;
+                try
+                {
+                    var meta = e.GetMetaMesh(m);
+                    if (meta != null && meta.IsValid && meta.MeshCount > 0)
+                    {
+                        editorOnly = true;
+                        for (int i = 0; i < meta.MeshCount; i++)
+                        {
+                            var mat = meta.GetMeshAtIndex(i)?.GetMaterial()?.Name;
+                            if (!string.Equals(mat, EditorOnlyMaterial, StringComparison.OrdinalIgnoreCase)) { editorOnly = false; break; }
+                        }
+                    }
+                }
+                catch { editorOnly = false; }
+                if (!editorOnly) count++;
+            }
+            return count;
         }
 
         // Pass force:true after the user has confirmed moving a non-empty root.

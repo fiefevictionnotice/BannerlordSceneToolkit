@@ -1528,6 +1528,24 @@ namespace MaterialSwapTool.GUI
 
         public void ExecuteOpenBatchHistory() => BatchHistoryLayer.Open();
 
+        // Fly-out: terrain mesh blend check and tuning (see MeshBlendVM). It reads the editor
+        // selection itself on each of its own button presses, not this panel's scope mode.
+        public void ExecuteOpenMeshBlend()
+        {
+            try
+            {
+                if (!EntitySelector.HasOpenScene) { StatusText = "No scene is currently open."; return; }
+                MeshBlendLayer.Open();
+                if (MeshBlendLayer.IsOpen) StatusText = "Mesh Blend opened - select an entity in the editor and press Check there.";
+                else StatusText = "Mesh Blend could not be opened - see tool.log.";
+            }
+            catch (Exception ex)
+            {
+                StatusText = "Opening Mesh Blend failed: " + ex.Message;
+                Log.Error("Opening Mesh Blend failed: " + ex);
+            }
+        }
+
         public void ExecuteUndoLastBatch()
         {
             try
@@ -1550,18 +1568,18 @@ namespace MaterialSwapTool.GUI
         public void ExecuteSolidify()
         {
             var inquiry = new InquiryData(
-                "Solidify tracking tags?",
+                "Simplify for export?",
                 "This applies to the WHOLE SCENE, not just your current selection. Every entity this " +
                 "tool has ever UID-tagged gets its tracking downgraded from exact tag-based to " +
                 "position-based, and the tag is REMOVED from the scene. This is a one-way step: after " +
-                "solidifying, revert/undo can no longer tell an entity apart from a clone at the same " +
+                "simplifying, revert/undo can no longer tell an entity apart from a clone at the same " +
                 "spot with full confidence - if it moves later, tracking for it is lost. A new log file " +
                 "is written; the original tag-based log is left untouched. Do this once you're done " +
                 "rearranging and just want to shed the tag clutter, not while you're still actively " +
                 "moving things around.",
                 isAffirmativeOptionShown: true,
                 isNegativeOptionShown: true,
-                affirmativeText: "Solidify",
+                affirmativeText: "Simplify",
                 negativeText: "Cancel",
                 affirmativeAction: RunSolidify,
                 negativeAction: null);
@@ -1573,14 +1591,14 @@ namespace MaterialSwapTool.GUI
             try
             {
                 var report = SolidifyManager.Run();
-                StatusText = $"Solidify: {report.EntitiesSolidified} entities converted to position tracking, " +
+                StatusText = $"Simplify for Export: {report.EntitiesSolidified} entities converted to position tracking, " +
                              $"{report.EntitiesAmbiguousSkipped} left tagged (ambiguous), " +
                              $"{report.EntriesDroppedMissing} stale entries dropped.";
             }
             catch (Exception ex)
             {
-                StatusText = "Solidify failed: " + ex.Message;
-                Log.Error("Solidify failed: " + ex);
+                StatusText = "Simplify for Export failed: " + ex.Message;
+                Log.Error("Simplify for Export failed: " + ex);
             }
         }
 

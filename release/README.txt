@@ -4,6 +4,10 @@ Bannerlord Scene Toolkit
 Editor tooling for Mount & Blade II: Bannerlord scene work - material swapping,
 prefab swapping and distribution, prefab creation, scene analysis, and backups.
 
+GAME VERSION: each release is built for one Bannerlord / Modding Kit version.
+WHATS-NEW-<version>.txt in this zip says which one. The full table is at
+    https://github.com/fiefevictionnotice/BannerlordSceneToolkit#which-release-for-which-game-version
+
 All three tools are ENABLED in this package (see tool_toggles.txt). Earlier
 builds shipped with Prefab Swapper and Prefab Creator switched off; they are on
 now, so every hotkey below is live.

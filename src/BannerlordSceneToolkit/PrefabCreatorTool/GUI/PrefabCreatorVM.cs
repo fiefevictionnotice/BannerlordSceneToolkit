@@ -147,6 +147,9 @@ namespace PrefabCreatorTool.GUI
 
         public PrefabCreatorVM(Action closeAction, Action beginDragAction)
         {
+            // A swap finishes inside its confirm dialog, after the forwarding command returned,
+            // so the mirrored status has to follow the inner VM whenever it changes.
+            _swap.StatusChanged = RefreshSwapBindings;
             _closeAction = closeAction;
             _beginDragAction = beginDragAction;
             _detectedGroups = new MBBindingList<VariantGroupRowVM>();

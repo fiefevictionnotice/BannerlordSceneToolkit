@@ -1,5 +1,336 @@
 # Changelog
 
+## v0.9.0 - 2026-11-12 (GitHub release, for Bannerlord v1.5.7)
+
+- Version bumped to v0.9.0 (`_Module/SubModule.xml`). Contains every entry below down to v0.8.1.
+- Built, deployed (22:40, 37 files verified by hash) and packaged against Bannerlord v1.5.7.
+  Not tried on v1.4.8; v0.8.1 stays the release for v1.4.8.
+- README has a "Which release for which game version" table; the zip's README.txt links to it.
+- New `WHATS-NEW-v0.9.0.txt` in the zip. Source snapshot in `BannerlordModArchive\v0.9.0`.
+- Confirmed in the editor by the user before release: tooltips, unsaved-change question, Scene
+  Diff (compare and Go), Statistics (Most-Used Prefabs and Heaviest Meshes across the scene),
+  Lights, Mesh Blend check, F5 swap with mesh bender carry-over, Auto Origin, path distribute
+  rotation, load-crash checks, Remove Physics Outside Border, F6 bad-name error, typed colors.
+  Not tested: Delete Interiors refusal with unsaved whitelist edits; the in-editor docs text.
+## 2026-11-12 - In-editor documentation updated for v0.9.0 (deployed 2026-11-12 22:40, untested in editor)
+
+`DocumentationVM.cs` brought up to date with everything since 2026-10-04. Docs text only, no
+behavior change. User Guide 40 -> 47 topics, Technical Docs 15 -> 18.
+
+- New User Guide topics: Tooltips; Unsaved changes (Discard changes / Keep editing); Panel size
+  and position; Material Swap Tool - Mesh Blend; Scene Analyzer - Scene Diff; Scene Analyzer -
+  Statistics; Scene Analyzer - Lights. Built from the six drafts in `docs/not-yet-in-editor/`, which stay as source drafts.
+- New Technical Docs topics: Tooltip layer (`ToolkitHints`, `Hint` widgets); Unsaved-change guard
+  (`UnsavedGuard`); Crash ledger (`NativeProbe`, the Statistics passes, `GetOldPrefabName`).
+- Edited User Guide topics: Color factor and Continuous Recolor (typed sRGB -> linear); Keyboard
+  shortcuts (Tooltips row, pointer to panel size); Delete Interiors (refuses with unsaved
+  whitelist edits); Category Editor and Culture Editor (unsaved question); Scene Analyzer
+  Overview (three fly-outs), Full Scan (two load-crash checks), Fix actions (Fix Destructible
+  Refs, Unparent Stands, Remove Physics Outside Border); Prefab Swapper & Distribution (mesh
+  bender, old-prefab lookup, status line and log, F6 short errors, path heading); Prefab Creator
+  (roots with an editor marker mesh).
+- Edited Technical Docs topics: Color mechanisms (Mesh.Color is linear); F6 fixes (v1.5.7 path
+  rotation, mesh bender carry); Delete Physics (Remove Physics Outside Border rework).
+- Where the drafts and the code disagreed, the code was followed: Statistics counts baked copies
+  by entity name (the draft said "the prefab they were baked from") and has the NOT COUNTED
+  line; Delete Interiors refuses, it does not only warn; Scene Diff also searches the default
+  backup folder; retrying one ledger step needs all of that step's lines removed, not only the
+  "crashed" line.
+- No "Solidify" wording was left in the docs text, and the docs state no tested game version, so
+  neither needed a change.
+
+## 2026-11-12 - F5 swap: result and failure reason now shown and logged (deployed 2026-11-12 22:16, untested in editor)
+
+Report: "nothing happens when i run the swap thing... there IS NO swap happening". The session log
+shows the pre-swap backup running three times with no swap trace after it, so each swap was refused
+before its first engine call. The reason was never visible: the cause of the refusal itself is NOT
+yet identified.
+
+- F5 mirrors the swapper's status text, but a swap finishes inside the confirm dialog's callback,
+  after F5 had already refreshed. The result line ("Swapped N", or a refusal) never reached the
+  panel. `PrefabSwapperVM.StatusChanged` now tells F5 to refresh whenever the status changes.
+- Every swap status is written to `PrefabSwapperTool\tool.log` as `[SwapStatus] ...`, and every
+  failed entity as `[Swap] failed: <reason>`. The status line carries the first reason.
+- Old-prefab lookup no longer relies on the display name alone: it tries the display name, the live
+  prefab link, then the name with `_2` / `_mst` style suffixes removed, and uses the first one the
+  engine can instantiate. The refusal message lists the names tried.
+
+## 2026-11-12 - Statistics: Most-Used Prefabs counts baked copies again (deployed 2026-11-12 21:46, untested in editor)
+
+- First working run of F7 > Statistics (19:00, fief_bake_test_2: 6,019 entities, 89 prefabs,
+  7 lights, scan 10-13 ms). CONFIRMED by the user: the Lights tab ("looks great") and Heaviest
+  Meshes including Select across the scene. Every probed engine call has now completed live
+  (the ledger shows ok for all of them), so the remaining crash risk listed below is gone.
+- Reported: Most-Used Prefabs only listed and selected instances that are still live prefab
+  links (in practice the contents of one big linked entity), not every copy in the scene. That
+  was the cost of dropping GetOldPrefabName: baked copies had no name.
+- Fix: an unlinked entity is now named from its display name. The engine is asked whether a
+  prefab of that name exists (`GameEntity.PrefabExists`); if not, one `_2` / `_3` / `_mst`
+  suffix is stripped and it is asked again (up to four steps, cached per distinct name). Names
+  that are not prefabs stay unnamed. Select uses the same rule, so it picks live links and baked
+  copies together; the row still says how many are linked and how many baked.
+- Limits: a copy that was renamed to something else entirely is not matched, and a nested part
+  that happens to carry a prefab's name is counted as an instance of it.
+- `PrefabExists` is a new call for the toolkit, so this pass runs under the crash ledger too.
+
+## 2026-11-12 - Statistics crash cause found: GameEntity.GetOldPrefabName (deployed 2026-11-12 18:50, untested in editor)
+
+- F7 > Statistics crashed the editor again at 18:48:18 on a new map. This time the crash ledger
+  (`MaterialSwapTool\native_probe_ledger.txt`) named the call: it ends on
+  `trying|SceneStats: GameEntity.GetOldPrefabName`, with `Scene.RootEntityCount` before it
+  marked ok. A dump was written too (`ProgramData\...\crashes\2026-11-13_00.48.32`).
+- `GetOldPrefabName()` is no longer called anywhere in the statistics code (scan and Select).
+  Never call it from this toolkit: it takes the editor down natively, try/catch does not help.
+- Cost: entities that are not live prefab links (baked copies, hand-built ones, children) are
+  counted but no longer named in the Most-Used Prefabs table. The totals line now says
+  "N live prefab links; M entities are not prefab links".
+- Even without this build the ledger protects the installed one: on the next launch that pass is
+  marked "crashed" and skipped. The remaining probed calls (component counts for cloth,
+  particles, decals, lights; script count; light getters; mesh face counts) have still never
+  completed a live run, so each could still cost one crash before the ledger skips it.
+
+## 2026-11-12 - First live test: tooltip box size, Statistics/Lights crash, Scene Diff backup locations (deployed 2026-11-12 17:23, untested in editor)
+
+Results of the user's first session with today's build (17:06-17:19):
+
+- CONFIRMED working: the unsaved-changes question on Esc (the "Keep editing" branch was not
+  tried), the "Simplify for Export" wording, and Scene Diff (a compare ran, the report was
+  written). The typed-color fix from earlier today was confirmed too.
+- BROKEN, fixed: every tooltip covered the whole screen. The box's two background sprites were
+  StretchToParent children of a CoverChildren widget, and the engine sized them from the
+  full-screen root. The sprites now sit ON the CoverChildren containers, so only the text gives
+  the box a size (460 wide). Safety net in `ToolkitHints.PlaceBox`: a box measuring more than 60%
+  of the screen switches hints off for the session and logs a `[Hints]` line.
+- CRASH, mitigated: pressing F7 > Lights took the editor down (native crash, no dump - it was
+  cancelled). It was not about lights: tool.log shows the statistics scan never finished its
+  first-ever run, so Statistics would have crashed the same way. The scan made six engine calls
+  the toolkit had never made before, in one loop, so the log could not say which one.
+  - The scan now runs in passes. Pass 1 uses only long-proven calls. Each new call gets its own
+    pass under `Core/NativeProbe.cs`, a crash ledger: "trying|name" is flushed to
+    `MaterialSwapTool\native_probe_ledger.txt` before the pass and "ok|name" after. A name left
+    on "trying" when the toolkit next loads is marked "crashed" and skipped from then on.
+  - So the next crash, if there is one, names the call in that file and costs nothing after
+    that: the panel still opens, shows "NOT COUNTED: ..." for the missing figure, and the rest
+    works. Deleting the ledger retries everything.
+  - Probed groups: Scene.RootEntityCount, GetOldPrefabName, GetComponentCount for ClothSimulator /
+    ParticleSystemInstanced / Decal / Light, WeakGameEntity.GetScriptCount, GetLight + light
+    getters, and the mesh-name + Mesh.GetFaceCount pass of the Heaviest tab.
+  - The culprit is still UNKNOWN. This change does not prevent one more crash; it makes it the
+    last one and identifies the call.
+- Scene Diff and a changed backup location (asked, analyzed): it reads the same setting the
+  backup writer uses (F9 Location), so backups written after a change are found. Backups
+  written BEFORE the change stayed in the old folder and were missing from the list; the
+  default folder is now searched as well whenever a custom location is set. Backups left in
+  some other, earlier custom folder are still not found.
+
+## 2026-11-12 - F8: Mesh Blend check and tuning (deployed 2026-11-12 17:19, untested in editor)
+
+- New fly-out, opened from one new button on F8's Continuous Recolor row (no new row, panel
+  height unchanged): Mesh Blend. It answers "why is the terrain color not blending onto the base
+  of this entity" and tunes the blend. Everything runs on a button press.
+- Check: one line per condition for the selected entities (first 4), each OK / FAIL / UNKNOWN
+  with the measured value, and a last line naming the most likely cause. Conditions: shader
+  quality, terrain layers flagged as mesh blend layers (read from the last SAVED scene.xscene; the
+  first layer never blends), material shader, mobility, current blend values, height of the
+  bounding box above the terrain.
+- UNKNOWN on purpose: paint weight under the entity (the engine has a setter and no getter) and
+  the engine's per-mesh stationary flag (mobility is shown as a hint). Texture format and
+  resolution are not checked; the panel only names the blend layers' diffuse textures.
+- Recalculate: looks the editor's `recalculate_mesh_blend` console command up in the editor's own
+  command list, runs it and shows the answer. If the editor does not list it, nothing is run.
+- Tuning: blend height (meters), softness, noise amount, noise scale, and behind an Advanced
+  toggle heightmap start, heightmap power, normal bend. -/+ steppers, Read from Selection, Apply
+  to Selection, Reset to Default, Undo Last Change (20 steps, this panel only, dropped on scene
+  switch). Applies to every eligible mesh of the selected entities, children and all LODs. An
+  empty field keeps each mesh's current value. Needs a scene save to persist.
+- Tuning is only offered on `pbr_shading`, `pbr_metallic` and `terrain_mesh_blend_shader`
+  materials without texture-scaler / animated-UV / tableau flags. Other shaders that can blend
+  (flags, bows, ropes, lightmapped) use the same mesh values for their own effects and are skipped.
+- From the shader source (1.5.7): there is no `pbr_standart` shader; the standard one is
+  `pbr_shading`. The rules and their file:line references are in the header of
+  `Core/MeshBlend.cs`.
+- Unverified until seen in the editor: the shader names the engine reports, that mesh vector
+  arguments set from managed code show at once and are saved, that the fourth component (noise
+  scale) reads back, the console command lookup, the shader-quality mapping, and the layout.
+  Look for `[MeshBlend]` lines in MaterialSwapTool\tool.log.
+- User-guide draft: docs\not-yet-in-editor\MESH-BLEND.md.
+
+## 2026-11-12 - Tooltips on every panel (deployed 2026-11-12, untested in editor)
+
+- Rest the mouse on a toolkit button for about half a second and a box says what it does: what
+  it acts on, whether it asks first, whether it can be undone. About 340 hints across every live
+  panel (F5-F9 and their fly-outs, including the new F7 panels). Each hint was written from the
+  button's handler code, not from its label.
+- How it works: a hint is a hidden `<TextWidget Id="Hint" ...>` child inside the button (or the
+  wrapper of a text field) in the panel XML. `Core/ToolkitHints.cs` looks at the hovered widget
+  of every Gauntlet layer once per frame and shows the text in one shared layer
+  (`ToolkitHintPanel.xml`). No VM properties and no per-panel code, so adding a hint to a new
+  button is one XML line.
+- The tooltip layer is not a focus layer and every node is click-through, like the
+  last-operation readout. It hides on click and stays hidden until the mouse moves to another
+  button. It flips left/up near the screen edges and follows the panel scale.
+- Switch: F9 > Keyboard Shortcuts > "Tooltips: ON/OFF" (`HintsEnabled` in shortcut_settings.json,
+  default on). The Shortcuts panel grew by one row.
+- Why not Gauntlet's own HintWidget: it depends on the game's global information layer, which is
+  not known to exist in the editor screen, and needs a view-model property per button.
+- Unverified until seen in the editor: that hover is reported for these panels, the box position
+  at non-default panel scales, and the look of the box. If no tooltip ever appears, look for
+  `[Hints]` lines in MaterialSwapTool\tool.log.
+- User-guide draft: docs\not-yet-in-editor\TOOLTIPS-AND-UNSAVED-CHANGES.md.
+
+## 2026-11-12 - Unsaved-change warnings; "Solidify" wording removed (deployed 2026-11-12, untested in editor)
+
+- Interior Whitelist, Category Editor and Culture Editor: Close and Esc now ask "Discard changes /
+  Keep editing" when the rows differ from what was last loaded or saved (`Core/UnsavedGuard.cs`;
+  detection compares a signature of the rows, so no setter can be missed). No question when
+  nothing changed. Forced closes (parent panel closing, scene switch) still close at once.
+- F7 Delete Interiors refuses while the Interior Whitelist panel is open with unsaved edits. It
+  acts on the saved list, not on what the panel shows; that gap is how the tutorial video lost a
+  scene's interiors.
+- "Simplify for Export": the confirmation title, its button, the status line and the log messages
+  no longer say "Solidify". Internal class and file names (`SolidifyManager`,
+  `solidified_*.jsonl`) are unchanged so existing data keeps working.
+
+## 2026-11-12 - F7: Scene Diff, Scene Statistics, Light List (deployed 2026-11-12, untested in editor)
+
+- Three read-only fly-outs, opened from new buttons on F7's Close row (no new row, panel height
+  unchanged): Scene Diff, Statistics, Lights. Statistics and Lights are two tabs of one panel.
+- Scene Diff: compares two saved states of the open scene - the saved scene.xscene against a
+  backup, or backup against backup - and lists entities added, removed, moved (with distance),
+  rotated/scaled, renamed, prefab reference changed, material/color changed, plus tags, scripts,
+  physics, light and flags. Snapshot list newest first; default = saved file vs the newest backup
+  that is not a copy of that same save. Parsed and compared on a background task. Results open
+  in the results window with Go buttons; Write Report saves the full list.
+- It reads SAVED files only; unsaved editor changes are in neither side. The panel says so.
+- Entities have no ids in the file, so they are matched: per sibling group, by prefab/name, exact
+  transform first, then same position, then nearest position, then renamed-in-place, then
+  prefab-swapped-in-place. Known limits (a delete plus a new placement of the same prefab reads
+  as a move; which of several identical duplicates moved is a guess) are in the draft doc.
+- Rotations are compared as orientations, not as three numbers: the editor rewrites the euler
+  angles of upright objects on every save, which read as 91 false "rotated" rows between two
+  real backups before this.
+- Statistics: scene totals (entities, top-level/children, distinct prefabs, linked vs baked,
+  meshes, lights, particle systems, decals, cloth, scripts), a most-used-prefabs table and a
+  heaviest-meshes table (LOD0 triangles x instances, counted once per distinct mesh). Select
+  picks every instance through the deferred selection queue; Go jumps to the first.
+- Lights: every light with owner, radius, color, intensity and shadow flag, sorted by shadow cost
+  or radius, with Go. Flags shadow-casting lights of radius 15+, radius 40+, zero
+  radius/intensity, and several lights at one position.
+- Everything runs on a button press (open / Refresh / Compare); nothing scans on tick. Tables
+  show 60 rows with Show More. Reports go to MaterialSwapTool\Reports\.
+- Statistics/Lights stays open when F7 closes; Scene Diff closes with it. Both close on a scene
+  switch (BackupManager.InvalidateSceneState).
+- Watch for: the Lights tab reads each light through `GameEntity.GetLight()`, whose wrapper
+  releases a native reference from its finalizer. The game's own LightCycle script does the
+  same, but a delayed crash some seconds after opening the Lights tab would point here.
+- New user-guide drafts: docs\not-yet-in-editor\SCENE-DIFF.md, SCENE-STATISTICS.md,
+  LIGHT-LIST.md. Scene Diff's matching was run outside the editor against real backups (13,556
+  entities: parse about 70 ms per file); the panels, Statistics and Lights have not been opened
+  in the editor.
+
+## 2026-11-12 - Typed colors no longer wash out (deployed 2026-11-12, CONFIRMED by the user 2026-11-12)
+
+- Continuous Recolor and Material Swap rule colors came out lighter and less saturated than the
+  hex you typed, always by the same curve: `#BAFFAF` -> `#DDFFD7`, `#802020` -> `#BB6363`.
+  Cause: `Mesh.Color` is stored LINEAR; the editor's own color field converts the typed sRGB hex
+  to linear first, the toolkit wrote it raw. Confirmed by the user's dark-color test (a 2.2 gamma
+  predicted `#BA6363`; "halfway to white" predicted `#C09090`).
+- New `ColorHex.SrgbToLinear` / `LinearToSrgb` (gamma 2.2, alpha untouched). Converted at the
+  typed-input write sites (Continuous Recolor palette + single-color apply, Material Swap rule
+  ColorFactor) and in Sample Selection's seeded hex.
+- Unchanged on purpose: undo/redo logs, LOD color fix, Fill Overrides and color presets copy
+  stored values mesh-to-mesh, so they stay raw and round-trip exactly.
+- Colors applied before this stay washed out until re-applied. Very dark channels land within a
+  couple of steps (8-bit linear storage). The entity-wide color factor (`SetFactorColor`) is not
+  converted; untested whether it has the same issue. Compiled with SkipDeploy; untested.
+
+## 2026-11-12 - Remove Physics Outside Border works again (deployed 2026-11-12, untested in editor)
+
+- It was still the first-round approach the pile work proved useless: it skipped every entity
+  whose own BodyFlag read None (every placed prefab root, since collision sits on the children)
+  and called RemovePhysics, which never persists (the save re-writes `<physics shape="bo_..."/>`).
+- Now each out-of-border entity is tagged `oob_nophys`; SavedScenePhysicsStripper strips the
+  `<physics>` nodes of tagged entities AND their whole subtree from scene.xscene, automatically
+  ~2 s after every editor save (.bak kept, newest 3). Result shows after save + reload.
+- Live prefab links among them are broken first (a `prefab="X"` entity has no children in the
+  file, so there would be nothing to strip). Undo removes the tag.
+- The stripper now covers subtrees for `pile_nophys` too. Compiled with SkipDeploy; untested.
+
+## 2026-11-12 - F6: short errors, unknown prefab names caught up front (deployed 2026-11-12, untested in editor)
+
+- Distribute by name (path, grid, onto surface, fill surfaces) checks the prefab name ONCE
+  before placing anything. An unknown name used to try every cell (100 for a 10x10 grid), dump
+  100 identical "instantiate returned null" lines into the two-line status, and still leave an
+  empty `_Grid` anchor. Now: "'x' is not a saved prefab ... switch Source to Selection."
+- No anchor is created when nothing was placed.
+- Every F6 status line (distribute, mirror, rotate) shows failures grouped and counted, e.g.
+  "100 failed: 100x instantiate returned null (full list in PrefabSwapperTool\tool.log)".
+  The full list goes to tool.log as `[Distribute] failed:` lines.
+- Compiled with SkipDeploy; untested in the editor.
+
+## 2026-11-12 - Auto Origin / Origin to Anchor accept roots with an editor marker mesh (deployed 2026-11-12, untested in editor)
+
+- "Set Origins (Selected)" refused the Fief scaffold prefabs (`moved=0 skippedMeshed=1` on every
+  click): their root carries `editor_plane_low` with the `editor_gizmo` material, an editor-only
+  pick handle, and it counted as real geometry. About 170 Native/SandBoxCore prefabs do the same.
+- A mesh slot is now ignored when every mesh in it uses `editor_gizmo`. `editor_cube` etc. with
+  real materials (stone_a, rock_u, ...) still count, so those roots are still protected.
+- Origin to Anchor no longer asks "Move a non-empty entity?" for these roots either.
+- The marker moves with the origin. Compiled with SkipDeploy; untested in the editor.
+
+## 2026-11-12 - Swaps keep the mesh bender (deployed 2026-11-12, untested in editor)
+
+- Swap Selected, Swap All Matching, swap to live reference, Add mode and undo now carry the
+  native `mesh_bender` script and its bend values ("Bend Amount", "Bend Center Ratio") onto the
+  swapped-in entity. Before, every swap dropped it: Instantiate only brings the new prefab's own
+  definition, and the live-reference path discarded everything from the old entity.
+- Live reference: the reference's own bender wins when it has one, otherwise the old entity's.
+- Each carry logs `[MeshBender] ... source[...] result[...]` in PrefabSwapperTool\tool.log,
+  with the values read back from the new entity.
+- Uses `GameEntity.CopyScriptComponentFromAnotherEntity` + `Set/GetNativeScriptComponentVariable`
+  (first use of both in the codebase). Compiled with SkipDeploy; untested in the editor.
+- Still open: the editor's drag-placement ghost disappearing after swaps. Swap code is unchanged
+  since 2026-08-23, so the 1.5.7 game update is a suspect.
+
+## 2026-11-11 - Scene Analyzer: two load-crash checks + fixes (CC_93 merlons, CC_84 market stand)
+
+- New `CrashChecks.cs`, run first in Full Scan:
+  - **Destructible reference tags (server load crash).** Any entity with a `DestructableComponent`
+    whose `ReferenceEntityTag` has no DIRECT child carrying that tag. `OnInit` asserts that child
+    exists (`GetFirstChildEntityWithTag` checks direct children only, decompiled), and the
+    dedicated server aborts on load. This was the CC_93_siege crash (8 merlons missing their
+    `debris_holder`). New button **Fix Destructible Refs** adds a tagged `debris_holder` child at
+    each entity's origin (the same fix that was server-verified on CC_93).
+  - **Live merchant_stand_market prefab (client load crash).** CC_84 test maps: every live
+    `prefab="merchant_stand_market"` crashed clients, the inline copy loaded. The server loads it
+    fine. The four sibling SandBox stands warn. New button **Unparent Stands** calls
+    `BreakPrefab()` so the save writes the children inline. The old meshless-cloth theory is ruled
+    out (working CC_84_battle has 50 bare `<cloth_simulator/>`), so there is no cloth check.
+- Deployed 2026-11-12 (MD5 of DLL + SceneAnalyzerPanel.xml match the build output). **Not tested
+  in-editor yet.** The live detection of a prefab link relies on `GetPrefabName()` being empty
+  for baked copies; check that on a test scene.
+- Standalone `Analyze-BannerlordScene.ps1` got the same two checks (32, 33), tested on 8 scenes
+  with known outcomes.
+
+
+## 2026-11-11 - Distribute along path rotates again (game v1.5.7 regression)
+
+- After the 2026-11-11 Bannerlord update (v1.5.7), `Path.GetFrameForDistance` returns the
+  position but an IDENTITY rotation, so F6 "Distribute along path" (by name and from
+  selection) placed every instance world-aligned. Confirmed in `BST_dist_test`: 225 path
+  instances with no `rotation_euler`, against August scenes (CC_76_battle_testing2) whose
+  instances carry a yaw-only heading along the path. Extra Z Rotation was not involved.
+- New `PrefabDistributor.PathFrameAt`: samples two positions 5 cm apart, flattens to XY and
+  builds the same yaw-only frame (f = travel, u = world up) the engine used to return. All four
+  path-sampling calls go through it. Deployed 13:16 after the editor exited (DLL MD5 matches the
+  build); not yet verified in-editor. No release.
+- 1.5.7 audit of the rest of the toolkit (offline): compiles against the 1.5.7 DLLs with 0 errors;
+  the 12:51 session's logs show every Harmony hook attached (SceneGuard, cursor, editor tick) and
+  no toolkit errors; string-named reflection targets still resolve (MBDebug.RenderDebugSphere,
+  SceneEditorScreen); engine API diff vs the 1.5.5 refs removed nothing; bounding-box extents
+  unchanged (sally wall 14.257). New engine-log noise is all vanilla (shader recompiles, Qt
+  editor warnings, missing FMOD events).
+
 ## 2026-10-26 - In-editor docs on GitHub; docs split into scene-toolkit / misc (docs only)
 
 - New `Tools/Export-InEditorDocs.ps1` reads `DocumentationVM.cs` (no build) and writes

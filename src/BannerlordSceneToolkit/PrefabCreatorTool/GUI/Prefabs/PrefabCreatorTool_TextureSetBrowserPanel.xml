@@ -22,7 +22,7 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SearchTerm" Brush="PrefabCreatorTool.InputText" MarginLeft="8" /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="100" Brush="Popup.Done.Button" Command.Click="ExecuteRefresh">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reloads the saved texture sets from disk, filtered by the search text, which matches the set name or its base prefab." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -30,10 +30,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorWordsInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="color words (comma separated)" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorWordsInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="color words (comma separated)" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Comma-separated color words to look for at the end of entity tags, such as redbrown or grey. Leave blank to use the built-in list of common color words." /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button" Command.Click="ExecuteImportColorFamilies">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Tagged Color Families" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import Tagged Color Families" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Scans the whole scene for entities tagged with a family name plus a color word and saves one texture set per family and color found, to disk. Uses the words typed to the left, or a built-in list. The scene is not changed." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -57,14 +57,14 @@
                                       <Children>
                                         <Widget WidthSizePolicy="Fixed" SuggestedWidth="24" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="@SwatchColor" MarginRight="6" DoNotAcceptEvents="true" />
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="80" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteApply" MarginRight="6">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Applies this set's materials and colors to the matching parts of every selected entity. It does not ask, takes no backup, and has no undo in this panel." /></Children>
                                         </ButtonWidget>
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Title.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" MarginRight="6" />
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteEdit" MarginRight="6">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Loads this set into the Create / Edit area below. Nothing is saved until you click Save Texture Set, which overwrites it if the name is unchanged." /></Children>
                                         </ButtonWidget>
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="80" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteDelete">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Deletes this saved texture set file from disk at once, without asking. Cannot be undone. Entities it was already applied to keep their look." /></Children>
                                         </ButtonWidget>
                                       </Children>
                                     </ListPanel>
@@ -72,7 +72,7 @@
                                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="18" Text="@SummaryText" Brush="Popup.Description.Text" MarginBottom="2" DoNotAcceptEvents="true" />
 
                                     <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="130" HeightSizePolicy="Fixed" SuggestedHeight="24" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggleExpand" MarginBottom="2">
-                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ExpandButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ExpandButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Shows or hides the list of parts this texture set changes." /></Children>
                                     </ButtonWidget>
 
                                     <ListPanel DataSource="{Overrides}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" IsVisible="@IsExpanded">
@@ -114,10 +114,10 @@
                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@EditNameInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="texture set name" /></Children>
                 </Widget>
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@EditBasePrefabInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="base prefab name" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@EditBasePrefabInput" Brush="PrefabCreatorTool.InputText" MarginLeft="8" DefaultSearchText="base prefab name" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="The prefab this texture set is meant for. The Texture button on a Pile Generator row only offers sets whose base prefab matches that row's prefab name." /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button" Command.Click="ExecuteFillBaseFromSelection">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies the first selected entity's display name into the base prefab box. That is the entity name, not its prefab name, so correct it by hand if the entity was renamed or is a numbered duplicate." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -125,10 +125,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="220" Brush="Popup.Done.Button" Command.Click="ExecuteCaptureOverrideFromSelection" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Capture Override From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Capture Override From Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the material and color of the first mesh on the first selected entity and adds them as an override row keyed by that entity's name, or updates the row if it exists. Changes nothing in the scene." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button" Command.Click="ExecuteAddManualOverride">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Add Manual Override" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Add Manual Override" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds a blank override row. Type a part key (a mesh slot or child entity name), then a material name, a hex color, or both." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -145,7 +145,7 @@
                               <Children>
                                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="18" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="@SwatchColor" MarginRight="4" DoNotAcceptEvents="true" />
                                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="2">
-                                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PartKey" Brush="PrefabCreatorTool.InputText" MarginLeft="4" DefaultSearchText="part key" /></Children>
+                                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PartKey" Brush="PrefabCreatorTool.InputText" MarginLeft="4" DefaultSearchText="part key" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Which part this row changes: a mesh slot name or a child entity name of the base prefab. Rows with a blank part key are dropped on save." /></Children>
                                 </Widget>
                                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="2">
                                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@Material" Brush="PrefabCreatorTool.InputText" MarginLeft="4" DefaultSearchText="material" /></Children>
@@ -154,7 +154,7 @@
                                   <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@Color" Brush="PrefabCreatorTool.InputText" MarginLeft="4" DefaultSearchText="#hex color" /></Children>
                                 </Widget>
                                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="30" Brush="Popup.Cancel.Button" Command.Click="ExecuteRemove">
-                                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes this override row from the edit area. It takes effect on disk only when you save." /></Children>
                                 </ButtonWidget>
                               </Children>
                             </ListPanel>
@@ -178,10 +178,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteSaveTextureSet" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Texture Set" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Texture Set" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Saves the name, base prefab and override rows above to disk, without asking. A texture set with the same name is overwritten." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="100" Brush="Popup.Cancel.Button" Command.Click="ExecuteClearEditor" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Empties the name, base prefab and override rows in this edit area. Saved texture sets on disk are not touched." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
                   <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>

@@ -36,7 +36,17 @@ namespace MaterialSwapTool.GUI
             Rows.Clear();
             foreach (var kvp in MaterialCategoryInference.GetAllForEditing().OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase))
                 Rows.Add(new CategoryEditItemVM(kvp.Key, string.Join(", ", kvp.Value.Include), string.Join(", ", kvp.Value.Exclude), RemoveRow));
+            _savedSignature = Signature();
         }
+
+        // Unsaved-change detection: compare the rows with what Refresh() last loaded (Refresh
+        // runs on open, after Save and after Import). See Core/UnsavedGuard.
+        private string _savedSignature = "";
+
+        private string Signature() =>
+            string.Join("\n", Rows.Select(r => (r.Name ?? "") + "|" + (r.IncludeText ?? "") + "|" + (r.ExcludeText ?? "")));
+
+        public bool HasUnsavedChanges => Signature() != _savedSignature;
 
         private void RemoveRow(CategoryEditItemVM row)
         {
@@ -176,7 +186,8 @@ namespace MaterialSwapTool.GUI
             catch (Exception ex) { StatusText = "Couldn't open the folder: " + ex.Message; }
         }
 
-        public void ExecuteClose() => _closeAction?.Invoke();
+        public void ExecuteClose() =>
+            BannerlordSceneToolkit.UnsavedGuard.CloseOrAsk("The category editor", HasUnsavedChanges, _closeAction);
         public void ExecuteDragStart() => _beginDragAction?.Invoke();
     }
 }

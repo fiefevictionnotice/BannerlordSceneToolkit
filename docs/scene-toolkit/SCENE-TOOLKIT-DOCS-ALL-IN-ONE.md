@@ -15,6 +15,10 @@ Bannerlord Scene Toolkit
 Editor tooling for Mount & Blade II: Bannerlord scene work - material swapping,
 prefab swapping and distribution, prefab creation, scene analysis, and backups.
 
+GAME VERSION: each release is built for one Bannerlord / Modding Kit version.
+WHATS-NEW-<version>.txt in this zip says which one. The full table is at
+    https://github.com/fiefevictionnotice/BannerlordSceneToolkit#which-release-for-which-game-version
+
 All three tools are ENABLED in this package (see tool_toggles.txt). Earlier
 builds shipped with Prefab Swapper and Prefab Creator switched off; they are on
 now, so every hotkey below is live.
@@ -122,6 +126,7 @@ The text behind every **Documentation** button in the toolkit's panels, in the s
 - [Material Swap Tool - Presets: save, load, browse](#material-swap-tool---presets-save-load-browse)
 - [Material Swap Tool - Preset Version History](#material-swap-tool---preset-version-history)
 - [Material Swap Tool - Batch History & screenshots](#material-swap-tool---batch-history--screenshots)
+- [Material Swap Tool - Mesh Blend (check and tuning)](#material-swap-tool---mesh-blend-check-and-tuning)
 - [Backups - how they work](#backups---how-they-work)
 - [Backups (F9) - the panel, settings and no-change skip](#backups-f9---the-panel-settings-and-no-change-skip)
 - [Backups - Notification settings](#backups---notification-settings)
@@ -132,6 +137,9 @@ The text behind every **Documentation** button in the toolkit's panels, in the s
 - [Clearing rules and text fields (Ctrl/Shift+Backspace)](#clearing-rules-and-text-fields-ctrlshiftbackspace)
 - [Keyboard shortcuts - Isolate, Repeat Last, and the F9 switches](#keyboard-shortcuts---isolate-repeat-last-and-the-f9-switches)
 - [Numeric transform - drag, then type a number](#numeric-transform---drag-then-type-a-number)
+- [Tooltips - hover a button to see what it does](#tooltips---hover-a-button-to-see-what-it-does)
+- [Unsaved changes - Discard changes / Keep editing](#unsaved-changes---discard-changes--keep-editing)
+- [Panel size and position - resize, drag, center](#panel-size-and-position---resize-drag-center)
 - [Flora Swap Tool - RETIRED (F9 is now Backups)](#flora-swap-tool---retired-f9-is-now-backups)
 - [Continuous Recolor - Overview & arming](#continuous-recolor---overview--arming)
 - [Continuous Recolor - Palettes (multi-category presets)](#continuous-recolor---palettes-multi-category-presets)
@@ -146,6 +154,9 @@ The text behind every **Documentation** button in the toolkit's panels, in the s
 - [Scene Analyzer - Scene Requirement Sets](#scene-analyzer---scene-requirement-sets)
 - [Scene Analyzer - Tag / Select tools (invisible, locked, interior, unbroken)](#scene-analyzer---tag--select-tools-invisible-locked-interior-unbroken)
 - [Scene Analyzer - Delete Interiors & the protected whitelist](#scene-analyzer---delete-interiors--the-protected-whitelist)
+- [Scene Analyzer - Scene Diff (compare the saved scene with a backup)](#scene-analyzer---scene-diff-compare-the-saved-scene-with-a-backup)
+- [Scene Analyzer - Statistics (totals, Most-Used Prefabs, Heaviest Meshes)](#scene-analyzer---statistics-totals-most-used-prefabs-heaviest-meshes)
+- [Scene Analyzer - Lights (light list)](#scene-analyzer---lights-light-list)
 - [Scene Analyzer - Deprecated / Legacy Checks](#scene-analyzer---deprecated--legacy-checks)
 - [Prefab Swapper (F5) & Distribution (F6) - Overview](#prefab-swapper-f5--distribution-f6---overview)
 - [Prefab Swapper (F6) - Per-scene history, Rotate (Specify), mirror & triad fixes](#prefab-swapper-f6---per-scene-history-rotate-specify-mirror--triad-fixes)
@@ -188,6 +199,8 @@ There are TWO separate color mechanisms - don't mix them up.
 A typed color that does not parse (a typo like '#ffwe193') is never silently skipped - the status line and an editor warning name it, because a skipped tint looks identical to a broken feature.
 
 Both boxes accept hex in #RRGGBB or #RRGGBBAA form (alpha optional, defaults to FF).
+
+TYPED COLORS NO LONGER WASH OUT. A per-rule color and a Continuous Recolor color used to come out lighter and less saturated than the hex you typed. The engine stores a mesh color in linear form, so the typed (sRGB) value is now converted before it is written, the way the editor's own color field does it. Colors applied before this fix stay washed out until you apply them again. Very dark channels can land a step or two off. The ENTITY-WIDE color factor is not converted; it is written as typed.
 
 Clearing the ENTITY-WIDE box back to no tint: just leave it empty and Apply - blank there means 'no entity-wide tint,' same as clicking the Clear button next to it (both resolve to white, #FFFFFFFF, the neutral/no-tint value). It's a single always-visible field representing your current intent, so blank is unambiguous.
 
@@ -277,6 +290,59 @@ A screenshot is captured automatically with each batch. Since the game's texture
 Only the 30 most recent batches are kept - both the log entries AND their screenshot files are pruned together automatically whenever a new batch pushes the count over 30, so disk usage doesn't grow forever.
 
 EVERY ROW HAS UNDO AND REDO, in any order. Undoing a middle entry leaves the later ones intact and still undoable; redo puts that one batch back. Undo Last Batch on the main panel is just the newest row's Undo. Both find entities by their UID tag when Track by UID was on for that batch - delete the tag and that entity drops out of the batch's undo (see 'Rename Changed / Track by UID / Tag Changed').
+
+## Material Swap Tool - Mesh Blend (check and tuning)
+
+Terrain mesh blend is the effect where the ground's texture creeps a little way up the base of a rock, wall or building, so the object looks set into the terrain instead of placed on top of it. The Mesh Blend panel does two things: it tells you why the effect is not showing on the entity you selected, and it lets you tune how the blend looks.
+
+Open it with the MESH BLEND button on F8, next to Continuous Recolor. The panel stays open when you close F8. It closes on Esc, on its own Close button, and when the scene changes.
+
+Nothing on this panel runs by itself. Every result comes from a button press, and it always works on what is selected in the editor at that moment.
+
+WHAT MESH BLEND NEEDS. All of these at the same time, for the part of the object you are looking at:  
+  1. The material uses a standard or metallic shader - in practice pbr_shading (the standard one) or pbr_metallic. Skinned (animated) meshes never blend.  
+  2. Shader quality is not Low. Low switches the effect off for the whole game.  
+  3. The object is stationary. Things that move or are driven by a script (doors, siege engines) usually are not.  
+  4. The terrain under it has a mesh blend layer painted there. A terrain layer has a Mesh Blend tick box in its settings. The layer must not be the FIRST layer in the list: the first (base) layer never blends. The more of that layer is painted at the spot, the stronger the blend.  
+  5. The base of the object is close to the ground. By default the blend reaches from 0.1 m below the terrain to about 1 m above it.
+
+CHECK. Select the entity (the first four selected are checked per press) and press Check. You get one line per condition: OK (the condition is met), FAIL (a reason the blend is not showing) or UNKNOWN (the toolkit cannot read this from the editor - the line says what to look at by hand). The last line names the most likely cause. Check changes nothing.  
+  - Shader quality: reads the graphics option. The toolkit ASSUMES the lowest setting is the one that switches the blend off.  
+  - Terrain layers: lists the layers that have Mesh Blend ticked. This is read from the LAST SAVED scene file, so tick the box, save, then check again.  
+  - Paint under the entity: always UNKNOWN. How much of a layer is painted at a point cannot be read. Look at the ground under the object and make sure one of the listed layers is actually painted there.  
+  - Material: how many of the entity's meshes (children and all LODs included) use a shader that can blend. Meshes that cannot are listed with the reason.  
+  - Stationary: shows the entity's mobility setting. Stationary reads UNKNOWN (probably fine), because the engine's own flag cannot be read. Anything else reads as a likely FAIL.  
+  - Blend values: the tuning values currently on the first tunable mesh.  
+  - Height: compares the entity's bounding box with the terrain height under it. This is a box test - a long object on a slope, or one with an overhanging part, can pass here and still be too high at the place you are looking at.
+
+If nothing fails and it still does not blend: check the UNKNOWN lines by hand, then try Recalculate, then save and reload the scene. Texture format and resolution are not checked; the panel only names the blend layers' diffuse textures.
+
+RECALCULATE runs the editor's own recalculate_mesh_blend console command for the open scene and shows what the editor answered. The toolkit looks the command up in the editor's command list first; if the editor does not list it, nothing is run and the status line says so. What it rebuilds is up to the editor, and there is no undo for it here.
+
+TUNING writes values to the meshes of ALL selected entities, including their children and every LOD. It only touches meshes whose material uses pbr_shading, pbr_metallic or terrain_mesh_blend_shader. Other shaders (flags, bows, ropes, lightmapped materials) use the same per-mesh values for their own effects, so those meshes are skipped. A standard material with texture scaling, animated texture coordinates or tableau blending switched on is skipped for the same reason.  
+  - Blend height: how far up from the ground the terrain color reaches, in meters. Default 1, allowed 0.05 to 20.  
+  - Softness: where the fade-out starts inside the blend height. 0 starts it halfway up; lower gives a longer, softer fade; higher gives a harder edge. Allowed -0.5 to 0.49.  
+  - Noise amount: how much a random pattern raises the top edge. Default 0; -0.5 gives a straight edge. Allowed -0.5 to 10.  
+  - Noise scale: size of that pattern. Default 0; higher is finer. Allowed -15 to 200.  
+ADVANCED (a toggle) shows three more:  
+  - Heightmap start: how far up the blend the material's height map starts to push the terrain color back. Allowed -0.5 to 0.49.  
+  - Heightmap power: how strongly it does that. Default 0; -1 switches it off. Allowed -1 to 10.  
+  - Normal bend: how far up the blend the surface shading is bent toward the terrain's. Allowed -0.19 to 0.8.  
+The two heightmap values only matter on materials with a separate displacement map.
+
+HOW THE FIELDS WORK. An EMPTY field means 'leave this value as it is on each mesh' - fill in only what you want to change. The - and + buttons change the number in the field only; nothing changes in the scene until you press Apply to Selection. A comma or a dot both work as the decimal separator. Text that is not a number, or a number outside the allowed range, is refused with a message and nothing is changed.
+
+BUTTONS:  
+  - Read from Selection fills every field from the first tunable mesh of the selection. Changes nothing in the scene.  
+  - Apply to Selection writes the filled-in fields. The advanced fields are written only while Advanced is ON. No confirmation.  
+  - Reset to Default writes the default values (all zeros, which is a 1 m blend height) to all seven values. No confirmation.  
+  - Undo Last Change puts back what the last Apply or Reset from this panel replaced. Up to 20 steps, kept until the scene is closed, even if you close the panel. It does not undo Recalculate, and it is separate from Batch History and the editor's own undo.
+
+SAVE THE SCENE TO KEEP THE RESULT. The values are stored per mesh in the scene file.
+
+A typical session: select a rock, press Check, fix what it reports, press Read from Selection, press + on Blend height a few times, Apply, look, repeat, then save.
+
+LIMITS: only four entities are checked per press (tuning has no such limit); the terrain layer list is the last save, not the live scene; tuning is not recorded in Batch History. If the status line warns that Noise scale 'did not read back as written', always type a Noise scale (0 for the default) instead of leaving the field empty, and do not rely on Undo for it. Look for '\[MeshBlend\]' lines in MaterialSwapTool\\tool.log if something looks wrong.
 
 ## Backups - how they work
 
@@ -431,6 +497,10 @@ NOT PRESENT, DELIBERATELY: the F5-F9 panel keys. Letting you disable the key tha
 
 NATIVE CURSOR (not a key, but it lives on the same flyout). Every toolkit panel is a Gauntlet layer, and by default a Gauntlet layer asks the engine for a visible mouse - which in the editor means the engine swaps its own oversized game cursor in over the normal Windows arrow the moment any panel opens. With this ON (the default) panels open without that request, so the editor keeps its Windows cursor; clicks, hover, focus and the wheel are routed exactly as before, because none of that depends on the visibility flag. Switching it applies to every open panel immediately. If the cursor ever disappears with a panel open, switch it OFF to get the old engine cursor back.
 
+TOOLTIPS (also not a key, same flyout). 'Tooltips: ON/OFF' turns the hover tooltips on or off for every toolkit panel at once. ON is the default. See 'Tooltips'.
+
+PANEL SIZE (Ctrl+Minus / Ctrl+Equals / Ctrl+0) has its own topic: 'Panel size and position'.
+
 ## Numeric transform - drag, then type a number
 
 DRAG THE GIZMO, THEN TYPE A NUMBER. Move or rotate something the normal way - during the drag or within 30 seconds of releasing, type a digit and a numeric panel takes over. Enter commits, Esc puts everything back to where it was BEFORE the drag. Ctrl+Shift+T opens the same panel cold, without a drag. Switchable from F9 -\> Shortcuts.
@@ -451,6 +521,55 @@ SHIFT-DRAG (DUPLICATE). A shift-drag copies and moves in one gesture; typing rig
 
 (How the takeover detects drags without any editor API, and the design history: Technical Docs on F9, 'Numeric transform'.)
 
+## Tooltips - hover a button to see what it does
+
+Rest the mouse on a toolkit button for about half a second and a small box says what the button does: what it acts on (your selection, the rules list, the whole scene, files on disk), whether it asks before acting, and whether it can be undone. Every panel has them - F5 to F9 and their fly-outs.
+
+The tooltip goes away when you move off the button or click it. After a click it stays away until the mouse moves to another button.
+
+Some text fields have a tooltip too: hover the dark box around the field.
+
+Tooltips follow the panel size you set with Ctrl+Minus / Ctrl+Equals, and move to the other side of the mouse near the right and bottom screen edges.
+
+They never take a click or a keystroke. They are drawn on their own layer that ignores all input.
+
+TO SWITCH THEM OFF: F9 -\> Shortcuts -\> 'Tooltips: ON/OFF'. It applies to every panel at once and the setting is saved.
+
+If no tooltip ever appears while the switch is ON, look for '\[Hints\]' lines in MaterialSwapTool\\tool.log.
+
+## Unsaved changes - Discard changes / Keep editing
+
+The Interior Whitelist, the Category Editor and the Culture Editor only write your edits when you press Save. If you press Close or Esc on one of them with edits that have not been saved, the toolkit asks first:
+
+  DISCARD CHANGES - closes the panel and drops the edits.  
+  KEEP EDITING - leaves the panel open so you can press Save.
+
+There is no question when nothing changed. Panels that are closed FOR you - their parent panel closing, or a scene switch - still close at once, without asking.
+
+There is no 'save and close' button on purpose: if the save failed, the panel would close anyway.
+
+DELETE INTERIORS (F7) refuses to run while the Interior Whitelist panel is open with unsaved edits. It acts on the SAVED list, not on what the panel shows, so it tells you to press Save there (or close the panel and discard the edits) first. See 'Delete Interiors & the protected whitelist'.
+
+## Panel size and position - resize, drag, center
+
+PANEL SIZE: ONE SIZE FOR EVERY PANEL. With any toolkit panel focused (click it first):  
+  Ctrl+Minus - smaller, 10% per press.  
+  Ctrl+Equals (the unshifted + key) - bigger, 10% per press.  
+  Ctrl+0 - back to the default, 80%.
+
+  - Number row only. The numpad belongs to Grow Selection (Ctrl+Numpad+), so Ctrl+Numpad keys never resize a panel.  
+  - Range 50% to 150%. Panels open at 80% until you change it.  
+  - Applies everywhere, live: a change made in one panel resizes every panel that is already open and every panel you open later.  
+  - Remembered between sessions in MaterialSwapTool\\PanelScales.json (a single number). A hand-edited value outside 50-150% is put back into range. Delete the file to return to the default.  
+  - Not inside Grow Selection: while that panel is open its own keys step the radius and the size keys are ignored. Resize from any other panel.  
+  - Shift must be up. Ctrl+Shift+0 is the center key below, not a size reset.
+
+PANEL POSITION: DRAG, SAVED PER PANEL. Drag any panel by its title row. Where you drop it is saved for that panel and restored the next time it opens. The positions are kept in a PanelPositions.json per tool folder (MaterialSwapTool, PrefabSwapperTool, PrefabCreatorTool) under Documents\\Mount and Blade II Bannerlord.
+
+A panel is never left fully off-screen: its center is kept at least 150 pixels inside the screen edge. This matters after a resize - a panel that grew could otherwise open with its title row and Close button out of reach.
+
+CENTER ALL OPEN PANELS: Ctrl+Alt+0, or Ctrl+Shift+Numpad 0, moves every open toolkit panel to the middle of the screen and saves that as its position. Panels that are closed at the time keep their saved positions. See 'Keyboard shortcuts' for the details of that key.
+
 ## Flora Swap Tool - RETIRED (F9 is now Backups)
 
 RETIRED - potential future feature. F9 now opens the BACKUPS panel; Flora Swap no longer has a hotkey at all. It previously lived on F9 and opened a placeholder instead of the real tool. Description below is preserved for when/if it comes back.
@@ -470,6 +589,8 @@ Toggle one or more categories ON, set a color per row, then either:
   APPLY COLORS - a one-shot: recolors the CURRENT selection once, armed or not. Use it when you don't want the brush following you around.
 
 Uses Mesh.Color - a real per-INDIVIDUAL-mesh-slot tint. Because it's per-slot, a building with mixed materials (stone AND timber-frame in the same object) can have just its timber-frame slots recolored without touching the stone ones - there is no 'mixed materials, refuse to recolor' restriction.
+
+A typed hex color is converted from sRGB to the linear form the engine stores, so what you type is what you see (see 'Color factor (2 kinds)').
 
 Edit Categories opens the Category Editor directly from this panel.
 
@@ -511,6 +632,8 @@ Test Material at the bottom lets you type a real material name and see which of 
 
 EXPORT ALL / IMPORT (MERGE) / OPEN FOLDER move category definitions through MaterialSwapTool\\Exports\\Categories. Export writes the SAVED categories, not unsaved rows on screen. Import merges rather than replaces - new categories added, existing ones gain missing patterns, nothing removed - and refreshes the rows, so Save any on-screen edits you care about first. See 'Import / Export - where everything goes'.
 
+CLOSING WITH UNSAVED EDITS: Close or Esc asks 'Discard changes' or 'Keep editing' when the rows differ from what was last loaded or saved - see 'Unsaved changes'.
+
 ## Culture Editor
 
 Two different lists per culture, used for two different purposes - don't confuse them.
@@ -522,6 +645,8 @@ Common: EXACT material names (not patterns) empirically seen on that culture's r
 Common is shown COLLAPSED by default (a count + Edit button) rather than as a live text box - a real culture's Common list runs 60-145+ entries, too much to render live for every culture at once. Click Edit on a row to expand just that one culture's list, Done to collapse it back.
 
 + New Culture adds a brand new culture, not limited to the 6 built-in ones - useful for a custom-culture mod's own architecture set.
+
+CLOSING WITH UNSAVED EDITS: Close or Esc asks 'Discard changes' or 'Keep editing' when the rows differ from what was last loaded or saved - see 'Unsaved changes'.
 
 ## Culture Preset Generator
 
@@ -541,10 +666,17 @@ Every check runs against the LIVE scene via the editor's GameEntity/Scene API, n
 
 Full Scene Scan runs every check below at once and opens the combined results in a preview list. Battle/Skirmish/Siege buttons run just that mode's own requirement checks. Fix actions are separate, confirm-gated buttons - see the Fix Actions topic.
 
+THREE READ-ONLY FLY-OUTS open from the bottom row, next to Close: SCENE DIFF (compares the saved scene file with a backup - the one F7 feature that reads SAVED files, so unsaved changes are not in it), STATISTICS (totals, Most-Used Prefabs, Heaviest Meshes) and LIGHTS (the light list). Statistics and Lights are tabs of one panel. Each has its own topic below.
+
 ## Scene Analyzer - Full Scan: what each check looks for
 
 What Full Scene Scan checks for (each becomes its own section in the results):
 
+TWO LOAD-CRASH CHECKS RUN FIRST:  
+Destructible Reference Tags (server load crash) - any entity with a destructible script whose Reference Entity Tag is set, but which has no DIRECT child carrying that tag. The dedicated server aborts while loading such a scene. The case that found it: merlons whose debris_holder child had been deleted. It applies to any destructible (walls, gates, barricades), not only merlons. Fix: 'Fix Destructible Refs'.  
+Live merchant_stand_market Prefab (client load crash) - every entity that is still a LIVE prefab link to merchant_stand_market. Saved that way it crashes multiplayer clients on map load; the server loads it fine, so a server-only test does not catch it. A copy whose prefab link is broken loads. The four other merchant stands from the same prefab file (mix, weapon, pottery, armor) are untested and only raise a warning. Fix: 'Unparent Stands'.
+
+THE REST:  
 Bugged Physics Shapes - entities matching a curated list of known-problematic collision shapes.  
 Misleading Physics - entities that visually look like they have gaps/openings but whose collision is actually solid (players get stuck expecting to walk through).  
 Duplicate / Overlapping Entities - top-level entities of the same type sitting at the exact same position and rotation (see the Fix Actions topic for why this is restricted to top-level entities specifically).  
@@ -578,6 +710,12 @@ Tag Bugged Physics - tags every entity matching the known-bugged-physics referen
 Apply LOD Fixes - instantly swaps every entity on the LOD Substitution list for its recommended replacement, live, preserving position/rotation.
 
 Fix Known-Broken Prefabs - Scan then Apply Fix swaps entities matching a curated broken-prefab list (currently module_wall_plank_a/b, which ship with inverted collision) for clean-named fixed replacements. Scale does NOT carry over on any of these swap-based fixes - the live API has no way to set an instantiated entity's scale after the fact, only read it - so an entity with non-default scale will lose that scale on the replacement; check affected entities visually afterward.
+
+Fix Destructible Refs - the fix for the 'Destructible Reference Tags' check. Gives every destructible whose reference tag has no tagged direct child an empty child named debris_holder that carries the tag, placed at the entity's own origin. Debris spawns there; move the holder if that is the wrong spot. Not undoable from inside the toolkit.
+
+Unparent Stands - the fix for the 'Live merchant_stand_market Prefab' check. Breaks the prefab link on every live merchant_stand_market, so the next save writes its parts into the scene directly. Nothing moves and nothing is deleted. The other merchant stands are left alone. Save afterwards, then run the scan again. Not undoable from inside the toolkit.
+
+Remove Physics Outside Border - marks every entity outside the border_soft boundary (plus the 10-unit margin) with the tag oob_nophys. When you SAVE, the collision of each marked entity and of everything under it is stripped from the saved scene file automatically, a moment after the save (a .bak of the file is kept). RELOAD the scene to see it - the open session keeps its collision until then. Meshes are not deleted, only collision. Live prefab links among the marked entities are broken first, because a linked prefab gets its collision back from the prefab on every load.
 
 All of these are confirm-gated (a dialog before anything happens) and backed up first.
 
@@ -617,6 +755,110 @@ The list is stored as tool data - so it is covered by 'Backup Tool Data' on F9, 
 
 READ THE CONFIRMATION. Interiors are deletable by default and the dialog lists what will go. The safe routine: Add From Scene, mark the keepers PROTECTED, click SAVE in the whitelist (an unsaved edit changes nothing), then Delete Interiors and read the list before confirming. Skipping the Save step once cost a scene's interiors - the backup taken first is what brought them back.
 
+TWO SAFEGUARDS AGAINST THAT. Delete Interiors refuses to run while the whitelist panel is open with unsaved edits, and its status line tells you to press Save there (or close the panel and discard the edits) first. And closing the whitelist with Close or Esc while it has unsaved edits asks 'Discard changes' or 'Keep editing' instead of dropping them silently - see 'Unsaved changes'.
+
+## Scene Analyzer - Scene Diff (compare the saved scene with a backup)
+
+Scene Diff answers 'what changed between these two saves?' It compares two saved states of the open scene - the saved scene file against a backup, or one backup against another - and lists every entity that was added, removed, moved, rotated, scaled, renamed or otherwise changed. Read-only: no scene file or backup is changed.
+
+Open it with F7 -\> Scene Diff (bottom row, next to Close). It closes when F7 closes and when the scene changes.
+
+IT READS SAVED FILES, NOT THE EDITOR. Anything you have changed since your last save is in NEITHER file and will not show up. Save first if you want the current state compared. The status line says how long ago the scene was last saved.
+
+PICKING THE TWO STATES. The list shows the SAVED FILE on top, then the backups of this scene, newest first. Each backup row shows when it was taken, why (auto-4min, before-apply, manual...), which save it is a copy of, and its size.  
+  - From marks the older state (the row turns purple), To the newer one (green). Any two rows can be compared, including two backups.  
+  - Default pair: To = the saved file, From = the newest backup that is NOT a copy of that same save. The newest backup is often identical to the saved file, and comparing those can only say 'no differences'. Rows marked '= identical to the saved file' are those copies.  
+  - If From turns out to be the newer save, the diff still runs; it just reads backwards (Added means 'gone since'). The status line says so.  
+  - At most 60 backups are listed.  
+  - Refresh re-reads the saved file and the backup folders and resets From and To to the default pair.
+
+WHERE BACKUPS ARE LOOKED FOR. The backup location set on F9, and - when that is a custom location - the default Backups folder as well, so backups written before you changed the location are still listed. Backups left in some OTHER, earlier custom folder are not found.
+
+Press COMPARE. Both files are read in the background, so the editor stays responsive. The result opens in the results window.
+
+READING THE RESULT. The first line is the summary, for example '+12 added, -1 removed, 40 moved, 5 rotated/scaled, 2 renamed, 1 prefab ref, 7 material, 3 color, 9 other'. Below it, one section per kind of change:  
+  - Removed: in From, not in To. The position is where it used to be.  
+  - Added: in To, not in From.  
+  - Prefab reference changed: swapped to a different prefab in place, or a prefab link broken (baked into the scene) or restored.  
+  - Renamed: same entity, different name.  
+  - Moved: position changed. Shows the distance, farthest first.  
+  - Rotated / scaled in place: position unchanged, rotation or scale changed.  
+  - Material changed / Color changed: a mesh's material or color differs.  
+  - Other changes: tags, scripts, physics, light, flags and visibility.
+
+An entity appears once, in the first section that applies to it, with everything else that changed on it on the same line. The summary counts every kind separately, so one entity that moved and changed material counts in both numbers. Added and removed rows are top-most only: a removed prefab with 36 children is one row, not 37.
+
+GO on a row jumps the camera to the row's position and selects the entity there if the live scene has one. For a removed row the camera goes to where it used to be. Positions come from the To file; if you compared two backups, the live scene may have moved on.
+
+The results window shows a limited number of rows. Raise 'Show first' at the bottom of it to see more, or use WRITE REPORT on the Scene Diff panel, which saves the complete list of the last comparison as a text file in MaterialSwapTool\\Reports (the status line shows the full path).
+
+HOW ENTITIES ARE MATCHED, AND WHERE THAT CAN BE WRONG. A scene file has no entity IDs, and duplicate names are normal (hundreds of the same rock). So entities are matched between the two files: one group of siblings at a time, by prefab or name, identical transform first, then same position, then nearest position, then 'same place but renamed', then 'same place but a different prefab'. Whatever is left over is Removed or Added. Limits worth knowing:  
+  - Moved vs. deleted-and-replaced. Delete one barrel and place another of the same prefab elsewhere, and the file looks exactly like 'that barrel moved'. The distance is shown, so an implausible 300 m move is easy to spot.  
+  - Which duplicate moved is a guess. Counts and positions are right; the pairing may not be the one you made.  
+  - Changed name AND moved shows as one Removed plus one Added. So does dragging an entity under another parent.  
+  - Rotation is compared as an orientation, not as three numbers. The editor rewrites the angles of upright objects on every save, and comparing the numbers would report rotations that never happened.  
+  - Terrain, flora and nav mesh data live in other files and are not compared.
+
+## Scene Analyzer - Statistics (totals, Most-Used Prefabs, Heaviest Meshes)
+
+A read-only overview of what the open scene is made of: totals, the prefabs you used most, and the meshes that cost the most triangles. Nothing on this panel changes the scene.
+
+Open it with F7 -\> Statistics (bottom row, next to Close). The same panel also holds the light list on its third tab - see 'Lights (light list)'.
+
+IT READS THE LIVE SCENE, ON DEMAND. Unlike Scene Diff, this reads the scene as it is in the editor right now, unsaved changes included. It scans once when the panel opens and again when you press REFRESH. It does not update by itself, so press Refresh after you add, delete or swap things. The status line shows how long the scan took.
+
+The panel stays open when you close F7, so you can use its Go and Select buttons with the viewport clear. It closes on its own Close button and when the scene changes.
+
+TOTALS, the block at the top: entities (top-level and children); prefabs (how many different ones, on how many entities, how many of those are live prefab links and how many are baked copies matched by name, and how many entities match no prefab); mesh components and cloth simulators; lights (with how many cast shadows and how many are flagged), particle systems and decals; script components. A Triangles line appears once the Heaviest Meshes tab has been opened.
+
+MOST-USED PREFABS. Every prefab in the scene with its instance count, most used first. A row reads '412 x rock_a', followed by '(baked)' or '(400 linked, 12 baked)' when not every instance is a live link.  
+  - Select selects every instance of that prefab in the editor, live links and baked copies together.  
+  - Go jumps to the first instance.
+
+HOW AN INSTANCE IS COUNTED. A live prefab link counts under the prefab it links to. A BAKED COPY (its prefab link was broken) is matched by its entity NAME: if the engine knows a prefab by that name, it counts as one. If not, a trailing suffix such as _2, _3 or _mst is removed and the name is tried again, a few times over, until the engine knows a prefab by that name. Two limits follow from matching by name:  
+  - A copy that was renamed to something unrelated is not matched.  
+  - A nested part that happens to carry a prefab's name is counted as an instance of that prefab.
+
+HEAVIEST MESHES. Every distinct mesh with 'total triangles = instances x triangles each', heaviest total first. This is the tab for 'what is eating my triangle budget': a 40,000-triangle statue used once and a 900-triangle crate used 600 times both show up near the top.  
+  - Triangles are full detail (LOD0) only. What the engine draws at a distance is less.  
+  - The count is per mesh, not per prefab. A building made of eight parts is eight rows.  
+  - Select selects every entity that uses the mesh. Go jumps to the first.  
+  - The triangle count runs the first time you open this tab after a scan, so it can take a moment.  
+  - Terrain and painted flora are not entities and are not counted.
+
+ROWS, SHOW MORE AND THE REPORT. Each table shows 60 rows at first. Show More adds 60 at a time, up to 600. The header line always gives the real total. WRITE REPORT saves the totals, prefabs and lights of the last scan to a text file in MaterialSwapTool\\Reports; the meshes are included only if the Heaviest Meshes tab was opened since that scan.
+
+SELECT AND THE SHORT DELAY. Select uses the same delayed selection as every other select-in-editor button (see 'Selecting in the editor'): the selection lands a moment after the click. Selecting several thousand entities at once can make the editor pause briefly.
+
+'NOT COUNTED'. One engine call crashed the editor during the first runs of this scan and is no longer used. As a safety net, the toolkit notes each of the newer scan steps in a small file before it runs. If the editor ever crashed inside one, that step is skipped on every later run: the panel still opens, the totals show a 'NOT COUNTED' line naming what is missing, and everything else works. A zero next to a skipped count means 'not counted', not 'none'. The file is Documents\\Mount and Blade II Bannerlord\\MaterialSwapTool\\native_probe_ledger.txt. Delete the file to have everything tried again; to retry one step only, delete every line that names it. The file is read once when the toolkit loads, so the change takes effect the next time the editor starts.
+
+## Scene Analyzer - Lights (light list)
+
+Every light in the open scene in one list, with the ones most likely to cost performance or to be mistakes at the top. Read-only: it does not edit lights.
+
+Open it with F7 -\> Lights (bottom row, next to Close). It is the Lights tab of the Statistics panel, so the same Refresh, Show More, Write Report and Close apply. If the Statistics panel is already open, the button just switches it to this tab. Like the rest of that panel it reads the live scene and only updates on Refresh.
+
+WHAT A ROW SHOWS: radius, SHADOW or no shadow, intensity and color as the engine reports them, then the OWNER - the entity that carries the light, and the top-level prefab it sits in when it is a child (lights usually are: the flame inside a torch). '(hidden)' is added when the owner, or a parent, is currently invisible. GO jumps to the owner's position and selects the entity there. The header gives the count: how many lights, how many cast shadows, how many are flagged.
+
+SORTING. Shadow cost (the default): shadow-casting lights first, largest radius first, then the rest by radius. A shadow-casting light has to re-render what it can reach, and how much it reaches grows with its radius, so this order puts the expensive ones on top. Radius: largest first, shadows or not. The Sort button switches between the two and names the order it will switch TO.
+
+WARNINGS. A flagged row starts with \[!\], is tinted, and says why:  
+  - 'shadow-casting with a large radius - likely expensive': shadows on and radius 15 or more.  
+  - 'very large radius': radius 40 or more, without shadows.  
+  - 'zero radius' / 'zero intensity - lights nothing': the light exists but cannot light anything. Usually a leftover.  
+  - 'N lights at this position': two or more lights within 5 cm of each other - almost always a duplicated torch stacked on itself.  
+  - '+N more light component(s) on this entity, not listed': the entity carries several lights; only the first can be read.  
+  - 'could not be read': the engine did not return the light. Listed so the count still adds up.
+
+The thresholds are judgement calls for 'worth a look', not engine limits. A large shadow-casting light can be exactly what a scene needs; a dozen of them in one courtyard usually is not.
+
+LIMITS:  
+  - Read-only. Change radius, intensity and shadows in the editor's own inspector, then press Refresh here.  
+  - Only whether shadows are ON is shown, not whether the shadow is static or dynamic.  
+  - Radius is the light's own value and does not account for a scaled parent.  
+  - The sun and sky lighting come from the atmosphere, not from light entities, and are not in this list.  
+  - The list shows 60 rows at first; Show More adds 60 at a time.
+
 ## Scene Analyzer - Deprecated / Legacy Checks
 
 Some curated reference-data entries get retired when the underlying problem is believed fixed by TaleWorlds, rather than deleted outright - they're moved to ReferenceData\\Deprecated_Legacy_Checks.txt (Documents\\Mount and Blade II Bannerlord\\MaterialSwapTool\\ if you've made an override copy) instead, verbatim, with a dated header explaining why and exactly which active file to paste the block back into if the issue ever resurfaces.
@@ -633,9 +875,15 @@ MODE: ADD vs SWAP - the toggle at the top of the swap section, and it governs Sw
 
 Fill From Selection fills the Old (or New) Prefab Name box from your selection - the REAL prefab name via GetPrefabName, falling back to the display name only when there is no prefab behind the entity (and saying so). Display names drift (_2 duplicate suffixes, _mst renames, recolor suffixes); the prefab name is the one that swaps and matches correctly. Swap-set Apply matches the same way.
 
+FINDING THE OLD PREFAB. A swap has to know which prefab the old entity is. It tries the entity's name, then its live prefab link, then the name with _2 / _mst style suffixes removed one at a time, and uses the first one the engine can place. If none works the swap is refused and the message lists the names it tried.
+
+THE STATUS LINE SHOWS THE RESULT. Once the confirm dialog closes, the status line reads either the result ('Swapped N') or the reason the swap was refused. Every swap status is also written to PrefabSwapperTool\\tool.log as '\[SwapStatus\]', and each entity that failed as '\[Swap\] failed:' with its reason, so a swap that seems to do nothing can be looked up there.
+
 POSITION/ROTATION are preserved on every swap. SCALE is a toggle: 1x (default) gives the new entity the prefab's own authored scale; Inherit keeps the old entity's scale. Two optional inputs apply to everything swapped in - regular swaps, live reference, and swap-set Apply alike: Z Rot (degrees of extra world-Z rotation) and Scale mult (uniform multiplier); 0 and 1 mean off.
 
 CHILDREN: parts belonging to the OLD prefab's own definition are removed with it; children you added by hand are carried onto the new prefab as extras. That is what keeps a cross-culture swap from stacking both cultures' merlons on one tower.
+
+MESH BENDER: if the old entity carries the native mesh_bender script, the script and its bend values (Bend Amount, Bend Center Ratio) are carried onto the new entity, so a bent wall stays bent after a swap. This covers Swap Selected, Swap All Matching, ADD mode, live-reference swaps and undo. In a live-reference swap the reference's own bender wins when it has one; otherwise the old entity's is used. Each carry is logged as '\[MeshBender\]' in PrefabSwapperTool\\tool.log.
 
 Undo Last Swap reverts the most recent swap batch - restoring at the pre-swap frame, so Z-rot/scale extras are undone too, and always in replace-mode regardless of the ADD/SWAP toggle.
 
@@ -645,9 +893,11 @@ SWAP TO LIVE REFERENCE: skips saving a prefab first entirely. Select an entity c
 
 DISTRIBUTION (F6) opens on a MODE SELECTOR - In Grid / Along Path / Onto Surface - showing only the active mode's controls, with ONE Distribute button that runs whatever is on screen and a plain-language summary line above it reading back exactly what the next run will do.
 
+ERRORS ARE SHORT. When you distribute by prefab name, the name is checked ONCE before anything is placed. An unknown name stops the run with one message ("'x' is not a saved prefab ... switch Source to Selection") and leaves nothing behind - no empty anchor. Other failures in distribute, mirror and rotate are grouped and counted in the status line; the full list goes to PrefabSwapperTool\\tool.log as '\[Distribute\] failed:' lines.
+
 ONTO SURFACE is the grid, but every cell raycasts STRAIGHT DOWN and lands on whatever is beneath it - the origin supplies only the horizontal start and heading, height comes from the surface. The 'Only land on' box is a FILTER, not a destination: one or more entity names (comma-separated, or Use Selected Entities to fill from a multi-select) that count as ground - the ray passes through everything else, so clutter cannot block a cell. Blank = first thing hit.
 
-ALONG PATH places copies along a path authored with the editor's own Path tool: type the path's name, then either a manual count or 'fill path', which derives the count from the path length and spacing. Relative spacing with a NEGATIVE gap packs pieces into each other for wall-type prefabs. Most prefabs were not built with this tool in mind and come out facing the wrong way: the Z Rotation box (90 or 180) fixes that without re-origining anything. Anchor choice: exact origin point, or bottom center.
+ALONG PATH places copies along a path authored with the editor's own Path tool: type the path's name, then either a manual count or 'fill path', which derives the count from the path length and spacing. Each copy is turned to face along the path (heading only, it stays upright). Relative spacing with a NEGATIVE gap packs pieces into each other for wall-type prefabs. Most prefabs were not built with this tool in mind and come out facing the wrong way: the Z Rotation box (90 or 180) fixes that without re-origining anything. Anchor choice: exact origin point, or bottom center.
 
 SPACING, RELATIVE vs ABSOLUTE (all modes). Relative measures from the prefab's own size - 0 means side by side, negative overlaps, positive leaves a gap. Absolute is a fixed distance in units between origins, regardless of size. Relative is the easier one for most work. A grid count must be at least 1 on each axis; 0 is refused.
 
@@ -692,6 +942,8 @@ ORIGIN TO ANCHOR moves a prefab's ORIGIN without moving the prefab: point at a s
 AUTO ORIGIN does the same job without needing an anchor entity placed first, and does it to a whole selection at once - EACH prefab is measured on its own bounding box and gets its own origin, not a shared group point. Two cycle buttons choose the preset between them: AXIS (X/Y/Z) and SIDE (Min/Center/Max), with the label spelling out the result. The named axis is pinned to that end of the box and the other two are centred, which is where the seven useful presets come from: Z+Min = Bottom Center, Z+Max = Top Center, X+Min = -X Center, X+Max = +X Center, Y+Min = -Y Center, Y+Max = +Y Center, and any axis + Center = Middle Center (the box's true centre, the same point whichever axis is showing).
 
 IT SKIPS ENTITIES THAT HAVE GEOMETRY OF THEIR OWN, and says which. The trick that moves an origin without moving the prefab is putting the CHILDREN back in world space after the root moves - an entity's own mesh has no such offset to compensate with, it is drawn at the entity's frame, so moving that frame moves the object. On a meshed entity this cannot do what its name promises, so it declines instead of quietly sliding real geometry around. Composite prefabs - an empty root with the meshes on children, which is what New Prefab builds - are exactly the case it is for. If you clicked a child part rather than the prefab, Ctrl+Shift+P promotes the selection to the roots first.
+
+ONE EXCEPTION: AN EDITOR MARKER MESH DOES NOT COUNT AS GEOMETRY. Some prefabs carry a small editor-only pick handle on their root - a mesh that uses the editor_gizmo material and is never drawn in game. Auto Origin and Origin to Anchor accept such a root as an empty one, and Origin to Anchor no longer asks 'Move a non-empty entity?' for it. The marker moves with the origin. A root whose mesh uses a real material is still protected.
 
 Both take a backup first and both are undoable.
 
@@ -761,6 +1013,9 @@ The engineering notes behind the **Technical Docs** button on F9: confirmed bugs
 - [Weighted rules - how the roll granularity evolved](#weighted-rules---how-the-roll-granularity-evolved)
 - [Runtime-created entities - stale editor state](#runtime-created-entities---stale-editor-state)
 - [Misc: Culture Editor lag, palette rows, Flora API limits](#misc-culture-editor-lag-palette-rows-flora-api-limits)
+- [Tooltip layer - ToolkitHints and the Hint widgets](#tooltip-layer---toolkithints-and-the-hint-widgets)
+- [Unsaved-change guard - UnsavedGuard](#unsaved-change-guard---unsavedguard)
+- [Crash ledger - NativeProbe and the Statistics scan](#crash-ledger---nativeprobe-and-the-statistics-scan)
 
 ## About these notes
 
@@ -787,6 +1042,8 @@ THE 2026-08-19 COLOR DISCOVERIES, in order:
 4. Mesh.Color was confirmed as a real live per-INDIVIDUAL-slot tint via a test scene (european_city_house_d3) where exactly one LOD5 submesh carried a non-white Color while Factor1 and FactorColor were both white. Continuous Recolor and Fix Color Mismatches use this same mechanism.
 
 LATER (2026-08-23): unparseable typed colors (e.g. '#ffwe193') used to be skipped silently, indistinguishable from 'broken' - they now warn on screen and in the log. MST undo used to restore an entity-wide entry via SetFactorColor(old), which (per discovery 2) flattened per-layer colors the batch never touched; entries now snapshot every mesh color before the forward SetFactorColor and undo restores them individually.
+
+MESH.COLOR IS STORED LINEAR (2026-11-12). Typed colors came out lighter and less saturated than the hex, always by the same curve (#BAFFAF -\> #DDFFD7, #802020 -\> #BB6363). The editor's own color field converts the typed sRGB hex to linear first; the toolkit wrote it raw. ColorHex.SrgbToLinear / LinearToSrgb (gamma 2.2, alpha untouched) now convert at the typed-input write sites: Continuous Recolor palette and single-color apply, the Material Swap rule color factor, and the seeded hex of Get Input from Selection. Unchanged on purpose: undo/redo logs, the LOD color fix, Fill In Overrides and color presets copy stored values mesh-to-mesh, so they stay raw and round-trip exactly. The entity-wide color factor (SetFactorColor) is not converted; whether it has the same issue is untested.
 
 ## Entity-wide color - why blank means reset
 
@@ -820,6 +1077,10 @@ PER-SCENE HISTORY: the swap log is one shared file across all scenes. A batch fr
 
 MIRROR'S RESIDUAL LIMITATION: a hand-built prefab-LESS piece mirrored an ODD number of times renders inside-out until the scene is saved and reloaded - the saved data is correct; the live winding cache is not reachable from managed code.
 
+PATH ROTATION ON GAME v1.5.7 (2026-11-11). After the v1.5.7 update Path.GetFrameForDistance returns the position but an identity rotation, so Distribute along path placed every instance world-aligned. PrefabDistributor.PathFrameAt now samples two positions 5 cm apart, flattens the direction to the ground plane and builds the yaw-only frame the engine used to return. All path sampling goes through it.
+
+MESH BENDER ON SWAPS (2026-11-12). Instantiate only brings the new prefab's own definition and the live-reference path discards everything from the old entity, so every swap used to drop the native mesh_bender script. It is carried now with GameEntity.CopyScriptComponentFromAnotherEntity, and the two float values with Get/SetNativeScriptComponentVariable; each carry logs '\[MeshBender\]' with the values read back from the new entity.
+
 ## Numeric transform - watcher internals & the two-axis saga
 
 HOW THE TAKEOVER KNOWS ANYTHING: the editor exposes no manipulation state at all - no rotate flag, no gizmo axis. The ManipulationWatcher polls the selected entities' frames and looks for the SHAPE of an operation: change followed by stillness. That covers gizmo drags, G/Z modal drags and typed transforms alike, and yields the frames from BEFORE the drag - which is what lets a typed number replace the drag. Rotation is checked before movement (rotating a group also moves each origin); the settle never fires while the mouse button is held (a pause mid-drag used to split one drag into two recorded operations); duplicates are recognised by the selection switching to a NEW entity while the original sits untouched.
@@ -839,6 +1100,8 @@ DELETE PHYSICS took five rounds because each layer of the engine hides the previ
 5. File surgery: the pieces are tagged pile_nophys at generation; the stripper removes their \<physics\> nodes from the saved scene.xscene (timestamped .bak first). An editor save from a stale session re-emits the nodes - confirmed live by matching timestamps - so the stripper also re-runs automatically ~2s after every detected save. Collision state in a LIVE session only updates on load; judge results after a reload.
 
 Every claim above was verified against the saved xscene, not inferred.
+
+REMOVE PHYSICS OUTSIDE BORDER (F7) was still the round-1 approach until 2026-11-12: it skipped every entity whose own BodyFlag read None (every placed prefab root) and called RemovePhysics, which never persists. It now uses round 5: each out-of-border entity is tagged oob_nophys, live prefab links among them are broken first (a prefab="X" entity has no children in the file, so there would be nothing to strip), and the stripper removes the \<physics\> nodes of the tagged entity AND its whole subtree after each save. The stripper covers subtrees for pile_nophys too. This rework is not covered by the 'verified' line above.
 
 ## Live-reference swaps - CopyFrom's tree behaviour
 
@@ -887,18 +1150,279 @@ FLORA LAYERS: the live scripting API exposes exactly two read-only flora counter
 
 CCMODULE_SP STARTUP: its wEditor bin was missing (DLL popups - fixed by populating it); the RGL texture warnings are unfixable from outside - the sheets exist in the module's pack0.tpac but the editor doesn't mount them and ignores loose GUI PNG paths (extraction was tried; correct layout, still not consulted). An external watchdog dismisses those popups at launch instead.
 
+## Tooltip layer - ToolkitHints and the Hint widgets
+
+THE SHARED TOOLTIP LAYER (2026-11-12, Core/ToolkitHints.cs). A hint is declared in the panel XML as a hidden text child with Id="Hint" inside the widget it belongs to - normally a ButtonWidget, or the wrapper Widget of a text field:  
+  \<TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="..." /\>  
+Nothing else is needed: no view-model property, no command, no per-panel code. Adding a hint to a new button is one XML line.
+
+HOW IT IS SHOWN. Once per frame ToolkitHints looks at every Gauntlet layer on the top screen, asks its event manager which widget the mouse is over, and walks up at most four parents looking for a 'Hint' child. After a dwell of 0.45 s the text is shown in ONE shared layer (ToolkitHintPanel.xml). It is ticked from all three editor tick patches, so hints keep working whichever tools are toggled off.
+
+That layer is not a focus layer and every node in it is DoNotAcceptEvents, like the last-operation readout: it is drawn over the viewport and must never take a click or a keystroke. A mouse press hides the hint and keeps it hidden for that widget until the mouse moves to another one. The box flips left / up near the right and bottom edges and follows the shared panel scale.
+
+SWITCH: HintsEnabled in shortcut_settings.json (default on), shown as 'Tooltips: ON/OFF' on F9 -\> Shortcuts.
+
+SAFETY NET. The first live build laid the box out at full-screen size, so every tooltip covered the editor (two background sprites were StretchToParent children of a CoverChildren widget and took their size from the full-screen root). The sprites now sit on the CoverChildren containers. In addition, a box that measures more than 60% of the screen in either direction switches hints off for the session and logs a '\[Hints\]' line.
+
+WHY NOT GAUNTLET'S OWN HintWidget: it relies on the game's global information layer, which is not known to exist in the editor screen, and needs a view-model property per button.
+
+## Unsaved-change guard - UnsavedGuard
+
+Core/UnsavedGuard.cs (2026-11-12) is the 'Discard changes / Keep editing' question of the three row editors: Interior Whitelist, Category Editor, Culture Editor. Those panels only write on Save, and Close / Esc used to discard edits without a word.
+
+DETECTION compares a signature of the rows with the signature taken when the rows were last loaded or saved (HasUnsavedChanges on each view model). No setter has to report a change, so none can be missed.
+
+ONLY THE USER'S OWN CLOSE BUTTON AND ESC GO THROUGH IT. Forced closes (parent panel closing, scene switch) still close at once - asking a question during a teardown is worse than losing an edit. A second Esc while the question is up is ignored. If the question cannot be shown, the panel closes and a '\[UnsavedGuard\]' warning is logged, so a failure never traps the user in a panel.
+
+An inquiry has two buttons, so the question is 'discard?' and the safe answer keeps the panel open. A 'save and close' button was left out on purpose: a save that fails would then also close the panel.
+
+RELATED: F7 Delete Interiors checks InteriorWhitelistLayer.HasUnsavedChanges and refuses while it is true. The delete acts on the SAVED whitelist; with the panel edited but not saved, what is on screen there protects nothing.
+
+## Crash ledger - NativeProbe and the Statistics scan
+
+Core/NativeProbe.cs (2026-11-12) is a crash ledger for engine calls that have not yet been proven safe in the editor. A native crash is not a managed exception: try/catch never sees it and nothing is logged. The first live run of the F7 Statistics scan took the editor down that way, with half a dozen new engine calls in one loop and no way to tell which one did it.
+
+HOW IT WORKS. Each group of unproven calls runs inside NativeProbe.Run(name, ...). Before it starts, 'trying|name' is appended to the ledger and flushed to disk; when it returns, 'ok|name' is appended. If the editor dies in between, the file still ends on 'trying' for that name. The next time the toolkit loads, it reads that as 'this call crashed the editor', appends 'crashed|name', and Run() skips that name from then on. So a bad call costs ONE crash, names itself in the file, and the feature keeps working without it. A managed exception is not a crash: it is recorded as survived and rethrown.
+
+THE LEDGER is MaterialSwapTool\\native_probe_ledger.txt, one 'state|name|time' line per event, read once per editor process; the last line for a name wins. Deleting the file retries everything. To retry one name, delete all of its lines - removing only the 'crashed' line leaves the 'trying' line last, which reads as a crash again.
+
+THE STATISTICS SCAN runs in passes for this reason. Pass 1 uses only long-proven calls (live prefab name, mesh component count). Each newer call gets its own pass under the ledger: Scene.RootEntityCount, the baked-copy name match (GameEntity.PrefabExists), the component counts for cloth, particles, decals and lights, the script count, the light getters, and the mesh-name + Mesh.GetFaceCount pass of the Heaviest Meshes tab. A skipped pass shows as 'NOT COUNTED' in the panel.
+
+WHAT IT FOUND: GameEntity.GetOldPrefabName(). The ledger ended on 'trying' for that call on the second crash. It is no longer called anywhere in the statistics code and must not be called from this toolkit: it takes the editor down natively. Baked copies are therefore named from their entity name instead - the engine is asked whether a prefab of that name exists, and if not one _2 / _3 / _mst style suffix is stripped and it is asked again (up to four steps, cached per distinct name).
+
+---
+
+# PART: Not yet in the editor: LIGHT-LIST
+
+Source: `docs/scene-toolkit/not-yet-in-editor/LIGHT-LIST.md`
+
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
+
+# Light List
+
+Every light in the open scene in one list, with the ones most likely to cost performance
+or to be mistakes at the top. Read-only: it does not edit lights.
+
+Open it with **F7 -> Lights** (bottom row, next to Close). It is the Lights tab of the
+Scene Statistics panel, so the same Refresh, Show More, Write Report and Close apply. If
+the Statistics panel is already open, the button just switches it to this tab.
+
+## What a row shows
+
+`[!] radius 25   SHADOW   intensity 1000   rgb 1.00 0.60 0.24   'flame_loop' in 'torch_wall_a'   - shadow-casting with a large radius - likely expensive`
+
+- **radius**, **SHADOW / no shadow**, **intensity** and **color** as the engine reports
+  them for the live scene.
+- The **owner**: the entity that carries the light, and the top-level prefab it sits in
+  when it is a child (lights usually are: the flame inside a torch).
+- `(hidden)` when the owner, or a parent, is currently invisible.
+- **Go** jumps to the owner's position and selects the entity there. That is normally the
+  owner; if its parent sits at exactly the same spot, the parent may be picked instead.
+
+The header gives the count: how many lights, how many cast shadows, how many are flagged.
+
+## Sorting
+
+- **Shadow cost** (default): shadow-casting lights first, largest radius first, then the
+  rest by radius. A shadow-casting light has to re-render what it can reach, and how much
+  it reaches grows with its radius, so this order puts the expensive ones on top.
+- **Radius**: largest first, shadows or not.
+
+The button at the top right switches between the two and names the order it will switch to.
+
+## Warnings
+
+A flagged row starts with `[!]`, is tinted, and says why:
+
+| Flag | Meaning |
+|------|---------|
+| shadow-casting with a large radius - likely expensive | Shadows on and radius 15 or more. Native torches sit around 6 to 10. |
+| very large radius | Radius 40 or more, without shadows. |
+| zero radius / zero intensity - lights nothing | The light exists but cannot light anything. Usually a leftover. |
+| N lights at this position | Two or more lights within 5 cm of each other: almost always a duplicated torch stacked on itself, doubling the cost for no visible gain. |
+| +N more light component(s) on this entity, not listed | The entity carries several lights; only the first can be read. |
+| could not be read | The engine did not return the light. Listed so the count still adds up. |
+
+The thresholds are judgement calls for "worth a look", not engine limits. A large
+shadow-casting light can be exactly what a scene needs; a dozen of them in one courtyard
+usually is not.
+
+## Limits
+
+- **Read-only in this version.** Change radius, intensity and shadows in the editor's own
+  inspector; then press Refresh here.
+- Only whether shadows are **on** is shown. The engine does not expose whether a light's
+  shadow is static or dynamic.
+- Radius is the light's own value and does not account for a scaled parent.
+- The sun and sky lighting come from the atmosphere, not from light entities, and are not
+  in this list.
+- The list shows 60 rows at first; **Show More** adds 60 at a time. **Write Report** saves
+  all of them, with positions.
+
+---
+
+# PART: Not yet in the editor: MESH-BLEND
+
+Source: `docs/scene-toolkit/not-yet-in-editor/MESH-BLEND.md`
+
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
+
+# Mesh Blend
+
+Terrain mesh blend is the effect where the ground's texture creeps a little way up the base
+of a rock, wall or building, so the object looks set into the terrain instead of placed on
+top of it. This panel does two things: it tells you why the effect is not showing on the
+entity you selected, and it lets you tune how the blend looks.
+
+Open it with **F8 -> Mesh Blend** (second row, next to Continuous Recolor). The panel stays
+open when you close F8. It closes on Esc, on its own Close button, and when the scene
+changes.
+
+Nothing on this panel runs by itself. Every result comes from a button press, and it always
+works on what is selected in the editor at that moment.
+
+## What mesh blend needs
+
+All of these must be true at the same time, for the part of the object you are looking at:
+
+1. **The material uses a standard or metallic shader.** In practice `pbr_shading` (the
+   standard one) or `pbr_metallic`. Flora, decals, faces, the world-map shaders and
+   `pbr_dithered_color` never blend. Skinned (animated) meshes never blend.
+2. **Shader quality is not Low.** Low shader quality switches the effect off for the whole
+   game.
+3. **The object is stationary.** Things that move or are driven by a script (doors, siege
+   engines, destructible pieces) are usually not.
+4. **The terrain under it has a mesh blend layer painted there.** A terrain layer has a
+   Mesh Blend tick box in its settings. The layer must not be the first layer in the list:
+   the first (base) layer never blends. The more of that layer is painted at the spot, the
+   stronger the blend.
+5. **The base of the object is close to the ground.** By default the blend reaches from
+   0.1 m below the terrain to about 1 m above it. Anything higher gets no terrain color.
+
+## Check
+
+Select the entity (up to four are checked per press) and press **Check**. You get one line
+per condition, colored by result:
+
+- **OK** (green): this condition is met.
+- **FAIL** (red): this is a reason the blend is not showing.
+- **UNKNOWN** (amber): the toolkit cannot read this from the editor. The line says what to
+  look at by hand.
+- The last line (blue) names the most likely cause.
+
+What each line means:
+
+- **Shader quality**: reads the graphics option. The toolkit assumes the lowest setting is
+  the one that switches the blend off.
+- **Terrain layers**: lists the layers that have Mesh Blend ticked. This is read from the
+  **last saved** scene file, so tick the box, save, then check again. Unsaved layer changes
+  are not seen.
+- **Paint under the entity**: always UNKNOWN. The toolkit cannot read how much of a layer is
+  painted at a point. Look at the ground under the object and make sure one of the listed
+  layers is actually painted there.
+- **Material**: how many of the entity's meshes (children and all LODs included) use a
+  shader that can blend, with examples. Meshes that cannot blend are listed with the
+  reason.
+- **Stationary**: shows the entity's mobility setting. Stationary is reported as UNKNOWN
+  (probably fine), because the engine's own flag cannot be read. Dynamic is reported as a
+  likely FAIL.
+- **Blend values**: the tuning values currently on the first tunable mesh.
+- **Height**: compares the entity's bounding box with the terrain height under its center,
+  its corners and its origin. This is a box test. A long object on a slope, or one with an
+  overhanging part, can pass here and still be too high at the place you are looking at.
+
+If nothing fails and it still does not blend, check the UNKNOWN lines by hand, then try
+**Recalculate**, then save and reload the scene.
+
+Two things the check cannot look at, which are worth knowing:
+
+- The editor appears to expect blend layer textures to be 2048x2048, with every blend layer
+  in a scene using the same diffuse resolution. This comes from text inside the editor and
+  is not confirmed.
+- A terrain layer change may need a save and reload before the blend picks it up.
+
+## Recalculate
+
+Runs the editor's own `recalculate_mesh_blend` console command for the open scene and shows
+what the editor answered. The toolkit looks the command up in the editor's command list
+first; if the editor does not list it, nothing is run and the status line says so.
+
+The toolkit cannot undo this, and what exactly the command rebuilds is up to the editor.
+
+## Tuning
+
+Tuning writes values to the meshes of **all selected entities**, including their children
+and every LOD. It only touches meshes whose material uses `pbr_shading`, `pbr_metallic` or
+`terrain_mesh_blend_shader`. Other shaders (flags, bows, ropes, lightmapped materials) use
+the same per-mesh values for their own effects, so those meshes are skipped and counted in
+the status line. A standard material with texture scaling, animated texture coordinates or
+tableau blending switched on is skipped for the same reason.
+
+| Field | What it does | Default | Allowed |
+| --- | --- | --- | --- |
+| Blend height | How far up from the ground the terrain color reaches, in meters | 1 | 0.05 to 20 |
+| Softness | Where the fade-out starts. Lower = starts nearer the ground, longer and softer fade. Higher = harder edge | 0 | -0.5 to 0.49 |
+| Noise amount | How much a random pattern raises the top edge. -0.5 gives a straight edge | 0 | -0.5 to 10 |
+| Noise scale | Size of that pattern. Higher = finer | 0 | -15 to 200 |
+
+**Advanced** (toggle) shows three more:
+
+| Field | What it does | Default | Allowed |
+| --- | --- | --- | --- |
+| Heightmap start | How far up the blend the material's height map starts to push the terrain color back | 0 | -0.5 to 0.49 |
+| Heightmap power | How strongly it does that. -1 switches it off | 0 | -1 to 10 |
+| Normal bend | How far up the blend the surface shading is bent toward the terrain's | 0 | -0.19 to 0.8 |
+
+The two heightmap values only matter on materials that have a separate displacement map.
+
+How the fields work:
+
+- **An empty field means "leave this value as it is on each mesh".** Fill in only what you
+  want to change.
+- The **-** and **+** buttons change the number in the field. Nothing changes in the scene
+  until you press Apply to Selection.
+- You can type a comma or a dot as the decimal separator. Text that is not a number, or a
+  number outside the allowed range, is refused with a message and nothing is changed.
+
+Buttons:
+
+- **Read from Selection** fills all fields from the first tunable mesh of the selection.
+- **Apply to Selection** writes the filled-in fields. The advanced fields are written only
+  while Advanced is ON.
+- **Reset to Default** writes the default values (all zeros, which is a 1 m blend height)
+  to all seven values.
+- **Undo Last Change** puts back what the last Apply or Reset replaced. Up to 20 steps. The
+  steps are kept while the scene stays open, even if you close the panel; they are dropped
+  when the scene closes. This is separate from Batch History and from the editor's own
+  undo.
+
+The status line says how many meshes on how many entities were changed.
+
+**Save the scene to keep the result.** The values are stored per mesh in the scene file.
+
+A typical session: select a rock, press Check, fix what it reports, press Read from
+Selection, press + on Blend height a few times, Apply, look, repeat, then save.
+
+## Limits
+
+- Paint weight, the engine's stationary flag and texture formats cannot be read; those
+  lines are UNKNOWN or missing by design.
+- The terrain layer list is the last save, not the live scene.
+- Noise scale: if the status line warns that it "did not read back as written", the editor
+  does not report that value. In that case always type a Noise scale (0 for the default)
+  instead of leaving the field empty, and do not rely on Undo for it.
+- Tuning is not recorded in Batch History.
+- Only four entities are checked per press. Tuning has no such limit.
+
 ---
 
 # PART: Not yet in the editor: PANEL-SIZE-AND-POSITION
 
 Source: `docs/scene-toolkit/not-yet-in-editor/PANEL-SIZE-AND-POSITION.md`
 
-# Panel size and panel position
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
 
-> **Not yet in the in-editor docs.** These features shipped in v0.8.0 (size) and v0.8.1
-> (centre key), but no Documentation-button topic covers them yet. This page is the
-> draft for that topic. When it is built into `DocumentationVM.cs`, delete this file: the
-> exported `in-editor/USER-GUIDE.md` will carry it from then on.
+# Panel size and panel position
 
 ## Panel size: one size for every panel
 
@@ -946,6 +1470,258 @@ middle of the screen and saves that as its position, as if you'd dragged it ther
 
 (The Keyboard shortcuts topic in the in-editor User Guide already mentions the centre key;
 this page collects it with the size and drag behaviour it depends on.)
+
+---
+
+# PART: Not yet in the editor: SCENE-DIFF
+
+Source: `docs/scene-toolkit/not-yet-in-editor/SCENE-DIFF.md`
+
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
+
+# Scene Diff
+
+Scene Diff answers "what changed between these two saves?" It compares two `scene.xscene`
+files for the open scene and lists every entity that was added, removed, moved, rotated,
+scaled, renamed or otherwise changed.
+
+Open it with **F7 -> Scene Diff** (bottom row, next to Close).
+
+## It reads saved files, not the editor
+
+The diff reads files on disk. Anything you have changed since your last save is in
+**neither** file and will not show up. Save first if you want the current state compared.
+The panel's status line says how long ago the scene was last saved.
+
+## Picking the two states
+
+The list shows the **saved file** on top, then every backup of this scene, newest first.
+Each backup row shows when it was taken, why (`auto-4min`, `before-apply`, `manual`, ...),
+which save it is a copy of, and its size.
+
+- **From** marks the older state (purple). **To** marks the newer one (green).
+- Any two rows can be compared, including two backups.
+- **Default pair:** To = the saved file, From = the newest backup that is *not* a copy of
+  that same save. The newest backup is often identical to the saved file (a backup is a
+  copy of the save), and comparing those can only say "no differences". Rows marked
+  `= identical to the saved file` are those copies.
+- If From turns out to be the newer save, the diff still runs; it just reads backwards
+  (Added means "gone since"). The status line says so.
+- At most 60 backups are listed. The default retention keeps 50.
+
+Press **Compare**. Both files are read in the background, so the editor stays responsive;
+a 13,000-entity scene took about a fifth of a second outside the editor. The result opens
+in the results window on the left.
+
+## Reading the result
+
+The first line is the summary, for example:
+
+`+12 added, -1 removed, 40 moved, 5 rotated/scaled, 2 renamed, 1 prefab ref, 7 material, 3 color, 9 other  (13,112 -> 13,556 entities)`
+
+Below it, one section per kind of change:
+
+| Section | What it lists |
+|---------|---------------|
+| Removed | In From, not in To. Position is where it used to be. |
+| Added | In To, not in From. |
+| Prefab reference changed | Swapped to a different prefab in place, or a prefab link broken (baked into the scene) or restored. |
+| Renamed | Same entity, different name. |
+| Moved | Position changed. Shows the distance, farthest first, and the old position. |
+| Rotated / scaled in place | Position unchanged, rotation or scale changed. |
+| Material changed | A mesh's material differs, shown as `old -> new (n meshes)`. |
+| Color changed | A mesh's color factor differs, shown as `#AARRGGBB -> #AARRGGBB`. |
+| Other changes | Tags (`+added -removed`), scripts, physics, light, components, mesh arguments, flags/visibility, prefab child overrides. |
+
+An entity appears once, in the first section that applies to it, with everything else that
+changed on it listed on the same line. The summary counts every kind separately, so one
+entity that moved and changed material counts in both numbers.
+
+- **Added and removed rows are top-most only.** A removed prefab with 36 children is one
+  row, `(+36 child entities)`, not 37.
+- **Go** jumps the camera to the row's position and selects the entity there if the live
+  scene has one. For a removed row the camera goes to where it used to be. Positions come
+  from the To file; if you compared two backups, the live scene may have moved on.
+- **Children** show their top-level parent's position (that is where Go takes you) plus
+  their own local position as text.
+- A note appears when scene-level data outside the entity list (atmosphere, water, terrain
+  layers, paths) also differs. It is not itemized.
+
+Each section shows a share of the row limit. Raise **Show first** at the bottom of the
+results window to see more, or use **Write Report** for everything.
+
+## Write Report
+
+**Write Report** on the Scene Diff panel saves the complete, untruncated result of the last
+comparison as a text file in:
+
+`Documents\Mount and Blade II Bannerlord\MaterialSwapTool\Reports\scene-diff_<scene>_<date>_<time>.txt`
+
+The status line shows the full path.
+
+## How entities are matched, and where that can be wrong
+
+A scene file has no entity IDs. An entity has a name and/or a prefab, a transform, and a
+place in the parent/child tree, and duplicate names are normal (hundreds of the same
+rock). So Scene Diff has to *match* entities between the two files:
+
+1. It works one sibling group at a time: top-level entities first, then the children of
+   each matched pair.
+2. Within a group, entities are grouped by what they were made from (prefab, or the prefab
+   they were baked from, or their name) and paired in passes, most certain first:
+   identical transform; same position; nearest remaining position; same place but renamed;
+   same transform but a different prefab.
+3. Whatever is left over is Removed or Added.
+
+Limits worth knowing:
+
+- **Moved vs. deleted-and-replaced.** If you delete one barrel and place another of the
+  same prefab elsewhere, the file looks exactly like "that barrel moved". Scene Diff
+  reports a move and shows the distance, so an implausible 300 m move is easy to spot.
+- **Which duplicate moved is a guess.** Among identical entities, the closest pairs are
+  matched first. Counts and positions are right; the pairing may not be the one you made.
+- **Changed name *and* moved** shows as one Removed plus one Added.
+- **Reparenting** (dragging an entity under another) shows as Removed plus Added.
+- **Rotation** is compared as an orientation, not as three numbers. The editor rewrites
+  the angles of upright objects on every save, and comparing the numbers would report
+  dozens of rotations that never happened. Rotations under about a quarter of a degree are
+  ignored. If one file stores a rotation as angles and the other as a matrix, the row says
+  "rotation rewritten" because the two cannot be compared reliably.
+- **Position** changes under 1.5 mm are ignored (the file stores three decimals).
+- Terrain, flora and nav mesh data live in other files and are not compared.
+
+---
+
+# PART: Not yet in the editor: SCENE-STATISTICS
+
+Source: `docs/scene-toolkit/not-yet-in-editor/SCENE-STATISTICS.md`
+
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
+
+# Scene Statistics
+
+A read-only overview of what the open scene is made of: totals, the prefabs you used most,
+and the meshes that cost the most triangles. Nothing on this panel changes the scene.
+
+Open it with **F7 -> Statistics** (bottom row, next to Close). The same panel also holds
+the light list; see the Light List page.
+
+## It reads the live scene, on demand
+
+Unlike Scene Diff, this reads the scene as it is in the editor right now, unsaved changes
+included. It scans once when the panel opens and again when you press **Refresh**. It does
+not update by itself, so press Refresh after you add, delete or swap things. The status
+line shows how long the scan took.
+
+The panel stays open when you close F7, so you can use its Go and Select buttons with the
+viewport clear. It closes on Esc, on its own Close button, and when the scene changes.
+
+## Totals
+
+The block at the top:
+
+- **Entities**, split into top-level and children.
+- **Prefabs**: how many different ones, on how many entities, and how many of those are
+  still live prefab links versus baked copies (link broken). Also how many entities carry
+  no prefab name at all.
+- **Meshes**: mesh components and how many entities have one; cloth simulators.
+- **Lights** (with how many cast shadows and how many are flagged), **particle systems**,
+  **decals**.
+- **Scripts**: script components and how many entities carry one.
+- **Triangles**: appears once the Heaviest Meshes tab has been opened.
+
+## Most-Used Prefabs
+
+Every prefab name in the scene with its instance count, most used first. A row reads
+`412 x  rock_a`, followed by `(baked)` or `(400 linked, 12 baked)` when not every instance
+is a live link.
+
+- **Select** selects every instance of that prefab in the editor.
+- **Go** jumps to the first instance.
+
+Entities are counted by the prefab they link to, or, if the link was broken, the prefab
+they were baked from. Children inside a baked prefab that came from prefabs themselves are
+counted too.
+
+## Heaviest Meshes
+
+Every distinct mesh with `total triangles = instances x triangles each`, heaviest total
+first. This is the tab for "what is eating my triangle budget": a 40,000-triangle statue
+used once and a 900-triangle crate used 600 times both show up near the top.
+
+- Triangles are **full detail (LOD0) only**. What the engine draws at a distance is less.
+- The count is per mesh, not per prefab. A building made of eight parts is eight rows.
+- **Select** selects every entity that uses the mesh. **Go** jumps to the first.
+- This tab runs a second, heavier scan the first time you open it, and again on Refresh
+  while it is showing.
+- Terrain and painted flora are not entities and are not counted.
+- If a mesh reads as 0 triangles, the engine did not expose its face count; the header
+  says how many did.
+
+## Rows, Show More and the report
+
+Each table shows 60 rows at first. **Show More** adds 60 at a time, up to 600. The header
+line always gives the real total.
+
+**Write Report** saves the totals and all three tables in full (no row limit) to:
+
+`Documents\Mount and Blade II Bannerlord\MaterialSwapTool\Reports\scene-stats_<scene>_<date>_<time>.txt`
+
+The status line shows the full path. The Heaviest Meshes table is only in the report if
+that tab has been opened since the last Refresh.
+
+## Select and the short delay
+
+Select uses the same delayed selection as every other select-in-editor button in the
+toolkit: the selection lands a couple of frames after the click. Selecting several
+thousand entities at once can make the editor pause briefly.
+
+---
+
+# PART: Not yet in the editor: TOOLTIPS-AND-UNSAVED-CHANGES
+
+Source: `docs/scene-toolkit/not-yet-in-editor/TOOLTIPS-AND-UNSAVED-CHANGES.md`
+
+> Built into the in-editor documentation in v0.9.0 (2026-11-12). Kept here as the source draft.
+
+# Tooltips and unsaved-change warnings
+
+Draft User Guide text for features added 2026-11-12 that do not have an in-editor topic yet.
+
+## Tooltips
+
+Rest the mouse on a toolkit button for about half a second and a small box explains what the
+button does: what it acts on (your selection, the rules list, the whole scene, files on disk),
+whether it asks before acting, and whether it can be undone.
+
+- The tooltip goes away when you move off the button or click it. After a click it stays away
+  until the mouse moves to another button.
+- Some text fields have a tooltip too; hover the dark box around the field.
+- Tooltips follow the panel size you set with Ctrl+Minus / Ctrl+Equals.
+- To switch them off: F9 > Keyboard Shortcuts > "Tooltips: ON/OFF". The setting is saved.
+
+Tooltips never take a click or a keystroke. They are drawn on their own layer that ignores
+all input.
+
+## Unsaved-change warnings
+
+The Interior Whitelist, Category Editor and Culture Editor only write your edits when you press
+Save. If you press Close or Esc with edits that have not been saved, the toolkit now asks:
+
+- **Discard changes** closes the panel and drops the edits.
+- **Keep editing** leaves the panel open so you can press Save.
+
+There is no question when nothing changed. Panels that are closed for you (their parent panel
+closing, or a scene switch) still close without asking.
+
+Delete Interior Entities (F7) also warns when the Interior Whitelist is open with unsaved
+edits, because it would act on the saved list, not on what you see in the panel.
+
+## "Simplify for Export"
+
+The old name "Solidify" is gone from the confirmation dialog, its button, and the status and
+log messages. The button, the dialog and the messages now all say "Simplify for Export".
+Files written by earlier versions (`solidified_*.jsonl`) keep their names.
 
 ---
 
@@ -1819,6 +2595,337 @@ Alright guys, it's your favorite YouTuber here. Got a very cool new mod to show 
 Source: `docs/scene-toolkit/CHANGELOG.md`
 
 # Changelog
+
+## v0.9.0 - 2026-11-12 (GitHub release, for Bannerlord v1.5.7)
+
+- Version bumped to v0.9.0 (`_Module/SubModule.xml`). Contains every entry below down to v0.8.1.
+- Built, deployed (22:40, 37 files verified by hash) and packaged against Bannerlord v1.5.7.
+  Not tried on v1.4.8; v0.8.1 stays the release for v1.4.8.
+- README has a "Which release for which game version" table; the zip's README.txt links to it.
+- New `WHATS-NEW-v0.9.0.txt` in the zip. Source snapshot in `BannerlordModArchive\v0.9.0`.
+- Confirmed in the editor by the user before release: tooltips, unsaved-change question, Scene
+  Diff (compare and Go), Statistics (Most-Used Prefabs and Heaviest Meshes across the scene),
+  Lights, Mesh Blend check, F5 swap with mesh bender carry-over, Auto Origin, path distribute
+  rotation, load-crash checks, Remove Physics Outside Border, F6 bad-name error, typed colors.
+  Not tested: Delete Interiors refusal with unsaved whitelist edits; the in-editor docs text.
+## 2026-11-12 - In-editor documentation updated for v0.9.0 (deployed 2026-11-12 22:40, untested in editor)
+
+`DocumentationVM.cs` brought up to date with everything since 2026-10-04. Docs text only, no
+behavior change. User Guide 40 -> 47 topics, Technical Docs 15 -> 18.
+
+- New User Guide topics: Tooltips; Unsaved changes (Discard changes / Keep editing); Panel size
+  and position; Material Swap Tool - Mesh Blend; Scene Analyzer - Scene Diff; Scene Analyzer -
+  Statistics; Scene Analyzer - Lights. Built from the six drafts in `docs/not-yet-in-editor/`, which stay as source drafts.
+- New Technical Docs topics: Tooltip layer (`ToolkitHints`, `Hint` widgets); Unsaved-change guard
+  (`UnsavedGuard`); Crash ledger (`NativeProbe`, the Statistics passes, `GetOldPrefabName`).
+- Edited User Guide topics: Color factor and Continuous Recolor (typed sRGB -> linear); Keyboard
+  shortcuts (Tooltips row, pointer to panel size); Delete Interiors (refuses with unsaved
+  whitelist edits); Category Editor and Culture Editor (unsaved question); Scene Analyzer
+  Overview (three fly-outs), Full Scan (two load-crash checks), Fix actions (Fix Destructible
+  Refs, Unparent Stands, Remove Physics Outside Border); Prefab Swapper & Distribution (mesh
+  bender, old-prefab lookup, status line and log, F6 short errors, path heading); Prefab Creator
+  (roots with an editor marker mesh).
+- Edited Technical Docs topics: Color mechanisms (Mesh.Color is linear); F6 fixes (v1.5.7 path
+  rotation, mesh bender carry); Delete Physics (Remove Physics Outside Border rework).
+- Where the drafts and the code disagreed, the code was followed: Statistics counts baked copies
+  by entity name (the draft said "the prefab they were baked from") and has the NOT COUNTED
+  line; Delete Interiors refuses, it does not only warn; Scene Diff also searches the default
+  backup folder; retrying one ledger step needs all of that step's lines removed, not only the
+  "crashed" line.
+- No "Solidify" wording was left in the docs text, and the docs state no tested game version, so
+  neither needed a change.
+
+## 2026-11-12 - F5 swap: result and failure reason now shown and logged (deployed 2026-11-12 22:16, untested in editor)
+
+Report: "nothing happens when i run the swap thing... there IS NO swap happening". The session log
+shows the pre-swap backup running three times with no swap trace after it, so each swap was refused
+before its first engine call. The reason was never visible: the cause of the refusal itself is NOT
+yet identified.
+
+- F5 mirrors the swapper's status text, but a swap finishes inside the confirm dialog's callback,
+  after F5 had already refreshed. The result line ("Swapped N", or a refusal) never reached the
+  panel. `PrefabSwapperVM.StatusChanged` now tells F5 to refresh whenever the status changes.
+- Every swap status is written to `PrefabSwapperTool\tool.log` as `[SwapStatus] ...`, and every
+  failed entity as `[Swap] failed: <reason>`. The status line carries the first reason.
+- Old-prefab lookup no longer relies on the display name alone: it tries the display name, the live
+  prefab link, then the name with `_2` / `_mst` style suffixes removed, and uses the first one the
+  engine can instantiate. The refusal message lists the names tried.
+
+## 2026-11-12 - Statistics: Most-Used Prefabs counts baked copies again (deployed 2026-11-12 21:46, untested in editor)
+
+- First working run of F7 > Statistics (19:00, fief_bake_test_2: 6,019 entities, 89 prefabs,
+  7 lights, scan 10-13 ms). CONFIRMED by the user: the Lights tab ("looks great") and Heaviest
+  Meshes including Select across the scene. Every probed engine call has now completed live
+  (the ledger shows ok for all of them), so the remaining crash risk listed below is gone.
+- Reported: Most-Used Prefabs only listed and selected instances that are still live prefab
+  links (in practice the contents of one big linked entity), not every copy in the scene. That
+  was the cost of dropping GetOldPrefabName: baked copies had no name.
+- Fix: an unlinked entity is now named from its display name. The engine is asked whether a
+  prefab of that name exists (`GameEntity.PrefabExists`); if not, one `_2` / `_3` / `_mst`
+  suffix is stripped and it is asked again (up to four steps, cached per distinct name). Names
+  that are not prefabs stay unnamed. Select uses the same rule, so it picks live links and baked
+  copies together; the row still says how many are linked and how many baked.
+- Limits: a copy that was renamed to something else entirely is not matched, and a nested part
+  that happens to carry a prefab's name is counted as an instance of it.
+- `PrefabExists` is a new call for the toolkit, so this pass runs under the crash ledger too.
+
+## 2026-11-12 - Statistics crash cause found: GameEntity.GetOldPrefabName (deployed 2026-11-12 18:50, untested in editor)
+
+- F7 > Statistics crashed the editor again at 18:48:18 on a new map. This time the crash ledger
+  (`MaterialSwapTool\native_probe_ledger.txt`) named the call: it ends on
+  `trying|SceneStats: GameEntity.GetOldPrefabName`, with `Scene.RootEntityCount` before it
+  marked ok. A dump was written too (`ProgramData\...\crashes\2026-11-13_00.48.32`).
+- `GetOldPrefabName()` is no longer called anywhere in the statistics code (scan and Select).
+  Never call it from this toolkit: it takes the editor down natively, try/catch does not help.
+- Cost: entities that are not live prefab links (baked copies, hand-built ones, children) are
+  counted but no longer named in the Most-Used Prefabs table. The totals line now says
+  "N live prefab links; M entities are not prefab links".
+- Even without this build the ledger protects the installed one: on the next launch that pass is
+  marked "crashed" and skipped. The remaining probed calls (component counts for cloth,
+  particles, decals, lights; script count; light getters; mesh face counts) have still never
+  completed a live run, so each could still cost one crash before the ledger skips it.
+
+## 2026-11-12 - First live test: tooltip box size, Statistics/Lights crash, Scene Diff backup locations (deployed 2026-11-12 17:23, untested in editor)
+
+Results of the user's first session with today's build (17:06-17:19):
+
+- CONFIRMED working: the unsaved-changes question on Esc (the "Keep editing" branch was not
+  tried), the "Simplify for Export" wording, and Scene Diff (a compare ran, the report was
+  written). The typed-color fix from earlier today was confirmed too.
+- BROKEN, fixed: every tooltip covered the whole screen. The box's two background sprites were
+  StretchToParent children of a CoverChildren widget, and the engine sized them from the
+  full-screen root. The sprites now sit ON the CoverChildren containers, so only the text gives
+  the box a size (460 wide). Safety net in `ToolkitHints.PlaceBox`: a box measuring more than 60%
+  of the screen switches hints off for the session and logs a `[Hints]` line.
+- CRASH, mitigated: pressing F7 > Lights took the editor down (native crash, no dump - it was
+  cancelled). It was not about lights: tool.log shows the statistics scan never finished its
+  first-ever run, so Statistics would have crashed the same way. The scan made six engine calls
+  the toolkit had never made before, in one loop, so the log could not say which one.
+  - The scan now runs in passes. Pass 1 uses only long-proven calls. Each new call gets its own
+    pass under `Core/NativeProbe.cs`, a crash ledger: "trying|name" is flushed to
+    `MaterialSwapTool\native_probe_ledger.txt` before the pass and "ok|name" after. A name left
+    on "trying" when the toolkit next loads is marked "crashed" and skipped from then on.
+  - So the next crash, if there is one, names the call in that file and costs nothing after
+    that: the panel still opens, shows "NOT COUNTED: ..." for the missing figure, and the rest
+    works. Deleting the ledger retries everything.
+  - Probed groups: Scene.RootEntityCount, GetOldPrefabName, GetComponentCount for ClothSimulator /
+    ParticleSystemInstanced / Decal / Light, WeakGameEntity.GetScriptCount, GetLight + light
+    getters, and the mesh-name + Mesh.GetFaceCount pass of the Heaviest tab.
+  - The culprit is still UNKNOWN. This change does not prevent one more crash; it makes it the
+    last one and identifies the call.
+- Scene Diff and a changed backup location (asked, analyzed): it reads the same setting the
+  backup writer uses (F9 Location), so backups written after a change are found. Backups
+  written BEFORE the change stayed in the old folder and were missing from the list; the
+  default folder is now searched as well whenever a custom location is set. Backups left in
+  some other, earlier custom folder are still not found.
+
+## 2026-11-12 - F8: Mesh Blend check and tuning (deployed 2026-11-12 17:19, untested in editor)
+
+- New fly-out, opened from one new button on F8's Continuous Recolor row (no new row, panel
+  height unchanged): Mesh Blend. It answers "why is the terrain color not blending onto the base
+  of this entity" and tunes the blend. Everything runs on a button press.
+- Check: one line per condition for the selected entities (first 4), each OK / FAIL / UNKNOWN
+  with the measured value, and a last line naming the most likely cause. Conditions: shader
+  quality, terrain layers flagged as mesh blend layers (read from the last SAVED scene.xscene; the
+  first layer never blends), material shader, mobility, current blend values, height of the
+  bounding box above the terrain.
+- UNKNOWN on purpose: paint weight under the entity (the engine has a setter and no getter) and
+  the engine's per-mesh stationary flag (mobility is shown as a hint). Texture format and
+  resolution are not checked; the panel only names the blend layers' diffuse textures.
+- Recalculate: looks the editor's `recalculate_mesh_blend` console command up in the editor's own
+  command list, runs it and shows the answer. If the editor does not list it, nothing is run.
+- Tuning: blend height (meters), softness, noise amount, noise scale, and behind an Advanced
+  toggle heightmap start, heightmap power, normal bend. -/+ steppers, Read from Selection, Apply
+  to Selection, Reset to Default, Undo Last Change (20 steps, this panel only, dropped on scene
+  switch). Applies to every eligible mesh of the selected entities, children and all LODs. An
+  empty field keeps each mesh's current value. Needs a scene save to persist.
+- Tuning is only offered on `pbr_shading`, `pbr_metallic` and `terrain_mesh_blend_shader`
+  materials without texture-scaler / animated-UV / tableau flags. Other shaders that can blend
+  (flags, bows, ropes, lightmapped) use the same mesh values for their own effects and are skipped.
+- From the shader source (1.5.7): there is no `pbr_standart` shader; the standard one is
+  `pbr_shading`. The rules and their file:line references are in the header of
+  `Core/MeshBlend.cs`.
+- Unverified until seen in the editor: the shader names the engine reports, that mesh vector
+  arguments set from managed code show at once and are saved, that the fourth component (noise
+  scale) reads back, the console command lookup, the shader-quality mapping, and the layout.
+  Look for `[MeshBlend]` lines in MaterialSwapTool\tool.log.
+- User-guide draft: docs\not-yet-in-editor\MESH-BLEND.md.
+
+## 2026-11-12 - Tooltips on every panel (deployed 2026-11-12, untested in editor)
+
+- Rest the mouse on a toolkit button for about half a second and a box says what it does: what
+  it acts on, whether it asks first, whether it can be undone. About 340 hints across every live
+  panel (F5-F9 and their fly-outs, including the new F7 panels). Each hint was written from the
+  button's handler code, not from its label.
+- How it works: a hint is a hidden `<TextWidget Id="Hint" ...>` child inside the button (or the
+  wrapper of a text field) in the panel XML. `Core/ToolkitHints.cs` looks at the hovered widget
+  of every Gauntlet layer once per frame and shows the text in one shared layer
+  (`ToolkitHintPanel.xml`). No VM properties and no per-panel code, so adding a hint to a new
+  button is one XML line.
+- The tooltip layer is not a focus layer and every node is click-through, like the
+  last-operation readout. It hides on click and stays hidden until the mouse moves to another
+  button. It flips left/up near the screen edges and follows the panel scale.
+- Switch: F9 > Keyboard Shortcuts > "Tooltips: ON/OFF" (`HintsEnabled` in shortcut_settings.json,
+  default on). The Shortcuts panel grew by one row.
+- Why not Gauntlet's own HintWidget: it depends on the game's global information layer, which is
+  not known to exist in the editor screen, and needs a view-model property per button.
+- Unverified until seen in the editor: that hover is reported for these panels, the box position
+  at non-default panel scales, and the look of the box. If no tooltip ever appears, look for
+  `[Hints]` lines in MaterialSwapTool\tool.log.
+- User-guide draft: docs\not-yet-in-editor\TOOLTIPS-AND-UNSAVED-CHANGES.md.
+
+## 2026-11-12 - Unsaved-change warnings; "Solidify" wording removed (deployed 2026-11-12, untested in editor)
+
+- Interior Whitelist, Category Editor and Culture Editor: Close and Esc now ask "Discard changes /
+  Keep editing" when the rows differ from what was last loaded or saved (`Core/UnsavedGuard.cs`;
+  detection compares a signature of the rows, so no setter can be missed). No question when
+  nothing changed. Forced closes (parent panel closing, scene switch) still close at once.
+- F7 Delete Interiors refuses while the Interior Whitelist panel is open with unsaved edits. It
+  acts on the saved list, not on what the panel shows; that gap is how the tutorial video lost a
+  scene's interiors.
+- "Simplify for Export": the confirmation title, its button, the status line and the log messages
+  no longer say "Solidify". Internal class and file names (`SolidifyManager`,
+  `solidified_*.jsonl`) are unchanged so existing data keeps working.
+
+## 2026-11-12 - F7: Scene Diff, Scene Statistics, Light List (deployed 2026-11-12, untested in editor)
+
+- Three read-only fly-outs, opened from new buttons on F7's Close row (no new row, panel height
+  unchanged): Scene Diff, Statistics, Lights. Statistics and Lights are two tabs of one panel.
+- Scene Diff: compares two saved states of the open scene - the saved scene.xscene against a
+  backup, or backup against backup - and lists entities added, removed, moved (with distance),
+  rotated/scaled, renamed, prefab reference changed, material/color changed, plus tags, scripts,
+  physics, light and flags. Snapshot list newest first; default = saved file vs the newest backup
+  that is not a copy of that same save. Parsed and compared on a background task. Results open
+  in the results window with Go buttons; Write Report saves the full list.
+- It reads SAVED files only; unsaved editor changes are in neither side. The panel says so.
+- Entities have no ids in the file, so they are matched: per sibling group, by prefab/name, exact
+  transform first, then same position, then nearest position, then renamed-in-place, then
+  prefab-swapped-in-place. Known limits (a delete plus a new placement of the same prefab reads
+  as a move; which of several identical duplicates moved is a guess) are in the draft doc.
+- Rotations are compared as orientations, not as three numbers: the editor rewrites the euler
+  angles of upright objects on every save, which read as 91 false "rotated" rows between two
+  real backups before this.
+- Statistics: scene totals (entities, top-level/children, distinct prefabs, linked vs baked,
+  meshes, lights, particle systems, decals, cloth, scripts), a most-used-prefabs table and a
+  heaviest-meshes table (LOD0 triangles x instances, counted once per distinct mesh). Select
+  picks every instance through the deferred selection queue; Go jumps to the first.
+- Lights: every light with owner, radius, color, intensity and shadow flag, sorted by shadow cost
+  or radius, with Go. Flags shadow-casting lights of radius 15+, radius 40+, zero
+  radius/intensity, and several lights at one position.
+- Everything runs on a button press (open / Refresh / Compare); nothing scans on tick. Tables
+  show 60 rows with Show More. Reports go to MaterialSwapTool\Reports\.
+- Statistics/Lights stays open when F7 closes; Scene Diff closes with it. Both close on a scene
+  switch (BackupManager.InvalidateSceneState).
+- Watch for: the Lights tab reads each light through `GameEntity.GetLight()`, whose wrapper
+  releases a native reference from its finalizer. The game's own LightCycle script does the
+  same, but a delayed crash some seconds after opening the Lights tab would point here.
+- New user-guide drafts: docs\not-yet-in-editor\SCENE-DIFF.md, SCENE-STATISTICS.md,
+  LIGHT-LIST.md. Scene Diff's matching was run outside the editor against real backups (13,556
+  entities: parse about 70 ms per file); the panels, Statistics and Lights have not been opened
+  in the editor.
+
+## 2026-11-12 - Typed colors no longer wash out (deployed 2026-11-12, CONFIRMED by the user 2026-11-12)
+
+- Continuous Recolor and Material Swap rule colors came out lighter and less saturated than the
+  hex you typed, always by the same curve: `#BAFFAF` -> `#DDFFD7`, `#802020` -> `#BB6363`.
+  Cause: `Mesh.Color` is stored LINEAR; the editor's own color field converts the typed sRGB hex
+  to linear first, the toolkit wrote it raw. Confirmed by the user's dark-color test (a 2.2 gamma
+  predicted `#BA6363`; "halfway to white" predicted `#C09090`).
+- New `ColorHex.SrgbToLinear` / `LinearToSrgb` (gamma 2.2, alpha untouched). Converted at the
+  typed-input write sites (Continuous Recolor palette + single-color apply, Material Swap rule
+  ColorFactor) and in Sample Selection's seeded hex.
+- Unchanged on purpose: undo/redo logs, LOD color fix, Fill Overrides and color presets copy
+  stored values mesh-to-mesh, so they stay raw and round-trip exactly.
+- Colors applied before this stay washed out until re-applied. Very dark channels land within a
+  couple of steps (8-bit linear storage). The entity-wide color factor (`SetFactorColor`) is not
+  converted; untested whether it has the same issue. Compiled with SkipDeploy; untested.
+
+## 2026-11-12 - Remove Physics Outside Border works again (deployed 2026-11-12, untested in editor)
+
+- It was still the first-round approach the pile work proved useless: it skipped every entity
+  whose own BodyFlag read None (every placed prefab root, since collision sits on the children)
+  and called RemovePhysics, which never persists (the save re-writes `<physics shape="bo_..."/>`).
+- Now each out-of-border entity is tagged `oob_nophys`; SavedScenePhysicsStripper strips the
+  `<physics>` nodes of tagged entities AND their whole subtree from scene.xscene, automatically
+  ~2 s after every editor save (.bak kept, newest 3). Result shows after save + reload.
+- Live prefab links among them are broken first (a `prefab="X"` entity has no children in the
+  file, so there would be nothing to strip). Undo removes the tag.
+- The stripper now covers subtrees for `pile_nophys` too. Compiled with SkipDeploy; untested.
+
+## 2026-11-12 - F6: short errors, unknown prefab names caught up front (deployed 2026-11-12, untested in editor)
+
+- Distribute by name (path, grid, onto surface, fill surfaces) checks the prefab name ONCE
+  before placing anything. An unknown name used to try every cell (100 for a 10x10 grid), dump
+  100 identical "instantiate returned null" lines into the two-line status, and still leave an
+  empty `_Grid` anchor. Now: "'x' is not a saved prefab ... switch Source to Selection."
+- No anchor is created when nothing was placed.
+- Every F6 status line (distribute, mirror, rotate) shows failures grouped and counted, e.g.
+  "100 failed: 100x instantiate returned null (full list in PrefabSwapperTool\tool.log)".
+  The full list goes to tool.log as `[Distribute] failed:` lines.
+- Compiled with SkipDeploy; untested in the editor.
+
+## 2026-11-12 - Auto Origin / Origin to Anchor accept roots with an editor marker mesh (deployed 2026-11-12, untested in editor)
+
+- "Set Origins (Selected)" refused the Fief scaffold prefabs (`moved=0 skippedMeshed=1` on every
+  click): their root carries `editor_plane_low` with the `editor_gizmo` material, an editor-only
+  pick handle, and it counted as real geometry. About 170 Native/SandBoxCore prefabs do the same.
+- A mesh slot is now ignored when every mesh in it uses `editor_gizmo`. `editor_cube` etc. with
+  real materials (stone_a, rock_u, ...) still count, so those roots are still protected.
+- Origin to Anchor no longer asks "Move a non-empty entity?" for these roots either.
+- The marker moves with the origin. Compiled with SkipDeploy; untested in the editor.
+
+## 2026-11-12 - Swaps keep the mesh bender (deployed 2026-11-12, untested in editor)
+
+- Swap Selected, Swap All Matching, swap to live reference, Add mode and undo now carry the
+  native `mesh_bender` script and its bend values ("Bend Amount", "Bend Center Ratio") onto the
+  swapped-in entity. Before, every swap dropped it: Instantiate only brings the new prefab's own
+  definition, and the live-reference path discarded everything from the old entity.
+- Live reference: the reference's own bender wins when it has one, otherwise the old entity's.
+- Each carry logs `[MeshBender] ... source[...] result[...]` in PrefabSwapperTool\tool.log,
+  with the values read back from the new entity.
+- Uses `GameEntity.CopyScriptComponentFromAnotherEntity` + `Set/GetNativeScriptComponentVariable`
+  (first use of both in the codebase). Compiled with SkipDeploy; untested in the editor.
+- Still open: the editor's drag-placement ghost disappearing after swaps. Swap code is unchanged
+  since 2026-08-23, so the 1.5.7 game update is a suspect.
+
+## 2026-11-11 - Scene Analyzer: two load-crash checks + fixes (CC_93 merlons, CC_84 market stand)
+
+- New `CrashChecks.cs`, run first in Full Scan:
+  - **Destructible reference tags (server load crash).** Any entity with a `DestructableComponent`
+    whose `ReferenceEntityTag` has no DIRECT child carrying that tag. `OnInit` asserts that child
+    exists (`GetFirstChildEntityWithTag` checks direct children only, decompiled), and the
+    dedicated server aborts on load. This was the CC_93_siege crash (8 merlons missing their
+    `debris_holder`). New button **Fix Destructible Refs** adds a tagged `debris_holder` child at
+    each entity's origin (the same fix that was server-verified on CC_93).
+  - **Live merchant_stand_market prefab (client load crash).** CC_84 test maps: every live
+    `prefab="merchant_stand_market"` crashed clients, the inline copy loaded. The server loads it
+    fine. The four sibling SandBox stands warn. New button **Unparent Stands** calls
+    `BreakPrefab()` so the save writes the children inline. The old meshless-cloth theory is ruled
+    out (working CC_84_battle has 50 bare `<cloth_simulator/>`), so there is no cloth check.
+- Deployed 2026-11-12 (MD5 of DLL + SceneAnalyzerPanel.xml match the build output). **Not tested
+  in-editor yet.** The live detection of a prefab link relies on `GetPrefabName()` being empty
+  for baked copies; check that on a test scene.
+- Standalone `Analyze-BannerlordScene.ps1` got the same two checks (32, 33), tested on 8 scenes
+  with known outcomes.
+
+
+## 2026-11-11 - Distribute along path rotates again (game v1.5.7 regression)
+
+- After the 2026-11-11 Bannerlord update (v1.5.7), `Path.GetFrameForDistance` returns the
+  position but an IDENTITY rotation, so F6 "Distribute along path" (by name and from
+  selection) placed every instance world-aligned. Confirmed in `BST_dist_test`: 225 path
+  instances with no `rotation_euler`, against August scenes (CC_76_battle_testing2) whose
+  instances carry a yaw-only heading along the path. Extra Z Rotation was not involved.
+- New `PrefabDistributor.PathFrameAt`: samples two positions 5 cm apart, flattens to XY and
+  builds the same yaw-only frame (f = travel, u = world up) the engine used to return. All four
+  path-sampling calls go through it. Deployed 13:16 after the editor exited (DLL MD5 matches the
+  build); not yet verified in-editor. No release.
+- 1.5.7 audit of the rest of the toolkit (offline): compiles against the 1.5.7 DLLs with 0 errors;
+  the 12:51 session's logs show every Harmony hook attached (SceneGuard, cursor, editor tick) and
+  no toolkit errors; string-named reflection targets still resolve (MBDebug.RenderDebugSphere,
+  SceneEditorScreen); engine API diff vs the 1.5.5 refs removed nothing; bounding-box extents
+  unchanged (sally wall 14.257). New engine-log noise is all vanilla (shader recompiles, Qt
+  editor warnings, missing FMOD events).
 
 ## 2026-10-26 - In-editor docs on GitHub; docs split into scene-toolkit / misc (docs only)
 

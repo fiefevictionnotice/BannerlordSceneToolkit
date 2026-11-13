@@ -84,6 +84,10 @@ namespace MaterialSwapTool.GUI
         {
             // Its own results view - makes no sense stranded open without this panel.
             DiffPreviewLayer.Close();
+            // Scene Diff shows its result IN that results view, so it goes with it. The
+            // Statistics / Lights fly-out is deliberately left alone: its Go and Select buttons
+            // are most useful with this panel out of the way, and it has its own Close and Esc.
+            SceneDiffLayer.Close();
 
             if (!IsOpen) return;
             try

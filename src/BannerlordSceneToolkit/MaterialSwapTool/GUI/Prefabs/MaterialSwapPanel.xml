@@ -17,7 +17,7 @@
               <Children>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Material Swap Tool (F8)" Brush="Popup.Title.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" HorizontalAlignment="Right" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenDocumentation">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Documentation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Documentation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the Documentation window, which covers every tool in the toolkit." /></Children>
                 </ButtonWidget>
               </Children>
             </Widget>
@@ -28,16 +28,19 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button" Command.Click="ExecuteSelectManual" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Manual" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets the scope of Preview, Dry Run, Apply and Check LOD Mismatches to the entities selected in the editor. Changes nothing in the scene; the status line shows how many are in scope." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button" Command.Click="ExecuteSelectFiltered" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Filtered" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets the scope to every entity in the scene whose name or prefab name contains the text in the box below. Type the text first; an empty box matches nothing. Changes nothing by itself." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="154" Brush="Popup.Done.Button" Command.Click="ExecuteSelectWholeScene" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Whole Scene" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets the scope to every entity in the open scene. Changes nothing by itself; Apply asks for confirmation when more than 50 entities are in scope." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -45,9 +48,18 @@
 
                 <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
                   <Children>
-                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenContinuousRecolor">
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenContinuousRecolor" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Continuous Recolor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Continuous Recolor panel, which tints whatever you select by material category for as long as it is armed." />
+                      </Children>
+                    </ButtonWidget>
+                    <!-- Second fly-out opener on this row (230+4+170 = 404 of 712) - no new row,
+                         panel height unchanged. -->
+                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenMeshBlend">
+                      <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Mesh Blend" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Mesh Blend panel: checks why the terrain color is not blending onto the base of the selected entity, and tunes the blend height, softness and noise. Opening it changes nothing." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -56,6 +68,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginBottom="4">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@FilterTerm" Brush="MaterialSwapTool.RuleText" MarginLeft="10" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Text used by Filtered mode (matched against entity and prefab names) and by Select by Material (matched against material names). Partial text works and case is ignored." />
                   </Children>
                 </Widget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="20" Text="@SelectionModeLabel" Brush="Popup.Description.Text" MarginBottom="10" DoNotAcceptEvents="true" />
@@ -85,6 +98,7 @@
                                     <Widget WidthSizePolicy="Fixed" SuggestedWidth="122" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
                                       <Children>
                                         <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorFactor" Brush="MaterialSwapTool.RuleText" MarginLeft="6" />
+                                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Optional color factor set where this rule swaps a material, as #RRGGBB or #RRGGBBAA. Leave empty to leave the color alone." />
                                       </Children>
                                     </Widget>
                                     <!-- Per-row invert: swaps this rule's from/to only. 64px = 2x the
@@ -92,11 +106,13 @@
                                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="64" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteInvertRule" MarginRight="4">
                                       <Children>
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="&lt;-&gt;" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Swaps the From and To materials of this rule only. Edits the rules list, not the scene; click again to swap back." />
                                       </Children>
                                     </ButtonWidget>
                                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="32" Brush="Popup.Cancel.Button" Command.Click="ExecuteRemoveRule">
                                       <Children>
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="X" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes this rule from the list. No confirmation and no undo; the scene and saved presets are not affected." />
                                       </Children>
                                     </ButtonWidget>
                                   </Children>
@@ -120,16 +136,19 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Done.Button" Command.Click="ExecuteAddRule" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+ Add Rule" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds an empty rule row at the end of the rules list." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="380" Brush="Popup.Done.Button" Command.Click="ExecuteGetInputFromSelection" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Get Input Rules from Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds one rule per material found on the entities selected in the editor, with From filled in and To left blank. Materials that already have a rule are skipped. The scene is not changed." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Cancel.Button" Command.Click="ExecuteDeleteBlankRules">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete Blanks" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes every rule whose To material is empty, including rows that only have a From material. No confirmation and no undo for the rules list; the scene is not changed." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -142,11 +161,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="330" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteSelectRuleMatches" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Select Rule Matches in Editor" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Selects in the editor every entity in the whole scene that uses any From material in the rules list, whatever the scope mode. Replaces the editor selection; changes no materials." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="374" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteSelectByFilterMaterial">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Select by Material (filter box)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Selects in the editor every entity in the whole scene that uses a material whose name contains the text in the filter box. Replaces the editor selection; changes no materials." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -162,11 +183,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="420" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteFillRulesFromEntity" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fill Rules From Entity (blank rules only)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Fills the empty To side of existing rules by searching the selected prefab for parts with the same name and tags that already carry a different material. Never adds rows or overwrites a To. The scene is not changed." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Cancel.Button" Command.Click="ExecuteClearAllRules">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear All Rules" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes every rule from the list after asking for confirmation. The rules list has no undo; presets saved on disk and the scene are not affected." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -181,11 +204,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteClearInputMaterials" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear All Input (FROM)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Blanks the From material on every rule and keeps the rows and their To materials. Asks first; the rules list has no undo." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteClearOutputMaterials" MarginRight="8">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear All Output (TO)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Blanks the To material on every rule and keeps the rows and their From materials, ready for Fill Rules From Entity or a Merge-mode preset load. Asks first; the rules list has no undo." />
                       </Children>
                     </ButtonWidget>
                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Keeps the rows; blanks one column." Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
@@ -200,6 +225,7 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteInvertRules" MarginRight="8">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Invert Rules" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Swaps From and To on every rule in the list, reversing the direction of the whole rule set. Edits the list only, not the scene; click again to swap back." />
                       </Children>
                     </ButtonWidget>
                     <!-- Two dedupe flavors: Rows keeps ONE row per input material (first wins,
@@ -208,11 +234,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteDedupeRows" MarginRight="8">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dedupe (Rows)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Keeps the first rule for each From material and deletes every later rule with the same From. No confirmation and no undo for the rules list." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="253" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteDedupeMultiOutput">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dedupe (Multi-Output)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reduces each weighted To entry (matA:4, matB:1) to its first material only. No rows are added or removed. No confirmation and no undo for the rules list." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -234,11 +262,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="242" Brush="Popup.Cancel.Button" Command.Click="ExecuteSetOverrideReference" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Set Input Entity (A)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Stores the one entity selected in the editor as input entity A for the Infer and Apply buttons in this section. Exactly one entity must be selected. A is kept until you set another or close the panel." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="466" Brush="Popup.Done.Button" Command.Click="ExecuteInferMaterialRules">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Infer Material from A (Matching Prefab)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Compares A slot by slot with the one entity selected now (B, a copy of the same prefab) and adds rules from each material on A to the material B has there. Materials that already have a rule are skipped. Scene unchanged until Apply." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -250,6 +280,7 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="466" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteGenerateRulesFromReference">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Infer Color from A (Matching Material)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the color of each tinted material on A and adds one rule per material that keeps the material and sets that color. Needs no second entity. Materials that already have a rule are skipped. Scene unchanged until Apply." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -262,6 +293,7 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="466" Brush="Popup.Done.Button.NineGrid" Color="#c9843bFF" Command.Click="ExecuteApplyMaterialLayout">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply B's Materials to A (Slot-Exact)" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets each mesh slot on A and its children to the material the selected entity B has in the same slot. Changes the scene directly: asks first, takes a backup, and is logged in Batch History so it can be undone." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -279,16 +311,19 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button" Command.Click="ExecuteToggleTagChanged" MarginRight="8">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@TagChangedLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="On: Apply adds the tag MST_Changed to every entity it changes, so you can find them later by searching that tag. Off: no tag is added." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="195" Brush="Popup.Done.Button" Command.Click="ExecuteToggleRenameChanged" MarginRight="8">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@RenameChangedLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="On: Apply appends _mst to the name of every entity it changes. Off: entity names are left alone." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button" Command.Click="ExecuteToggleAssignUid">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@AssignUidLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="On: Apply stores a unique ID tag on each entity it changes, so undo finds the right entity even after it is moved or renamed. Off: undo matches entities by name and position." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -312,6 +347,7 @@
                         <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="70" SuggestedHeight="30" VerticalAlignment="Center" Brush="Popup.Cancel.Button" Command.Click="ExecuteClearEntityColor" MarginRight="10">
                           <Children>
                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Clear" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Puts #FFFFFFFF (no tint) in the box. Nothing changes in the scene until Apply, which then resets the entity-wide tint on every entity in scope. To leave entity-wide color alone, empty the box instead." />
                           </Children>
                         </ButtonWidget>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="applies to ALL selected entities, e.g. #38FF92 - Clear resets to no tint" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
@@ -327,12 +363,14 @@
                     <Widget WidthSizePolicy="Fixed" SuggestedWidth="220" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="8">
                       <Children>
                         <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PresetName" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Preset name used by Save Preset and Load Preset. Choosing a preset in Browse Presets fills this in." />
                       </Children>
                     </Widget>
                     <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="42" HeightSizePolicy="StretchToParent" Text="Tags:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                     <Widget WidthSizePolicy="Fixed" SuggestedWidth="220" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                       <Children>
                         <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PresetTagsInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Optional comma-separated tags stored with the preset by Save Preset and used for filtering in Browse Presets. Culture tags are detected from the From materials and added automatically." />
                       </Children>
                     </Widget>
                   </Children>
@@ -342,11 +380,13 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteSavePreset" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save Preset" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Saves the rules list to disk as a personal preset under the name in the Name box. An existing preset with that name is overwritten without asking; its old version is kept in the preset History." />
                       </Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteLoadPreset" MarginRight="4">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Load Preset" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Replaces the whole rules list with the preset named in the Name box. No confirmation and no undo for the rules list. A personal preset wins over a built-in one with the same name." />
                       </Children>
                     </ButtonWidget>
                     <!-- Browse joins Save/Load on one row (140+4+140+4+220 = 508 of 712) and keeps
@@ -354,6 +394,7 @@
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="220" Brush="Popup.Done.Button.NineGrid" Color="#d4af37FF" Command.Click="ExecuteBrowsePresets">
                       <Children>
                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Browse Presets" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the preset browser, where you can search the saved presets and load one in Overwrite, Add or Merge mode, optionally inverted." />
                       </Children>
                     </ButtonWidget>
                   </Children>
@@ -363,32 +404,32 @@
                 <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
                   <Children>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button" Command.Click="ExecuteRefreshPreview" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Preview" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Preview" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens a list of the entities the rules would change, with world positions and Go buttons. Changes no materials. In Filtered and Whole Scene modes it also selects those entities in the editor." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button" Command.Click="ExecuteDryRun" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dry Run" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dry Run" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Runs the rules against the current scope without changing anything and reports the counts in the status line. In Filtered and Whole Scene modes it also selects the affected entities in the editor." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button" Command.Click="ExecuteApply" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Applies the rules and the entity-wide color to every entity in scope. Takes a backup first, asks before a batch of more than 50 entities or unknown material names, and is logged in Batch History so it can be undone." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="196" Brush="Popup.Done.Button" Command.Click="ExecuteUndoLastBatch" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Batch" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Undo Last Batch" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reverts the most recent logged batch for the open scene (the newest Batch History row). No confirmation. Entities it cannot match with confidence are left alone and listed in tool.log." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button" Command.Click="ExecuteDumpSlotInfo">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dump Slots" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Dump Slots" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Diagnostic. Writes the mesh slots, materials, LOD masks and colors of the selected entities to tool.log (search for [SlotDump]). Changes nothing." /></Children>
                     </ButtonWidget>
                   </Children>
                 </ListPanel>
                 <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
                   <Children>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenBatchHistory" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Batch History" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Batch History" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens Batch History: the logged change batches for this scene, each with its own Undo, Redo and screenshot buttons." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="242" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteCheckLodMismatches" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Check LOD Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Check LOD Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Scans the entities in scope for LOD5 mesh slots whose material or color differs from the matching full-detail slot and lists them in a window. Changes nothing." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="209" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteRevertToNormal">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Revert to Normal" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Revert to Normal" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Resets materials and color tints on the entities selected in the editor to their native defaults, however they were changed. Ignores the scope mode. Asks first, takes a backup, and is logged in Batch History." /></Children>
                     </ButtonWidget>
                   </Children>
                 </ListPanel>
@@ -400,10 +441,10 @@
                 <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="10">
                   <Children>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="253" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteFixColorMismatches" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fix Color Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fix Color Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets the color of each mismatched LOD5 slot in scope to match its full-detail slot. Runs the check itself if no list is pending. Asks first, takes a backup, and is logged in Batch History." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="275" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteFixMaterialMismatches">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fix Material Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Fix Material Mismatches" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets the material of each mismatched LOD5 slot in scope to match its full-detail slot. A different LOD material can be intentional, so review the list first. Asks first, takes a backup, and is logged in Batch History." /></Children>
                     </ButtonWidget>
                   </Children>
                 </ListPanel>
@@ -414,17 +455,17 @@
                          which was actively misleading. ExecuteBackupNow/BackupManager are left in
                          place for when backups get switched back on. -->
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="243" Brush="Popup.Done.Button.NineGrid" Color="#b83227FF" Command.Click="ExecuteSolidify" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Simplify for Export" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Simplify for Export" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Whole scene: removes the tracking UID tags this tool added and switches their history to position-based matching. Asks first. It cannot be reversed and undo is less exact afterwards, so use it when you are done iterating." /></Children>
                     </ButtonWidget>
                     <!-- Backup shortcuts. The manual button was removed while backups were
                          disabled (it could only ever report failure); backups are on again, and
                          nothing in the UI previously said WHERE they land. Row: 243+170+160+120
                          +margins = 705 of 712. -->
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteBackupNow" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Scene" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Backup Scene" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Starts a backup of the scene files saved on disk into the backup folder. Unsaved editor changes are not included. The Backup panel (F9) shows the verified result." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="160" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenBackups" MarginRight="4">
-                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Backups" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                      <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Backups" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the backup folder in Explorer and shows the latest backup in the status line." /></Children>
                     </ButtonWidget>
                     <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
                       <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>

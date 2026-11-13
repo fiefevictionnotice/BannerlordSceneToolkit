@@ -89,7 +89,18 @@ namespace MaterialSwapTool.GUI
                 .ToList();
             ApplyFilter();
             StatusText = $"{_all.Count} entr(y/ies): {_all.Count(e => e.KnownGood)} protected, {_all.Count(e => !e.KnownGood)} deletable.";
+            _savedSignature = Signature();
         }
+
+        // Unsaved-change detection by comparing against what was last loaded or saved, rather
+        // than flagging in every setter: rows are added, removed and toggled from several places
+        // and a missed flag would be silent.
+        private string _savedSignature = "";
+
+        private string Signature() =>
+            string.Join("\n", _all.Select(e => (e.Name ?? "").Trim() + "|" + (e.KnownGood ? "1" : "0") + "|" + (e.IsPattern ? "1" : "0")));
+
+        public bool HasUnsavedChanges => Signature() != _savedSignature;
 
         // The list runs to ~50 entries and is scanned by eye, so a filter matters more here than
         // a scrollbar does.
@@ -138,7 +149,8 @@ namespace MaterialSwapTool.GUI
             set { if (value != _statusText) { _statusText = value; OnPropertyChangedWithValue(value, nameof(StatusText)); } }
         }
 
-        public void ExecuteClose() => _closeAction?.Invoke();
+        public void ExecuteClose() =>
+            BannerlordSceneToolkit.UnsavedGuard.CloseOrAsk("The interior whitelist", HasUnsavedChanges, _closeAction);
         public void ExecuteDragStart() => _beginDragAction?.Invoke();
 
         // New entries default to PROTECTED - you open this panel to stop something being deleted
@@ -199,6 +211,7 @@ namespace MaterialSwapTool.GUI
                     .Select(e => new LiveSceneChecks.InteriorEntry { Name = e.Name.Trim(), IsPattern = e.IsPattern, KnownGood = e.KnownGood })
                     .ToList();
                 LiveSceneChecks.SaveInteriorEntries(entries);
+                _savedSignature = Signature();
                 StatusText = $"Saved {entries.Count} entr(y/ies) - {entries.Count(e => e.KnownGood)} protected. Takes effect immediately.";
                 _onSaved?.Invoke();
             }

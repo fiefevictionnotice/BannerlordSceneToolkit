@@ -19,10 +19,10 @@ sync, so it always matches the source:
 
 ## Not yet in the editor
 
-Topics for features that already work but aren't in the Documentation buttons yet. They
-move into the editor in a later release.
-
-- [not-yet-in-editor/PANEL-SIZE-AND-POSITION.md](not-yet-in-editor/PANEL-SIZE-AND-POSITION.md) - panel size keys, dragging and saved positions, centre all panels
+Drafts for features that work before their topic reaches the Documentation buttons. As of
+v0.9.0 every draft in [not-yet-in-editor/](not-yet-in-editor/) has been built into the
+in-editor documentation; the files are kept as the source drafts (panel size and position,
+tooltips and unsaved changes, Scene Diff, Scene Statistics, Light List, Mesh Blend).
 
 ## Reference
 

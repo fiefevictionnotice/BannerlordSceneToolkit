@@ -41,6 +41,7 @@
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="90" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteDelete">
                                           <Children>
                                             <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Removes this culture from the list on screen without asking. The removal is only written when you press Save; closing without saving keeps the culture." />
                                           </Children>
                                         </ButtonWidget>
                                       </Children>
@@ -52,6 +53,7 @@
                                         <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                                           <Children>
                                             <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@UniqueText" Brush="MaterialSwapTool.RuleText" MarginLeft="6" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Comma-separated pieces of text used to recognize this culture: a rule whose FROM material name contains one of them is tagged with this culture. Keep the list narrow." />
                                           </Children>
                                         </Widget>
                                       </Children>
@@ -67,7 +69,7 @@
                                         <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="60" HeightSizePolicy="StretchToParent" Text="Common:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                                         <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@CommonSummaryText" Brush="Popup.Description.Text" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" />
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggleCommonExpanded">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Expands this culture's Common material list into an editable text box. Only this row is expanded." /></Children>
                                         </ButtonWidget>
                                       </Children>
                                     </ListPanel>
@@ -78,10 +80,11 @@
                                         <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
                                           <Children>
                                             <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@CommonText" Brush="MaterialSwapTool.RuleText" MarginLeft="6" />
+                                            <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Exact material names used by this culture's buildings, comma-separated. The Culture Preset Generator builds its presets from this list. It is not used to recognize the culture." />
                                           </Children>
                                         </Widget>
                                         <ButtonWidget WidthSizePolicy="Fixed" SuggestedWidth="70" HeightSizePolicy="StretchToParent" Brush="Popup.Cancel.Button.NineGrid" Command.Click="ExecuteToggleCommonExpanded">
-                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Done" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Done" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Collapses the Common list back to a material count. Your edits to the list stay on screen, but are not kept until you press Save." /></Children>
                                         </ButtonWidget>
                                       </Children>
                                     </ListPanel>
@@ -109,18 +112,18 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="4">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteExportAll" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export All" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes every saved culture to its own JSON file in the Exports folder (Cultures subfolder), replacing files of the same name. Unsaved edits on screen are not included." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteImportAll" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the JSON files in the Exports folder (Cultures subfolder) and adds the cultures you do not have yet, saving at once. A culture whose name exists is skipped. Unsaved edits on screen are lost, so Save first." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenExportFolder">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the culture export and import folder in Windows Explorer, creating it if needed." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
             <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="180" SuggestedHeight="30" Brush="Popup.Done.Button" Command.Click="ExecuteAddCulture" MarginBottom="8">
-              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+ New Culture" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="+ New Culture" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Adds a row named new_culture with empty lists at the end of the list. Rename it and fill in its materials. Not kept until you press Save." /></Children>
             </ButtonWidget>
 
             <!-- Import a culture's material set out of an existing preset. Search by preset name,
@@ -132,10 +135,10 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="110" HeightSizePolicy="StretchToParent" Text="Into culture:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="170" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="6">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ImportTargetCulture" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ImportTargetCulture" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Name of the culture row that receives the materials when you click a preset in the search results below. It must match the name of a row in the list above." /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="230" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteToggleImportSide">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ImportSideLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@ImportSideLabel" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Chooses which column of the preset's rules is imported. LEFT takes the from-materials, correct for a generator stub. RIGHT takes the to-materials, correct for a built-in Empire to Culture preset." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -143,7 +146,7 @@
               <Children>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="110" HeightSizePolicy="StretchToParent" Text="Find preset:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PresetSearchTerm" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PresetSearchTerm" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Type part of a preset name; up to 20 matching presets are listed below. Clicking one merges its materials into the culture named in the Into culture box." /></Children>
                 </Widget>
               </Children>
             </ListPanel>
@@ -156,7 +159,7 @@
                         <ListPanel Id="PresetMatchListPanel" DataSource="{PresetMatches}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" ClipContents="true">
                           <ItemTemplate>
                             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteChoose" MarginBottom="2">
-                              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" /></Children>
+                              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Merges this preset's materials, from the chosen side, into the Common list of the culture named in the Into culture box. Only names not already there are added. Not kept until you press Save." /></Children>
                             </ButtonWidget>
                           </ItemTemplate>
                         </ListPanel>
@@ -179,6 +182,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@TestMaterialInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="e.g. sturgia_wall_a" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Type a material name to see which cultures' Unique lists on screen would match it, including edits you have not saved yet. Common lists are not tested." />
                   </Children>
                 </Widget>
               </Children>
@@ -188,7 +192,7 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteSave" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes all rows to your culture file in Documents and refreshes the generator's culture list. Edits, new rows, preset imports and deletions are not kept until you press this. Rows with an empty name are dropped." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
                   <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>

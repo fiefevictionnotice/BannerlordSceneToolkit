@@ -362,8 +362,9 @@ namespace MaterialSwapTool.Core
                             // matches that: each mesh's color is set independently, immediately, no shared
                             // state to collide over - a wall rule and a roof rule can both fully apply on
                             // the same building at once.
-                            if (!string.IsNullOrWhiteSpace(rule.ColorFactor) && ColorHex.TryParse(rule.ColorFactor, out var newColor))
+                            if (!string.IsNullOrWhiteSpace(rule.ColorFactor) && ColorHex.TryParse(rule.ColorFactor, out var typedColor))
                             {
+                                var newColor = ColorHex.SrgbToLinear(typedColor);   // typed sRGB -> stored linear (see ColorHex)
                                 entry.OldMeshColor = ColorHex.ToHex(mesh.Color);
                                 entry.NewMeshColor = ColorHex.ToHex(newColor);
                                 if (!options.DryRun)

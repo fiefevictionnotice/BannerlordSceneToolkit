@@ -56,6 +56,7 @@
                             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Brush="Popup.Done.Button.NineGrid" Color="@RowColor" Command.Click="ExecuteChoose" MarginBottom="2">
                               <Children>
                                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" />
+                                <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Fills the From culture box with this culture, or the To culture box on the next click. The line above the list says which box the next click fills. Gold rows are built-in cultures, blue rows are custom." />
                               </Children>
                             </ButtonWidget>
                           </ItemTemplate>
@@ -79,6 +80,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@OutputNameInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" DefaultSearchText="optional - defaults to 'From to To'" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Name for the generated preset. Leave blank to use the two culture names joined by the word to. An existing personal preset with the same name is replaced; the old one goes to its version history." />
                   </Children>
                 </Widget>
               </Children>
@@ -87,7 +89,7 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="8">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Done.Button" Command.Click="ExecuteGenerate">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Generate" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Builds a conversion preset from the From culture to the To culture by matching their Common materials by category role, and saves it under Personal in Browse Presets. The scene is not changed; review the rules before applying." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -107,6 +109,7 @@
                             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Brush="Popup.Done.Button.NineGrid" Color="@RowColor" Command.Click="ExecuteChoose" MarginBottom="2">
                               <Children>
                                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="8" DoNotAcceptEvents="true" />
+                                <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Creates a personal preset named after this culture, ending in Materials (stub), with one blank rule per material in its Common list. Saved to disk at once, replacing an earlier stub; the scene is not changed." />
                               </Children>
                             </ButtonWidget>
                           </ItemTemplate>
@@ -130,10 +133,10 @@
             <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="30" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="6">
               <Children>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" Command.Click="ExecuteOpenCultureEditor" MarginRight="8">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Cultures" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Cultures" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Culture Editor, where each culture's Unique and Common material lists are edited and custom cultures are added." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="180" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenCategoryEditor">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Categories" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Categories" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Category Editor. Generate matches materials by category, so a material that converts to nothing usually needs a category pattern added there." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>

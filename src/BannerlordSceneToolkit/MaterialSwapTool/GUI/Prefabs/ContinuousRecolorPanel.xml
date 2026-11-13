@@ -14,7 +14,7 @@
               <Children>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Continuous Recolor" Brush="Popup.Title.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="150" HorizontalAlignment="Right" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenDocumentation">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Documentation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Documentation" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens or closes the in-editor User Guide window. Nothing in the scene changes." /></Children>
                 </ButtonWidget>
               </Children>
             </Widget>
@@ -33,10 +33,10 @@
                     <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="26" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="1">
                       <Children>
                         <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggle" MarginRight="2">
-                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /></Children>
+                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Switches this material category on [X] or off [ ] for recoloring. While armed, toggling recolors the current selection right away. Switching a category off does not remove color already applied." /></Children>
                         </ButtonWidget>
                         <Widget WidthSizePolicy="Fixed" SuggestedWidth="100" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /></Children>
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Color for this category, as #RRGGBB or #RRGGBBAA. The words clear, white or none reset the tint. Typing paints nothing: click Apply Colors, or arm and select something." /></Children>
                         </Widget>
                       </Children>
                     </ListPanel>
@@ -48,10 +48,10 @@
                     <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="26" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="1">
                       <Children>
                         <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggle" MarginRight="2">
-                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /></Children>
+                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Switches this material category on [X] or off [ ] for recoloring. While armed, toggling recolors the current selection right away. Switching a category off does not remove color already applied." /></Children>
                         </ButtonWidget>
                         <Widget WidthSizePolicy="Fixed" SuggestedWidth="100" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /></Children>
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Color for this category, as #RRGGBB or #RRGGBBAA. The words clear, white or none reset the tint. Typing paints nothing: click Apply Colors, or arm and select something." /></Children>
                         </Widget>
                       </Children>
                     </ListPanel>
@@ -63,10 +63,10 @@
                     <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="26" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="1">
                       <Children>
                         <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteToggle" MarginRight="2">
-                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /></Children>
+                          <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Switches this material category on [X] or off [ ] for recoloring. While armed, toggling recolors the current selection right away. Switching a category off does not remove color already applied." /></Children>
                         </ButtonWidget>
                         <Widget WidthSizePolicy="Fixed" SuggestedWidth="100" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
-                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /></Children>
+                          <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="2" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Color for this category, as #RRGGBB or #RRGGBBAA. The words clear, white or none reset the tint. Typing paints nothing: click Apply Colors, or arm and select something." /></Children>
                         </Widget>
                       </Children>
                     </ListPanel>
@@ -82,6 +82,7 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@ColorInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Typing here copies the same color into the box of every category that is switched on. Nothing is painted until you click Apply Colors, or select something while armed." />
                   </Children>
                 </Widget>
               </Children>
@@ -94,20 +95,20 @@
                      the end. The previous sizes summed to ~914, which is exactly how Close ended
                      up hanging off the right edge of the panel. Currently 830. -->
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="200" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteSampleFromSelection" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Get Input from Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Get Input from Selection" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the selected entities, switches on every category found on them and loads each category's color from what is already painted there. Paints nothing. Each click advances the seed and draws a different color mix." /></Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="40" HeightSizePolicy="StretchToParent" Text="Seed:" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />
                 <Widget WidthSizePolicy="Fixed" SuggestedWidth="60" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="8">
-                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SampleSeedInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /></Children>
+                  <Children><EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@SampleSeedInput" Brush="MaterialSwapTool.RuleText" MarginLeft="6" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Seed used by Get Input from Selection. Shows the seed just used; type a number to get that same set of colors again, or leave it alone and each click moves to the next seed." /></Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Done.Button" Command.Click="ExecuteToggleArmed" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Arm / Disarm" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Arm / Disarm" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Arms or disarms the tool. Armed: the current selection and every new selection are recolored at once with the categories that are on. Disarmed: selecting changes nothing. The status line at the bottom reports the state." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="130" Brush="Popup.Done.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteApplyColors" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply Colors" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply Colors" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Recolors the current selection once, armed or not, using every category that is on and has a valid color. The change is logged as a batch, so Undo Last Batch on the F8 panel can revert it." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="140" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteOpenCategoryEditor">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Categories" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Edit Categories" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the Category Editor, where the name patterns that sort materials into categories are edited. Saving there refreshes the category rows on this panel." /></Children>
                 </ButtonWidget>
                 <!-- Close rides on this existing row, NOT a row of its own. This panel is a fixed
                      880-wide box whose content already fills its height, so an extra row pushes
@@ -128,25 +129,26 @@
                 <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Color="#111111FF" MarginRight="4">
                   <Children>
                     <EditableTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" RealText="@PaletteNameInput" Brush="MaterialSwapTool.RuleText" MarginLeft="8" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Palette name used by the Save and Delete buttons. Clicking a palette in the list below loads it and puts its name here." />
                   </Children>
                 </Widget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Done.Button" Command.Click="ExecuteSavePalette" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Save" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Saves the categories that are on, with their colors, as a palette file under the name in the box. An existing palette with that name is overwritten without asking." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="90" Brush="Popup.Cancel.Button" Command.Click="ExecuteDeleteSelectedPalette" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Delete" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Deletes the saved palette file whose name is in the box. Does not ask first and cannot be undone." /></Children>
                 </ButtonWidget>
                 <!-- Import/export share the presets' Exports folder (Palettes subfolder). These sit
                      on the existing row - the name box is StretchToParent so it just gives up the
                      width, no new row and no panel resize needed. -->
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="100" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteExportPalettes" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Export" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Copies every saved palette into the Exports folder (Palettes subfolder) as JSON files for sharing. Files there with the same name are overwritten." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="100" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteImportPalettes" MarginRight="4">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Import" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads every JSON palette in the Exports folder (Palettes subfolder) into your saved palettes. A palette whose name you already have is skipped and yours is kept." /></Children>
                 </ButtonWidget>
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Cancel.Button.NineGrid" Color="#c9782fFF" Command.Click="ExecuteOpenPaletteFolder">
-                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Open Folder" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Opens the palette export and import folder in Windows Explorer, creating it if needed." /></Children>
                 </ButtonWidget>
               </Children>
             </ListPanel>
@@ -160,7 +162,7 @@
                         <ListPanel Id="PaletteListPanel" DataSource="{SavedPalettes}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" ClipContents="true">
                           <ItemTemplate>
                             <ButtonWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="24" Brush="Popup.Done.Button.NineGrid" Command.Click="ExecuteChoose" MarginBottom="1">
-                              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /></Children>
+                              <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Name" Brush="Popup.Button.Text" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="6" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Loads this palette: its categories are switched on with their saved colors and every other category is switched off. While armed, the current selection is recolored at once." /></Children>
                             </ButtonWidget>
                           </ItemTemplate>
                         </ListPanel>

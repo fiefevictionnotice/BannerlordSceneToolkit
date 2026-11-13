@@ -46,6 +46,7 @@ namespace MaterialSwapTool.GUI
             AddTopic("Material Swap Tool - Presets: save, load, browse", PresetsDoc);
             AddTopic("Material Swap Tool - Preset Version History", PresetHistoryDoc);
             AddTopic("Material Swap Tool - Batch History & screenshots", BatchHistoryDoc);
+            AddTopic("Material Swap Tool - Mesh Blend (check and tuning)", MeshBlendDoc);
             AddTopic("Backups - how they work", BackupsDoc);
             AddTopic("Backups (F9) - the panel, settings and no-change skip", BackupPanelDoc);
             AddTopic("Backups - Notification settings", NotificationSettingsDoc);
@@ -56,6 +57,9 @@ namespace MaterialSwapTool.GUI
             AddTopic("Clearing rules and text fields (Ctrl/Shift+Backspace)", ClearingDoc);
             AddTopic("Keyboard shortcuts - Isolate, Repeat Last, and the F9 switches", ShortcutsDoc);
             AddTopic("Numeric transform - drag, then type a number", NumericTransformDoc);
+            AddTopic("Tooltips - hover a button to see what it does", TooltipsDoc);
+            AddTopic("Unsaved changes - Discard changes / Keep editing", UnsavedChangesDoc);
+            AddTopic("Panel size and position - resize, drag, center", PanelSizePositionDoc);
 
             // --- Flora Swap Tool (F9) ---
             AddTopic("Flora Swap Tool - RETIRED (F9 is now Backups)", FloraSwapDoc);
@@ -78,6 +82,9 @@ namespace MaterialSwapTool.GUI
             AddTopic("Scene Analyzer - Scene Requirement Sets", SceneAnalyzerRequirementsDoc);
             AddTopic("Scene Analyzer - Tag / Select tools (invisible, locked, interior, unbroken)", TaggingToolsDoc);
             AddTopic("Scene Analyzer - Delete Interiors & the protected whitelist", InteriorWhitelistDoc);
+            AddTopic("Scene Analyzer - Scene Diff (compare the saved scene with a backup)", SceneDiffDoc);
+            AddTopic("Scene Analyzer - Statistics (totals, Most-Used Prefabs, Heaviest Meshes)", SceneStatsDoc);
+            AddTopic("Scene Analyzer - Lights (light list)", LightListDoc);
             AddTopic("Scene Analyzer - Deprecated / Legacy Checks", DeprecatedChecksDoc);
 
             // --- Prefab Swapper (F6) ---
@@ -251,7 +258,12 @@ namespace MaterialSwapTool.GUI
             "will go. The safe routine: Add From Scene, mark the keepers PROTECTED, click SAVE in " +
             "the whitelist (an unsaved edit changes nothing), then Delete Interiors and read the " +
             "list before confirming. Skipping the Save step once cost a scene's interiors - the " +
-            "backup taken first is what brought them back.";
+            "backup taken first is what brought them back.\n\n" +
+            "TWO SAFEGUARDS AGAINST THAT. Delete Interiors refuses to run while the whitelist " +
+            "panel is open with unsaved edits, and its status line tells you to press Save there " +
+            "(or close the panel and discard the edits) first. And closing the whitelist with " +
+            "Close or Esc while it has unsaved edits asks 'Discard changes' or 'Keep editing' " +
+            "instead of dropping them silently - see 'Unsaved changes'.";
 
         private const string RecolorSamplingDoc =
             "GET INPUT FROM SELECTION on Continuous Recolor is the counterpart to the Material Swap " +
@@ -313,6 +325,12 @@ namespace MaterialSwapTool.GUI
             "around. Composite prefabs - an empty root with the meshes on children, which is what New " +
             "Prefab builds - are exactly the case it is for. If you clicked a child part rather than " +
             "the prefab, Ctrl+Shift+P promotes the selection to the roots first.\n\n" +
+            "ONE EXCEPTION: AN EDITOR MARKER MESH DOES NOT COUNT AS GEOMETRY. Some prefabs carry a " +
+            "small editor-only pick handle on their root - a mesh that uses the editor_gizmo " +
+            "material and is never drawn in game. Auto Origin and Origin to Anchor accept such a " +
+            "root as an empty one, and Origin to Anchor no longer asks 'Move a non-empty entity?' " +
+            "for it. The marker moves with the origin. A root whose mesh uses a real material is " +
+            "still protected.\n\n" +
             "Both take a backup first and both are undoable.\n\n" +
             "AN ENTITY WITH NO EMPTY ABOVE IT CANNOT HAVE ITS ORIGIN CHANGED - its mesh is drawn at " +
             "its own frame, so there is nothing to offset against. Parent it under an empty first " +
@@ -551,7 +569,11 @@ namespace MaterialSwapTool.GUI
             "open without that request, so the editor keeps its Windows cursor; clicks, hover, " +
             "focus and the wheel are routed exactly as before, because none of that depends on the " +
             "visibility flag. Switching it applies to every open panel immediately. If the cursor " +
-            "ever disappears with a panel open, switch it OFF to get the old engine cursor back.";
+            "ever disappears with a panel open, switch it OFF to get the old engine cursor back.\n\n" +
+            "TOOLTIPS (also not a key, same flyout). 'Tooltips: ON/OFF' turns the hover tooltips " +
+            "on or off for every toolkit panel at once. ON is the default. See 'Tooltips'.\n\n" +
+            "PANEL SIZE (Ctrl+Minus / Ctrl+Equals / Ctrl+0) has its own topic: 'Panel size and " +
+            "position'.";
 
         // FUTURE IDEAS now live in docs/ROADMAP.md in the source repo - the numeric transform
         // modal that used to be sketched here has since been BUILT (see NumericTransformDoc
@@ -601,6 +623,352 @@ namespace MaterialSwapTool.GUI
             "(How the takeover detects drags without any editor API, and the design history: " +
             "Technical Docs on F9, 'Numeric transform'.)";
 
+        // ---------------------------------------------------------------------------------
+        // Added in the 2026-11-12 documentation pass (v0.9.0): tooltips, unsaved-change
+        // question, panel size/position, the three F7 fly-outs and F8's Mesh Blend. Built from
+        // the drafts in docs/not-yet-in-editor, checked against the code.
+        // ---------------------------------------------------------------------------------
+
+        private const string TooltipsDoc =
+            "Rest the mouse on a toolkit button for about half a second and a small box says what " +
+            "the button does: what it acts on (your selection, the rules list, the whole scene, " +
+            "files on disk), whether it asks before acting, and whether it can be undone. Every " +
+            "panel has them - F5 to F9 and their fly-outs.\n\n" +
+            "The tooltip goes away when you move off the button or click it. After a click it stays " +
+            "away until the mouse moves to another button.\n\n" +
+            "Some text fields have a tooltip too: hover the dark box around the field.\n\n" +
+            "Tooltips follow the panel size you set with Ctrl+Minus / Ctrl+Equals, and move to the " +
+            "other side of the mouse near the right and bottom screen edges.\n\n" +
+            "They never take a click or a keystroke. They are drawn on their own layer that ignores " +
+            "all input.\n\n" +
+            "TO SWITCH THEM OFF: F9 -> Shortcuts -> 'Tooltips: ON/OFF'. It applies to every panel " +
+            "at once and the setting is saved.\n\n" +
+            "If no tooltip ever appears while the switch is ON, look for '[Hints]' lines in " +
+            "MaterialSwapTool\\tool.log.";
+
+        private const string UnsavedChangesDoc =
+            "The Interior Whitelist, the Category Editor and the Culture Editor only write your " +
+            "edits when you press Save. If you press Close or Esc on one of them with edits that " +
+            "have not been saved, the toolkit asks first:\n\n" +
+            "  DISCARD CHANGES - closes the panel and drops the edits.\n" +
+            "  KEEP EDITING - leaves the panel open so you can press Save.\n\n" +
+            "There is no question when nothing changed. Panels that are closed FOR you - their " +
+            "parent panel closing, or a scene switch - still close at once, without asking.\n\n" +
+            "There is no 'save and close' button on purpose: if the save failed, the panel would " +
+            "close anyway.\n\n" +
+            "DELETE INTERIORS (F7) refuses to run while the Interior Whitelist panel is open with " +
+            "unsaved edits. It acts on the SAVED list, not on what the panel shows, so it tells you " +
+            "to press Save there (or close the panel and discard the edits) first. See 'Delete " +
+            "Interiors & the protected whitelist'.";
+
+        private const string PanelSizePositionDoc =
+            "PANEL SIZE: ONE SIZE FOR EVERY PANEL. With any toolkit panel focused (click it first):\n" +
+            "  Ctrl+Minus - smaller, 10% per press.\n" +
+            "  Ctrl+Equals (the unshifted + key) - bigger, 10% per press.\n" +
+            "  Ctrl+0 - back to the default, 80%.\n\n" +
+            "  - Number row only. The numpad belongs to Grow Selection (Ctrl+Numpad+), so " +
+            "Ctrl+Numpad keys never resize a panel.\n" +
+            "  - Range 50% to 150%. Panels open at 80% until you change it.\n" +
+            "  - Applies everywhere, live: a change made in one panel resizes every panel that is " +
+            "already open and every panel you open later.\n" +
+            "  - Remembered between sessions in MaterialSwapTool\\PanelScales.json (a single " +
+            "number). A hand-edited value outside 50-150% is put back into range. Delete the file " +
+            "to return to the default.\n" +
+            "  - Not inside Grow Selection: while that panel is open its own keys step the radius " +
+            "and the size keys are ignored. Resize from any other panel.\n" +
+            "  - Shift must be up. Ctrl+Shift+0 is the center key below, not a size reset.\n\n" +
+            "PANEL POSITION: DRAG, SAVED PER PANEL. Drag any panel by its title row. Where you " +
+            "drop it is saved for that panel and restored the next time it opens. The positions " +
+            "are kept in a PanelPositions.json per tool folder (MaterialSwapTool, " +
+            "PrefabSwapperTool, PrefabCreatorTool) under Documents\\Mount and Blade II Bannerlord.\n\n" +
+            "A panel is never left fully off-screen: its center is kept at least 150 pixels inside " +
+            "the screen edge. This matters after a resize - a panel that grew could otherwise open " +
+            "with its title row and Close button out of reach.\n\n" +
+            "CENTER ALL OPEN PANELS: Ctrl+Alt+0, or Ctrl+Shift+Numpad 0, moves every open toolkit " +
+            "panel to the middle of the screen and saves that as its position. Panels that are " +
+            "closed at the time keep their saved positions. See 'Keyboard shortcuts' for the " +
+            "details of that key.";
+
+        private const string MeshBlendDoc =
+            "Terrain mesh blend is the effect where the ground's texture creeps a little way up the " +
+            "base of a rock, wall or building, so the object looks set into the terrain instead of " +
+            "placed on top of it. The Mesh Blend panel does two things: it tells you why the effect " +
+            "is not showing on the entity you selected, and it lets you tune how the blend looks.\n\n" +
+            "Open it with the MESH BLEND button on F8, next to Continuous Recolor. The panel stays " +
+            "open when you close F8. It closes on Esc, on its own Close button, and when the scene " +
+            "changes.\n\n" +
+            "Nothing on this panel runs by itself. Every result comes from a button press, and it " +
+            "always works on what is selected in the editor at that moment.\n\n" +
+            "WHAT MESH BLEND NEEDS. All of these at the same time, for the part of the object you " +
+            "are looking at:\n" +
+            "  1. The material uses a standard or metallic shader - in practice pbr_shading (the " +
+            "standard one) or pbr_metallic. Skinned (animated) meshes never blend.\n" +
+            "  2. Shader quality is not Low. Low switches the effect off for the whole game.\n" +
+            "  3. The object is stationary. Things that move or are driven by a script (doors, " +
+            "siege engines) usually are not.\n" +
+            "  4. The terrain under it has a mesh blend layer painted there. A terrain layer has a " +
+            "Mesh Blend tick box in its settings. The layer must not be the FIRST layer in the " +
+            "list: the first (base) layer never blends. The more of that layer is painted at the " +
+            "spot, the stronger the blend.\n" +
+            "  5. The base of the object is close to the ground. By default the blend reaches from " +
+            "0.1 m below the terrain to about 1 m above it.\n\n" +
+            "CHECK. Select the entity (the first four selected are checked per press) and press " +
+            "Check. You get one line per condition: OK (the condition is met), FAIL (a reason the " +
+            "blend is not showing) or UNKNOWN (the toolkit cannot read this from the editor - the " +
+            "line says what to look at by hand). The last line names the most likely cause. Check " +
+            "changes nothing.\n" +
+            "  - Shader quality: reads the graphics option. The toolkit ASSUMES the lowest setting " +
+            "is the one that switches the blend off.\n" +
+            "  - Terrain layers: lists the layers that have Mesh Blend ticked. This is read from " +
+            "the LAST SAVED scene file, so tick the box, save, then check again.\n" +
+            "  - Paint under the entity: always UNKNOWN. How much of a layer is painted at a point " +
+            "cannot be read. Look at the ground under the object and make sure one of the listed " +
+            "layers is actually painted there.\n" +
+            "  - Material: how many of the entity's meshes (children and all LODs included) use a " +
+            "shader that can blend. Meshes that cannot are listed with the reason.\n" +
+            "  - Stationary: shows the entity's mobility setting. Stationary reads UNKNOWN " +
+            "(probably fine), because the engine's own flag cannot be read. Anything else reads " +
+            "as a likely FAIL.\n" +
+            "  - Blend values: the tuning values currently on the first tunable mesh.\n" +
+            "  - Height: compares the entity's bounding box with the terrain height under it. This " +
+            "is a box test - a long object on a slope, or one with an overhanging part, can pass " +
+            "here and still be too high at the place you are looking at.\n\n" +
+            "If nothing fails and it still does not blend: check the UNKNOWN lines by hand, then " +
+            "try Recalculate, then save and reload the scene. Texture format and resolution are " +
+            "not checked; the panel only names the blend layers' diffuse textures.\n\n" +
+            "RECALCULATE runs the editor's own recalculate_mesh_blend console command for the open " +
+            "scene and shows what the editor answered. The toolkit looks the command up in the " +
+            "editor's command list first; if the editor does not list it, nothing is run and the " +
+            "status line says so. What it rebuilds is up to the editor, and there is no undo for " +
+            "it here.\n\n" +
+            "TUNING writes values to the meshes of ALL selected entities, including their children " +
+            "and every LOD. It only touches meshes whose material uses pbr_shading, pbr_metallic " +
+            "or terrain_mesh_blend_shader. Other shaders (flags, bows, ropes, lightmapped " +
+            "materials) use the same per-mesh values for their own effects, so those meshes are " +
+            "skipped. A standard material with texture scaling, animated texture coordinates or " +
+            "tableau blending switched on is skipped for the same reason.\n" +
+            "  - Blend height: how far up from the ground the terrain color reaches, in meters. " +
+            "Default 1, allowed 0.05 to 20.\n" +
+            "  - Softness: where the fade-out starts inside the blend height. 0 starts it halfway " +
+            "up; lower gives a longer, softer fade; higher gives a harder edge. Allowed -0.5 to " +
+            "0.49.\n" +
+            "  - Noise amount: how much a random pattern raises the top edge. Default 0; -0.5 gives " +
+            "a straight edge. Allowed -0.5 to 10.\n" +
+            "  - Noise scale: size of that pattern. Default 0; higher is finer. Allowed -15 to " +
+            "200.\n" +
+            "ADVANCED (a toggle) shows three more:\n" +
+            "  - Heightmap start: how far up the blend the material's height map starts to push " +
+            "the terrain color back. Allowed -0.5 to 0.49.\n" +
+            "  - Heightmap power: how strongly it does that. Default 0; -1 switches it off. Allowed " +
+            "-1 to 10.\n" +
+            "  - Normal bend: how far up the blend the surface shading is bent toward the " +
+            "terrain's. Allowed -0.19 to 0.8.\n" +
+            "The two heightmap values only matter on materials with a separate displacement map.\n\n" +
+            "HOW THE FIELDS WORK. An EMPTY field means 'leave this value as it is on each mesh' - " +
+            "fill in only what you want to change. The - and + buttons change the number in the " +
+            "field only; nothing changes in the scene until you press Apply to Selection. A comma " +
+            "or a dot both work as the decimal separator. Text that is not a number, or a number " +
+            "outside the allowed range, is refused with a message and nothing is changed.\n\n" +
+            "BUTTONS:\n" +
+            "  - Read from Selection fills every field from the first tunable mesh of the " +
+            "selection. Changes nothing in the scene.\n" +
+            "  - Apply to Selection writes the filled-in fields. The advanced fields are written " +
+            "only while Advanced is ON. No confirmation.\n" +
+            "  - Reset to Default writes the default values (all zeros, which is a 1 m blend " +
+            "height) to all seven values. No confirmation.\n" +
+            "  - Undo Last Change puts back what the last Apply or Reset from this panel replaced. " +
+            "Up to 20 steps, kept until the scene is closed, even if you close the panel. It does " +
+            "not undo Recalculate, and it is separate from Batch History and the editor's own " +
+            "undo.\n\n" +
+            "SAVE THE SCENE TO KEEP THE RESULT. The values are stored per mesh in the scene file.\n\n" +
+            "A typical session: select a rock, press Check, fix what it reports, press Read from " +
+            "Selection, press + on Blend height a few times, Apply, look, repeat, then save.\n\n" +
+            "LIMITS: only four entities are checked per press (tuning has no such limit); the " +
+            "terrain layer list is the last save, not the live scene; tuning is not recorded in " +
+            "Batch History. If the status line warns that Noise scale 'did not read back as " +
+            "written', always type a Noise scale (0 for the default) instead of leaving the field " +
+            "empty, and do not rely on Undo for it. Look for '[MeshBlend]' lines in " +
+            "MaterialSwapTool\\tool.log if something looks wrong.";
+
+        private const string SceneDiffDoc =
+            "Scene Diff answers 'what changed between these two saves?' It compares two saved " +
+            "states of the open scene - the saved scene file against a backup, or one backup " +
+            "against another - and lists every entity that was added, removed, moved, rotated, " +
+            "scaled, renamed or otherwise changed. Read-only: no scene file or backup is changed.\n\n" +
+            "Open it with F7 -> Scene Diff (bottom row, next to Close). It closes when F7 closes " +
+            "and when the scene changes.\n\n" +
+            "IT READS SAVED FILES, NOT THE EDITOR. Anything you have changed since your last save " +
+            "is in NEITHER file and will not show up. Save first if you want the current state " +
+            "compared. The status line says how long ago the scene was last saved.\n\n" +
+            "PICKING THE TWO STATES. The list shows the SAVED FILE on top, then the backups of " +
+            "this scene, newest first. Each backup row shows when it was taken, why (auto-4min, " +
+            "before-apply, manual...), which save it is a copy of, and its size.\n" +
+            "  - From marks the older state (the row turns purple), To the newer one (green). Any " +
+            "two rows can be compared, including two backups.\n" +
+            "  - Default pair: To = the saved file, From = the newest backup that is NOT a copy of " +
+            "that same save. The newest backup is often identical to the saved file, and comparing " +
+            "those can only say 'no differences'. Rows marked '= identical to the saved file' are " +
+            "those copies.\n" +
+            "  - If From turns out to be the newer save, the diff still runs; it just reads " +
+            "backwards (Added means 'gone since'). The status line says so.\n" +
+            "  - At most 60 backups are listed.\n" +
+            "  - Refresh re-reads the saved file and the backup folders and resets From and To to " +
+            "the default pair.\n\n" +
+            "WHERE BACKUPS ARE LOOKED FOR. The backup location set on F9, and - when that is a " +
+            "custom location - the default Backups folder as well, so backups written before you " +
+            "changed the location are still listed. Backups left in some OTHER, earlier custom " +
+            "folder are not found.\n\n" +
+            "Press COMPARE. Both files are read in the background, so the editor stays responsive. " +
+            "The result opens in the results window.\n\n" +
+            "READING THE RESULT. The first line is the summary, for example '+12 added, -1 " +
+            "removed, 40 moved, 5 rotated/scaled, 2 renamed, 1 prefab ref, 7 material, 3 color, 9 " +
+            "other'. Below it, one section per kind of change:\n" +
+            "  - Removed: in From, not in To. The position is where it used to be.\n" +
+            "  - Added: in To, not in From.\n" +
+            "  - Prefab reference changed: swapped to a different prefab in place, or a prefab " +
+            "link broken (baked into the scene) or restored.\n" +
+            "  - Renamed: same entity, different name.\n" +
+            "  - Moved: position changed. Shows the distance, farthest first.\n" +
+            "  - Rotated / scaled in place: position unchanged, rotation or scale changed.\n" +
+            "  - Material changed / Color changed: a mesh's material or color differs.\n" +
+            "  - Other changes: tags, scripts, physics, light, flags and visibility.\n\n" +
+            "An entity appears once, in the first section that applies to it, with everything else " +
+            "that changed on it on the same line. The summary counts every kind separately, so one " +
+            "entity that moved and changed material counts in both numbers. Added and removed rows " +
+            "are top-most only: a removed prefab with 36 children is one row, not 37.\n\n" +
+            "GO on a row jumps the camera to the row's position and selects the entity there if " +
+            "the live scene has one. For a removed row the camera goes to where it used to be. " +
+            "Positions come from the To file; if you compared two backups, the live scene may have " +
+            "moved on.\n\n" +
+            "The results window shows a limited number of rows. Raise 'Show first' at the bottom " +
+            "of it to see more, or use WRITE REPORT on the Scene Diff panel, which saves the " +
+            "complete list of the last comparison as a text file in MaterialSwapTool\\Reports " +
+            "(the status line shows the full path).\n\n" +
+            "HOW ENTITIES ARE MATCHED, AND WHERE THAT CAN BE WRONG. A scene file has no entity " +
+            "IDs, and duplicate names are normal (hundreds of the same rock). So entities are " +
+            "matched between the two files: one group of siblings at a time, by prefab or name, " +
+            "identical transform first, then same position, then nearest position, then 'same " +
+            "place but renamed', then 'same place but a different prefab'. Whatever is left over " +
+            "is Removed or Added. Limits worth knowing:\n" +
+            "  - Moved vs. deleted-and-replaced. Delete one barrel and place another of the same " +
+            "prefab elsewhere, and the file looks exactly like 'that barrel moved'. The distance " +
+            "is shown, so an implausible 300 m move is easy to spot.\n" +
+            "  - Which duplicate moved is a guess. Counts and positions are right; the pairing may " +
+            "not be the one you made.\n" +
+            "  - Changed name AND moved shows as one Removed plus one Added. So does dragging an " +
+            "entity under another parent.\n" +
+            "  - Rotation is compared as an orientation, not as three numbers. The editor rewrites " +
+            "the angles of upright objects on every save, and comparing the numbers would report " +
+            "rotations that never happened.\n" +
+            "  - Terrain, flora and nav mesh data live in other files and are not compared.";
+
+        private const string SceneStatsDoc =
+            "A read-only overview of what the open scene is made of: totals, the prefabs you used " +
+            "most, and the meshes that cost the most triangles. Nothing on this panel changes the " +
+            "scene.\n\n" +
+            "Open it with F7 -> Statistics (bottom row, next to Close). The same panel also holds " +
+            "the light list on its third tab - see 'Lights (light list)'.\n\n" +
+            "IT READS THE LIVE SCENE, ON DEMAND. Unlike Scene Diff, this reads the scene as it is " +
+            "in the editor right now, unsaved changes included. It scans once when the panel opens " +
+            "and again when you press REFRESH. It does not update by itself, so press Refresh " +
+            "after you add, delete or swap things. The status line shows how long the scan took.\n\n" +
+            "The panel stays open when you close F7, so you can use its Go and Select buttons with " +
+            "the viewport clear. It closes on its own Close button and when the scene changes.\n\n" +
+            "TOTALS, the block at the top: entities (top-level and children); prefabs (how many " +
+            "different ones, on how many entities, how many of those are live prefab links and how " +
+            "many are baked copies matched by name, and how many entities match no prefab); mesh " +
+            "components and cloth simulators; lights (with how many cast shadows and how many are " +
+            "flagged), particle systems and decals; script components. A Triangles line appears " +
+            "once the Heaviest Meshes tab has been opened.\n\n" +
+            "MOST-USED PREFABS. Every prefab in the scene with its instance count, most used " +
+            "first. A row reads '412 x rock_a', followed by '(baked)' or '(400 linked, 12 baked)' " +
+            "when not every instance is a live link.\n" +
+            "  - Select selects every instance of that prefab in the editor, live links and baked " +
+            "copies together.\n" +
+            "  - Go jumps to the first instance.\n\n" +
+            "HOW AN INSTANCE IS COUNTED. A live prefab link counts under the prefab it links to. A " +
+            "BAKED COPY (its prefab link was broken) is matched by its entity NAME: if the engine " +
+            "knows a prefab by that name, it counts as one. If not, a trailing suffix such as _2, " +
+            "_3 or _mst is removed and the name is tried again, a few times over, until the engine " +
+            "knows a prefab by that name. Two limits follow from matching by name:\n" +
+            "  - A copy that was renamed to something unrelated is not matched.\n" +
+            "  - A nested part that happens to carry a prefab's name is counted as an instance of " +
+            "that prefab.\n\n" +
+            "HEAVIEST MESHES. Every distinct mesh with 'total triangles = instances x triangles " +
+            "each', heaviest total first. This is the tab for 'what is eating my triangle budget': " +
+            "a 40,000-triangle statue used once and a 900-triangle crate used 600 times both show " +
+            "up near the top.\n" +
+            "  - Triangles are full detail (LOD0) only. What the engine draws at a distance is " +
+            "less.\n" +
+            "  - The count is per mesh, not per prefab. A building made of eight parts is eight " +
+            "rows.\n" +
+            "  - Select selects every entity that uses the mesh. Go jumps to the first.\n" +
+            "  - The triangle count runs the first time you open this tab after a scan, so it can " +
+            "take a moment.\n" +
+            "  - Terrain and painted flora are not entities and are not counted.\n\n" +
+            "ROWS, SHOW MORE AND THE REPORT. Each table shows 60 rows at first. Show More adds 60 " +
+            "at a time, up to 600. The header line always gives the real total. WRITE REPORT saves " +
+            "the totals, prefabs and lights of the last scan to a text file in " +
+            "MaterialSwapTool\\Reports; the meshes are included only if the Heaviest Meshes tab " +
+            "was opened since that scan.\n\n" +
+            "SELECT AND THE SHORT DELAY. Select uses the same delayed selection as every other " +
+            "select-in-editor button (see 'Selecting in the editor'): the selection lands a moment " +
+            "after the click. Selecting several thousand entities at once can make the editor " +
+            "pause briefly.\n\n" +
+            "'NOT COUNTED'. One engine call crashed the editor during the first runs of this scan " +
+            "and is no longer used. As a safety net, the toolkit notes each of the newer scan " +
+            "steps in a small file before it runs. If the editor ever " +
+            "crashed inside one, that step is skipped on every later run: the panel still opens, " +
+            "the totals show a 'NOT COUNTED' line naming what is missing, and everything else " +
+            "works. A zero next to a skipped count means 'not counted', not 'none'. The file is " +
+            "Documents\\Mount and Blade II Bannerlord\\MaterialSwapTool\\native_probe_ledger.txt. " +
+            "Delete the file to have everything tried again; to retry one step only, delete every " +
+            "line that names it. The file is read once when the toolkit loads, so the change takes " +
+            "effect the next time the editor starts.";
+
+        private const string LightListDoc =
+            "Every light in the open scene in one list, with the ones most likely to cost " +
+            "performance or to be mistakes at the top. Read-only: it does not edit lights.\n\n" +
+            "Open it with F7 -> Lights (bottom row, next to Close). It is the Lights tab of the " +
+            "Statistics panel, so the same Refresh, Show More, Write Report and Close apply. If " +
+            "the Statistics panel is already open, the button just switches it to this tab. Like " +
+            "the rest of that panel it reads the live scene and only updates on Refresh.\n\n" +
+            "WHAT A ROW SHOWS: radius, SHADOW or no shadow, intensity and color as the engine " +
+            "reports them, then the OWNER - the entity that carries the light, and the top-level " +
+            "prefab it sits in when it is a child (lights usually are: the flame inside a torch). " +
+            "'(hidden)' is added when the owner, or a parent, is currently invisible. GO jumps to " +
+            "the owner's position and selects the entity there. The header gives the count: how " +
+            "many lights, how many cast shadows, how many are flagged.\n\n" +
+            "SORTING. Shadow cost (the default): shadow-casting lights first, largest radius " +
+            "first, then the rest by radius. A shadow-casting light has to re-render what it can " +
+            "reach, and how much it reaches grows with its radius, so this order puts the " +
+            "expensive ones on top. Radius: largest first, shadows or not. The Sort button " +
+            "switches between the two and names the order it will switch TO.\n\n" +
+            "WARNINGS. A flagged row starts with [!], is tinted, and says why:\n" +
+            "  - 'shadow-casting with a large radius - likely expensive': shadows on and radius 15 " +
+            "or more.\n" +
+            "  - 'very large radius': radius 40 or more, without shadows.\n" +
+            "  - 'zero radius' / 'zero intensity - lights nothing': the light exists but cannot " +
+            "light anything. Usually a leftover.\n" +
+            "  - 'N lights at this position': two or more lights within 5 cm of each other - " +
+            "almost always a duplicated torch stacked on itself.\n" +
+            "  - '+N more light component(s) on this entity, not listed': the entity carries " +
+            "several lights; only the first can be read.\n" +
+            "  - 'could not be read': the engine did not return the light. Listed so the count " +
+            "still adds up.\n\n" +
+            "The thresholds are judgement calls for 'worth a look', not engine limits. A large " +
+            "shadow-casting light can be exactly what a scene needs; a dozen of them in one " +
+            "courtyard usually is not.\n\n" +
+            "LIMITS:\n" +
+            "  - Read-only. Change radius, intensity and shadows in the editor's own inspector, " +
+            "then press Refresh here.\n" +
+            "  - Only whether shadows are ON is shown, not whether the shadow is static or " +
+            "dynamic.\n" +
+            "  - Radius is the light's own value and does not account for a scaled parent.\n" +
+            "  - The sun and sky lighting come from the atmosphere, not from light entities, and " +
+            "are not in this list.\n" +
+            "  - The list shows 60 rows at first; Show More adds 60 at a time.";
+
         // =================================================================================
         // TECHNICAL DOCS - engineering history and evidence, migrated out of the User Guide
         // (2026-08-24). The full day-by-day record is docs/CHANGELOG.md in the source repo;
@@ -623,6 +991,9 @@ namespace MaterialSwapTool.GUI
             AddTopic("Weighted rules - how the roll granularity evolved", TechWeightedDoc);
             AddTopic("Runtime-created entities - stale editor state", TechStaleDoc);
             AddTopic("Misc: Culture Editor lag, palette rows, Flora API limits", TechMiscDoc);
+            AddTopic("Tooltip layer - ToolkitHints and the Hint widgets", TechHintsDoc);
+            AddTopic("Unsaved-change guard - UnsavedGuard", TechUnsavedGuardDoc);
+            AddTopic("Crash ledger - NativeProbe and the Statistics scan", TechNativeProbeDoc);
         }
 
         private const string TechAboutDoc =
@@ -675,7 +1046,17 @@ namespace MaterialSwapTool.GUI
             "silently, indistinguishable from 'broken' - they now warn on screen and in the log. " +
             "MST undo used to restore an entity-wide entry via SetFactorColor(old), which (per " +
             "discovery 2) flattened per-layer colors the batch never touched; entries now snapshot " +
-            "every mesh color before the forward SetFactorColor and undo restores them individually.";
+            "every mesh color before the forward SetFactorColor and undo restores them individually.\n\n" +
+            "MESH.COLOR IS STORED LINEAR (2026-11-12). Typed colors came out lighter and less " +
+            "saturated than the hex, always by the same curve (#BAFFAF -> #DDFFD7, #802020 -> " +
+            "#BB6363). The editor's own color field converts the typed sRGB hex to linear first; " +
+            "the toolkit wrote it raw. ColorHex.SrgbToLinear / LinearToSrgb (gamma 2.2, alpha " +
+            "untouched) now convert at the typed-input write sites: Continuous Recolor palette and " +
+            "single-color apply, the Material Swap rule color factor, and the seeded hex of Get " +
+            "Input from Selection. Unchanged on purpose: undo/redo logs, the LOD color fix, Fill " +
+            "In Overrides and color presets copy stored values mesh-to-mesh, so they stay raw and " +
+            "round-trip exactly. The entity-wide color factor (SetFactorColor) is not converted; " +
+            "whether it has the same issue is untested.";
 
         private const string TechEntityColorDoc =
             "WHY BLANK MEANS RESET on the entity-wide color box: GameEntity.SetFactorColor is a " +
@@ -744,7 +1125,19 @@ namespace MaterialSwapTool.GUI
             "refusals log as '[SceneGuard]'.\n\n" +
             "MIRROR'S RESIDUAL LIMITATION: a hand-built prefab-LESS piece mirrored an ODD number of " +
             "times renders inside-out until the scene is saved and reloaded - the saved data is " +
-            "correct; the live winding cache is not reachable from managed code.";
+            "correct; the live winding cache is not reachable from managed code.\n\n" +
+            "PATH ROTATION ON GAME v1.5.7 (2026-11-11). After the v1.5.7 update " +
+            "Path.GetFrameForDistance returns the position but an identity rotation, so " +
+            "Distribute along path placed every instance world-aligned. " +
+            "PrefabDistributor.PathFrameAt now samples two positions 5 cm apart, flattens the " +
+            "direction to the ground plane and builds the yaw-only frame the engine used to " +
+            "return. All path sampling goes through it.\n\n" +
+            "MESH BENDER ON SWAPS (2026-11-12). Instantiate only brings the new prefab's own " +
+            "definition and the live-reference path discards everything from the old entity, so " +
+            "every swap used to drop the native mesh_bender script. It is carried now with " +
+            "GameEntity.CopyScriptComponentFromAnotherEntity, and the two float values with " +
+            "Get/SetNativeScriptComponentVariable; each carry logs '[MeshBender]' with the values " +
+            "read back from the new entity.";
 
         private const string TechNumericDoc =
             "HOW THE TAKEOVER KNOWS ANYTHING: the editor exposes no manipulation state at all - no " +
@@ -787,7 +1180,15 @@ namespace MaterialSwapTool.GUI
             "save from a stale session re-emits the nodes - confirmed live by matching timestamps - " +
             "so the stripper also re-runs automatically ~2s after every detected save. Collision " +
             "state in a LIVE session only updates on load; judge results after a reload.\n\n" +
-            "Every claim above was verified against the saved xscene, not inferred.";
+            "Every claim above was verified against the saved xscene, not inferred.\n\n" +
+            "REMOVE PHYSICS OUTSIDE BORDER (F7) was still the round-1 approach until 2026-11-12: " +
+            "it skipped every entity whose own BodyFlag read None (every placed prefab root) and " +
+            "called RemovePhysics, which never persists. It now uses round 5: each out-of-border " +
+            "entity is tagged oob_nophys, live prefab links among them are broken first (a " +
+            "prefab=\"X\" entity has no children in the file, so there would be nothing to strip), " +
+            "and the stripper removes the <physics> nodes of the tagged entity AND its whole " +
+            "subtree after each save. The stripper covers subtrees for pile_nophys too. This " +
+            "rework is not covered by the 'verified' line above.";
 
         private const string TechLiveRefDoc =
             "GameEntity.CopyFrom copies the ROOT entity and its prefab-definitional children, but " +
@@ -883,6 +1284,85 @@ namespace MaterialSwapTool.GUI
             "(extraction was tried; correct layout, still not consulted). An external watchdog " +
             "dismisses those popups at launch instead.";
 
+        private const string TechHintsDoc =
+            "THE SHARED TOOLTIP LAYER (2026-11-12, Core/ToolkitHints.cs). A hint is declared in the " +
+            "panel XML as a hidden text child with Id=\"Hint\" inside the widget it belongs to - " +
+            "normally a ButtonWidget, or the wrapper Widget of a text field:\n" +
+            "  <TextWidget Id=\"Hint\" IsVisible=\"false\" DoNotAcceptEvents=\"true\" Text=\"...\" />\n" +
+            "Nothing else is needed: no view-model property, no command, no per-panel code. Adding " +
+            "a hint to a new button is one XML line.\n\n" +
+            "HOW IT IS SHOWN. Once per frame ToolkitHints looks at every Gauntlet layer on the top " +
+            "screen, asks its event manager which widget the mouse is over, and walks up at most " +
+            "four parents looking for a 'Hint' child. After a dwell of 0.45 s the text is shown in " +
+            "ONE shared layer (ToolkitHintPanel.xml). It is ticked from all three editor tick " +
+            "patches, so hints keep working whichever tools are toggled off.\n\n" +
+            "That layer is not a focus layer and every node in it is DoNotAcceptEvents, like the " +
+            "last-operation readout: it is drawn over the viewport and must never take a click or " +
+            "a keystroke. A mouse press hides the hint and keeps it hidden for that widget until " +
+            "the mouse moves to another one. The box flips left / up near the right and bottom " +
+            "edges and follows the shared panel scale.\n\n" +
+            "SWITCH: HintsEnabled in shortcut_settings.json (default on), shown as 'Tooltips: " +
+            "ON/OFF' on F9 -> Shortcuts.\n\n" +
+            "SAFETY NET. The first live build laid the box out at full-screen size, so every " +
+            "tooltip covered the editor (two background sprites were StretchToParent children of a " +
+            "CoverChildren widget and took their size from the full-screen root). The sprites now " +
+            "sit on the CoverChildren containers. In addition, a box that measures more than 60% " +
+            "of the screen in either direction switches hints off for the session and logs a " +
+            "'[Hints]' line.\n\n" +
+            "WHY NOT GAUNTLET'S OWN HintWidget: it relies on the game's global information layer, " +
+            "which is not known to exist in the editor screen, and needs a view-model property per " +
+            "button.";
+
+        private const string TechUnsavedGuardDoc =
+            "Core/UnsavedGuard.cs (2026-11-12) is the 'Discard changes / Keep editing' question of " +
+            "the three row editors: Interior Whitelist, Category Editor, Culture Editor. Those " +
+            "panels only write on Save, and Close / Esc used to discard edits without a word.\n\n" +
+            "DETECTION compares a signature of the rows with the signature taken when the rows " +
+            "were last loaded or saved (HasUnsavedChanges on each view model). No setter has to " +
+            "report a change, so none can be missed.\n\n" +
+            "ONLY THE USER'S OWN CLOSE BUTTON AND ESC GO THROUGH IT. Forced closes (parent panel " +
+            "closing, scene switch) still close at once - asking a question during a teardown is " +
+            "worse than losing an edit. A second Esc while the question is up is ignored. If the " +
+            "question cannot be shown, the panel closes and a '[UnsavedGuard]' warning is logged, " +
+            "so a failure never traps the user in a panel.\n\n" +
+            "An inquiry has two buttons, so the question is 'discard?' and the safe answer keeps " +
+            "the panel open. A 'save and close' button was left out on purpose: a save that fails " +
+            "would then also close the panel.\n\n" +
+            "RELATED: F7 Delete Interiors checks InteriorWhitelistLayer.HasUnsavedChanges and " +
+            "refuses while it is true. The delete acts on the SAVED whitelist; with the panel " +
+            "edited but not saved, what is on screen there protects nothing.";
+
+        private const string TechNativeProbeDoc =
+            "Core/NativeProbe.cs (2026-11-12) is a crash ledger for engine calls that have not yet " +
+            "been proven safe in the editor. A native crash is not a managed exception: try/catch " +
+            "never sees it and nothing is logged. The first live run of the F7 Statistics scan " +
+            "took the editor down that way, with half a dozen new engine calls in one loop and no " +
+            "way to tell which one did it.\n\n" +
+            "HOW IT WORKS. Each group of unproven calls runs inside NativeProbe.Run(name, ...). " +
+            "Before it starts, 'trying|name' is appended to the ledger and flushed to disk; when " +
+            "it returns, 'ok|name' is appended. If the editor dies in between, the file still ends " +
+            "on 'trying' for that name. The next time the toolkit loads, it reads that as 'this " +
+            "call crashed the editor', appends 'crashed|name', and Run() skips that name from then " +
+            "on. So a bad call costs ONE crash, names itself in the file, and the feature keeps " +
+            "working without it. A managed exception is not a crash: it is recorded as survived " +
+            "and rethrown.\n\n" +
+            "THE LEDGER is MaterialSwapTool\\native_probe_ledger.txt, one 'state|name|time' line " +
+            "per event, read once per editor process; the last line for a name wins. Deleting the " +
+            "file retries everything. To retry one name, delete all of its lines - removing only " +
+            "the 'crashed' line leaves the 'trying' line last, which reads as a crash again.\n\n" +
+            "THE STATISTICS SCAN runs in passes for this reason. Pass 1 uses only long-proven " +
+            "calls (live prefab name, mesh component count). Each newer call gets its own pass " +
+            "under the ledger: Scene.RootEntityCount, the baked-copy name match " +
+            "(GameEntity.PrefabExists), the component counts for cloth, particles, decals and " +
+            "lights, the script count, the light getters, and the mesh-name + Mesh.GetFaceCount " +
+            "pass of the Heaviest Meshes tab. A skipped pass shows as 'NOT COUNTED' in the panel.\n\n" +
+            "WHAT IT FOUND: GameEntity.GetOldPrefabName(). The ledger ended on 'trying' for that " +
+            "call on the second crash. It is no longer called anywhere in the statistics code and " +
+            "must not be called from this toolkit: it takes the editor down natively. Baked copies " +
+            "are therefore named from their entity name instead - the engine is asked whether a " +
+            "prefab of that name exists, and if not one _2 / _3 / _mst style suffix is stripped " +
+            "and it is asked again (up to four steps, cached per distinct name).";
+
         private void AddTopic(string title, string body) => _topics.Add(new DocumentationTopicVM(title, body));
 
         [DataSourceProperty]
@@ -941,6 +1421,12 @@ namespace MaterialSwapTool.GUI
             "the status line and an editor warning name it, because a skipped tint looks identical " +
             "to a broken feature.\n\n" +
             "Both boxes accept hex in #RRGGBB or #RRGGBBAA form (alpha optional, defaults to FF).\n\n" +
+            "TYPED COLORS NO LONGER WASH OUT. A per-rule color and a Continuous Recolor color used " +
+            "to come out lighter and less saturated than the hex you typed. The engine stores a " +
+            "mesh color in linear form, so the typed (sRGB) value is now converted before it is " +
+            "written, the way the editor's own color field does it. Colors applied before this fix " +
+            "stay washed out until you apply them again. Very dark channels can land a step or two " +
+            "off. The ENTITY-WIDE color factor is not converted; it is written as typed.\n\n" +
             "Clearing the ENTITY-WIDE box back to no tint: just leave it empty and Apply - blank " +
             "there means 'no entity-wide tint,' same as clicking the Clear button next to it (both " +
             "resolve to white, #FFFFFFFF, the neutral/no-tint value). It's a single always-visible " +
@@ -1164,6 +1650,8 @@ namespace MaterialSwapTool.GUI
             "building with mixed materials (stone AND timber-frame in the same object) can have " +
             "just its timber-frame slots recolored without touching the stone ones - there is no " +
             "'mixed materials, refuse to recolor' restriction.\n\n" +
+            "A typed hex color is converted from sRGB to the linear form the engine stores, so " +
+            "what you type is what you see (see 'Color factor (2 kinds)').\n\n" +
             "Edit Categories opens the Category Editor directly from this panel.";
 
         private const string RecolorPaletteDoc =
@@ -1202,7 +1690,9 @@ namespace MaterialSwapTool.GUI
             "MaterialSwapTool\\Exports\\Categories. Export writes the SAVED categories, not unsaved " +
             "rows on screen. Import merges rather than replaces - new categories added, existing " +
             "ones gain missing patterns, nothing removed - and refreshes the rows, so Save any " +
-            "on-screen edits you care about first. See 'Import / Export - where everything goes'.";
+            "on-screen edits you care about first. See 'Import / Export - where everything goes'.\n\n" +
+            "CLOSING WITH UNSAVED EDITS: Close or Esc asks 'Discard changes' or 'Keep editing' " +
+            "when the rows differ from what was last loaded or saved - see 'Unsaved changes'.";
 
         private const string CultureEditorDoc =
             "Two different lists per culture, used for two different purposes - don't confuse them.\n\n" +
@@ -1222,7 +1712,9 @@ namespace MaterialSwapTool.GUI
             "every culture at once. Click Edit on a row to expand just that one culture's list, " +
             "Done to collapse it back.\n\n" +
             "+ New Culture adds a brand new culture, not limited to the 6 built-in ones - useful for a " +
-            "custom-culture mod's own architecture set.";
+            "custom-culture mod's own architecture set.\n\n" +
+            "CLOSING WITH UNSAVED EDITS: Close or Esc asks 'Discard changes' or 'Keep editing' " +
+            "when the rows differ from what was last loaded or saved - see 'Unsaved changes'.";
 
         private const string CultureGeneratorDoc =
             "Two separate features in one panel, opened from Material Swap Tool.\n\n" +
@@ -1259,10 +1751,28 @@ namespace MaterialSwapTool.GUI
             "scene by nature (it's not entity data at all).\n\n" +
             "Full Scene Scan runs every check below at once and opens the combined results in a " +
             "preview list. Battle/Skirmish/Siege buttons run just that mode's own requirement checks. " +
-            "Fix actions are separate, confirm-gated buttons - see the Fix Actions topic.";
+            "Fix actions are separate, confirm-gated buttons - see the Fix Actions topic.\n\n" +
+            "THREE READ-ONLY FLY-OUTS open from the bottom row, next to Close: SCENE DIFF (compares " +
+            "the saved scene file with a backup - the one F7 feature that reads SAVED files, so " +
+            "unsaved changes are not in it), STATISTICS (totals, Most-Used Prefabs, Heaviest " +
+            "Meshes) and LIGHTS (the light list). Statistics and Lights are tabs of one panel. " +
+            "Each has its own topic below.";
 
         private const string SceneAnalyzerChecksDoc =
             "What Full Scene Scan checks for (each becomes its own section in the results):\n\n" +
+            "TWO LOAD-CRASH CHECKS RUN FIRST:\n" +
+            "Destructible Reference Tags (server load crash) - any entity with a destructible " +
+            "script whose Reference Entity Tag is set, but which has no DIRECT child carrying that " +
+            "tag. The dedicated server aborts while loading such a scene. The case that found it: " +
+            "merlons whose debris_holder child had been deleted. It applies to any destructible " +
+            "(walls, gates, barricades), not only merlons. Fix: 'Fix Destructible Refs'.\n" +
+            "Live merchant_stand_market Prefab (client load crash) - every entity that is still a " +
+            "LIVE prefab link to merchant_stand_market. Saved that way it crashes multiplayer " +
+            "clients on map load; the server loads it fine, so a server-only test does not catch " +
+            "it. A copy whose prefab link is broken loads. The four other merchant stands from the " +
+            "same prefab file (mix, weapon, pottery, armor) are untested and only raise a warning. " +
+            "Fix: 'Unparent Stands'.\n\n" +
+            "THE REST:\n" +
             "Bugged Physics Shapes - entities matching a curated list of known-problematic collision " +
             "shapes.\n" +
             "Misleading Physics - entities that visually look like they have gaps/openings but whose " +
@@ -1351,6 +1861,23 @@ namespace MaterialSwapTool.GUI
             "fixes - the live API has no way to set an instantiated entity's scale after the fact, " +
             "only read it - so an entity with non-default scale will lose that scale on the " +
             "replacement; check affected entities visually afterward.\n\n" +
+            "Fix Destructible Refs - the fix for the 'Destructible Reference Tags' check. Gives " +
+            "every destructible whose reference tag has no tagged direct child an empty child named " +
+            "debris_holder that carries the tag, placed at the entity's own origin. Debris spawns " +
+            "there; move the holder if that is the wrong spot. Not undoable from inside the " +
+            "toolkit.\n\n" +
+            "Unparent Stands - the fix for the 'Live merchant_stand_market Prefab' check. Breaks " +
+            "the prefab link on every live merchant_stand_market, so the next save writes its " +
+            "parts into the scene directly. Nothing moves and nothing is deleted. The other " +
+            "merchant stands are left alone. Save afterwards, then run the scan again. Not " +
+            "undoable from inside the toolkit.\n\n" +
+            "Remove Physics Outside Border - marks every entity outside the border_soft boundary " +
+            "(plus the 10-unit margin) with the tag oob_nophys. When you SAVE, the collision of " +
+            "each marked entity and of everything under it is stripped from the saved scene file " +
+            "automatically, a moment after the save (a .bak of the file is kept). RELOAD the scene " +
+            "to see it - the open session keeps its collision until then. Meshes are not deleted, " +
+            "only collision. Live prefab links among the marked entities are broken first, because " +
+            "a linked prefab gets its collision back from the prefab on every load.\n\n" +
             "All of these are confirm-gated (a dialog before anything happens) and backed up first.";
 
         private const string SceneAnalyzerRequirementsDoc =
@@ -1381,6 +1908,15 @@ namespace MaterialSwapTool.GUI
             "no prefab behind the entity (and saying so). Display names drift (_2 duplicate " +
             "suffixes, _mst renames, recolor suffixes); the prefab name is the one that swaps and " +
             "matches correctly. Swap-set Apply matches the same way.\n\n" +
+            "FINDING THE OLD PREFAB. A swap has to know which prefab the old entity is. It tries " +
+            "the entity's name, then its live prefab link, then the name with _2 / _mst style " +
+            "suffixes removed one at a time, and uses the first one the engine can place. If none " +
+            "works the swap is refused and the message lists the names it tried.\n\n" +
+            "THE STATUS LINE SHOWS THE RESULT. Once the confirm dialog closes, the status line " +
+            "reads either the result ('Swapped N') or the reason the swap was refused. Every swap " +
+            "status is also written to PrefabSwapperTool\\tool.log as '[SwapStatus]', and each " +
+            "entity that failed as '[Swap] failed:' with its reason, so a swap that seems to do " +
+            "nothing can be looked up there.\n\n" +
             "POSITION/ROTATION are preserved on every swap. SCALE is a toggle: 1x (default) gives " +
             "the new entity the prefab's own authored scale; Inherit keeps the old entity's scale. " +
             "Two optional inputs apply to everything swapped in - regular swaps, live reference, " +
@@ -1389,6 +1925,12 @@ namespace MaterialSwapTool.GUI
             "CHILDREN: parts belonging to the OLD prefab's own definition are removed with it; " +
             "children you added by hand are carried onto the new prefab as extras. That is what " +
             "keeps a cross-culture swap from stacking both cultures' merlons on one tower.\n\n" +
+            "MESH BENDER: if the old entity carries the native mesh_bender script, the script and " +
+            "its bend values (Bend Amount, Bend Center Ratio) are carried onto the new entity, so " +
+            "a bent wall stays bent after a swap. This covers Swap Selected, Swap All Matching, " +
+            "ADD mode, live-reference swaps and undo. In a live-reference swap the reference's own " +
+            "bender wins when it has one; otherwise the old entity's is used. Each carry is logged " +
+            "as '[MeshBender]' in PrefabSwapperTool\\tool.log.\n\n" +
             "Undo Last Swap reverts the most recent swap batch - restoring at the pre-swap frame, " +
             "so Z-rot/scale extras are undone too, and always in replace-mode regardless of the " +
             "ADD/SWAP toggle.\n\n" +
@@ -1409,6 +1951,12 @@ namespace MaterialSwapTool.GUI
             "showing only the active mode's controls, with ONE Distribute button that runs whatever " +
             "is on screen and a plain-language summary line above it reading back exactly what the " +
             "next run will do.\n\n" +
+            "ERRORS ARE SHORT. When you distribute by prefab name, the name is checked ONCE before " +
+            "anything is placed. An unknown name stops the run with one message (\"'x' is not a " +
+            "saved prefab ... switch Source to Selection\") and leaves nothing behind - no empty " +
+            "anchor. Other failures in distribute, mirror and rotate are grouped and counted in " +
+            "the status line; the full list goes to PrefabSwapperTool\\tool.log as '[Distribute] " +
+            "failed:' lines.\n\n" +
             "ONTO SURFACE is the grid, but every cell raycasts STRAIGHT DOWN and lands on whatever " +
             "is beneath it - the origin supplies only the horizontal start and heading, height comes " +
             "from the surface. The 'Only land on' box is a FILTER, not a destination: one or more " +
@@ -1417,7 +1965,8 @@ namespace MaterialSwapTool.GUI
             "a cell. Blank = first thing hit.\n\n" +
             "ALONG PATH places copies along a path authored with the editor's own Path tool: type " +
             "the path's name, then either a manual count or 'fill path', which derives the count " +
-            "from the path length and spacing. Relative spacing with a NEGATIVE gap packs pieces " +
+            "from the path length and spacing. Each copy is turned to face along the path (heading " +
+            "only, it stays upright). Relative spacing with a NEGATIVE gap packs pieces " +
             "into each other for wall-type prefabs. Most prefabs were not built with this tool in " +
             "mind and come out facing the wrong way: the Z Rotation box (90 or 180) fixes that " +
             "without re-origining anything. Anchor choice: exact origin point, or bottom center.\n\n" +

@@ -172,7 +172,14 @@ namespace MaterialSwapTool.GUI
             {
                 if (!TryGetEntities(out _, out var all)) return;
 
-                var lines = new List<string> { "=== Bugged Physics Shapes ===" };
+                // Load crashes first: these stop the map from loading at all.
+                var lines = new List<string> { "=== Destructible Reference Tags (server load crash) ===" };
+                lines.AddRange(FormatFindings(CrashChecks.CheckDestructibleReferences(all)));
+                lines.Add("");
+                lines.Add("=== Live merchant_stand_market Prefab (client load crash) ===");
+                lines.AddRange(FormatFindings(CrashChecks.CheckCursedPrefabs(all)));
+                lines.Add("");
+                lines.Add("=== Bugged Physics Shapes ===");
                 lines.AddRange(FormatFindings(LiveSceneChecks.CheckBuggedPhysics(all)));
                 lines.Add("");
                 lines.Add("=== Misleading Physics ===");
@@ -294,6 +301,38 @@ namespace MaterialSwapTool.GUI
                 isAffirmativeOptionShown: true, isNegativeOptionShown: true,
                 affirmativeText: "Tag", negativeText: "Cancel",
                 affirmativeAction: () => RunMutatingAction("Tag bugged physics", all => LiveSceneChecks.TagBuggedPhysics(all), "entit(y/ies) tagged BSA_BUGGED_PHYSICS_SHAPE"),
+                negativeAction: null);
+            InformationManager.ShowInquiry(inquiry);
+        }
+
+        public void ExecuteFixDestructibleRefs()
+        {
+            var inquiry = new InquiryData(
+                "Fix destructible reference tags?",
+                "Every DestructableComponent whose ReferenceEntityTag has no direct child carrying that tag gets an empty " +
+                "'debris_holder' child with the tag, at the entity's own origin. Without it the dedicated server aborts while " +
+                "loading the scene (CC_93_siege merlon bug). Debris will spawn at that point; move the holder if it matters. " +
+                "A backup is taken first. Continue?",
+                isAffirmativeOptionShown: true, isNegativeOptionShown: true,
+                affirmativeText: "Fix", negativeText: "Cancel",
+                affirmativeAction: () => RunMutatingAction("Fix destructible refs",
+                    all => CrashChecks.FixDestructibleReferences(EntitySelector.CurrentScene, all), "debris_holder child(ren) added"),
+                negativeAction: null);
+            InformationManager.ShowInquiry(inquiry);
+        }
+
+        public void ExecuteUnparentMarketStands()
+        {
+            var inquiry = new InquiryData(
+                "Break merchant_stand_market prefab links?",
+                "Breaks the prefab link on each live merchant_stand_market, so the save writes its children inline. Nothing " +
+                "moves. As a live SandBox prefab it crashes MP clients on load (CC_84); the inline copy loads. " +
+                "The other SandBox merchant stands are only warned about and are left alone. Save, then re-run the scan. " +
+                "A backup is taken first. Continue?",
+                isAffirmativeOptionShown: true, isNegativeOptionShown: true,
+                affirmativeText: "Unparent", negativeText: "Cancel",
+                affirmativeAction: () => RunMutatingAction("Unparent market stands",
+                    all => CrashChecks.UnparentCursedPrefabs(EntitySelector.CurrentScene, all), "stand(s) unparented"),
                 negativeAction: null);
             InformationManager.ShowInquiry(inquiry);
         }
@@ -528,6 +567,43 @@ namespace MaterialSwapTool.GUI
             }
         }
 
+        // --- Read-only fly-outs (2026-11-12). Each does its own work on its own buttons; these
+        // only open them. Statistics and Lights are two tabs of one panel, so the second
+        // button switches tab when the panel is already up instead of opening another. ---
+        public void ExecuteOpenSceneDiff()
+        {
+            try
+            {
+                if (!EntitySelector.HasOpenScene) { StatusText = "No scene is currently open."; return; }
+                SceneDiffLayer.Toggle();
+                if (SceneDiffLayer.IsOpen)
+                    StatusText = "Scene Diff compares the SAVED scene file with its backups - unsaved editor changes are not included.";
+            }
+            catch (Exception ex)
+            {
+                StatusText = "Scene Diff failed to open: " + ex.Message;
+                Log.Error("SceneAnalyzer OpenSceneDiff failed: " + ex);
+            }
+        }
+
+        public void ExecuteOpenStatistics() => OpenStats(SceneStatsTab.Prefabs, "Scene statistics opened - press Refresh there after editing the scene.");
+        public void ExecuteOpenLights() => OpenStats(SceneStatsTab.Lights, "Light list opened - press Refresh there after editing the scene.");
+
+        private void OpenStats(SceneStatsTab tab, string message)
+        {
+            try
+            {
+                if (!EntitySelector.HasOpenScene) { StatusText = "No scene is currently open."; return; }
+                SceneStatsLayer.Open(tab);
+                if (SceneStatsLayer.IsOpen) StatusText = message;
+            }
+            catch (Exception ex)
+            {
+                StatusText = "Statistics failed to open: " + ex.Message;
+                Log.Error("SceneAnalyzer OpenStats failed: " + ex);
+            }
+        }
+
         public void ExecuteOpenInteriorWhitelist() =>
             InteriorWhitelistLayer.Open(() => StatusText = "Interior whitelist saved - protection updated.");
 
@@ -573,6 +649,17 @@ namespace MaterialSwapTool.GUI
         {
             try
             {
+                // The delete acts on the SAVED whitelist. With the whitelist panel open and
+                // edited but not saved, what is on screen there is not what protects anything -
+                // the tutorial video lost a scene's interiors exactly this way. Refuse until the
+                // edits are saved or dropped.
+                if (InteriorWhitelistLayer.HasUnsavedChanges)
+                {
+                    StatusText = "The Interior Whitelist panel has unsaved changes. Press Save there (or close it and discard them) first - "
+                               + "Delete Interiors uses the saved list, not what the panel shows.";
+                    return;
+                }
+
                 if (!TryGetEntities(out _, out var all)) return;
                 var preview = LiveSceneChecks.PreviewInteriorEntities(all);
                 if (preview.Count == 0)
@@ -736,9 +823,10 @@ namespace MaterialSwapTool.GUI
         {
             var inquiry = new InquiryData(
                 "Remove physics shapes outside the soft border?",
-                "Strips collision (RemovePhysics - same mechanism the game itself uses for props that stay visible but " +
-                "lose their collider) from every entity currently outside the border_soft boundary (+10 unit margin). " +
-                "The entities and their visible meshes are NOT deleted, only their collision. A backup is taken first. Continue?",
+                "Marks every entity outside the border_soft boundary (+10 unit margin) with an 'oob_nophys' tag. When you " +
+                "SAVE, the collision of each marked entity and everything under it is stripped from the saved scene file " +
+                "(automatic, a .bak is kept). RELOAD the scene to see it. Meshes are NOT deleted, only collision. Live prefab " +
+                "instances among them are unlinked so their collision can be stripped. A backup is taken first. Continue?",
                 isAffirmativeOptionShown: true, isNegativeOptionShown: true,
                 affirmativeText: "Remove Physics", negativeText: "Cancel",
                 affirmativeAction: RunRemovePhysicsOutsideBorder,

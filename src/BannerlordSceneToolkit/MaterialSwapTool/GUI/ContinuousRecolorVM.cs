@@ -190,7 +190,7 @@ namespace MaterialSwapTool.GUI
                     // Silent: neither IsOn nor SetColorSilent triggers a reapply, so seeding many
                     // rows cannot fire the rapid back-to-back recolor passes that crashed the
                     // editor's Qt shell before (see CategoryToggleVM.ColorInput).
-                    toggle.SetColorSilent(ColorHex.ToHex(picked));
+                    toggle.SetColorSilent(ColorHex.ToHex(ColorHex.LinearToSrgb(picked)));   // stored linear -> the sRGB hex you would type
                     colored++;
                 }
 

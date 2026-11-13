@@ -125,7 +125,19 @@ namespace MaterialSwapTool.GUI
             }
 
             bool exit = _layer.Input.IsHotKeyReleased("Exit") || _layer.Input.IsKeyReleased(InputKey.Escape);
-            if (exit) Close();
+            // Esc goes through the VM so unsaved edits get the same question as the Close button.
+            if (exit) { if (_dataSource != null) _dataSource.ExecuteClose(); else Close(); }
+        }
+
+        // True while the panel is open with edits that Save has not written yet. Scene Analyzer's
+        // Delete Interiors asks this before acting on a list the user is still editing.
+        public static bool HasUnsavedChanges
+        {
+            get
+            {
+                try { return _dataSource != null && _dataSource.HasUnsavedChanges; }
+                catch { return false; }
+            }
         }
     }
 }

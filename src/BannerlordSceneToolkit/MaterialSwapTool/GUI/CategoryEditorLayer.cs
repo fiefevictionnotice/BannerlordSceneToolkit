@@ -125,7 +125,8 @@ namespace MaterialSwapTool.GUI
             }
 
             bool exit = _layer.Input.IsHotKeyReleased("Exit") || _layer.Input.IsKeyReleased(InputKey.Escape);
-            if (exit) Close();
+            // Esc goes through the VM so unsaved edits get the same question as the Close button.
+            if (exit) { if (_dataSource != null) _dataSource.ExecuteClose(); else Close(); }
         }
     }
 }

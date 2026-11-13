@@ -35,6 +35,7 @@
                                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="54" SuggestedHeight="28" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" MarginRight="8" MarginTop="3" IsVisible="@HasPosition" Command.Click="ExecuteGo">
                                   <Children>
                                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Go" Brush="Popup.Button.Text" Brush.FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Moves the editor camera to the position on this line and selects the entity found there, if there is one." />
                                   </Children>
                                 </ButtonWidget>
                                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" MinHeight="34" Text="@Text" Brush="MaterialSwapTool.DiffLineText" HorizontalAlignment="Left" CanBreakWords="true" DoNotAcceptEvents="true" />
@@ -69,6 +70,7 @@
                 <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Done.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteApplyLimit" MarginRight="10">
                   <Children>
                     <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Apply" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                    <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Rebuilds the list to show up to the number of entities typed in the box (1 to 5000). Does not rescan the scene or change anything." />
                   </Children>
                 </ButtonWidget>
                 <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@LimitStatus" Brush="Popup.Description.Text" VerticalAlignment="Center" DoNotAcceptEvents="true" />

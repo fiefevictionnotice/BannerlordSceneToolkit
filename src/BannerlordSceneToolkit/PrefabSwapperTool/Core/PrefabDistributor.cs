@@ -86,6 +86,45 @@ namespace PrefabSwapperTool.Core
             public int AutoPlacedSecondaryCount;
         }
 
+        // NAME CHECK BEFORE PLACING ANYTHING (2026-11-12, "when you try to distribute a prefab
+        // that's not a real prefab ... it gives you a 15 line error"): a 10x10 grid of an unknown
+        // name used to try all 100 cells, collect 100 identical "instantiate returned null"
+        // lines into the status, and still leave an empty _Grid anchor behind. One throwaway
+        // Instantiate up front answers the question once. Hand-built entities (a scene object
+        // that was never saved as a prefab) cannot be placed by name at all - From Selection
+        // copies them instead.
+        public static string CheckPrefabName(Scene scene, string prefabName)
+        {
+            var name = prefabName?.Trim();
+            if (string.IsNullOrEmpty(name)) return "No prefab name given.";
+            GameEntity probe = null;
+            try { probe = GameEntity.Instantiate(scene, name, MatrixFrame.Identity, false); }
+            catch (Exception ex) { return $"'{name}' could not be placed: {ex.Message}"; }
+            if (probe == null)
+                return $"'{name}' is not a saved prefab, so it can't be placed by name. " +
+                       "If it's something built in this scene, select it and switch Source to Selection.";
+            try { scene.RemoveEntity(probe, 0); } catch { }
+            return null;
+        }
+
+        // Short, grouped form of a Failed list for the one-or-two-line status widgets. Per-item
+        // prefixes like "instance (3,7): " are stripped so 100 identical failures read as one
+        // line with a count; the full list always goes to tool.log.
+        public static string FailureSummary(List<string> failed, int maxKinds = 2)
+        {
+            if (failed == null || failed.Count == 0) return "";
+            foreach (var f in failed) Log.Warn("[Distribute] failed: " + f);
+            var kinds = failed
+                .Select(f => System.Text.RegularExpressions.Regex.Replace(f ?? "", @"^(instance|cell|piece|copy|source)?\s*\(?[\d, ]*\)?\s*:\s*", "", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                .GroupBy(f => f)
+                .OrderByDescending(g => g.Count())
+                .ToList();
+            var parts = kinds.Take(maxKinds).Select(g => g.Count() > 1 ? $"{g.Count()}x {g.Key}" : g.Key);
+            var text = $"{failed.Count} failed: " + string.Join(" | ", parts);
+            if (kinds.Count > maxKinds) text += $" | +{kinds.Count - maxKinds} other kind(s)";
+            return text + " (full list in PrefabSwapperTool\\tool.log)";
+        }
+
         public static DistributeResult DistributeAlongPath(
             Scene scene, Path path, string prefabName, int requestedCount,
             bool relativeSpacing, float absoluteSpacing, string anchorName, AnchorMode anchorMode,
@@ -98,6 +137,7 @@ namespace PrefabSwapperTool.Core
                 return result;
             }
             if (!fillToPathLength && requestedCount < 1) { result.Error = "Count must be at least 1."; return result; }
+            if ((result.Error = CheckPrefabName(scene, prefabName)) != null) return result;
 
             Log.Info($"[NativeTrace] ENTER PrefabDistributor.DistributeAlongPath prefab='{prefabName}' requestedCount={requestedCount} relative={relativeSpacing} fillToPathLength={fillToPathLength}");
 
@@ -106,7 +146,7 @@ namespace PrefabSwapperTool.Core
             catch (Exception ex) { result.Error = "Failed to read path length: " + ex.Message; return result; }
 
             MatrixFrame startFrame;
-            try { startFrame = path.GetFrameForDistance(0f); }
+            try { startFrame = PathFrameAt(path, 0f, totalLength); }
             catch (Exception ex) { result.Error = "Failed to sample path start: " + ex.Message; return result; }
 
             var placed = new List<GameEntity>();
@@ -176,7 +216,7 @@ namespace PrefabSwapperTool.Core
                 float distance = Math.Min(i * spacing, totalLength);
 
                 MatrixFrame frame;
-                try { frame = path.GetFrameForDistance(distance); }
+                try { frame = PathFrameAt(path, distance, totalLength); }
                 catch (Exception ex) { result.Failed.Add($"instance {i}: failed to sample path at {distance}: {ex.Message}"); continue; }
 
                 if (extraZRotationDegrees != 0f)
@@ -251,6 +291,7 @@ namespace PrefabSwapperTool.Core
                 return result;
             }
             if (axis1.Count < 1 || axis2.Count < 1) { result.Error = "Both counts must be at least 1."; return result; }
+            if ((result.Error = CheckPrefabName(scene, prefabName)) != null) return result;
 
             Log.Info($"[NativeTrace] ENTER PrefabDistributor.DistributeInGrid prefab='{prefabName}' axis1Count={axis1.Count} axis2Count={axis2.Count}");
 
@@ -356,7 +397,7 @@ namespace PrefabSwapperTool.Core
             catch (Exception ex) { result.Error = "Failed to read path length: " + ex.Message; return result; }
 
             MatrixFrame startFrame;
-            try { startFrame = path.GetFrameForDistance(0f); }
+            try { startFrame = PathFrameAt(path, 0f, totalLength); }
             catch (Exception ex) { result.Error = "Failed to sample path start: " + ex.Message; return result; }
 
             Log.Info($"[NativeTrace] ENTER PrefabDistributor.DistributeSelectionAlongPath sources={live.Count} " +
@@ -412,7 +453,7 @@ namespace PrefabSwapperTool.Core
                 float distance = Math.Min(i * spacing, totalLength);
 
                 MatrixFrame pathFrame;
-                try { pathFrame = path.GetFrameForDistance(distance); }
+                try { pathFrame = PathFrameAt(path, distance, totalLength); }
                 catch (Exception ex) { result.Failed.Add($"instance {i}: failed to sample path at {distance}: {ex.Message}"); continue; }
 
                 if (extraZRotationDegrees != 0f)
@@ -583,6 +624,7 @@ namespace PrefabSwapperTool.Core
 
             var live = (sources ?? new List<GameEntity>()).Where(EntitySelector.IsValidEntity).ToList();
             if (fromSelection && live.Count == 0) { result.Error = "Nothing selected to distribute."; return result; }
+            if (!fromSelection && (result.Error = CheckPrefabName(scene, prefabName)) != null) return result;
 
             // The origin's up vector is logged because a tilted origin is exactly the thing that
             // made "keep upright" look broken - (0,0,1) here means the origin itself is upright.
@@ -809,6 +851,7 @@ namespace PrefabSwapperTool.Core
                 result.Error = "Fill Target Surfaces places a named prefab - switch Source to Prefab Name.";
                 return result;
             }
+            if ((result.Error = CheckPrefabName(scene, prefabName)) != null) return result;
 
             var targets = (targetSurfaces ?? new List<GameEntity>()).Where(EntitySelector.IsValidEntity).ToList();
             if (targets.Count == 0)
@@ -1284,6 +1327,13 @@ namespace PrefabSwapperTool.Core
             // with a heading, not a scaled object: unit basis, always.
             anchorFrame.rotation = NormalizeBasisLengths(anchorFrame.rotation);
 
+            // Nothing placed = no anchor: an empty _Grid/_Path node left in the scene is clutter.
+            if (placed.Count == 0)
+            {
+                result.Error = "Nothing was placed. " + FailureSummary(result.Failed);
+                return null;
+            }
+
             Log.Info($"[NativeTrace] CreateEmpty (anchor '{anchorName}')");
             GameEntity anchor;
             try { anchor = GameEntity.CreateEmpty(scene, true, false, true); }
@@ -1565,6 +1615,34 @@ namespace PrefabSwapperTool.Core
 
         private static Mat3 ReflectMat3(Mat3 rotation, Vec3 planeNormalUnit) =>
             new Mat3(ReflectVector(rotation.s, planeNormalUnit), ReflectVector(rotation.f, planeNormalUnit), ReflectVector(rotation.u, planeNormalUnit));
+
+        // PATH FRAME WITH A HEADING (2026-11-11, game v1.5.7). Before that update,
+        // Path.GetFrameForDistance returned a yaw-only frame whose .f pointed along the direction
+        // of travel (August scenes show rotation_euler 0,0,<yaw> on every path instance). Since
+        // the 2026-11-11 game update it returns the POSITION but an identity rotation, so every
+        // instance came out world-aligned ("no longer rotates along the path"). Extra Z Rotation
+        // was not the cause - it only adds degrees on top of whatever frame came back.
+        // The heading is now derived from the path itself: two positions sampled 5 cm apart,
+        // flattened to XY, giving the same yaw-only frame the engine used to return, whatever
+        // later engine versions do with the rotation. Falls back to the engine's frame if the
+        // path is degenerate there (zero length, or vertical).
+        private static MatrixFrame PathFrameAt(Path path, float distance, float totalLength)
+        {
+            var frame = path.GetFrameForDistance(distance);
+            const float eps = 0.05f;
+            float a = distance, b = distance + eps;
+            if (b > totalLength) { b = distance; a = Math.Max(0f, distance - eps); }
+            if (b - a < 0.001f) return frame;
+            var pa = path.GetFrameForDistance(a).origin;
+            var pb = path.GetFrameForDistance(b).origin;
+            var dir = new Vec3(pb.x - pa.x, pb.y - pa.y, 0f);
+            float len = dir.Length;
+            if (len < 1e-5f) return frame;
+            var f = dir * (1f / len);
+            var u = new Vec3(0f, 0f, 1f);
+            var s = Vec3.CrossProduct(f, u);   // TaleWorlds basis: s (right) = f x u
+            return new MatrixFrame(new Mat3(s, f, u), frame.origin);
+        }
 
         // Spins a path-sampled frame around its own up axis (.u) - a path frame's forward (.f)
         // already points along the direction of travel, so this is what "the prefab is facing

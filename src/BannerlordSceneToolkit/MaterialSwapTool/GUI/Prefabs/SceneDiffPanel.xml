@@ -1,0 +1,97 @@
+<Prefab>
+  <Window>
+    <Widget Id="PanelRoot" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="740" SuggestedHeight="820" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Children>
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="StdAssets\Popup\canvas_gradient" IsEnabled="false" />
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="frame_9" ExtendLeft="18" ExtendTop="18" ExtendRight="18" ExtendBottom="18" IsEnabled="false" />
+
+        <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="VerticalTopToBottom" MarginLeft="20" MarginRight="20" MarginTop="16" MarginBottom="16" DoNotAcceptEvents="true">
+          <Children>
+
+            <!-- Drag handle: press-and-hold the title row to move the whole panel. -->
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" MarginBottom="4" Command.MouseDown="ExecuteDragStart">
+              <Children>
+                <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Scene Diff" Brush="Popup.Title.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+              </Children>
+            </Widget>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="44" Text="Lists what changed between two saved states of this scene: entities added, removed, moved, renamed or changed. Pick FROM (the older state) and TO (the newer one), then Compare." Brush="Popup.Description.Text" CanBreakWords="true" HorizontalAlignment="Center" MarginBottom="8" DoNotAcceptEvents="true" />
+
+            <!-- The current pair, restated outside the list so it is readable without scrolling. -->
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="@FromText" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" HorizontalAlignment="Left" MarginBottom="2" DoNotAcceptEvents="true" />
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="22" Text="@ToText" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" HorizontalAlignment="Left" MarginBottom="8" DoNotAcceptEvents="true" />
+
+            <!-- Snapshot list: the saved file first, then backups newest first. Each row has
+                 its own From / To buttons; the row tint and the tag on the right show its
+                 current part (purple FROM, green TO). -->
+            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" MarginBottom="10">
+              <Children>
+                <ScrollablePanel Id="SnapScrollablePanel" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" MarginRight="14" AutoHideScrollBars="true" ClipRect="SnapClipRect" InnerPanel="SnapClipRect\SnapListPanel" VerticalScrollbar="..\SnapScrollbar">
+                  <Children>
+                    <Widget Id="SnapClipRect" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" ClipContents="true">
+                      <Children>
+                        <ListPanel Id="SnapListPanel" DataSource="{Snapshots}" WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" StackLayout.LayoutMethod="VerticalTopToBottom" ClipContents="true">
+                          <ItemTemplate>
+                            <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="36" Sprite="BlankWhiteSquare_9" Color="@RowColor" MarginBottom="3">
+                              <Children>
+                                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginLeft="6" MarginRight="6" MarginTop="4" MarginBottom="4">
+                                  <Children>
+                                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="64" Brush="Popup.Cancel.Button.NineGrid" Color="#8a5fc9FF" MarginRight="4" Command.Click="ExecutePickFrom">
+                                      <Children>
+                                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="From" Brush="Popup.Button.Text" Brush.FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets this saved state as FROM, the older side of the comparison; the row turns purple. Nothing is read until you press Compare." />
+                                      </Children>
+                                    </ButtonWidget>
+                                    <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="54" Brush="Popup.Done.Button.NineGrid" Color="#4fb96aFF" MarginRight="8" Command.Click="ExecutePickTo">
+                                      <Children>
+                                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="To" Brush="Popup.Button.Text" Brush.FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                        <TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Sets this saved state as TO, the newer side of the comparison; the row turns green. Nothing is read until you press Compare." />
+                                      </Children>
+                                    </ButtonWidget>
+                                    <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@Label" Brush="Popup.Description.Text" Brush.TextHorizontalAlignment="Left" VerticalAlignment="Center" MarginRight="6" DoNotAcceptEvents="true" />
+                                    <TextWidget WidthSizePolicy="Fixed" SuggestedWidth="84" HeightSizePolicy="StretchToParent" Text="@RoleText" Brush="Popup.Button.Text" Brush.FontSize="18" VerticalAlignment="Center" DoNotAcceptEvents="true" />
+                                  </Children>
+                                </ListPanel>
+                              </Children>
+                            </Widget>
+                          </ItemTemplate>
+                        </ListPanel>
+                      </Children>
+                    </Widget>
+                  </Children>
+                </ScrollablePanel>
+                <ScrollbarWidget Id="SnapScrollbar" WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="6" HorizontalAlignment="Right" AlignmentAxis="Vertical" Handle="SnapScrollbarHandle" MaxValue="100" MinValue="0">
+                  <Children>
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="4" HorizontalAlignment="Center" Sprite="BlankWhiteSquare_9" Color="#5a4033FF" AlphaFactor="0.2" />
+                    <ImageWidget Id="SnapScrollbarHandle" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedHeight="10" SuggestedWidth="8" HorizontalAlignment="Center" Brush="FaceGen.Scrollbar.Handle" />
+                  </Children>
+                </ScrollbarWidget>
+              </Children>
+            </Widget>
+
+            <!-- 170+170+120+110 = 570 (+ margins) of 700. -->
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="34" StackLayout.LayoutMethod="HorizontalLeftToRight" MarginBottom="8">
+              <Children>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Done.Button" Command.Click="ExecuteCompare" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="@CompareButtonText" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Reads the FROM and TO files in the background and opens the list of entities added, removed, moved, renamed or changed in the results window. Saved files only: unsaved editor changes are not included." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="170" Brush="Popup.Cancel.Button.NineGrid" Color="#4fb96aFF" Command.Click="ExecuteWriteReport" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Write Report" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Writes the full list from the last Compare to a text file in Documents\Mount and Blade II Bannerlord\MaterialSwapTool\Reports. Run Compare first. Scene files and backups are not changed." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="120" Brush="Popup.Cancel.Button.NineGrid" Color="#3ba1c9FF" Command.Click="ExecuteRefresh" MarginRight="4">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Refresh" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /><TextWidget Id="Hint" IsVisible="false" DoNotAcceptEvents="true" Text="Re-reads the saved scene file and the backup folder from disk, rebuilds the list (newest 60 backups) and resets FROM and TO to the default pair. Changes nothing on disk." /></Children>
+                </ButtonWidget>
+                <ButtonWidget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="110" Brush="Popup.Cancel.Button.NineGrid" Color="#c9484eFF" Command.Click="ExecuteClose">
+                  <Children><TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Text="Close" Brush="Popup.Button.Text" HorizontalAlignment="Center" VerticalAlignment="Center" DoNotAcceptEvents="true" /></Children>
+                </ButtonWidget>
+              </Children>
+            </ListPanel>
+
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="66" Text="@StatusText" Brush="Popup.Description.Text" CanBreakWords="true" HorizontalAlignment="Center" DoNotAcceptEvents="true" />
+
+          </Children>
+        </ListPanel>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

@@ -61,14 +61,14 @@ namespace MaterialSwapTool.Core
                     if (matches.Count == 0)
                     {
                         report.EntriesDroppedMissing += group.Count();
-                        Log.Warn($"Solidify: UID {group.Key} no longer resolves to any entity - dropping {group.Count()} entry(ies).");
+                        Log.Warn($"Simplify for Export: UID {group.Key} no longer resolves to any entity - dropping {group.Count()} entry(ies).");
                         continue;
                     }
 
                     if (matches.Count > 1)
                     {
                         report.EntitiesAmbiguousSkipped++;
-                        Log.Warn($"Solidify: UID {group.Key} resolves to {matches.Count} entities (unresolved clone) - leaving tag in place, not solidifying.");
+                        Log.Warn($"Simplify for Export: UID {group.Key} resolves to {matches.Count} entities (unresolved clone) - leaving tag in place, not converting it.");
                         continue;
                     }
 

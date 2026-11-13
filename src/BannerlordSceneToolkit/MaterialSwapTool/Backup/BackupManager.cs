@@ -456,6 +456,12 @@ namespace MaterialSwapTool.Backup
             Try(() => GUI.SelectionGrowLayer.Close(), "SelectionGrowLayer");
             Try(() => GUI.NumericTransformLayer.Close(), "NumericTransformLayer");
             Try(() => GUI.LastOperationHudLayer.Close(), "LastOperationHudLayer");
+            // Their lists describe the scene being left (its backups, its prefab counts).
+            Try(() => GUI.SceneDiffLayer.Close(), "SceneDiffLayer");
+            Try(() => GUI.SceneStatsLayer.Close(), "SceneStatsLayer");
+            // Its undo steps hold meshes of the scene being left.
+            Try(() => GUI.MeshBlendLayer.Close(), "MeshBlendLayer");
+            Try(() => Core.MeshBlend.OnSceneChanged(reason), "MeshBlend");
         }
 
         private static void Try(Action action, string what)
@@ -765,7 +771,7 @@ namespace MaterialSwapTool.Backup
                 // A save landed. Only act when stripped pieces exist in the file at all.
                 string text;
                 try { text = File.ReadAllText(path); } catch { return; }
-                if (!text.Contains(PrefabCreatorTool.Core.SavedScenePhysicsStripper.Tag)) return;
+                if (!PrefabCreatorTool.Core.SavedScenePhysicsStripper.FileHasStripTags(text)) return;
                 if (!text.Contains("<physics")) return;
 
                 var status = PrefabCreatorTool.Core.SavedScenePhysicsStripper.StripCurrentScene();
@@ -773,7 +779,7 @@ namespace MaterialSwapTool.Backup
                 try { _lastStripSeenWriteUtc = File.GetLastWriteTimeUtc(path); } catch { }
 
                 if (status.StartsWith("Removed", StringComparison.OrdinalIgnoreCase))
-                    try { TaleWorlds.MountAndBlade.MBEditor.AddEditorWarning("Pile physics re-stripped from the saved file after that save - reload to get collision-free pieces."); } catch { }
+                    try { TaleWorlds.MountAndBlade.MBEditor.AddEditorWarning("Physics stripped from the saved file after that save (piles / outside-border) - reload the scene to get the collision-free pieces."); } catch { }
             }
             catch (Exception ex) { Log.Warn("[Pile] auto re-strip failed: " + ex.Message); }
         }

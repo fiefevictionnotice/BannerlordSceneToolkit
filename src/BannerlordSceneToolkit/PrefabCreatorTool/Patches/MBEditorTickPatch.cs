@@ -40,6 +40,7 @@ namespace PrefabCreatorTool.Patches
             PileGeneratorLayer.Tick(dt);
             FamilyBrowserLayer.Tick(dt);
             BackupManager.Tick(dt);
+            BannerlordSceneToolkit.ToolkitHints.Tick();
         }
     }
 }

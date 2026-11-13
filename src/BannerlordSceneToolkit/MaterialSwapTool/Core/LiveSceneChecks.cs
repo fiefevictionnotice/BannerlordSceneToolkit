@@ -1176,19 +1176,51 @@ namespace MaterialSwapTool.Core
         // some other way) but leaves the entity and its visible mesh completely intact - this is
         // for greeble/scatter dressing sitting outside the actual play area that doesn't need to be
         // solid, not for deleting anything.
+        //
+        // REWORKED 2026-11-12 ("deleting the physics of things outside the border is broken but
+        // the tagging still works"): this was still the FIRST-ROUND approach the pile work proved
+        // useless (see Technical Docs - Delete Physics): it skipped anything whose own BodyFlag
+        // read None - which is every placed prefab ROOT, since collision lives on the children -
+        // and RemovePhysics never persists anyway: the save re-writes <physics shape="bo_..."/>
+        // from metadata no runtime API clears. Now it uses the mechanism that works: each
+        // out-of-border entity is tagged oob_nophys, and SavedScenePhysicsStripper removes the
+        // <physics> nodes of the tagged entity AND its whole subtree from scene.xscene - run
+        // automatically ~2 s after every editor save (BackupManager.TickAutoPhysicsStrip).
+        // A live prefab link is broken first: such an entity saves as <game_entity prefab="X">
+        // with no children in the file, so the loader would rebuild its collision from the
+        // prefab definition and there would be nothing to strip.
+        // Effect is visible after SAVE + RELOAD; the live session keeps its collision.
         public static (int cleared, Finding status) RemovePhysicsOutsideBorder(List<GameEntity> all)
         {
             var (status, oob) = GetEntitiesOutsideBorder(all);
             if (status != null) return (0, status);
 
-            int cleared = 0;
+            var tag = PrefabCreatorTool.Core.SavedScenePhysicsStripper.OobTag;
+            int marked = 0, unlinked = 0;
+            var undoBatch = new List<GameEntity>();
             foreach (var e in oob)
             {
-                if (e.BodyFlag == BodyFlags.None) continue;
-                try { e.RemovePhysics(false); cleared++; }
+                try
+                {
+                    string live = "";
+                    try { live = e.GetPrefabName() ?? ""; } catch { }
+                    if (live.Length > 0)
+                    {
+                        try { e.BreakPrefab(); unlinked++; }
+                        catch (Exception bx) { Log.Warn($"RemovePhysicsOutsideBorder: BreakPrefab failed on '{Label(e)}' (prefab '{live}'): {bx.Message}"); }
+                    }
+                    if (!e.HasTag(tag)) { e.AddTag(tag); marked++; undoBatch.Add(e); }
+                }
                 catch (Exception ex) { Log.Warn($"RemovePhysicsOutsideBorder: failed on '{Label(e)}': {ex.Message}"); }
             }
-            return (cleared, null);
+            BannerlordSceneToolkit.EditUndo.CaptureTags("Mark outside border for physics removal", tag, undoBatch);
+            Log.Info($"[Boundary] RemovePhysicsOutsideBorder: oob={oob.Count} newlyMarked={marked} prefabLinksBroken={unlinked}");
+
+            return (marked, Info($"Marked {marked} outside-border entit(y/ies) with '{tag}'" +
+                                 (oob.Count - marked > 0 ? $" ({oob.Count - marked} already marked)" : "") +
+                                 (unlinked > 0 ? $", unlinked {unlinked} live prefab instance(s)" : "") +
+                                 ". SAVE the scene: their collision is then stripped from the saved file automatically. " +
+                                 "RELOAD to see it - the open session keeps its collision until then."));
         }
 
         private static double[][] ConvexHull2D(List<double[]> points)
