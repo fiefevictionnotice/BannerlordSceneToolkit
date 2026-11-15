@@ -8,6 +8,35 @@ The community findings behind [16. Scene Troubleshooting: Symptom Index](../16-s
 
 251 of 256 findings have a message link.
 
+### LOAD CRASHES THE SCENE TOOLKIT CHECKS FOR (our own findings, F7 Scene Analyzer)
+
+These two are not from the Discord export. We found them in November 2026 by bisecting real multiplayer maps on a vanilla dedicated server (copy the scene, delete half the entities, test, repeat), then confirmed each fix on the full map. Both are now checked by the Scene Toolkit's **Scene Analyzer (F7)**: run the scan and they are the first two sections of the report, each with a one-click fix button. Included since Scene Toolkit v0.9.0.
+
+If you are helping someone whose map **crashes while loading** (server dies on map change, or every player crashes on the loading screen while the server stays up), check these two first. They are cheap to check and neither one shows up in a normal editor session.
+
+- **Server aborts while loading the map: a destructible with a `ReferenceEntityTag` but no child carrying that tag (the "merlon without a debris_holder" crash).**
+  - **Symptom:** the dedicated server dies during scene load with `Fatal error. Invalid Program: attempted to call a UnmanagedCallersOnly method from managed code`. No useful managed stack, nothing that names the entity. The map opens fine in the editor.
+  - **Cause:** any entity with a `DestructableComponent` script whose `ReferenceEntityTag` field is filled in (castle wall merlons use `reference`) must have a **direct child** entity carrying that tag. On native walls that child is the `debris_holder`. On init the game looks up the first direct child with the tag and asserts it exists; if it is missing, the server aborts. Grandchildren do not count. The usual way to get here is deleting or unparenting the `debris_holder` while tidying a wall, or breaking a wall prefab and removing "empty" children.
+  - **Scope:** every destructible, not only merlons: walls, gates, barricades, custom destructibles.
+  - **Our case:** a siege map with 8 such merlons, on two wall pieces (`european_castle_wall_gate_l3` and `european_castle_wall_a_l1`). Every working siege map we compared had zero.
+  - **In the editor it is only an entity warning** (the "Reference entity must be assigned" problem on the entity), easy to miss among harmless warnings. This is the concrete case behind "merlon/destructible errors are not harmless" further down this page.
+  - **Check:** F7 > run the scan > section **"Destructible Reference Tags (server load crash)"**. It lists each entity with its path, tag and position.
+  - **Fix:** F7 > **Fix Destructible Refs**. It adds an empty `debris_holder` child with the tag at the entity's own origin (a backup is taken first). Debris spawns at that point, so move the holder if it matters. By hand: add an empty child entity, give it the tag named in `ReferenceEntityTag`, or clear the `ReferenceEntityTag` field. Save and re-run the scan.
+
+- **Every client crashes on the loading screen, server is fine: a live `merchant_stand_market` prefab (a SandBox prefab placed in a multiplayer scene).**
+  - **Symptom:** multiplayer clients crash while loading the map. The dedicated server loads the same scene without complaint, so a server-only test passes.
+  - **Cause:** the scene holds an entity saved as a **live prefab link**, `<game_entity ... prefab="merchant_stand_market">`. That prefab lives in `SandBox\Prefabs\merchant_sets.xml`, and SandBox prefabs are not loaded in multiplayer. The same stand saved with the link broken (`old_prefab_name="merchant_stand_market"` and its children written inline) loads fine. Every test map with the live link crashed; the copy with the baked children loaded.
+  - **Not the cause:** a bare `<cloth_simulator/>` on the stand's cloth. We suspected it first; a working production map has 50 of them.
+  - **Related, untested:** the four sibling stands in the same file (`merchant_stand_mix`, `merchant_stand_weapon`, `merchant_stand_pottery`, `merchant_stand_armor`). The scan warns about live links to them but does not call them errors. More generally, a live link to any prefab that multiplayer does not load (SandBox, SandBoxCore, or a module the clients lack) is a client-crash suspect even when the server test passes.
+  - **Check:** F7 > run the scan > section **"Live merchant_stand_market Prefab (client load crash)"**. In a text editor: search `scene.xscene` for `prefab="merchant_stand_market"`.
+  - **Fix:** F7 > **Unparent Stands**. It breaks the prefab link on each live stand so the next save writes the children inline; nothing moves (a backup is taken first). By hand: select the stand and use Break Prefab, or delete it. Save and re-run the scan.
+
+Lessons that apply to any load crash:
+
+- **A server test and a client test catch different crashes.** The first one above only kills the server, the second only kills clients. Test both before an event.
+- **Bisecting is safe with the base components kept.** Keep flags, spawn zones, `spawn_visual`, camera, borders and spawners in every half; a scene with no other entities at all still loads, so an empty half never gives a false crash.
+- **Break links to prefabs before shipping a multiplayer scene** (see the "break prefab" finding below). The loaded-prefab set differs between the editor, the server and the clients.
+
 ### BUGS (#bl-scenes)
 
 - **Material-map import that crashes the editor every time was fixed by painting a tiny bit with that layer first.**<br>Deleted User, 2020-10-06 · single-report · [Deleted User, 2020-10-06](https://discord.com/channels/411286129317249035/761302555308720148/762916561307828234)
