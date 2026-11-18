@@ -1,5 +1,21 @@
 # Bannerlord Scene Toolkit
 
+## End of Support Notice - Nov 17th, 2026.
+
+I recently released updates to both the Bannerlord Scene Toolkit (update compatibility, new features) and the Blenderlord reference files.
+
+Out of protest to TaleWorlds' abrupt decision to revoke the ability to release updates on the Steam workshop, further support for these tools is being ended. Existing packages remain available but no future patches or improvements will be released. I encourage any users of these tools who share my concerns to leave a negative review on Steam and encourage others to do so as well.
+
+I previously demonstrated a Blender add-on which automates the process of managing skeletons/armatures for export, cloth sim masking, cloth sim mesh creation, and female/slim (gloved) variant creation. These tools were not released and - out of protest to TW's mismanagement of the Steam Workshop - will not be released.
+
+I have also built a server-side fix for bots on TDM (bots showing up in the wrong team's colors, broken respawns and bot counts) and working, properly synced elevators for native multiplayer, neither of which needs a client download. These were not released and - out of protest to TW's mismanagement of the Steam Workshop - will not be released.
+
+This is in response to TW's refusal to maintain the basic playability of the game for the multiplayer community. This is a game that some people paid money for primarily for multiplayer and TW seems to have no regard for them. TW has essentially gone out of their way to inconvenience multiplayer events by first freezing the workshop for 6 weeks, and then releasing an update to the game. No clarification on who made the decisions - TaleWorlds, Valve - has been shared, no ETA for a fix has been shared, and though they have been asked tens of times to allow specific popular multiplayer mods to have a manually reviewed, expedited approval on multiple platforms, all of these requests have been entirely ignored.
+
+TW has failed to release basic bug fixes for years (invisible trees when using layer flora, weapon highlighting broke with War Sails alongside a dozen other unintended changes, there are still several objects in base game which have a flipped physics shape/completely incorrect collision meshes - many years after release), and has consistently, actively worsened the game for the multiplayer community with almost every release for the last 12 months. These issues with the Steam workshop have been a major concern for every major NA and EU event runner - HCA/HRBH, Calradic Campaign (NA), CI, BRE (EU) - and we have all asked for basic accommodations and interim solutions. While they share our frustrations, no actual promises are being made. I have expended an enormous effort in outreach, going so far as to offer to spend my own time and money to assist TW in developing an automated approval system, and have been either ignored or dismissed with every proposed solution.
+
+---
+
 Editor tooling for **Mount & Blade II: Bannerlord** scene editing, running inside the game's
 own scene editor (the Modding Kit / `Win64_Shipping_wEditor` build) as a single module.
 
